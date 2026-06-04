@@ -1,0 +1,6 @@
+{
+  "name": "Starlight Movements HNOSS Portal",
+  "description": "The official institutional Governance, State, and Financial Market Architecture portal of HNOSS, featuring real-time sovereign capital flows, audit trails, and cryptographic identity validation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
