@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { motion } from "motion/react";
 
 export default function RainbowLightningFooter() {
-  const [isHovered, setIsHovered] = useState(false);
   const [lightningActive, setLightningActive] = useState(false);
   const [rainbowOffset, setRainbowOffset] = useState(0);
 
@@ -34,205 +33,121 @@ export default function RainbowLightningFooter() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       {/* Lightning flash overlay */}
       {lightningActive && (
         <motion.div
           className="fixed inset-0 bg-white pointer-events-none z-[100]"
           initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 0.6, 0] }}
+          animate={{ opacity: [0, 0.8, 0] }}
           transition={{ duration: 0.1 }}
         />
       )}
 
-      {/* Circular/Diamond shaped footer with rainbow glow */}
-      <motion.div
-        animate={{
-          scale: isHovered ? 1 : 0.95,
-          opacity: isHovered ? 1 : 0.9
-        }}
-        transition={{ duration: 0.3 }}
-        className="mx-auto mt-2 w-fit"
-      >
-        {/* Diamond/Rhombus shape with rainbow border */}
-        <div 
-          className="p-1 rotate-45"
-          style={{
-            background: rainbowGradient,
-            backgroundSize: "400% 400%",
-            boxShadow: `0 0 30px ${rainbowGradient}, 0 0 60px ${rainbowGradient}, inset 0 0 30px ${rainbowGradient}`,
-            animation: "rainbowFlow 3s ease infinite"
-          }}
-        >
-          <div 
-            className="bg-black rotate-[-45deg] p-8 relative z-10"
-            style={{
-              minWidth: "350px",
-              minHeight: "150px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center"
+      {/* Main footer content */}
+      <div className="bg-black/95 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          {/* Rainbow Lightning Thunder text */}
+          <motion.div
+            className="text-center mb-4"
+            animate={{
+              textShadow: lightningActive 
+                ? "0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff00ff, 0 0 40px #ff00ff"
+                : "0 0 5px #ff00ff, 0 0 10px #00ffff, 0 0 15px #00ff00"
             }}
+            transition={{ duration: 0.1 }}
           >
-            {/* Crystal clear rainbow text with strong visibility */}
-            <motion.div
-              className="text-center relative z-20"
-              animate={{
-                textShadow: lightningActive 
-                  ? "0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 60px #00ffff"
-                  : "0 0 10px #ff00ff, 0 0 20px #00ffff, 0 0 30px #ffff00, 0 0 40px #00ff00"
-              }}
-              transition={{ duration: 0.1 }}
-              style={{
-              position: "relative",
-              zIndex: 20
-            }}>
-              <motion.h3
-                className="text-2xl font-black mb-3"
-                style={{
-                  background: rainbowGradient,
-                  backgroundSize: "400% 400%",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  animation: "rainbowFlow 2s linear infinite",
-                  filter: "drop-shadow(0 0 3px rgba(0,0,0,0.8))",
-                  position: "relative",
-                  zIndex: 20
-                }}
-              >
-                ⚖️ EIGENTUMSRECHTLICHE LIZENZ
-              </motion.h3>
-              <motion.p
-                className="text-xl font-black"
-                style={{
-                  background: rainbowGradient,
-                  backgroundSize: "400% 400%",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  animation: "rainbowFlow 2.5s linear infinite",
-                  filter: "drop-shadow(0 0 3px rgba(0,0,0,0.8))",
-                  position: "relative",
-                  zIndex: 20
-                }}
-              >
-                ALLE RECHTE VORBEHALTEN
-              </motion.p>
-            </motion.div>
-          </div>
-        </div>
-      </motion.div>
-
-        {/* Expandable content - Kristallklares Lizenzdisplay mit Karo-Design */}
-        <motion.div
-          animate={{
-            opacity: isHovered ? 1 : 0,
-            height: isHovered ? "auto" : 0
-          }}
-          transition={{ duration: 0.3 }}
-          className="overflow-hidden"
-        >
-          {/* Karo/Checkerboard Style License Container */}
-          <div className="border-2 rounded-lg p-6 mb-4 bg-black/90 relative max-w-5xl mx-auto">
-            {/* Karo Background Pattern - Caro style grid */}
-            <div className="absolute inset-0 opacity-10 pointer-events-none">
-              <div className="w-full h-full" style={{
-                backgroundImage: `
-                  linear-gradient(45deg, #bf953f 25%, transparent 25%),
-                  linear-gradient(-45deg, #bf953f 25%, transparent 25%),
-                  linear-gradient(45deg, transparent 75%, #bf953f 75%),
-                  linear-gradient(-45deg, transparent 75%, #bf953f 75%)
-                `,
-                backgroundSize: "20px 20px",
-                backgroundPosition: "0 0, 0 10px, 10px -10px, -10px 0px"
-              }}></div>
-            </div>
-            
-            {/* Rainbow border glow */}
-            <div 
-              className="absolute inset-0 rounded-lg pointer-events-none"
+            <motion.h3
+              className="text-2xl font-bold"
               style={{
                 background: rainbowGradient,
                 backgroundSize: "400% 400%",
-                borderRadius: "inherit",
-                animation: "rainbowFlow 3s ease infinite"
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                animation: "rainbowFlow 2s linear infinite"
               }}
-            />
+            >
+              ⚡ RAINBOW LIGHTNING THUNDER ⚡
+            </motion.h3>
             
-            <div className="text-center space-y-3 relative z-10">
-              {/* Crystal Clear License Header */}
-              <div className="border-2 border-[#bf953f]/50 rounded-lg p-4 bg-black/80">
-                <h4 className="text-lg font-black text-white mb-2 tracking-wider">
-                  ⚖️ EIGENTUMSRECHTLICHE LIZENZ
-                </h4>
-                <p className="text-xl font-black" style={{
-                  background: rainbowGradient,
-                  backgroundSize: "400% 400%",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  animation: "rainbowFlow 2s linear infinite"
-                }}>
-                  ALLE RECHTE VORBEHALTEN
-                </p>
-              </div>
-              
-              <p className="text-sm font-bold text-[#bf953f]">
-                HCOS – HNOSS CONTROL OPERATING SYSTEM
-              </p>
+            {/* Lightning bolt animation */}
+            <motion.div
+              className="text-3xl"
+              animate={lightningActive ? {
+                scale: [1, 1.5, 1],
+                rotate: [0, 10, -10, 0]
+              } : {}}
+              transition={{ duration: 0.2 }}
+            >
+              🌩️
+            </motion.div>
+          </motion.div>
 
-              <div className="text-xs text-gray-200 space-y-2 bg-black/60 p-4 rounded-lg border border-[#bf953f]/30">
-                <p className="font-bold text-white">⚠️ URHEBERRECHTSHINWEIS:</p>
-                <p className="text-white font-medium">Copyright © 2024–2026 Daniel Pohl. Alle Rechte weltweit vorbehalten.</p>
-                
-                <p className="font-bold text-white pt-2">EIGENTUMS- UND SCHUTZRECHTE:</p>
-                <p className="text-gray-300">
-                  Diese Software, einschließlich, aber nicht beschränkt auf Quellcode, Objektcode, Dokumentation, Algorithmen, 
-                  Architekturdesigns und alle damit verborgen geistigen Eigentumsrechte (zusammenfassend „Das Werk"), ist das 
-                  exklusive Eigentum von Daniel Pohl sowie der folgenden autorisierten Unternehmen:
-                </p>
-                <p className="text-[#bf953f] font-black text-sm py-1">
-                  HNOSS Enterprises | PRISMANTHARION Corporation | SHINEHEALTHCARE GmbH | STARLIGHTMOVEMENTS AG
-                </p>
-                
-                <p className="font-bold text-red-400 pt-2">KEINE RECHTEÜBERTRAGUNG:</p>
-                <p className="text-gray-300 text-[10px]">
-                  DURCH DIE VERÖFFENTLICHUNG, VERFÜGBARKEIT ODER EXISTENZ DIESES CODES WERDEN KEINERLEI RECHTE GEWÄHRT, 
-                  ÜBERTRAGEN ODER ABGETRETEN.
-                </p>
-              </div>
+          {/* License Information */}
+          <div className="text-center text-gray-300 text-xs space-y-2 mb-4">
+            <div className="text-[#bf953f] font-bold text-sm mb-2">⚖️ EIGENTUMSRECHTLICHE LIZENZ - ALLE RECHTE VORBEHALTEN</div>
+            
+            <div className="text-left max-w-4xl mx-auto space-y-1 text-[10px] leading-relaxed">
+              <p><strong>HCOS – HNOSS CONTROL OPERATING SYSTEM</strong></p>
+              <p><strong>URHEBERRECHTSHINWEIS:</strong> Copyright © 2024–2026 Daniel Pohl. Alle Rechte weltweit vorbehalten.</p>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 text-left">
-                <div className="bg-black/50 p-3 rounded border border-red-900/30">
-                  <p className="text-red-400 font-bold text-xs mb-2">NUTZUNGSBESCHRÄNKUNGEN:</p>
-                  <ul className="text-[10px] text-gray-400 space-y-1">
-                    <li>• KEINE NUTZUNG ohne ausdrückliche Genehmigung</li>
-                    <li>• KEINE KOPIEN oder Duplizierung</li>
-                    <li>• KEINE ÄNDERUNG oder abgeleitete Werke</li>
-                    <li>• KEINE VERBREITUNG oder Weitergabe</li>
-                    <li>• KEIN KLONEN von Repositories</li>
-                    <li>• KEINE REVERSE-ENGINEERING</li>
-                  </ul>
-                </div>
-                
-                <div className="bg-black/50 p-3 rounded border border-yellow-900/30">
-                  <p className="text-yellow-400 font-bold text-xs mb-2">RECHTSSTATUS:</p>
-                  <ul className="text-[10px] text-gray-400 space-y-1">
-                    <li>• Institutionen der Europäischen Union</li>
-                    <li>• NATO (North Atlantic Treaty Organization)</li>
-                    <li>• The Pentagon / U.S. Department of Defense</li>
-                    <li>• Vereinte Nationen (UN)</li>
-                    <li>• Deutsche Börse AG</li>
-                    <li>• Weitere klassifizierte Partner</li>
-                  </ul>
-                </div>
+              <p className="mt-2"><strong>EIGENTUMS- UND SCHUTZRECHTE:</strong></p>
+              <p>Diese Software ist das exklusive Eigentum von Daniel Pohl sowie der folgenden autorisierten Unternehmen:</p>
+              <p className="text-[#bf953f]">HNOSS Enterprises | PRISMANTHARION Corporation | SHINEHEALTHCARE GmbH | STARLIGHTMOVEMENTS AG</p>
+              
+              <p className="mt-2"><strong>RECHTSSTATUS:</strong></p>
+              <p>Pilotprojekt in Zusammenarbeit mit: EU Institutionen, NATO, Pentagon/US DoD, Vereinte Nationen (UN), Deutsche Börse AG</p>
+              
+              <p className="mt-2"><strong>Status:</strong> KLASSIFIZIERT – PILOTPROJEKT – NICHT FÜR DIE ÖFFENTLICHE VERBREITUNG</p>
+              <p className="text-gray-500">Version: PILOT-2026-EU-NATO-CLASSIFIED</p>
+            </div>
+          </div>
+
+          {/* Institutional URLs */}
+          <div className="text-center text-gray-400 text-[9px] space-y-1">
+            <p className="text-[#bf953f] font-bold text-xs mb-2">CORP. BY. PLEDGE - OFFIZIELLE INSTITUTIONEN</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-1 max-w-6xl mx-auto">
+              <div className="space-y-0.5">
+                <p className="text-[#bf953f] font-bold">Europäische & Internationale</p>
+                <a href="https://ec.europa.eu" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">EU Kommission</a>
+                <a href="https://www.consilium.europa.eu" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">EU Rat</a>
+                <a href="https://www.europol.europa.eu" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">Europol</a>
+                <a href="https://www.interpol.int" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">INTERPOL</a>
+                <a href="https://www.nato.int" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">NATO</a>
+                <a href="https://www.un.org" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">Vereinte Nationen</a>
+              </div>
+              <div className="space-y-0.5">
+                <p className="text-[#bf953f] font-bold">Deutsche Behörden</p>
+                <a href="https://www.bundestag.de" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">Bundestag</a>
+                <a href="https://www.verfassungsschutz.de" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">BfV</a>
+                <a href="https://www.bafin.de" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">BaFin</a>
+                <a href="https://www.deutsche-boerse.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">Deutsche Börse</a>
+                <a href="https://www.bundesregierung.de" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">Bundesregierung</a>
+                <a href="https://www.bsi.bund.de" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">BSI</a>
+              </div>
+              <div className="space-y-0.5">
+                <p className="text-[#bf953f] font-bold">US-Regierung</p>
+                <a href="https://www.whitehouse.gov" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">White House</a>
+                <a href="https://www.defense.gov" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">DoD</a>
+                <a href="https://www.darpa.mil" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">DARPA</a>
+                <a href="https://www.federalreserve.gov" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">Federal Reserve</a>
+                <a href="https://www.va.gov" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">Veterans Affairs</a>
+                <a href="https://www.usa.gov" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">USA.gov</a>
+              </div>
+              <div className="space-y-0.5">
+                <p className="text-[#bf953f] font-bold">Organisationen</p>
+                <a href="https://www.oecd.org" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">OECD</a>
+                <a href="https://www.wto.org" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">WTO</a>
+                <a href="https://www.imf.org" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">IWF</a>
+                <a href="https://www.worldbank.org" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">Weltbank</a>
+                <a href="https://www.w3.org" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">W3C</a>
+                <a href="https://www.iso.org" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 block">ISO</a>
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
+      </div>
 
       {/* CSS animation keyframes */}
       <style>{`
