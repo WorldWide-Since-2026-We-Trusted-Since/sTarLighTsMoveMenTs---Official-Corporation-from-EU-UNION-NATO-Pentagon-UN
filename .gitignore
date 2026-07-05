@@ -6,3 +6,9 @@ coverage/
 *.log
 .env*
 !.env.example
+# Analysis and backup files
+analysis/
+ReadyBLess
+freedom250.html
+# PDF files (keep only source md)
+*.pdf

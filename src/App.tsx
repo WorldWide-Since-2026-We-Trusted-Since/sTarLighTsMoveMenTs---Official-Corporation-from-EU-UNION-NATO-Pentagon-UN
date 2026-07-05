@@ -40,10 +40,17 @@ import {
 } from "./components/CosmicSystem";
 import { DataVisualizationDashboard } from "./components/DataVisualizationDashboard";
 import { AtomicSyncClock } from "./components/AtomicSyncClock";
+import PledgePage from "./components/PledgePage";
+import PapersArchive from "./components/PapersArchive";
+
+import FinanceSystemPage from "./components/FinanceSystemPage";
+import MemorialTributePage from "./components/MemorialTributePage";
+import RainbowLightningFooter from "./components/RainbowLightningFooter";
+import ConcilPortal from "./components/ConcilPortal";
 
 export default function App() {
-  // Navigation tabs: original portal, structural governance stack, economics, real-time audit logs
-  const [activeTab, setActiveTab] = useState<"portal" | "governance" | "capital" | "audit">("portal");
+  // Navigation tabs: pledge (default start page), papers, finance, memorial, portal, governance, capital, audit, concil
+  const [activeTab, setActiveTab] = useState<"pledge" | "papers" | "finance" | "memorial" | "portal" | "governance" | "capital" | "audit" | "concil">("pledge");
   const [nodes, setNodes] = useState<GovernanceNode[]>(GOVERNANCE_NODES);
   const [selectedNode, setSelectedNode] = useState<GovernanceNode>(GOVERNANCE_NODES[0]);
   const [audits, setAudits] = useState<AuditRecord[]>(SEED_AUDITS);
@@ -179,6 +186,50 @@ export default function App() {
           {/* Interactive Navigation Control Buttons */}
           <nav className="flex flex-wrap items-center justify-center gap-2">
             <button
+              id="btn-pledge"
+              onClick={() => setActiveTab("pledge")}
+              className={`px-4 py-2 border rounded text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                activeTab === "pledge"
+                  ? "border-[#fcf6ba] bg-[#bf953f]/25 text-white shadow-[0_0_12px_rgba(191,149,63,0.3)]"
+                  : "border-gray-800 bg-black/40 text-gray-400 hover:text-white hover:border-gray-600"
+              }`}
+            >
+              📜 Government Pledge
+            </button>
+            <button
+              id="btn-papers"
+              onClick={() => setActiveTab("papers")}
+              className={`px-4 py-2 border rounded text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                activeTab === "papers"
+                  ? "border-[#fcf6ba] bg-[#bf953f]/25 text-white shadow-[0_0_12px_rgba(191,149,63,0.3)]"
+                  : "border-gray-800 bg-black/40 text-gray-400 hover:text-white hover:border-gray-600"
+              }`}
+            >
+              📚 Papers Archive
+            </button>
+            <button
+              id="btn-finance"
+              onClick={() => setActiveTab("finance")}
+              className={`px-4 py-2 border rounded text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                activeTab === "finance"
+                  ? "border-[#fcf6ba] bg-[#bf953f]/25 text-white shadow-[0_0_12px_rgba(191,149,63,0.3)]"
+                  : "border-gray-800 bg-black/40 text-gray-400 hover:text-white hover:border-gray-600"
+              }`}
+            >
+              💰 Finance System
+            </button>
+            <button
+              id="btn-memorial"
+              onClick={() => setActiveTab("memorial")}
+              className={`px-4 py-2 border rounded text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                activeTab === "memorial"
+                  ? "border-[#fcf6ba] bg-[#bf953f]/25 text-white shadow-[0_0_12px_rgba(191,149,63,0.3)]"
+                  : "border-gray-800 bg-black/40 text-gray-400 hover:text-white hover:border-gray-600"
+              }`}
+            >
+              🕊️ Memorial
+            </button>
+            <button
               id="btn-identity-portal"
               onClick={() => setActiveTab("portal")}
               className={`px-4 py-2 border rounded text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
@@ -209,7 +260,7 @@ export default function App() {
                   : "border-gray-800 bg-black/40 text-gray-400 hover:text-white hover:border-gray-600"
               }`}
             >
-              📊 Capital &amp; Corridor Map
+              📊 Capital & Corridor Map
             </button>
             <button
               id="btn-realtime-audit"
@@ -220,7 +271,18 @@ export default function App() {
                   : "border-gray-800 bg-black/40 text-gray-400 hover:text-white hover:border-gray-600"
               }`}
             >
-              🛡️ Live Audits &amp; Signer
+              🛡️ Live Audits & Signer
+            </button>
+            <button
+              id="btn-concil-portal"
+              onClick={() => setActiveTab("concil")}
+              className={`px-4 py-2 border rounded text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                activeTab === "concil"
+                  ? "border-[#fcf6ba] bg-[#bf953f]/25 text-white shadow-[0_0_12px_rgba(191,149,63,0.3)]"
+                  : "border-gray-800 bg-black/40 text-gray-400 hover:text-white hover:border-gray-600"
+              }`}
+            >
+              🏛️ Concil Portal
             </button>
           </nav>
         </div>
@@ -233,7 +295,65 @@ export default function App() {
       <main className="relative z-10 max-w-7xl mx-auto px-4 py-6 flex flex-col items-center justify-center">
         <AnimatePresence mode="wait">
           
-          {/* TAB 1: 100% ORIGINAL IDENTITY PORTAL DESIGN */}
+          {/* TAB 0: PAPERS ARCHIVE — WISSENSCHAFTLICHE DOKUMENTATION */}
+          {activeTab === "papers" && (
+            <motion.div
+              key="papers-view"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="w-full"
+            >
+              <PapersArchive />
+            </motion.div>
+          )}
+
+          {/* TAB: FINANCE SYSTEM */}
+          {activeTab === "finance" && (
+            <motion.div
+              key="finance-view"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="w-full"
+            >
+              <FinanceSystemPage />
+            </motion.div>
+          )}
+
+          {/* TAB: MEMORIAL TRIBUTE */}
+          {activeTab === "memorial" && (
+            <motion.div
+              key="memorial-view"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="w-full"
+            >
+              <MemorialTributePage />
+            </motion.div>
+          )}
+
+          {/* TAB 1: GOVERNMENT PLEDGE — AGENDA HEAVENLY SINCE PLEDGE (STARTSEITE) */}
+          {/* TAB 1: GOVERNMENT PLEDGE — AGENDA HEAVENLY SINCE PLEDGE (STARTSEITE) */}
+          {activeTab === "pledge" && (
+            <motion.div
+              key="pledge-view"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="w-full"
+              id="pledge-tab-panel"
+            >
+              <PledgePage />
+            </motion.div>
+          )}
+
+          {/* TAB 2: 100% ORIGINAL IDENTITY PORTAL DESIGN */}
           {activeTab === "portal" && (
             <motion.div
               key="portal-view"
@@ -530,7 +650,7 @@ export default function App() {
             </motion.div>
           )}
 
-          {/* TAB 2: INTERACTIVE GOVERNANCE HIERARCHY MAP */}
+          {/* TAB 3: INTERACTIVE GOVERNANCE HIERARCHY MAP */}
           {activeTab === "governance" && (
             <motion.div
               key="gov-view"
@@ -1372,7 +1492,7 @@ export default function App() {
             </motion.div>
           )}
 
-          {/* TAB 3: SOVEREIGN WEALTH & INFRASTRUCTURE PROJECT MONITOR */}
+          {/* TAB 4: SOVEREIGN WEALTH & INFRASTRUCTURE PROJECT MONITOR */}
           {activeTab === "capital" && (
             <motion.div
               key="capital-view"
@@ -1540,7 +1660,7 @@ export default function App() {
             </motion.div>
           )}
 
-          {/* TAB 4: DECENTRALIZED REAL-TIME AUDITING TERMINAL & CRYPTO SIGNER */}
+          {/* TAB 5: DECENTRALIZED REAL-TIME AUDITING TERMINAL & CRYPTO SIGNER */}
           {activeTab === "audit" && (
             <motion.div
               key="audit-view"
@@ -1756,11 +1876,26 @@ export default function App() {
             </motion.div>
           )}
 
+          {/* CONCIL PORTAL - Official Documentation Archive */}
+          {activeTab === "concil" && (
+            <motion.div
+              key="concil-view"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="w-full"
+              id="concil-tab-panel"
+            >
+              <ConcilPortal />
+            </motion.div>
+          )}
+
         </AnimatePresence>
       </main>
 
       {/* SYSTEM META FOOTER AND CERTIFIED LOGOS */}
-      <footer className="relative z-20 max-w-7xl mx-auto px-4 py-8 border-t border-amber-950/20 mt-12 bg-black/60 text-center font-mono">
+      <footer className="relative z-20 max-w-7xl mx-auto px-4 py-8 border-t border-amber-950/20 mt-12 bg-black/60 text-center font-mono pb-32">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left max-w-4xl mx-auto mb-6 text-gray-400 text-[10px] leading-relaxed">
           <div>
             <h5 className="text-[#bf953f] uppercase font-bold text-xs mb-1 tracking-widest">// CERTIFICATIONS</h5>
@@ -1788,6 +1923,9 @@ export default function App() {
           © 2026 HNOSS Corporation. All supreme rights preserved under state-independent covenants.
         </p>
       </footer>
+
+      {/* Rainbow Lightning Thunder Footer */}
+      <RainbowLightningFooter />
     </div>
   );
 }

@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance System — Komplettes Projektkonzept | 26.06.2026 by Daniel Pohl</title>
+    <style>
+        :root {
+            --primary: #0f4c81;
+            --secondary: #1a6bb8;
+            --accent: #00a8a8;
+            --dark: #0a1628;
+            --light: #f6f9fc;
+            --text: #1e2a3a;
+            --muted: #5b6b7b;
+            --border: #d0dce8;
+            --success: #1a936f;
+            --warning: #e9a319;
+            --danger: #c0392b;
+        }
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            background: var(--light);
+            line-height: 1.7;
+        }
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: #fff;
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        header h1 { font-size: 2.6rem; margin: 0 0 0.5rem; letter-spacing: -0.5px; }
+        header .subtitle { font-size: 1.2rem; opacity: 0.9; max-width: 800px; margin: 0 auto 1.5rem; }
+        header .meta { font-size: 0.95rem; opacity: 0.8; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+        .badge { display: inline-block; padding: 0.35rem 0.9rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-green { background: var(--success); color: #fff; }
+        .badge-blue { background: var(--secondary); color: #fff; }
+        .badge-gold { background: var(--warning); color: #1a1200; }
+        nav { background: #fff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; padding: 0.75rem 1rem; overflow-x: auto; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.4rem; min-width: max-content; }
+        nav a { text-decoration: none; color: var(--primary); font-weight: 600; font-size: 0.85rem; padding: 0.5rem 0.85rem; border-radius: 6px; white-space: nowrap; }
+        nav a:hover { background: var(--light); }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; }
+        section { background: #fff; border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        h2 { color: var(--primary); font-size: 1.75rem; margin-top: 0; border-bottom: 3px solid var(--accent); padding-bottom: 0.5rem; display: flex; align-items: center; gap: 0.75rem; }
+        h3 { color: var(--secondary); font-size: 1.35rem; margin-top: 1.75rem; }
+        h4 { color: var(--text); font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+        p { margin: 0.75rem 0; }
+        .lead { font-size: 1.15rem; color: var(--muted); margin-bottom: 1.5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .card { background: var(--light); border-radius: 10px; padding: 1.5rem; border-left: 5px solid var(--accent); }
+        .card h4 { margin-top: 0; color: var(--primary); }
+        .card ul { margin: 0.5rem 0; padding-left: 1.2rem; }
+        .card li { margin-bottom: 0.35rem; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.95rem; }
+        th, td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background: var(--primary); color: #fff; font-weight: 600; }
+        tr:hover { background: var(--light); }
+        code { background: #eef2f7; padding: 0.15rem 0.4rem; border-radius: 4px; font-family: "Consolas", "Monaco", monospace; font-size: 0.9em; }
+        pre { background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; }
+        .highlight-box { background: linear-gradient(90deg, #e6f7ff, #f0fff9); border-left: 5px solid var(--accent); padding: 1.25rem; border-radius: 8px; margin: 1.25rem 0; }
+        .warning-box { background: #fff8e6; border-left: 5px solid var(--warning); padding: 1.25rem; border-radius: 8px; margin: 1.25rem 0; }
+        ul, ol { margin: 0.75rem 0; padding-left: 1.5rem; }
+        li { margin-bottom: 0.45rem; }
+        .footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.9rem; }
+        .toc { column-count: 2; column-gap: 2rem; }
+        .toc li { break-inside: avoid; }
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.8rem; }
+            .toc { column-count: 1; }
+            .container { padding: 1rem; }
+            section { padding: 1.25rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Finance System</h1>
+    <p class="subtitle">Enterprise-grade System für digitale Zahlungen und Partner-Verwaltung — Banken-Standard-Sicherheit mit moderner Hochgeschwindigkeits-Verarbeitung</p>
+    <div class="meta">
+        <span>Autor: <strong>Daniel Pohl</strong></span>
+        <span>Datum: <strong>26.06.2026</strong></span>
+        <span>Version: <strong>1.0</strong></span>
+        <span class="badge badge-green">Status: Konzeptphase abgeschlossen</span>
+    </div>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#ueberblick">Überblick</a></li>
+        <li><a href="#strukturen">Strukturen</a></li>
+        <li><a href="#projektplan">Projektplan</a></li>
+        <li><a href="#architektur">Architektur</a></li>
+        <li><a href="#datenmodell">Datenmodell</a></li>
+        <li><a href="#sicherheit">Sicherheit</a></li>
+        <li><a href="#compliance">Compliance</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#frameworks">Frameworks</a></li>
+        <li><a href="#code">Code & Portal</a></li>
+        <li><a href="#inventory">Inventory</a></li>
+        <li><a href="#anhang">Anhang</a></li>
+    </ul>
+</nav>
+
+<div class="container">
+
+<section id="ueberblick">
+    <h2>1. Executive Summary</h2>
+    <p class="lead">Das <strong>Finance System</strong> ist ein vollständiges Konzept für eine digitale Zahlungs- und Partner-Management-Plattform, die Banken-Standard-Sicherheit mit moderner Hochgeschwindigkeits-Verarbeitung verbindet. Es ist Teil des Hnoss / MOSTVALUE-Ökosystems und integriert bestehende Strukturen wie SystemHeaven, HPS-Architecture, Wallet/POS und Asset-Wonder.</p>
+    <div class="grid">
+        <div class="card">
+            <h4>Kernprinzipien</h4>
+            <ul>
+                <li>Banken-Standard-Sicherheit: Zero-Trust, MFA, HSM, Immutable Audit-Ledger.</li>
+                <li>Hochgeschwindigkeits-Verarbeitung: Async-Events, Caching, CQRS, Auto-Scaling.</li>
+                <li>Regulatorische Konformität: MiCA, PSD2, DORA, GDPR, AML5, GoBD.</li>
+                <li>Integration: Bestehende Hnoss-Strukturen werden referenziert und weiterentwickelt.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Zielsetzung</h4>
+            <ul>
+                <li>Entwicklung eines Enterprise-grade Finance Systems für digitale Zahlungen.</li>
+                <li>Partner-Verwaltung mit Onboarding, Verträgen, Limits und API-Keys.</li>
+                <li>Banken-Standard-Sicherheit, regulatorische Konformität und Skalierbarkeit.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Erfolgskennzahlen</h4>
+            <ul>
+                <li>Verarbeitung >1 Mio. Transaktionen pro Stunde.</li>
+                <li>API-Antwortzeit < 200 ms.</li>
+                <li>Systemverfügbarkeit 99,9 %.</li>
+                <li>Deployment-Zeit < 30 Sekunden.</li>
+                <li>Testabdeckung > 85 %.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="strukturen">
+    <h2>2. Vorhandene Projektstrukturen</h2>
+    <p class="lead">Das Projektverzeichnis <code>/run/media/shinehealthcare/a9496acd-4335-4f6b-9ef4-2a6d2c0ce9ad/Finance System. 26.06.2026 by. Daniel Pohl</code> enthält folgende etablierte Strukturen, die in dieses Gesamtkonzept integriert wurden:</p>
+
+    <h3>2.1 Verzeichnisstruktur</h3>
+    <pre><code>Finance System. 26.06.2026 by. Daniel Pohl/
+├── README.md                              # Projektübersicht
+├── FINANCE_SYSTEM_GESAMTKONZEPT_26.06.2026.html  # Vollständiges HTML-Gesamtkonzept
+├── PROJECT_PLAN.md                        # Projektplan
+├── ARCHITECTURE.md                        # Architekturkonzept
+├── DATA_MODEL.md                          # Datenmodell
+├── SECURITY.md                            # Sicherheitskonzept
+├── COMPLIANCE.md                          # Compliance & Regulatorik
+├── ROADMAP.md                             # Roadmap & Phasen
+├── PORTAL/                                # Web-Portale
+│   └── index.html
+├── DATA/                                  # Seed-Daten und Datenbank-Schemas
+│   └── finance_system_seed.json
+├── CODE/                                  # Docker Compose, Skripte, später Backend/Frontend
+│   ├── docker-compose.yml
+│   └── scripts/setup.sh
+├── DOCS/                                  # Dokumentation
+│   └── INVENTORY.md
+├── SYSTEM/                                # SystemD-Service und Desktop-Icons
+│   ├── systemd/finance-system.service
+│   └── desktop/finance-system.desktop
+├── CONCEPTS/                              # Integrierte Konzept-Workspaces
+│   └── integrated_frameworks.md
+├── SOURCE/                                # Original-Referenzen
+│   └── README.md
+└── Contracts/                             # Verträge & regulatorische Dokumentation
+    └── README.md
+    </code></pre>
+
+    <h3>2.2 Dokumente & Konzept</h3>
+    <table>
+        <tr><th>Datei</th><th>Zweck</th></tr>
+        <tr><td><code>README.md</code></td><td>Projektübersicht, Schnellstart, Kernprinzipien, Ordnerstruktur.</td></tr>
+        <tr><td><code>FINANCE_SYSTEM_GESAMTKONZEPT_26.06.2026.html</code></td><td>Vollständiges HTML-Gesamtkonzept (Projekt-intern).</td></tr>
+        <tr><td><code>PROJECT_PLAN.md</code></td><td>Projektplan mit Phasen, Ressourcen, Risiken und Meilensteinen.</td></tr>
+        <tr><td><code>ARCHITECTURE.md</code></td><td>Architekturkonzept mit Schichten, Komponenten und Event-Fluss.</td></tr>
+        <tr><td><code>DATA_MODEL.md</code></td><td>Datenmodell mit Kernentitäten, Audit-Ledger und Datenbank-Design.</td></tr>
+        <tr><td><code>SECURITY.md</code></td><td>Sicherheitskonzept, Kontrollen, Freeze-System, Schlüsselpraktiken.</td></tr>
+        <tr><td><code>COMPLIANCE.md</code></td><td>Compliance & Regulatorik: MiCA, PSD2, DORA, GDPR, AML5, GoBD.</td></tr>
+        <tr><td><code>ROADMAP.md</code></td><td>Roadmap & Phasen mit Meilensteinen.</td></tr>
+    </table>
+
+    <h3>2.3 Verzeichnisse & Inhalte</h3>
+    <table>
+        <tr><th>Ordner</th><th>Inhalt</th></tr>
+        <tr><td><code>PORTAL/</code></td><td>Web-Portale (index.html mit Admin, Partner, Endkunden, POS).</td></tr>
+        <tr><td><code>DATA/</code></td><td>Seed-Daten und Datenbank-Schemas (finance_system_seed.json).</td></tr>
+        <tr><td><code>CODE/</code></td><td>Docker Compose, Skripte, später Backend/Frontend.</td></tr>
+        <tr><td><code>DOCS/</code></td><td>Dokumentation und Inventar.</td></tr>
+        <tr><td><code>SYSTEM/</code></td><td>SystemD-Service und Desktop-Integration.</td></tr>
+        <tr><td><code>CONCEPTS/</code></td><td>Integrierte Konzept-Workspaces (SystemHeaven, HPS, Wallet/POS, Asset Wonder).</td></tr>
+        <tr><td><code>SOURCE/</code></td><td>Original-Referenzen.</td></tr>
+        <tr><td><code>Contracts/</code></td><td>Verträge & regulatorische Dokumentation.</td></tr>
+    </table>
+</section>
+
+<section id="projektplan">
+    <h2>3. Projektplan</h2>
+    <p class="lead">Der Projektplan definiert Zielsetzung, Phasen, Ressourcen, Risiken und Meilensteine.</p>
+
+    <h3>3.1 Zielsetzung</h3>
+    <p>Entwicklung eines Enterprise-grade Finance Systems für digitale Zahlungen und Partner-Verwaltung mit Banken-Standard-Sicherheit, regulatorischer Konformität und Skalierbarkeit.</p>
+
+    <h3>3.2 Projektphasen</h3>
+    <table>
+        <tr><th>Phase</th><th>Zeitraum</th><th>Ziele</th><th>Deliverables</th></tr>
+        <tr><td>0 — Foundation</td><td>Woche 1–4</td><td>Setup, Struktur, Architektur-Review</td><td>Repository, CI/CD, Architektur-Dokument</td></tr>
+        <tr><td>1 — MVP</td><td>Woche 5–16</td><td>Identity, Wallet, SEPA, Partner-Onboarding</td><td>Registrierung, KYC, Einzahlung, Admin-Portal</td></tr>
+        <tr><td>2 — Scale & Compliance</td><td>Monat 5–9</td><td>Instant Payments, POS, AML, Reporting</td><td>Partner-Portal, API, Dashboards, DORA-Doku</td></tr>
+        <tr><td>3 — Advanced & Ecosystem</td><td>Monat 10–18</td><td>Krypto, Open Banking, MiCA, White-Label</td><td>CASP-Roadmap, Multi-Tenancy, Mobile Apps</td></tr>
+    </table>
+
+    <h3>3.3 Ressourcen</h3>
+    <ul>
+        <li><strong>Team:</strong> Product Owner, Compliance Officer, ISO, Backend, Frontend, DevOps, QA.</li>
+        <li><strong>Budget:</strong> Hardware, Cloud, externe KYC/Screening-Provider, Sicherheits-Audits.</li>
+        <li><strong>Infrastruktur:</strong> Docker, PostgreSQL, Redis, RabbitMQ, Monitoring, HSM/Vault.</li>
+    </ul>
+
+    <h3>3.4 Risiken & Massnahmen</h3>
+    <table>
+        <tr><th>Risiko</th><th>Massnahme</th></tr>
+        <tr><td>Regulatorisch</td><td>Früher BaFin-Dialog, Sandbox, Compliance-First.</td></tr>
+        <tr><td>Sicherheit</td><td>Zero-Trust, Pentests, Freeze-System, Incident Response.</td></tr>
+        <tr><td>Performance</td><td>Load-Tests, Caching, Partitionierung, Auto-Scaling.</td></tr>
+    </table>
+
+    <h3>3.5 Meilensteine</h3>
+    <ol>
+        <li>Architecture Review (Woche 4)</li>
+        <li>MVP Live (Monat 4)</li>
+        <li>Compliance Gate (Monat 7)</li>
+        <li>Partner Go-Live (Monat 9)</li>
+        <li>MiCA-Readiness (Monat 15)</li>
+    </ol>
+</section>
+
+<section id="architektur">
+    <h2>4. Architektur</h2>
+    <p class="lead">Die Architektur basiert auf Domain-Driven Design, Event-Driven Architecture und SAGA-Patterns.</p>
+
+    <h3>4.1 Prinzipien</h3>
+    <ul>
+        <li>Domain-Driven Design (DDD) mit Bounded Contexts.</li>
+        <li>Modular Monolith (MVP) → Microservices (Scale).</li>
+        <li>Event-Driven Architecture mit SAGA-Patterns.</li>
+        <li>API-First, Immutable Audit Trail, Zero-Trust.</li>
+    </ul>
+
+    <h3>4.2 Schichten</h3>
+    <pre><code>┌─ Presentation (Web Portal, PWA, POS, Dashboards)
+├─ API Gateway (Auth, Rate-Limit, WAF, Cache)
+├─ Application (Payment, Partner, Wallet, Ledger, Compliance, Reporting)
+├─ Domain (Entities, Value Objects, Events, Policies)
+├─ Infrastructure (Adapters: REST, DB, Broker, Blockchain, Banking)
+└─ Data (PostgreSQL, Redis, Audit-Ledger, Object Storage, DWH)
+    </code></pre>
+
+    <h3>4.3 Komponenten</h3>
+    <table>
+        <tr><th>Komponente</th><th>Verantwortlichkeit</th></tr>
+        <tr><td>API Gateway</td><td>Routing, Auth, Versionierung, Logging.</td></tr>
+        <tr><td>Identity Service</td><td>OIDC/OAuth2, MFA, Sessions.</td></tr>
+        <tr><td>Payment Orchestrator</td><td>State-Machine, Routing, Retry.</td></tr>
+        <tr><td>Partner Service</td><td>Onboarding, Verträge, Limits, API-Keys.</td></tr>
+        <tr><td>Wallet & POS Service</td><td>Multi-Currency, QR-Code, Notarisierung.</td></tr>
+        <tr><td>Ledger Service</td><td>Doppelte Buchführung, Hash-Chain, Freeze.</td></tr>
+        <tr><td>Compliance & Risk</td><td>AML, Fraud, Screening, Case-Management.</td></tr>
+        <tr><td>Reporting Service</td><td>Dashboards, KPIs, Export.</td></tr>
+        <tr><td>Notification Service</td><td>E-Mail, SMS, Push, Webhooks.</td></tr>
+        <tr><td>Admin Configuration</td><td>Feature-Flags, Gebühren, Produkte.</td></tr>
+    </table>
+
+    <h3>4.4 Event-Fluss (SAGA)</h3>
+    <ol>
+        <li><code>PaymentCreated</code> → Checks (KYC, Limit, Liquidität).</li>
+        <li><code>PaymentValidated</code> → Routing (SEPA, Instant, Krypto).</li>
+        <li><code>PaymentCleared</code> → Ledger-Reservierung.</li>
+        <li><code>PaymentSettled</code> → Gegenbuchung, Provision, Notification.</li>
+        <li>Kompensierende Events bei Fehlern.</li>
+    </ol>
+
+    <h3>4.5 Bezugsrahmen</h3>
+    <ul>
+        <li><strong>SystemHeaven:</strong> 8-Layer Validation, IGOS-Scoring.</li>
+        <li><strong>HPS-Architecture:</strong> Zero-Downfall, Redundanz, Fallbacks.</li>
+        <li><strong>Wallet-Concept:</strong> Blockchain-Notar für POS.</li>
+    </ul>
+</section>
+
+<section id="datenmodell">
+    <h2>5. Datenmodell</h2>
+    <p class="lead">Relationales Datenmodell in PostgreSQL, Multi-Tenancy-fähig, jede Entität mit UUID, Zeitstempeln und Audit-Referenz.</p>
+
+    <h3>5.1 Kernentitäten</h3>
+    <table>
+        <tr><th>Entität</th><th>Attribute</th><th>Beziehungen</th></tr>
+        <tr><td>User</td><td>user_id, email, phone, kyc_level, status, tenant_id</td><td>1:n Wallet, KYC-Dokumente</td></tr>
+        <tr><td>Partner</td><td>partner_id, legal_name, tax_id, type, risk_class, api_key_hash</td><td>n:m Contracts, 1:n Payments</td></tr>
+        <tr><td>Contract</td><td>contract_id, type, start_date, fee_schedule, terms_hash</td><td>1:n Partner</td></tr>
+        <tr><td>Wallet</td><td>wallet_id, owner_id, currency, balance, reserved_balance</td><td>1:n Transactions</td></tr>
+        <tr><td>Payment</td><td>payment_id, type, amount, currency, source, target, status</td><td>n:1 Wallet, 1:n LedgerEntry</td></tr>
+        <tr><td>LedgerEntry</td><td>entry_id, account_code, debit, credit, hash, previous_hash</td><td>n:1 Payment</td></tr>
+        <tr><td>LedgerAccount</td><td>account_id, code, name, type, currency</td><td>1:n LedgerEntry</td></tr>
+        <tr><td>ComplianceCase</td><td>case_id, type, risk_score, alert_reason, reviewer_id</td><td>n:1 Payment, User</td></tr>
+        <tr><td>AuditLog</td><td>log_id, entity_type, action, actor_id, payload_hash, signature</td><td>Verweis auf alle Operationen</td></tr>
+        <tr><td>Product</td><td>product_id, name, fee_fixed, fee_variable, min_fee, max_fee</td><td>n:m Contracts</td></tr>
+    </table>
+
+    <h3>5.2 Audit-Ledger</h3>
+    <p>Append-only JSONL mit SHA-256 Hash-Chain:</p>
+    <pre><code>{
+  "timestamp": "2026-06-26T12:00:00Z",
+  "entity_type": "Payment",
+  "entity_id": "pay_abc123",
+  "action": "SETTLED",
+  "actor_id": "user_42",
+  "payload_hash": "sha256:...",
+  "previous_hash": "sha256:...",
+  "signature": "ed25519:..."
+}
+    </code></pre>
+
+    <h3>5.3 Datenbank-Design</h3>
+    <ul>
+        <li><strong>Partitionierung:</strong> Payment- und Ledger-Tabellen nach Tenant/Zeitraum.</li>
+        <li><strong>Indizes:</strong> UUIDs, Status, Zeitstempel, Tenant.</li>
+        <li><strong>Replikation:</strong> Synchrone Replikation für HA, Read-Replicas für Reporting.</li>
+    </ul>
+
+    <h3>5.4 Seed-Daten (finance_system_seed.json)</h3>
+    <table>
+        <tr><th>Kategorie</th><th>Werte</th></tr>
+        <tr><td>Währungen</td><td>EUR, USD, CHF, GBP</td></tr>
+        <tr><td>Zahlungsarten</td><td>SEPA, SEPA_INSTANT, INTERNAL, CRYPTO, POS</td></tr>
+        <tr><td>Partner-Typen</td><td>BANK, MERCHANT, FUND, PSP, EXCHANGE</td></tr>
+        <tr><td>KYC-Stufen</td><td>LEVEL_1, LEVEL_2, LEVEL_3</td></tr>
+        <tr><td>Wallet-Status</td><td>ACTIVE, FROZEN, CLOSED</td></tr>
+        <tr><td>Payment-Status</td><td>CREATED, VALIDATED, CLEARED, SETTLED, REVERSED</td></tr>
+        <tr><td>Beispiel-Konten</td><td>Bankguthaben (1000), Kundenverbindlichkeiten (2000), Gebührenerlöse (4000), Betriebskosten (5000)</td></tr>
+    </table>
+</section>
+
+<section id="sicherheit">
+    <h2>6. Sicherheitskonzept</h2>
+    <p class="lead">Das Sicherheitskonzept definiert Ziele, Kontrollen, Freeze-System und Schlüsselpraktiken.</p>
+
+    <h3>6.1 Sicherheitsziele</h3>
+    <table>
+        <tr><th>Ziel</th><th>Umsetzung</th></tr>
+        <tr><td>Vertraulichkeit</td><td>TLS 1.3, Field-Level Encryption, Secrets in Vault.</td></tr>
+        <tr><td>Integrität</td><td>SHA-256 Hash-Chain, signierte Events, Code-Signing.</td></tr>
+        <tr><td>Verfügbarkeit</td><td>Multi-AZ, DDoS-Schutz, Backup & DR.</td></tr>
+    </table>
+
+    <h3>6.2 Sicherheitskontrollen</h3>
+    <table>
+        <tr><th>Kontrolle</th><th>Umsetzung</th></tr>
+        <tr><td>Zero-Trust</td><td>mTLS, Netzwerksegmentierung, kein implizites Vertrauen.</td></tr>
+        <tr><td>Authentifizierung</td><td>OIDC/OAuth2, MFA, WebAuthn, Passkeys.</td></tr>
+        <tr><td>Autorisierung</td><td>RBAC + ABAC, Least Privilege, OPA.</td></tr>
+        <tr><td>Verschlüsselung</td><td>AES-256 at rest, TLS 1.3 in transit, Memory-safe.</td></tr>
+        <tr><td>Key Management</td><td>HSM / KMS, Schlüsselrotation, Separation of Duties.</td></tr>
+        <tr><td>API-Sicherheit</td><td>WAF, Rate-Limiting, Idempotency, CSRF.</td></tr>
+        <tr><td>Logging & SIEM</td><td>Zentralisierte Logs, unveränderliche Audit-Trail.</td></tr>
+        <tr><td>Incident Response</td><td>Runbooks, Freeze, Forensik, Post-Incident.</td></tr>
+        <tr><td>Secure SDLC</td><td>SAST, DAST, Dependency-Scan, Pentests.</td></tr>
+    </table>
+
+    <h3>6.3 Freeze-System</h3>
+    <p>Jederzeit auslösbare Sperre für globale, kundenbezogene oder partnerbezogene Transaktionen. Freeze/Unfreeze werden mit Begründung, Autorität und Zeitstempel im Ledger protokolliert.</p>
+
+    <h3>6.4 Schlüsselpraktiken</h3>
+    <ul>
+        <li>Keine Secrets im Code.</li>
+        <li>Regelmäßige Rotation von API-Keys und Tokens.</li>
+        <li>Minimale Rechte für Dienstkonten.</li>
+        <li>Sicherheitsvorfälle innerhalb von 30 Minuten eindämmbar.</li>
+    </ul>
+</section>
+
+<section id="compliance">
+    <h2>7. Compliance & Regulatorik</h2>
+    <p class="lead">Compliance-by-Design für MiCA, PSD2/PSD3, DORA, GDPR, AML5/AML6 und GoBD.</p>
+
+    <h3>7.1 Regulatorische Anforderungen</h3>
+    <table>
+        <tr><th>Regulierung</th><th>Relevanz</th><th>Umsetzung</th></tr>
+        <tr><td>MiCA</td><td>Krypto-Assets</td><td>Token-Klassifikation, Whitepaper, Reserve, CASP-Pfad.</td></tr>
+        <tr><td>PSD2 / PSD3</td><td>Zahlungsdienste</td><td>SCA, Zahlungsauslöser, Consent.</td></tr>
+        <tr><td>DORA</td><td>Operative Resilienz</td><td>ICT-Risiko, Incident-Management, BCP.</td></tr>
+        <tr><td>GDPR</td><td>Datenschutz</td><td>Privacy by Design, Datenminimierung, Löschung.</td></tr>
+        <tr><td>AML5 / AML6</td><td>Geldwäsche</td><td>KYC, Risk-Based Approach, Monitoring, Meldung.</td></tr>
+        <tr><td>GoBD</td><td>Buchführung</td><td>Unveränderliche Daten, revisionssichere Archivierung.</td></tr>
+    </table>
+
+    <h3>7.2 KYC-Stufen</h3>
+    <ol>
+        <li><strong>Level 1:</strong> E-Mail/Telefon-Verifizierung.</li>
+        <li><strong>Level 2:</strong> Identitätsdokument + Adresse.</li>
+        <li><strong>Level 3:</strong> Source of Funds, Enhanced Due Diligence.</li>
+    </ol>
+
+    <h3>7.3 AML-Monitoring</h3>
+    <ul>
+        <li>Echtzeit-Regeln: Limits, Velocity, Geografie, Muster.</li>
+        <li>ML-basiertes Scoring mit regelmäßigem Retraining.</li>
+        <li>Case-Management: Alert → Review → Entscheidung → Audit-Log.</li>
+    </ul>
+
+    <h3>7.4 Reporting & Audit-Trail</h3>
+    <ul>
+        <li>Automatische regulatorische Berichte.</li>
+        <li>Genehmigungs-Workflow vor Meldung.</li>
+        <li>Revisionssicherer Export im richtigen Format.</li>
+        <li>Jede relevante Aktion wird mit Zeitstempel, Actor, Hash und Signatur in einem append-only Ledger gespeichert.</li>
+    </ul>
+</section>
+
+<section id="roadmap">
+    <h2>8. Roadmap & Phasen</h2>
+
+    <h3>8.1 Phase 0 — Foundation (Woche 1–4)</h3>
+    <ul>
+        <li>Repository, CI/CD, Docker-Compose-Setup.</li>
+        <li>Übernahme Hnoss-Strukturen (README, SystemD, DOCS).</li>
+        <li>Architektur-Review und OpenAPI-Spezifikation.</li>
+        <li>Sicherheits- und Compliance-Framework.</li>
+    </ul>
+
+    <h3>8.2 Phase 1 — MVP (Woche 5–16)</h3>
+    <ul>
+        <li>Identity & Access: Registrierung, KYC Level 1-2, MFA.</li>
+        <li>Wallet: Multi-Currency, interne Transfers.</li>
+        <li>SEPA: Einzahlung und Auszahlung (T+1).</li>
+        <li>Partner-Onboarding (manuelle Freigabe).</li>
+        <li>Admin- und Endkunden-Portal (Basis).</li>
+        <li>Audit-Ledger mit Hash-Chain.</li>
+    </ul>
+
+    <h3>8.3 Phase 2 — Scale & Compliance (Monat 5–9)</h3>
+    <ul>
+        <li>SEPA Instant, POS-Zahlung, QR-Code.</li>
+        <li>Compliance-Engine (AML, Fraud, Limits).</li>
+        <li>Partner-Self-Service, API-Keys, Webhooks.</li>
+        <li>Reporting & Analytics, Echtzeit-Dashboards.</li>
+        <li>Load-Tests, Pentests, DORA-Dokumentation.</li>
+    </ul>
+
+    <h3>8.4 Phase 3 — Advanced & Ecosystem (Monat 10–18)</h3>
+    <ul>
+        <li>Krypto-Settlement, Smart-Contract-Notarisierung.</li>
+        <li>Open-Banking-Integration.</li>
+        <li>MiCA-Whitepaper, Token-Klassifikation, CASP-Vorbereitung.</li>
+        <li>Multi-Tenancy, White-Label für Partner.</li>
+        <li>Mobile Apps (PWA / Capacitor).</li>
+    </ul>
+
+    <h3>8.5 Meilensteine</h3>
+    <table>
+        <tr><th>Meilenstein</th><th>Termin</th><th>Deliverable</th></tr>
+        <tr><td>Architecture Review</td><td>Woche 4</td><td>Genehmigtes Architektur-Dokument</td></tr>
+        <tr><td>MVP Live</td><td>Monat 4</td><td>Registrierung, Wallet, SEPA-Einzahlung</td></tr>
+        <tr><td>Compliance Gate</td><td>Monat 7</td><td>AML/KYC, Audit-Trail, DORA-Doku</td></tr>
+        <tr><td>Partner Go-Live</td><td>Monat 9</td><td>Partner-Portal, API, erste Partner</td></tr>
+        <tr><td>MiCA-Readiness</td><td>Monat 15</td><td>Whitepaper, Token-Klassifikation</td></tr>
+    </table>
+</section>
+
+<section id="frameworks">
+    <h2>9. Integrierte Konzept-Frameworks</h2>
+    <p class="lead">Das Finance System baut auf bestehenden Konzepten aus dem Hnoss-Ökosystem auf. Die Frameworks werden referenziert, nicht kopiert.</p>
+
+    <h3>9.1 SystemHeaven / Cornerstone-Methodology</h3>
+    <ul>
+        <li><strong>Quelle:</strong> <code>Hnoss - Projecte/CONCEPTS/Cornerstone-Methodology-Style-main</code></li>
+        <li><strong>Inhalt:</strong> 8-Layer Validation Framework, IIOS-Verfassung, IGOS-Scoring, Zertifizierungstiers.</li>
+        <li><strong>Nutzung:</strong> Verankerung auf Layer 0 bis Layer 7, IGOS-Scoring für Architektur-Review und Audit, philosophische Grundlage für Governance.</li>
+    </ul>
+
+    <h3>9.2 HPS-Architecture (High-Potential-Scale)</h3>
+    <ul>
+        <li><strong>Quelle:</strong> <code>Hnoss - Projecte/CONCEPTS/HPS-Architecture</code></li>
+        <li><strong>Inhalt:</strong> Zero-Downfall Crypto-Fiat Integration, symbiotische Architektur.</li>
+        <li><strong>Nutzung:</strong> Redundanz, Fallbacks, Circuit-Breaker, Event-Sourcing für ausfallfreien Zahlungsverkehr zwischen Fiat und Krypto.</li>
+    </ul>
+
+    <h3>9.3 Wallet & POS Concept</h3>
+    <ul>
+        <li><strong>Quelle:</strong> <code>Hnoss - Projecte/CONCEPTS/Wallet-Concept</code></li>
+        <li><strong>Inhalt:</strong> Blockchain-Notar für Kassen, Wallet-Integration.</li>
+        <li><strong>Nutzung:</strong> POS-Zahlungs-Workflows, QR-Code, Wallet-Guthaben, Beleg-Notarisierung.</li>
+    </ul>
+
+    <h3>9.4 Asset Wonder Dashboard</h3>
+    <ul>
+        <li><strong>Quelle:</strong> <code>Hnoss - Projecte/Asset Wonder FuLLy/.../hnoss-visual-dashboard</code></li>
+        <li><strong>Inhalt:</strong> Visualisierung von Staatsfonds, LP/GLP-Fonds, Sport-Assets, MiCA-Token-Klassifikation.</li>
+        <li><strong>Nutzung:</strong> Design- und Visualisierungs-Referenz für Partner- und Asset-Reports.</li>
+    </ul>
+</section>
+
+<section id="code">
+    <h2>10. Code, Infrastruktur & Portal</h2>
+
+    <h3>10.1 Docker-Compose-Stack</h3>
+    <p>Der lokale Entwicklungsstack umfasst PostgreSQL 16, Redis 7 und RabbitMQ 3 mit Management-UI.</p>
+    <table>
+        <tr><th>Service</th><th>Image</th><th>Port</th></tr>
+        <tr><td>PostgreSQL</td><td>postgres:16-alpine</td><td>5432</td></tr>
+        <tr><td>Redis</td><td>redis:7-alpine</td><td>6379</td></tr>
+        <tr><td>RabbitMQ</td><td>rabbitmq:3-management-alpine</td><td>5672, 15672</td></tr>
+    </table>
+    <div class="warning-box">
+        <strong>Hinweis:</strong> Die Standard-Passwörter im docker-compose.yml sind Platzhalter und müssen vor Produktivsetzung durch Secrets aus Vault/KMS ersetzt werden.
+    </div>
+
+    <h3>10.2 Web-Portal (PORTAL/index.html)</h3>
+    <p>Das Portal-Template bietet vier Einstiegspunkte:</p>
+    <ul>
+        <li><strong>Admin Portal:</strong> User-Management, Compliance, Konfiguration, Freeze.</li>
+        <li><strong>Partner Portal:</strong> Transaktionen, Auszahlungen, API-Keys, Reports.</li>
+        <li><strong>Endkunden Portal:</strong> Konto, Wallet, Zahlungen, KYC, Historie.</li>
+        <li><strong>POS Interface:</strong> QR-Code, Zahlungsbestätigung, Tagesabschluss.</li>
+    </ul>
+
+    <h3>10.3 System-Integration</h3>
+    <ul>
+        <li><strong>SystemD-Service:</strong> <code>SYSTEM/systemd/finance-system.service</code> für Linux-Systemdienste.</li>
+        <li><strong>Desktop-Icon:</strong> <code>SYSTEM/desktop/finance-system.desktop</code> für Desktop-Integration.</li>
+        <li><strong>Setup-Skript:</strong> <code>CODE/scripts/setup.sh</code> für Einrichtung und Start.</li>
+    </ul>
+</section>
+
+<section id="inventory">
+    <h2>11. Projekt-Inventory</h2>
+    <p class="lead">Snapshot vom 26.06.2026 des Projektverzeichnisses.</p>
+
+    <h3>11.1 Dokumente & Konzept</h3>
+    <table>
+        <tr><th>Datei</th><th>Zweck</th></tr>
+        <tr><td><code>README.md</code></td><td>Projektübersicht</td></tr>
+        <tr><td><code>FINANCE_SYSTEM_GESAMTKONZEPT_26.06.2026.html</code></td><td>Vollständiges HTML-Gesamtkonzept</td></tr>
+        <tr><td><code>PROJECT_PLAN.md</code></td><td>Projektplan</td></tr>
+        <tr><td><code>ARCHITECTURE.md</code></td><td>Architekturkonzept</td></tr>
+        <tr><td><code>DATA_MODEL.md</code></td><td>Datenmodell</td></tr>
+        <tr><td><code>SECURITY.md</code></td><td>Sicherheitskonzept</td></tr>
+        <tr><td><code>COMPLIANCE.md</code></td><td>Compliance & Regulatorik</td></tr>
+        <tr><td><code>ROADMAP.md</code></td><td>Roadmap & Phasen</td></tr>
+    </table>
+
+    <h3>11.2 Verzeichnisse</h3>
+    <table>
+        <tr><th>Ordner</th><th>Inhalt</th></tr>
+        <tr><td><code>PORTAL/</code></td><td>Web-Portale</td></tr>
+        <tr><td><code>DATA/</code></td><td>Seed-Daten und Datenbank-Schemas</td></tr>
+        <tr><td><code>CODE/</code></td><td>Docker Compose, Skripte, später Backend/Frontend</td></tr>
+        <tr><td><code>DOCS/</code></td><td>Dokumentation</td></tr>
+        <tr><td><code>SYSTEM/</code></td><td>SystemD-Service und Desktop-Icons</td></tr>
+        <tr><td><code>CONCEPTS/</code></td><td>Integrierte Konzept-Workspaces</td></tr>
+        <tr><td><code>SOURCE/</code></td><td>Original-Referenzen</td></tr>
+        <tr><td><code>Contracts/</code></td><td>Verträge & regulatorische Dokumentation</td></tr>
+    </table>
+
+    <h3>11.3 Status</h3>
+    <p>Konzeptphase abgeschlossen. Nächster Schritt: Architecture Review und MVP-Definition.</p>
+</section>
+
+<section id="anhang">
+    <h2>12. Anhang</h2>
+
+    <h3>12.1 Glossar</h3>
+    <table>
+        <tr><th>Begriff</th><th>Bedeutung</th></tr>
+        <tr><td>AML</td><td>Anti-Money Laundering — Geldwäscheprävention</td></tr>
+        <tr><td>KYC</td><td>Know Your Customer — Kundenidentifikation</td></tr>
+        <tr><td>SEPA</td><td>Single Euro Payments Area</td></tr>
+        <tr><td>MiCA</td><td>Markets in Crypto-Assets Regulation</td></tr>
+        <tr><td>DORA</td><td>Digital Operational Resilience Act</td></tr>
+        <tr><td>GDPR</td><td>General Data Protection Regulation</td></tr>
+        <tr><td>GoBD</td><td>Grundsätze zur ordnungsmäßigen Führung und Aufbewahrung von Büchern</td></tr>
+        <tr><td>PSD2/PSD3</td><td>Payment Services Directive</td></tr>
+        <tr><td>CASP</td><td>Crypto-Asset Service Provider</td></tr>
+        <tr><td>HSM</td><td>Hardware Security Module</td></tr>
+    </table>
+
+    <h3>12.2 Versionshistorie</h3>
+    <table>
+        <tr><th>Version</th><th>Datum</th><th>Autor</th><th>Änderungen</th></tr>
+        <tr><td>1.0</td><td>26.06.2026</td><td>Daniel Pohl</td><td>Erstveröffentlichung des vollständigen Konzepts</td></tr>
+    </table>
+
+    <h3>12.3 Kontakt & Verantwortlichkeiten</h3>
+    <ul>
+        <li><strong>Projektinhaber / Konzeptautor:</strong> Daniel Pohl</li>
+        <li><strong>Projektdatum:</strong> 26.06.2026</li>
+        <li><strong>Dokument:</strong> Finance_System_Konzept_26.06.2026_by_Daniel_Pohl.html</li>
+        <li><strong>Zielsystem:</strong> Finance System — Enterprise-grade Finanzplattform</li>
+    </ul>
+
+    <div class="highlight-box">
+        <strong>Integration der vorhandenen Strukturen:</strong> Dieses Konzept integriert die im Projektverzeichnis vorhandenen Dateien README.md, PROJECT_PLAN.md, ARCHITECTURE.md, DATA_MODEL.md, SECURITY.md, COMPLIANCE.md, ROADMAP.md sowie die Verzeichnisse PORTAL, DATA, CODE, DOCS, SYSTEM, CONCEPTS, SOURCE und Contracts. Alle Inhalte wurden in diese Master-Dokumentation eingepflegt und verknüpft.
+    </div>
+</section>
+
+</div>
+
+<footer class="footer">
+    <p>Finance System — Komplettes Projektkonzept | 26.06.2026 by Daniel Pohl</p>
+    <p>Enterprise-grade System für digitale Zahlungen und Partner-Verwaltung.</p>
+</footer>
+
+</body>
+</html>

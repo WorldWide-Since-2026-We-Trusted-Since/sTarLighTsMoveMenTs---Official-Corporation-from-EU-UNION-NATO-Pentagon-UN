@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finance System — Gesamtkonzept | 26.06.2026 by Daniel Pohl</title>
+  <style>
+    :root {
+      --bg: #0a0f16;
+      --bg-card: #111827;
+      --bg-card-hover: #1a2436;
+      --border: #1f2937;
+      --text: #e5e7eb;
+      --text-muted: #9ca3af;
+      --accent-gold: #f59e0b;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --accent-purple: #8b5cf6;
+      --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-main); line-height: 1.6; font-size: 15px; }
+    a { color: var(--accent-cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+    header { text-align: center; padding: 60px 20px 40px; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+    header h1 { font-size: 2.6rem; margin: 0; letter-spacing: -1px; color: var(--accent-gold); }
+    header .subtitle { font-size: 1.2rem; color: var(--text-muted); margin-top: 12px; }
+    header .meta { margin-top: 20px; font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-cyan); }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin: 4px 4px 0 0; border: 1px solid; }
+    .badge-gold { color: var(--accent-gold); border-color: var(--accent-gold); background: rgba(245,158,11,0.1); }
+    .badge-cyan { color: var(--accent-cyan); border-color: var(--accent-cyan); background: rgba(6,182,212,0.1); }
+    .badge-green { color: var(--accent-green); border-color: var(--accent-green); background: rgba(16,185,129,0.1); }
+    .badge-purple { color: var(--accent-purple); border-color: var(--accent-purple); background: rgba(139,92,246,0.1); }
+    .toc { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 40px; }
+    .toc h2 { margin-top: 0; color: var(--accent-cyan); }
+    .toc ul { columns: 2; column-gap: 40px; }
+    .toc li { margin-bottom: 6px; }
+    .toc a { color: var(--text); }
+    .toc a:hover { color: var(--accent-gold); }
+    section { margin-bottom: 48px; }
+    h2 { color: var(--accent-gold); border-bottom: 2px solid var(--accent-gold); padding-bottom: 8px; margin-top: 0; }
+    h3 { color: var(--accent-cyan); margin-top: 28px; }
+    h4 { color: var(--accent-green); margin-top: 22px; }
+    p { max-width: 95ch; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; background: var(--bg-card); border-radius: 8px; overflow: hidden; }
+    th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { background: #162032; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; font-size: 0.8rem; }
+    tr:hover { background: var(--bg-card-hover); }
+    ul { padding-left: 22px; }
+    li { margin-bottom: 6px; }
+    .highlight-box { background: rgba(6,182,212,0.08); border-left: 4px solid var(--accent-cyan); padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 18px 0; }
+    .warning-box { background: rgba(239,68,68,0.08); border-left: 4px solid var(--accent-red); padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 18px 0; }
+    .success-box { background: rgba(16,185,129,0.08); border-left: 4px solid var(--accent-green); padding: 18px 22px; border-radius: 0 10px 10px 0; margin: 18px 0; }
+    .code-block { background: #05080c; border: 1px solid var(--border); border-radius: 8px; padding: 16px; font-family: var(--font-mono); font-size: 0.85rem; overflow-x: auto; color: #d1d5db; margin: 16px 0; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+    .card h4 { margin-top: 0; }
+    .footer { text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 40px 0 20px; border-top: 1px solid var(--border); }
+    @media (max-width: 900px) { .toc ul { columns: 1; } .two-col, .three-col { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Finance System</h1>
+      <div class="subtitle">Enterprise-grade System für digitale Zahlungen und Partner-Verwaltung</div>
+      <div class="meta">Version 1.0 · 26.06.2026 · Autor: Daniel Pohl · Projektkonzept</div>
+      <div style="margin-top: 16px;">
+        <span class="badge badge-gold">Banken-Standard-Sicherheit</span>
+        <span class="badge badge-cyan">Hochgeschwindigkeits-Verarbeitung</span>
+        <span class="badge badge-green">MiCA / PSD2 / DORA Ready</span>
+        <span class="badge badge-purple">Hnoss / MOSTVALUE-Ökosystem</span>
+      </div>
+    </header>
+
+    <div class="toc">
+      <h2>Inhaltsverzeichnis</h2>
+      <ul>
+        <li><a href="#sec-summary">1. Executive Summary</a></li>
+        <li><a href="#sec-vision">2. Vision &amp; Zielsetzung</a></li>
+        <li><a href="#sec-context">3. Projekt-Kontext &amp; Einordnung</a></li>
+        <li><a href="#sec-scope">4. Domänenabgrenzung &amp; Scope</a></li>
+        <li><a href="#sec-stakeholder">5. Stakeholder &amp; Rollenmodell</a></li>
+        <li><a href="#sec-processes">6. Geschäftsprozesse &amp; Use Cases</a></li>
+        <li><a href="#sec-architecture">7. Systemarchitektur</a></li>
+        <li><a href="#sec-existing">8. Integration bestehender Strukturen</a></li>
+        <li><a href="#sec-data">9. Datenmodell &amp; Entitäten</a></li>
+        <li><a href="#sec-modules">10. Modulkatalog</a></li>
+        <li><a href="#sec-tech">11. Technologie-Stack</a></li>
+        <li><a href="#sec-security">12. Sicherheitskonzept</a></li>
+        <li><a href="#sec-compliance">13. Compliance &amp; Regulatorik</a></li>
+        <li><a href="#sec-payments">14. Zahlungsverkehr &amp; Partnerverwaltung</a></li>
+        <li><a href="#sec-api">15. API-Design &amp; Integrationen</a></li>
+        <li><a href="#sec-ux">16. Frontend &amp; User Experience</a></li>
+        <li><a href="#sec-devops">17. DevOps, Betrieb &amp; SystemD</a></li>
+        <li><a href="#sec-performance">18. Performance, Skalierung &amp; HA</a></li>
+        <li><a href="#sec-roadmap">19. Roadmap &amp; Phasenplan</a></li>
+        <li><a href="#sec-risk">20. Risikomanagement &amp; Mitigations</a></li>
+        <li><a href="#sec-kpi">21. KPIs &amp; Erfolgsmetriken</a></li>
+        <li><a href="#sec-integration-catalog">22. Integrationskatalog Open-Source Finance</a></li>
+        <li><a href="#sec-glossary">23. Glossar</a></li>
+        <li><a href="#sec-history">24. Änderungshistorie</a></li>
+      </ul>
+    </div>
+
+    <section id="sec-summary">
+      <h2>1. Executive Summary</h2>
+      <p>Das <strong>Finance System</strong> ist ein vollständiges Konzept für eine digitale Zahlungs- und Partner-Management-Plattform, die Banken-Standard-Sicherheit mit moderner Hochgeschwindigkeits-Verarbeitung verbindet. Es entsteht als logische Weiterentwicklung der bestehenden Strukturen im Hnoss / MOSTVALUE-Ökosystem und übernimmt deren bewährte Architektur-Muster (SystemHeaven, HPS-Architektur, Wallet/POS-Konzept), ohne deren Dateien zu verändern.</p>
+      <div class="highlight-box"><strong>Kernbotschaft:</strong> Das Finance System bildet eine skalierbare, regulatorisch konforme und philosophisch verankerte Finanzinfrastruktur, die digitale Zahlungen, Partner-Stammdaten, Wallet-/POS-Funktionen, Ledger-/Settlement-Prozesse und ein Admin-Portal in einer einheitlichen Plattform zusammenführt.</div>
+      <p>Das Dokument beschreibt das komplette Konzept: Zielstellung, Architektur, Datenmodell, Sicherheitsmaßnahmen, regulatorische Einordnung, Technologie-Stack, Roadmap, Risiken, KPIs und Integrationskatalog. Es dient als Master-Plan für die technische Umsetzung und als Nachweis gegenüber Regulatoren, Investoren und Partnerinstitutionen.</p>
+    </section>
+
+    <section id="sec-vision">
+      <h2>2. Vision &amp; Zielsetzung</h2>
+      <h3>2.1 Vision</h3>
+      <p>Eine souveräne, transparente und hochverfügbare Finanzinfrastruktur, die digitale Zahlungen, Partnerverwaltung und Wertpapier-ähnliche Assets in einem einheitlichen, ethisch verankerten Rahmen vereint — verifizierbar, revisionssicher und auf Banken-Niveau abgesichert.</p>
+      <h3>2.2 Strategische Ziele</h3>
+      <div class="three-col">
+        <div class="card"><h4>Banken-Standard</h4><ul><li>End-to-End-Verschlüsselung, Zero-Trust, HSM, MFA</li><li>Audit-Trail, Immutable Ledger, SIEM-Anbindung</li><li>RBAC und ABAC</li></ul></div>
+        <div class="card"><h4>Hochgeschwindigkeit</h4><ul><li>Async-Event-Verarbeitung, Caching, CQRS</li><li>Horizontale Skalierung, Auto-Scaling</li><li>P99 &lt; 100 ms für API-Requests</li></ul></div>
+        <div class="card"><h4>Konformität</h4><ul><li>MiCA, PSD2, GDPR, DORA, AML5</li><li>BaFin-konforme Prozesse, Verfahrensdokumentation</li><li>Whitelisting, KYC, AML-Screening</li></ul></div>
+      </div>
+      <h3>2.3 Nutzenversprechen</h3>
+      <ul>
+        <li><strong>Reduzierte Komplexität:</strong> Ein System statt vieler Insellösungen für Zahlungen, Partner, Wallets und Reporting.</li>
+        <li><strong>Höhere Sicherheit:</strong> Durchgängige Kryptographie, Zero-Trust und unveränderliche Ledger-Einträge.</li>
+        <li><strong>Regulatorische Freigabe:</strong> MiCA-ready Token-Klassifikation, PSD2-Zahlungsauslöser, DORA-Resilienz.</li>
+        <li><strong>Skalierbarkeit:</strong> Von MVP bis globale Clearing-Instanz auf derselben Codebasis.</li>
+        <li><strong>Transparenz:</strong> Dashboards, Audit-Logs, Echtzeit-Monitoring für alle Stakeholder.</li>
+      </ul>
+    </section>
+
+    <section id="sec-context">
+      <h2>3. Projekt-Kontext &amp; Einordnung</h2>
+      <p>Das Projekt wird im Verzeichnis <code>/run/media/shinehealthcare/a9496acd-4335-4f6b-9ef4-2a6d2c0ce9ad/Finance System. 26.06.2026 by. Daniel Pohl</code> geführt. Es ist Teil des übergeordneten Hnoss-Ökosystems, das unter anderem das Twin Taxi Asset / MOSTVALUE-Portal, CBDC-Settlement-Engines, Asset-Wonder-Dashboards und regulatorische Vertrags-Architekturen umfasst.</p>
+      <h3>3.1 Übergeordnete Bezugsrahmen</h3>
+      <table>
+        <thead><tr><th>Bezugsrahmen</th><th>Verzeichnis / Quelle</th><th>Rolle im Finance System</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Hnoss / Twin Taxi Asset</strong></td><td><code>Hnoss - Projecte 16.06.2026 - 03:13 Uhr</code></td><td>Ökosystem, Daten- und Asset-Referenz, MOSTVALUE-Trigger, Partner-Layer.</td></tr>
+          <tr><td><strong>SystemHeaven / Cornerstone</strong></td><td><code>CONCEPTS/Cornerstone-Methodology-Style-main</code></td><td>8-Layer Validation Framework, IIOS-Verfassung, IGOS-Scoring, Zertifizierungstiers.</td></tr>
+          <tr><td><strong>HPS-Architektur</strong></td><td><code>CONCEPTS/HPS-Architecture</code></td><td>Zero-Downfall Crypto-Fiat Integration, symbiotische Architektur.</td></tr>
+          <tr><td><strong>Wallet &amp; POS</strong></td><td><code>CONCEPTS/Wallet-Concept</code></td><td>Blockchain-Notar für Kassen, Wallet-Integration, POS-Workflows.</td></tr>
+          <tr><td><strong>Asset Wonder Dashboard</strong></td><td><code>Asset Wonder FuLLy/.../hnoss-visual-dashboard</code></td><td>Visualisierungs-Referenz für Staatsfonds, LP/GLP-Fonds, Sport-Assets, MiCA-Token-Klassifikation.</td></tr>
+          <tr><td><strong>Open-Source Finance</strong></td><td><code>Open-Source Finance &amp; Trading Platforms Setup.json</code></td><td>Katalog potenzieller Integrations-Plattformen.</td></tr>
+        </tbody>
+      </table>
+      <h3>3.2 Status &amp; Annahmen</h3>
+      <ul>
+        <li><strong>Status:</strong> Konzeptphase (Stand 26.06.2026). Noch keine Produktiv-Umgebung.</li>
+        <li><strong>Annahme 1:</strong> Das Projekt wird als eigenständige Anwendung innerhalb des Hnoss-Ökosystems betrieben.</li>
+        <li><strong>Annahme 2:</strong> BaFin-Regulierungsanforderungen gelten als Zielgröße, ohne dass bereits eine Lizenz vorliegt.</li>
+        <li><strong>Annahme 3:</strong> Bestehende Strukturen (PORTAL, DATA, CODE, DOCS, SYSTEM, CONCEPTS, SOURCE, Contracts) werden als Referenz und Ausgangsbasis übernommen.</li>
+      </ul>
+    </section>
+
+    <section id="sec-scope">
+      <h2>4. Domänenabgrenzung &amp; Scope</h2>
+      <h3>4.1 In-Scope</h3>
+      <table>
+        <thead><tr><th>Domäne</th><th>Was wird abgedeckt</th><th>Beispiel-Prozesse</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Identity &amp; Access</strong></td><td>Benutzer, Rollen, Rechte, KYC, MFA</td><td>Registrierung, Verifizierung, Rollenzuweisung</td></tr>
+          <tr><td><strong>Payment Engine</strong></td><td>Ein-/Auszahlungen, SEPA, Instant, Krypto, interne Buchungen</td><td>Zahlung auslösen, Clearing, Settlement</td></tr>
+          <tr><td><strong>Partner Management</strong></td><td>Partner-Stammdaten, Verträge, Banken, Händler</td><td>Onboarding, Rating, Kommissionsabrechnung</td></tr>
+          <tr><td><strong>Wallet &amp; POS</strong></td><td>Digitale Wallets, Kassen-Integration, QR-Code</td><td>Wallet erstellen, POS-Zahlung, Beleg-Notarisierung</td></tr>
+          <tr><td><strong>Ledger &amp; Accounting</strong></td><td>Doppelte Buchführung, Journal, Reconciliation</td><td>Buchungssatz, Ledger-Freeze, Reconciliation</td></tr>
+          <tr><td><strong>Compliance &amp; Risk</strong></td><td>AML, KYC, Fraud, Limits, Reporting</td><td>Monitoring, Screening, Verdachtsmeldung</td></tr>
+          <tr><td><strong>Reporting &amp; Analytics</strong></td><td>Dashboards, KPIs, Berichte</td><td>COB-Bericht, Partner-Performance</td></tr>
+          <tr><td><strong>Admin &amp; Configuration</strong></td><td>Systemeinstellungen, Parameter</td><td>Gebührenmodell, Währungspaare</td></tr>
+        </tbody>
+      </table>
+      <h3>4.2 Out-of-Scope (MVP)</h3>
+      <ul>
+        <li>Eigene Blockchain als Layer-1 (stattdessen EVM-kompatible Layer-2 oder permissioned Ledger).</li>
+        <li>Lizenzierung als Bank (MVP: Zahlungsinstitut / Fintech unter Auslagerung).</li>
+        <li>Vollständige Wertpapierhandels-Plattform (Trading-Integration als Erweiterung).</li>
+        <li>Native mobile Apps (MVP: Responsive Web; Apps später per PWA).</li>
+      </ul>
+    </section>
+
+    <section id="sec-stakeholder">
+      <h2>5. Stakeholder &amp; Rollenmodell</h2>
+      <h3>5.1 Externe Stakeholder</h3>
+      <table>
+        <thead><tr><th>Stakeholder</th><th>Interesse</th><th>Anforderungen</th></tr></thead>
+        <tbody>
+          <tr><td>Regulatoren (BaFin, ECB)</td><td>Compliance, Stabilität, Verbraucherschutz</td><td>Audit-Trails, Meldewesen, DORA-Resilienz</td></tr>
+          <tr><td>Banken &amp; Zahlungsinstitute</td><td>Interoperabilität, Sicherheit, SLA</td><td>REST/ISO20022 APIs, Zertifikate, 99.95 % Verfügbarkeit</td></tr>
+          <tr><td>Händler &amp; Partner</td><td>Einfaches Onboarding, schnelle Abrechnung</td><td>Self-Service, tägliche Auszahlung, Export</td></tr>
+          <tr><td>Endkunden</td><td>Einfache, sichere Zahlung</td><td>Intuitive UI, Transparenz, Datenschutz</td></tr>
+          <tr><td>Investoren</td><td>Transparenz, Wachstum</td><td>KPI-Dashboards, Risiko-Reports</td></tr>
+        </tbody>
+      </table>
+      <h3>5.2 Interne Rollen</h3>
+      <div class="two-col">
+        <div class="card"><h4>Governance &amp; Management</h4><ul><li>Product Owner</li><li>Compliance Officer</li><li>Information Security Officer</li><li>IT-Betrieb</li></ul></div>
+        <div class="card"><h4>Technische Rollen</h4><ul><li>Backend Engineers</li><li>Frontend Engineers</li><li>DevOps / SRE</li><li>QA / Test Automation</li></ul></div>
+      </div>
+    </section>
+
+    <section id="sec-processes">
+      <h2>6. Geschäftsprozesse &amp; Use Cases</h2>
+      <h3>6.1 Core-Prozesskette</h3>
+      <ol>
+        <li><strong>Onboarding:</strong> Identitätsprüfung (KYC) → Vertragsabschluss → Wallet-Provisionierung → Limits &amp; Freigabe.</li>
+        <li><strong>Zahlungsauslösung:</strong> Auftraggeber autorisiert Zahlung → Pre-Checks (Limits, AML, Liquidität) → Clearing → Settlement → Ledger-Buchung.</li>
+        <li><strong>Partner-Abrechnung:</strong> Transaktionserfassung → Kommissionsberechnung → Rechnungsstellung/Auszahlung → Steuer-Reporting.</li>
+        <li><strong>Monitoring &amp; Reporting:</strong> Echtzeit-Monitoring → Anomalie-Erkennung → Berichte → Audit-Export.</li>
+      </ol>
+      <h3>6.2 Detaillierte Use Cases</h3>
+      <table>
+        <thead><tr><th>ID</th><th>Use Case</th><th>Akteure</th><th>Beschreibung</th><th>Erfolgskriterium</th></tr></thead>
+        <tbody>
+          <tr><td>UC-001</td><td>Benutzer-Registrierung</td><td>Endkunde, System</td><td>Registrierung per E-Mail/Mobile, Verifizierung, starke Passwortrichtlinie</td><td>Konto aktiviert, Audit-Trail angelegt</td></tr>
+          <tr><td>UC-002</td><td>KYC-Verifizierung</td><td>Endkunde, Compliance</td><td>Dokumenten-Upload, Liveness-Check, Sanctions-Screening, manuelle Freigabe</td><td>Status Level 1/2/3 erreicht</td></tr>
+          <tr><td>UC-003</td><td>Einzahlung SEPA</td><td>Endkunde, Bank, System</td><td>Referenz generieren, Überweisung, Matching, Gutschrift auf Wallet</td><td>Geld in Echtzeit (Instant) oder T+1 verfügbar</td></tr>
+          <tr><td>UC-004</td><td>POS-Zahlung</td><td>Kunde, Händler, POS, System</td><td>QR-Code/Token-Scan, Betragsprüfung, Autorisierung, Settlement</td><td>Zahlung in &lt; 2 Sekunden abgeschlossen</td></tr>
+          <tr><td>UC-005</td><td>Interner Transfer</td><td>Endkunde, System</td><td>Übertragung zwischen Wallets im selben System, Instant, geringe Gebühren</td><td>Transaktion sofort im Ledger sichtbar</td></tr>
+          <tr><td>UC-006</td><td>Auszahlung</td><td>Endkunde, Bank, System</td><td>Auszahlungsziel prüfen, AML-Check, Freigabe, SEPA-Überweisung</td><td>Geld am Zielkonto innerhalb SLA</td></tr>
+          <tr><td>UC-007</td><td>Partner-Onboarding</td><td>Partner, Admin, System</td><td>Antragstellung, Due-Diligence, Vertragsunterzeichnung, API-Key, Whitelisting</td><td>Partner aktiv, API-Limit hinterlegt</td></tr>
+          <tr><td>UC-008</td><td>Transaktions-Monitoring</td><td>Compliance-System</td><td>Regelbasierte und ML-basierte Anomalieerkennung</td><td>Verdachtsfälle werden als Alert erstellt</td></tr>
+          <tr><td>UC-009</td><td>Reconciliation</td><td>Buchhaltung, System</td><td>Abgleich externe Konten vs. interner Ledger</td><td>Differenzen &lt; 0,01 % identifiziert</td></tr>
+          <tr><td>UC-010</td><td>Audit-Export</td><td>Auditor, Admin</td><td>Export aller relevanten Ledger-Einträge und Konfigurationsänderungen</td><td>SHA-256 signierter Export verfügbar</td></tr>
+          <tr><td>UC-011</td><td>Gebührenmodell-Konfiguration</td><td>Admin</td><td>Definition von Gebührenbändern pro Produkt/Partner</td><td>Änderung versioniert und auditierbar</td></tr>
+          <tr><td>UC-012</td><td>Notfall-Freeze</td><td>ISO, Admin</td><td>Systemweite oder kundenbezogene Sperre bei Verdacht</td><td>Freeze innerhalb &lt; 30 Sekunden wirksam</td></tr>
+          <tr><td>UC-013</td><td>API-Integration Drittanbieter</td><td>Partner, System</td><td>OAuth2 / mTLS, Rate-Limits, Webhooks</td><td>API-Response P99 &lt; 100 ms</td></tr>
+          <tr><td>UC-014</td><td>Regulatorisches Reporting</td><td>Compliance, System</td><td>Automatische Erstellung von Meldungen (z. B. AML, Zahlungsstatistik)</td><td>Bericht termingerecht im richtigen Format</td></tr>
+          <tr><td>UC-015</td><td>Partner-Performance-Dashboard</td><td>Management, Admin</td><td>Visualisierung von Umsatz, Gebühren, Ausfällen pro Partner</td><td>Daten aktualisieren sich nahezu in Echtzeit</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sec-architecture">
+      <h2>7. Systemarchitektur</h2>
+      <h3>7.1 Architektur-Prinzipien</h3>
+      <ul>
+        <li><strong>Domain-Driven Design (DDD):</strong> Jede Domäne besitzt ein eigenes Bounded Context, Datenmodell und API-Grenzen.</li>
+        <li><strong>Modular Monolith (MVP) → Microservices (Scale):</strong> Im MVP alle Module in einem Service, bei Skalierung extrahiert.</li>
+        <li><strong>Event-Driven Architecture:</strong> Zustandsänderungen werden als Events publiziert; andere Dienste reagieren asynchron.</li>
+        <li><strong>API-First:</strong> Alle Funktionen sind zuerst API-Endpunkte; das Frontend ist ein Consumer.</li>
+        <li><strong>Immutable Audit Trail:</strong> Jede relevante Änderung wird in einem append-only Ledger protokolliert.</li>
+        <li><strong>Zero-Trust:</strong> Keine interne Komponente vertraut einer anderen implizit.</li>
+      </ul>
+      <h3>7.2 High-Level Schichtenmodell</h3>
+      <div class="code-block">
+┌─────────────────────────────────────────────────────────────────────────┐
+│  Präsentationsschicht (Web-Portal, PWA, POS, Dashboards)                │
+├─────────────────────────────────────────────────────────────────────────┤
+│  API-Gateway &amp; Edge Layer (Auth, Rate-Limit, WAF, Cache)              │
+├─────────────────────────────────────────────────────────────────────────┤
+│  Anwendungsschicht (Payment, Partner, Wallet, Ledger, Compliance,       │
+│  Reporting, Notification, Configuration)                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│  Domain-Schicht (Entities, Value Objects, Domain Events, Policies)      │
+├─────────────────────────────────────────────────────────────────────────┤
+│  Infrastruktur-Schicht (REST/gRPC, DB-Adapter, Broker, Blockchain,    │
+│  Banking-Adapter, External Services)                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│  Datenschicht (PostgreSQL, Redis, Audit-Ledger, Object Storage, DWH)    │
+└─────────────────────────────────────────────────────────────────────────┘
+      </div>
+      <h3>7.3 Komponenten- &amp; Service-Landschaft</h3>
+      <table>
+        <thead><tr><th>Komponente</th><th>Verantwortlichkeit</th><th>Schnittstellen</th></tr></thead>
+        <tbody>
+          <tr><td><strong>API Gateway</strong></td><td>Routing, Auth, Rate-Limiting, Versioning, Logging</td><td>REST, gRPC, WebSocket</td></tr>
+          <tr><td><strong>Identity Service</strong></td><td>Benutzer, Rollen, MFA, Sessions, Token-Refresh</td><td>OIDC, OAuth2, LDAP/SCIM</td></tr>
+          <tr><td><strong>Payment Orchestrator</strong></td><td>Lebenszyklus einer Zahlung, Routing, Retry, State-Machine</td><td>REST Events, Bank-Adapter, Wallet-Service</td></tr>
+          <tr><td><strong>Partner Service</strong></td><td>CRUD Partner, Verträge, Limits, Rating, API-Keys</td><td>REST, Events, Notification</td></tr>
+          <tr><td><strong>Wallet &amp; POS Service</strong></td><td>Wallet-Guthaben, QR-Code-Zahlungen, Beleg-Notarisierung</td><td>REST, WebSocket, Blockchain-Adapter</td></tr>
+          <tr><td><strong>Ledger Service</strong></td><td>Doppelte Buchführung, Journal, Freeze, Reconciliation</td><td>Events, REST, Export-API</td></tr>
+          <tr><td><strong>Compliance &amp; Risk</strong></td><td>AML, KYC, Fraud, Limits, Screening, Case-Management</td><td>Events, REST, externe Screening-Provider</td></tr>
+          <tr><td><strong>Reporting Service</strong></td><td>Dashboards, KPIs, Berichte, Audit-Export</td><td>REST, GraphQL, Export-Endpunkte</td></tr>
+          <tr><td><strong>Notification Service</strong></td><td>E-Mail, SMS, Push, Webhooks, In-App</td><td>SMTP, SMS-Gateway, FCM/APNS</td></tr>
+          <tr><td><strong>Admin Configuration</strong></td><td>Feature-Flags, Gebühren, Währungen, Produkte</td><td>REST, Audit-Log</td></tr>
+        </tbody>
+      </table>
+      <h3>7.4 Event-Driven &amp; SAGA-Patterns</h3>
+      <p>Zahlungen sind komplexe, langlaufende Transaktionen über mehrere Services. Sie werden als <strong>Process Manager / SAGA</strong> modelliert:</p>
+      <ul>
+        <li><strong>PaymentCreated</strong> → KYC-Check, Limit-Check, Liquiditäts-Check parallel.</li>
+        <li><strong>PaymentValidated</strong> → Routing-Entscheidung (SEPA, Instant, Krypto).</li>
+        <li><strong>PaymentCleared</strong> → Ledger-Reservierung, Wallet-Belastung.</li>
+        <li><strong>PaymentSettled</strong> → Gegenbuchung, Partner-Provision, Notification.</li>
+        <li><strong>Compensating Events:</strong> Bei Fehlern werden Rückbuchungs-Events ausgelöst (PaymentReversed, WalletRefunded).</li>
+      </ul>
+      <h3>7.5 Einordnung in SystemHeaven &amp; HPS</h3>
+      <div class="success-box"><strong>SystemHeaven 8-Layer:</strong> Das Finance System wird auf allen 8 Ebenen verankert: Eckstein (Barmherzigkeit), Verfassung (IIOS), Prinzipien, Governance, Technische Standards, Implementierung, Audit (IGOS-Scoring) und kontinuierliche Verbesserung.</div>
+      <div class="success-box"><strong>HPS-Architektur:</strong> Die Zero-Downfall-Prinzipien werden durch Redundanz, Circuit-Breaker, Fallback-Kanäle, Event-Sourcing und immutable Ledger umgesetzt — Zahlungsausfälle werden vermieden.</div>
+    </section>
+
+    <section id="sec-existing">
+      <h2>8. Integration bestehender Strukturen</h2>
+      <p>Das Finance System übernimmt die bewährte Verzeichnisstruktur aus dem Hnoss-Projekt und befüllt sie mit Zahlungs- und Partner-spezifischen Artefakten. Bestehende Daten und Konzepte werden referenziert, nicht kopiert.</p>
+      <table>
+        <thead><tr><th>Verzeichnis</th><th>Quelle im Hnoss-Projekt</th><th>Inhalt / Bedeutung für Finance System</th></tr></thead>
+        <tbody>
+          <tr><td><code>PORTAL/</code></td><td><code>Hnoss - Projecte/PORTAL/</code></td><td>HTML-Webportale (Admin, Dashboard, Partner-Portal). Basis für Finance-System-UI.</td></tr>
+          <tr><td><code>DATA/</code></td><td><code>Hnoss - Projecte/DATA/</code></td><td>JSON-Datenbanken, Audit-Ledger, konsolidierte Werte. Basis für Datenhaltung.</td></tr>
+          <tr><td><code>CODE/</code></td><td><code>Hnoss - Projecte/CODE/</code></td><td>Python-Generatoren, Freeze-System, SystemD-Skripte. Wiederverwendbare Patterns.</td></tr>
+          <tr><td><code>DOCS/</code></td><td><code>Hnoss - Projecte/DOCS/</code></td><td>Gesamtwert-Dokumentation, Projektdokumentation, Executive Summary.</td></tr>
+          <tr><td><code>SYSTEM/</code></td><td><code>Hnoss - Projecte/SYSTEM/</code></td><td>SystemD-Service-Files, Desktop-Icons. Finance-System erhält eigene Services.</td></tr>
+          <tr><td><code>CONCEPTS/</code></td><td><code>Hnoss - Projecte/CONCEPTS/</code></td><td>SystemHeaven, HPS, Wallet/POS. Philosophische und architektonische Grundlagen.</td></tr>
+          <tr><td><code>SOURCE/</code></td><td><code>Hnoss - Projecte/SOURCE/</code></td><td>Vollständige Original-Kopien. Referenz-Backup.</td></tr>
+          <tr><td><code>Contracts/</code></td><td><code>Hnoss - Projecte/Contracts/</code></td><td>Verträge, Regulatorik, Verfahrensdokumentation. Basis für Partner-Verträge.</td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box"><strong>Integrationsregel:</strong> Das Finance System kopiert keine bestehenden Dateien, sondern verweist auf sie per relativem Pfad, URI oder Dokumentation. Bei notwendiger Wiederverwendung wird Code in das eigene <code>CODE/</code>-Verzeichnis übernommen und versioniert.</div>
+    </section>
+
+    <section id="sec-data">
+      <h2>9. Datenmodell &amp; Entitäten</h2>
+      <h3>9.1 Überblick</h3>
+      <p>Das relationale Datenmodell basiert auf PostgreSQL. Zentrale Domänen sind: Identity, Partner, Wallet, Payment, Ledger, Compliance, Configuration, Reporting. Jedes Aggregat besitzt eine UUID, Zeitstempel, einen Tenant-Bezug und einen Verweis auf den Audit-Log-Eintrag.</p>
+      <h3>9.2 Kernentitäten</h3>
+      <table>
+        <thead><tr><th>Entität</th><th>Hauptattribute</th><th>Beziehungen</th></tr></thead>
+        <tbody>
+          <tr><td><strong>User</strong></td><td>user_id, email, phone, password_hash, kyc_level, status, created_at, tenant_id</td><td>1:n zu Wallets, KYC-Dokumenten, Sessions</td></tr>
+          <tr><td><strong>Partner</strong></td><td>partner_id, legal_name, tax_id, type, status, risk_class, api_key_hash, contract_id</td><td>n:m zu Verträgen, 1:n zu Transaktionen</td></tr>
+          <tr><td><strong>Contract</strong></td><td>contract_id, partner_id, type, start_date, end_date, fee_schedule, terms_hash</td><td>1:n zu Partner, n:m zu Produkten</td></tr>
+          <tr><td><strong>Wallet</strong></td><td>wallet_id, owner_id, currency, balance, reserved_balance, status, type</td><td>1:n zu Transactions</td></tr>
+          <tr><td><strong>Payment</strong></td><td>payment_id, type, amount, currency, source, target, status, reference, settled_at</td><td>n:1 zu Wallet, 1:n zu Ledger Entries</td></tr>
+          <tr><td><strong>LedgerEntry</strong></td><td>entry_id, payment_id, account_code, debit, credit, currency, hash, previous_hash</td><td>n:1 zu Payment, LedgerAccount</td></tr>
+          <tr><td><strong>LedgerAccount</strong></td><td>account_id, code, name, type, currency, parent_id</td><td>1:n zu LedgerEntry</td></tr>
+          <tr><td><strong>ComplianceCase</strong></td><td>case_id, type, payment_id, user_id, status, risk_score, alert_reason, reviewer_id</td><td>n:1 zu Payment, User</td></tr>
+          <tr><td><strong>AuditLog</strong></td><td>log_id, entity_type, entity_id, action, actor_id, payload_hash, timestamp, signature</td><td>Verweis auf alle mutierenden Operationen</td></tr>
+          <tr><td><strong>Product / FeeSchedule</strong></td><td>product_id, name, type, fee_fixed, fee_variable, min_fee, max_fee, valid_from</td><td>n:m zu Contracts</td></tr>
+        </tbody>
+      </table>
+      <h3>9.3 Audit-Ledger &amp; Hash-Chain</h3>
+      <p>Jede mutierende Operation erzeugt einen <code>AuditLog</code>-Eintrag, der in eine append-only Datei (<code>audit_ledger.jsonl</code>) geschrieben wird. Jede Zeile enthält einen SHA-256-Hash über den aktuellen Payload sowie den vorherigen Hash, sodass eine Kette entsteht. Manipulation früherer Einträge würde die Hash-Kette brechen.</p>
+      <div class="code-block">{
+  "timestamp": "2026-06-26T12:00:00Z",
+  "entity_type": "Payment",
+  "entity_id": "pay_abc123",
+  "action": "SETTLED",
+  "actor_id": "user_42",
+  "payload_hash": "sha256:a3f...",
+  "previous_hash": "sha256:9d2...",
+  "signature": "ed25519:..."
+}</div>
+    </section>
+
+    <section id="sec-modules">
+      <h2>10. Modulkatalog</h2>
+      <p>Das Finance System wird in 10 Kernmodule unterteilt. Jedes Modul ist ein Bounded Context mit eigenen Endpunkten, Datenmodell, Sicherheitsrichtlinien und Tests.</p>
+      <table>
+        <thead><tr><th>Modul</th><th>Zweck</th><th>Key Features</th><th>Tech-Notizen</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1. Identity &amp; Access</strong></td><td>Authentifizierung, Autorisierung, KYC, MFA</td><td>OIDC/OAuth2, RBAC/ABAC, KYC-Level 1-3, Self-Service</td><td>Keycloak / Authentik, WebAuthn, Redis</td></tr>
+          <tr><td><strong>2. Payment Engine</strong></td><td>Lebenszyklus jeder Zahlung</td><td>State Machine, Routing, Retry, Idempotency, Instant, SEPA, Krypto, Refunds</td><td>NestJS / FastAPI, PostgreSQL, RabbitMQ</td></tr>
+          <tr><td><strong>3. Partner Management</strong></td><td>Verwaltung von Partnern &amp; Verträgen</td><td>Onboarding, Due-Diligence, Vertragsversionen, API-Keys, Limits</td><td>REST API, Doc-Sign, Workflow-Engine</td></tr>
+          <tr><td><strong>4. Wallet &amp; POS</strong></td><td>Digitale Geldbörse &amp; Kassen-Zahlung</td><td>Multi-Currency Wallets, QR-Code, Beleg-Notarisierung, Token-Transfer</td><td>Blockchain-Adapter, React POS, PWA</td></tr>
+          <tr><td><strong>5. Ledger &amp; Accounting</strong></td><td>Buchhaltung, Journal, Reconciliation</td><td>Doppelte Buchführung, Kontenplan, Journal, Freeze, Hash-Chain</td><td>PostgreSQL + JSONL Ledger</td></tr>
+          <tr><td><strong>6. Compliance &amp; Risk</strong></td><td>AML, Fraud, Limits, Screening</td><td>Regelbasiertes + ML-Scoring, Sanctions-Screening, Case-Management</td><td>Rule-Engine, Python, Screening-API</td></tr>
+          <tr><td><strong>7. Reporting &amp; Analytics</strong></td><td>Dashboards, Berichte, KPIs</td><td>Real-Time Dashboards, Drill-Down, Export, Audit-Export</td><td>React + Recharts, ClickHouse</td></tr>
+          <tr><td><strong>8. Notification &amp; Workflow</strong></td><td>Kommunikation &amp; Automatisierung</td><td>E-Mail, SMS, Push, Webhooks, Escalation, Genehmigungs-Workflows</td><td>BullMQ / Celery, SendGrid/Twilio</td></tr>
+          <tr><td><strong>9. Configuration &amp; Fees</strong></td><td>Produkt-, Gebühren- und System-Konfiguration</td><td>Feature-Flags, Gebührenbänder, Währungen, Tenant-Config</td><td>Parameter-DB, Versionierung</td></tr>
+          <tr><td><strong>10. Integration &amp; API Hub</strong></td><td>Externe Anbindungen</td><td>Banking-Adapter, Open Banking, Crypto-Node, KYC-Provider</td><td>Adapter-Pattern, gRPC/REST, mTLS</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sec-tech">
+      <h2>11. Technologie-Stack</h2>
+      <h3>11.1 Empfohlener Stack</h3>
+      <table>
+        <thead><tr><th>Layer</th><th>Technologie</th><th>Begründung</th></tr></thead>
+        <tbody>
+          <tr><td>Frontend</td><td>React 18+ + TypeScript + Vite</td><td>Moderne Komponenten-Architektur, schnelles Build-System, großes Ökosystem.</td></tr>
+          <tr><td>UI-Bibliothek</td><td>Tailwind CSS + shadcn/ui + Lucide Icons</td><td>Konsistentes, zugängliches Design, geringe Bundle-Größe.</td></tr>
+          <tr><td>Backend</td><td>NestJS (Node.js) oder FastAPI (Python)</td><td>Modularität, OpenAPI, DDD-freundlich, Performance-Optionen.</td></tr>
+          <tr><td>Datenbank</td><td>PostgreSQL 16</td><td>ACID, JSONB, Partitionierung, erweiterbare Typen.</td></tr>
+          <tr><td>Cache &amp; Sessions</td><td>Redis 7</td><td>Low-Latency, Pub/Sub, Streams, Rate-Limiting.</td></tr>
+          <tr><td>Message Broker</td><td>RabbitMQ oder Apache Kafka</td><td>Event-Routing, SAGA, Dead-Letter-Queues.</td></tr>
+          <tr><td>Blockchain</td><td>EVM Layer-2 (Polygon, Arbitrum) oder Hyperledger</td><td>MiCA-konforme Notarisierung, geringe Kosten.</td></tr>
+          <tr><td>Auth</td><td>Keycloak oder Authentik</td><td>OIDC/OAuth2, MFA, LDAP, Federation.</td></tr>
+          <tr><td>API-Gateway</td><td>Traefik oder Kong</td><td>Routing, SSL, Rate-Limit, Observability.</td></tr>
+          <tr><td>Observability</td><td>Prometheus + Grafana + Loki + OpenTelemetry</td><td>Metrics, Logs, Traces, Alerting.</td></tr>
+          <tr><td>CI/CD</td><td>GitHub Actions + Docker + Docker Compose</td><td>Automatisierung, Reproduzierbarkeit.</td></tr>
+          <tr><td>Infrastructure</td><td>Docker, Docker Compose, optional Kubernetes</td><td>Containerisierung, Orchestrierung.</td></tr>
+          <tr><td>Tests</td><td>Jest, Playwright, pytest, k6</td><td>Unit, Integration, E2E, Load-Tests.</td></tr>
+        </tbody>
+      </table>
+      <h3>11.2 Alternative Stack-Varianten</h3>
+      <ul>
+        <li><strong>Python-First:</strong> FastAPI + SQLAlchemy + Celery + React. Ideal für datenintensive Berechnungen.</li>
+        <li><strong>Node-First:</strong> NestJS + Prisma + BullMQ + React. Ideal für Echtzeit-APIs.</li>
+        <li><strong>Hybrid:</strong> Payment Engine und Wallet in Node.js, Risk Engine und Ledger in Python.</li>
+      </ul>
+    </section>
+
+    <section id="sec-security">
+      <h2>12. Sicherheitskonzept</h2>
+      <h3>12.1 Sicherheitsziele</h3>
+      <div class="three-col">
+        <div class="card"><h4>Vertraulichkeit</h4><ul><li>TLS 1.3 überall</li><li>Field-Level Encryption für PII</li><li>Secrets in Vault</li></ul></div>
+        <div class="card"><h4>Integrität</h4><ul><li>SHA-256 Hash-Chain für Audit-Logs</li><li>Signierte Events und API-Responses</li><li>Code-Signing, SBOM</li></ul></div>
+        <div class="card"><h4>Verfügbarkeit</h4><ul><li>Multi-AZ-Deployment</li><li>DDoS-Schutz, Rate-Limiting</li><li>Backup &amp; Disaster Recovery</li></ul></div>
+      </div>
+      <h3>12.2 Sicherheitskontrollen</h3>
+      <table>
+        <thead><tr><th>Kontrolle</th><th>Umsetzung</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Zero-Trust Network</strong></td><td>mTLS zwischen Services, Netzwerk-Segmentierung, kein implizites Vertrauen.</td></tr>
+          <tr><td><strong>Authentifizierung</strong></td><td>OIDC/OAuth2, MFA (TOTP/WebAuthn), Passkeys, Refresh-Token-Rotation.</td></tr>
+          <tr><td><strong>Autorisierung</strong></td><td>RBAC + ABAC, Least Privilege, Policy-as-Code (OPA).</td></tr>
+          <tr><td><strong>Datenverschlüsselung</strong></td><td>At-Rest AES-256, In-Transit TLS 1.3, In-Use Memory-safe.</td></tr>
+          <tr><td><strong>Key Management</strong></td><td>HSM oder Cloud KMS, Schlüsselrotation, Separation of Duties.</td></tr>
+          <tr><td><strong>API-Sicherheit</strong></td><td>WAF, Input-Validierung, Rate-Limiting, Idempotency-Keys, CSRF-Schutz.</td></tr>
+          <tr><td><strong>Logging &amp; Monitoring</strong></td><td>Zentrales SIEM, Alerting auf Anomalien, unveränderliche Logs.</td></tr>
+          <tr><td><strong>Incident Response</strong></td><td>Runbooks, Eskalationspfad, automatischer Freeze, Forensik-Export.</td></tr>
+          <tr><td><strong>Secure SDLC</strong></td><td>SAST, DAST, Dependency-Scanning, Container-Scanning, Penetration-Tests.</td></tr>
+        </tbody>
+      </table>
+      <h3>12.3 Freeze-System</h3>
+      <p>Inspiriert durch <code>mostvalue_freeze_system.py</code> aus dem Hnoss-Projekt: Ein globaler oder selektiver Freeze kann jederzeit ausgelöst werden. Freeze- und Unfreeze-Operationen werden mit Begründung, Autorität und Zeitstempel im Ledger festgehalten.</p>
+    </section>
+
+    <section id="sec-compliance">
+      <h2>13. Compliance &amp; Regulatorik</h2>
+      <h3>13.1 Regulatorische Anforderungen</h3>
+      <table>
+        <thead><tr><th>Regulierung</th><th>Relevanz</th><th>Umsetzung im Finance System</th></tr></thead>
+        <tbody>
+          <tr><td><strong>MiCA (EU)</strong></td><td>Krypto-Asset-Verordnung</td><td>Token-Klassifikation, Whitepaper, Reserve-Anforderungen, CASP-Lizenzpfad.</td></tr>
+          <tr><td><strong>PSD2 / PSD3</strong></td><td>Zahlungsdienste</td><td>SCA, Zahlungsauslöser, Kontoinformationsdienst, Consent-Management.</td></tr>
+          <tr><td><strong>DORA</strong></td><td>Operative Resilienz</td><td>ICT-Risikomanagement, Incident-Management, Penetration-Tests, BCP.</td></tr>
+          <tr><td><strong>GDPR</strong></td><td>Datenschutz</td><td>Privacy by Design, Datenminimierung, Löschungsrecht, Verzeichnis.</td></tr>
+          <tr><td><strong>AML5 / AML6</strong></td><td>Geldwäscheprävention</td><td>KYC, Risk-Based Approach, Transaktionsmonitoring, Verdachtsanzeige.</td></tr>
+          <tr><td><strong>GoBD (DE)</strong></td><td>Ordnungsmäßige Buchführung</td><td>Unveränderliche Buchhaltungsdaten, revisionssichere Archivierung.</td></tr>
+        </tbody>
+      </table>
+      <h3>13.2 Compliance-Prozesse</h3>
+      <ul>
+        <li><strong>KYC-Stufen:</strong> Level 1 (E-Mail/Phone), Level 2 (ID + Adresse), Level 3 (Source of Funds, EDD).</li>
+        <li><strong>AML-Monitoring:</strong> Echtzeit-Regeln (Limits, Velocity, Geografie, Muster) + regelmäßiges ML-Retraining.</li>
+        <li><strong>Verdachtsfall-Workflow:</strong> Alert → Case → Review → Entscheidung (Freigabe / Freeze / Meldung) → Audit-Log.</li>
+        <li><strong>Regulatorisches Reporting:</strong> Automatische Meldungen an BaFin/BAFI/EZB-Formate, mit Genehmigungs-Workflow.</li>
+      </ul>
+    </section>
+
+    <section id="sec-payments">
+      <h2>14. Zahlungsverkehr &amp; Partnerverwaltung</h2>
+      <h3>14.1 Zahlungsarten &amp; Routing</h3>
+      <table>
+        <thead><tr><th>Zahlungsart</th><th>Technik</th><th>SLA</th><th>Kosten</th></tr></thead>
+        <tbody>
+          <tr><td>SEPA-Überweisung</td><td>Pain.001 / Camt.054</td><td>T+1</td><td>Niedrig</td></tr>
+          <tr><td>SEPA Instant</td><td>SCT Inst</td><td>&lt; 10 Sekunden</td><td>Mittel</td></tr>
+          <tr><td>Interner Transfer</td><td>Internes Ledger</td><td>Sofort</td><td>Sehr niedrig</td></tr>
+          <tr><td>Krypto-Settlement</td><td>EVM Smart Contract</td><td>Blockzeit (≈ 2–12 Sekunden)</td><td>Gas-Fee</td></tr>
+          <tr><td>POS-Zahlung</td><td>QR-Code / Wallet-App</td><td>&lt; 2 Sekunden</td><td>Konfigurierbar</td></tr>
+          <tr><td>Kartenzahlung (Token)</td><td>Tokenized Card on File</td><td>Sofort</td><td>Interchange + Gebühr</td></tr>
+        </tbody>
+      </table>
+      <h3>14.2 Partner-Lifecycle</h3>
+      <ol>
+        <li><strong>Antrag:</strong> Online-Formular, USt-Id, Vertragstyp, erwartetes Volumen.</li>
+        <li><strong>Due-Diligence:</strong> Handelsregister, Sanctions-Screening, Bonitätsprüfung.</li>
+        <li><strong>Vertragsabschluss:</strong> Digitale Signatur, AGB, Gebührenmodell, SLA.</li>
+        <li><strong>Technische Integration:</strong> API-Key, Webhook-Endpoint, IP-Whitelisting, Sandbox-Tests.</li>
+        <li><strong>Live-Betrieb:</strong> Transaktionen, Monitoring, monatliche Abrechnung, jährliche Review.</li>
+        <li><strong>Offboarding:</strong> Kündigung, Settlement offener Posten, Deaktivierung API-Keys, Archivierung.</li>
+      </ol>
+      <h3>14.3 Kommissions- &amp; Gebührenmodell</h3>
+      <p>Das Gebührenmodell ist pro Partner und Produkt konfigurierbar: Festbeträge, prozentuale Anteile, Min-/Max-Gebühren, Staffelpreise nach Volumen, Partner-Abrechnungsintervalle (täglich, wöchentlich, monatlich). Jede Änderung wird versioniert und auditierbar im Ledger abgelegt.</p>
+    </section>
+
+    <section id="sec-api">
+      <h2>15. API-Design &amp; Integrationen</h2>
+      <h3>15.1 API-Prinzipien</h3>
+      <ul>
+        <li><strong>RESTful + JSON:</strong> Standard für CRUD und Zahlungsoperationen.</li>
+        <li><strong>gRPC:</strong> Für interne Service-zu-Service-Kommunikation mit hohem Durchsatz.</li>
+        <li><strong>Idempotency:</strong> Jede schreibende Operation benötigt einen Idempotency-Key.</li>
+        <li><strong>Versionierung:</strong> API-Versionen im Pfad (<code>/api/v1/...</code>) oder via Header.</li>
+        <li><strong>Webhooks:</strong> Asynchrone Benachrichtigungen an Partner bei Statusänderungen.</li>
+        <li><strong>OpenAPI 3.1:</strong> Spezifikation ist Single-Source-of-Truth für SDKs und Tests.</li>
+      </ul>
+      <h3>15.2 Beispiel-Endpunkte</h3>
+      <table>
+        <thead><tr><th>Methode</th><th>Endpoint</th><th>Zweck</th></tr></thead>
+        <tbody>
+          <tr><td>POST</td><td><code>/api/v1/payments</code></td><td>Zahlung auslösen</td></tr>
+          <tr><td>GET</td><td><code>/api/v1/payments/{id}</code></td><td>Zahlungsstatus abfragen</td></tr>
+          <tr><td>POST</td><td><code>/api/v1/partners</code></td><td>Partner registrieren</td></tr>
+          <tr><td>GET</td><td><code>/api/v1/wallets/{id}/balance</code></td><td>Guthaben abfragen</td></tr>
+          <tr><td>POST</td><td><code>/api/v1/wallets/{id}/transfer</code></td><td>Interner Transfer</td></tr>
+          <tr><td>POST</td><td><code>/api/v1/withdrawals</code></td><td>Auszahlung beantragen</td></tr>
+          <tr><td>GET</td><td><code>/api/v1/ledger/entries</code></td><td>Ledger-Einträge abfragen</td></tr>
+          <tr><td>POST</td><td><code>/api/v1/compliance/cases</code></td><td>Compliance-Fall anlegen</td></tr>
+          <tr><td>GET</td><td><code>/api/v1/reports/liquidity</code></td><td>Liquiditätsbericht</td></tr>
+          <tr><td>POST</td><td><code>/api/v1/admin/freeze</code></td><td>Freeze auslösen</td></tr>
+        </tbody>
+      </table>
+      <h3>15.3 Externe Integrationen</h3>
+      <ul>
+        <li><strong>Banking:</strong> SEPA (Pain.001/Camt), SWIFT (MT/MX), Open Banking (Berlin Group / STET).</li>
+        <li><strong>Krypto:</strong> EVM-Node (Alchemy/Infura), Wallet-Connect, Block Explorer (Blockscout).</li>
+        <li><strong>Compliance:</strong> KYC-Provider (Onfido, Jumio), Sanctions-Screening (Dow Jones, Refinitiv).</li>
+        <li><strong>Tax &amp; Accounting:</strong> Datev, SAP, CSV-Export, ELSTER-Schnittstelle.</li>
+        <li><strong>Communication:</strong> E-Mail (SendGrid, AWS SES), SMS (Twilio), Push (Firebase).</li>
+      </ul>
+    </section>
+
+    <section id="sec-ux">
+      <h2>16. Frontend &amp; User Experience</h2>
+      <h3>16.1 UI-Prinzipien</h3>
+      <ul>
+        <li><strong>Mobile-First:</strong> Alle Endkunden- und Händler-Workflows sind primär für mobile Geräte optimiert.</li>
+        <li><strong>Progressive Disclosure:</strong> Komplexe Informationen (z. B. Compliance-Status, Ledger) werden erst auf Anfrage angezeigt.</li>
+        <li><strong>Consistency:</strong> Einheitliche Design-Sprache über Admin-, Partner- und Endkunden-Portal.</li>
+        <li><strong>Accessibility:</strong> WCAG 2.1 AA, Tastatur-Navigation, Screenreader-Support.</li>
+        <li><strong>Performance:</strong> Lazy Loading, Code-Splitting, Skeletons, optimistische UI-Updates.</li>
+      </ul>
+      <h3>16.2 Portale</h3>
+      <table>
+        <thead><tr><th>Portal</th><th>Zielgruppe</th><th>Kernfunktionen</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Admin Portal</strong></td><td>Interne Admins, Compliance</td><td>User-Management, Partner-Review, Compliance-Cases, Freeze, Reporting, Konfiguration</td></tr>
+          <tr><td><strong>Partner Portal</strong></td><td>Händler, Banken, Fonds</td><td>Transaktionsübersicht, Auszahlungen, Rechnungen, API-Keys, Performance-Reports</td></tr>
+          <tr><td><strong>Endkunden Portal</strong></td><td>Privat-/Geschäftskunden</td><td>Konto, Wallet, Zahlungen, KYC, Historie, Support</td></tr>
+          <tr><td><strong>POS-Interface</strong></td><td>Händler, Kassensysteme</td><td>QR-Code-Generierung, Zahlungsbestätigung, Offline-Modus, Tagesabschluss</td></tr>
+        </tbody>
+      </table>
+      <h3>16.3 Design-Tokens</h3>
+      <p>Das UI verwendet ein konsistentes Farb- und Typografie-System. Primärfarbe Gold für Werte und Status, Cyan für Informationen, Grün für Erfolg, Rot für Warnungen, Lila für Krypto-Assets. Die Schriftfamilien sind eine saubere Sans-Serif für UI und eine Monospace für Beträge und Adressen.</p>
+    </section>
+
+    <section id="sec-devops">
+      <h2>17. DevOps, Betrieb &amp; SystemD</h2>
+      <h3>17.1 Deployment-Strategie</h3>
+      <ul>
+        <li><strong>Development:</strong> Lokale Docker-Compose-Umgebung mit Hot-Reload.</li>
+        <li><strong>Staging:</strong> Produktionsnahe Umgebung mit TLS, Monitoring, Dummy-Bank-Adapter.</li>
+        <li><strong>Production:</strong> Multi-AZ, Blue/Green-Deployment, Canary-Releases.</li>
+        <li><strong>Feature Flags:</strong> Schrittweise Rollout neuer Funktionen pro Tenant oder Partner.</li>
+      </ul>
+      <h3>17.2 SystemD-Integration</h3>
+      <p>Für Linux-Desktops und Server wird ein SystemD-Service-Unit bereitgestellt, der das Portal und die Backend-Services startet. Desktop-Shortcuts ermöglichen das schnelle Öffnen des Portals und den Neustart des Services.</p>
+      <div class="code-block">[Unit]
+Description=Finance System Portal
+After=network.target postgresql.service redis.service
+
+[Service]
+Type=simple
+User=finance
+WorkingDirectory=/opt/finance-system
+ExecStart=/opt/finance-system/start-portal.sh
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target</div>
+      <h3>17.3 Monitoring &amp; Alerting</h3>
+      <table>
+        <thead><tr><th>Bereich</th><th>Tool</th><th>Metriken</th></tr></thead>
+        <tbody>
+          <tr><td>Infrastruktur</td><td>Prometheus + Grafana</td><td>CPU, RAM, Disk, Netzwerk, Container-Health</td></tr>
+          <tr><td>Logs</td><td>Loki / Fluentd</td><td>Strukturierte Logs, Audit-Log-Separation</td></tr>
+          <tr><td>Traces</td><td>OpenTelemetry + Jaeger</td><td>Request-Latenz, Service-Abhängigkeiten</td></tr>
+          <tr><td>Alerts</td><td>Alertmanager / PagerDuty</td><td>SLA-Verletzungen, Sicherheitsvorfälle, Compliance-Delays</td></tr>
+          <tr><td>Health</td><td>Traefik / Uptime-Kuma</td><td>Endpoint-Health, Zertifikatsablauf</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sec-performance">
+      <h2>18. Performance, Skalierung &amp; Hochverfügbarkeit</h2>
+      <h3>18.1 Performance-Ziele</h3>
+      <table>
+        <thead><tr><th>Metrik</th><th>Ziel</th><th>Messmethode</th></tr></thead>
+        <tbody>
+          <tr><td>API-Latenz (P99)</td><td>&lt; 100 ms</td><td>OpenTelemetry / k6</td></tr>
+          <tr><td>POS-Zahlung</td><td>&lt; 2 Sekunden</td><td>End-to-End-Timer</td></tr>
+          <tr><td>SEPA Instant</td><td>&lt; 10 Sekunden</td><td>Bank-Adapter-Logs</td></tr>
+          <tr><td>Verfügbarkeit</td><td>99.95 %</td><td>Uptime-Monitoring</td></tr>
+          <tr><td>Throughput</td><td>10.000+ TPS</td><td>Load-Tests</td></tr>
+          <tr><td>Recovery Time</td><td>&lt; 30 Minuten</td><td>Disaster-Recovery-Tests</td></tr>
+        </tbody>
+      </table>
+      <h3>18.2 Skalierungsmechanismen</h3>
+      <ul>
+        <li><strong>Read-Scaling:</strong> Read-Replicas für PostgreSQL, Redis-Cluster, CDN für statische Assets.</li>
+        <li><strong>Write-Scaling:</strong> Partitionierung der Ledger- und Payment-Tabellen nach Tenant/Zeitraum.</li>
+        <li><strong>Async-Entkopplung:</strong> Message Broker für nicht-blockierende Verarbeitung.</li>
+        <li><strong>Auto-Scaling:</strong> Container-Replikation basierend auf CPU/Request-Queue.</li>
+        <li><strong>Caching:</strong> Redis für Sessions, Rate-Limits, Gebührenmodelle; CDN für Portal-Assets.</li>
+      </ul>
+      <h3>18.3 Hochverfügbarkeit</h3>
+      <p>Active-Passive oder Active-Active-Setup je nach Komponente. Datenbank mit synchroner Replikation über Verfügbarkeitszonen. Message Broker mit Quorum. API-Gateway mit Health-Checks und automatischem Failover. Backups stündlich, täglich und monatlich, mit getesteter Wiederherstellung.</p>
+    </section>
+
+    <section id="sec-roadmap">
+      <h2>19. Roadmap &amp; Phasenplan</h2>
+      <h3>19.1 Phase 0: Foundation (Woche 1–4)</h3>
+      <ul>
+        <li>Projektsetup, Repository, CI/CD, Entwicklungsumgebung.</li>
+        <li>Übernahme der Hnoss-Strukturen (README, SystemD, DOCS).</li>
+        <li>Definition von API-First-Spezifikationen (OpenAPI).</li>
+        <li>Sicherheits- und Compliance-Framework.</li>
+      </ul>
+      <h3>19.2 Phase 1: MVP (Woche 5–16)</h3>
+      <ul>
+        <li>Identity &amp; Access (Registrierung, KYC Level 1-2, MFA).</li>
+        <li>Wallets &amp; interne Transfers.</li>
+        <li>SEPA-Einzahlung und -Auszahlung (T+1).</li>
+        <li>Partner-Onboarding (manuelle Freigabe).</li>
+        <li>Admin- und Endkunden-Portal (Basis).</li>
+        <li>Audit-Ledger mit Hash-Chain.</li>
+      </ul>
+      <h3>19.3 Phase 2: Scale &amp; Compliance (Monat 5–9)</h3>
+      <ul>
+        <li>SEPA Instant, POS-Zahlung, QR-Code.</li>
+        <li>Compliance-Engine (AML, Fraud, Limits).</li>
+        <li>Partner-Self-Service, API-Keys, Webhooks.</li>
+        <li>Reporting &amp; Analytics, Echtzeit-Dashboards.</li>
+        <li>Load-Tests, Penetration-Tests, DORA-Dokumentation.</li>
+      </ul>
+      <h3>19.4 Phase 3: Advanced &amp; Ecosystem (Monat 10–18)</h3>
+      <ul>
+        <li>Krypto-Settlement, Smart-Contract-Notarisierung.</li>
+        <li>Open-Banking-Integration.</li>
+        <li>MiCA-Whitepaper, Token-Klassifikation, CASP-Vorbereitung.</li>
+        <li>Multi-Tenancy, White-Label für Partner.</li>
+        <li>Mobile Apps (PWA / Capacitor).</li>
+      </ul>
+      <h3>19.5 Meilensteine</h3>
+      <table>
+        <thead><tr><th>Meilenstein</th><th>Zieltermin</th><th>Deliverable</th></tr></thead>
+        <tbody>
+          <tr><td>Architecture Review</td><td>Woche 4</td><td>Genehmigtes Architektur-Dokument</td></tr>
+          <tr><td>MVP Live</td><td>Monat 4</td><td>Registrierung, Wallet, SEPA-Einzahlung</td></tr>
+          <tr><td>Compliance Gate</td><td>Monat 7</td><td>AML/KYC-Prozesse, Audit-Trail, DORA-Doku</td></tr>
+          <tr><td>Partner Go-Live</td><td>Monat 9</td><td>Partner-Portal, API, erste Live-Partner</td></tr>
+          <tr><td>MiCA-Readiness</td><td>Monat 15</td><td>Whitepaper, Token-Klassifikation, CASP-Roadmap</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sec-risk">
+      <h2>20. Risikomanagement &amp; Mitigations</h2>
+      <h3>20.1 Risikomatrix</h3>
+      <table>
+        <thead><tr><th>Risiko</th><th>Eintritts-wahrscheinlichkeit</th><th>Schadens-ausmaß</th><th>Mitigation</th></tr></thead>
+        <tbody>
+          <tr><td>Regulatorische Ablehnung</td><td>Mittel</td><td>Hoch</td><td>Früher BaFin-Dialog, Anwalt, Compliance-First-Ansatz, Sandbox-Betrieb.</td></tr>
+          <tr><td>Sicherheitsvorfälle (Breach)</td><td>Mittel</td><td>Sehr hoch</td><td>Zero-Trust, Pentests, HSM, Bug-Bounty, Incident Response, Freeze.</td></tr>
+          <tr><td>Performance-Engpässe</td><td>Hoch</td><td>Mittel</td><td>Load-Tests, Caching, Partitionierung, Auto-Scaling.</td></tr>
+          <tr><td>Partner-Integration fehlerhaft</td><td>Hoch</td><td>Mittel</td><td>Sandbox, API-Versionierung, Webhooks, Retry-Logik, Fallbacks.</td></tr>
+          <tr><td>Liquiditätsengpässe</td><td>Niedrig</td><td>Hoch</td><td>Clearing-Reserven, Limits, Echtzeit-Liquiditätsmonitoring, Banking-Partner.</td></tr>
+          <tr><td>Datenverlust</td><td>Niedrig</td><td>Sehr hoch</td><td>Backups, Replikation, Immutable Ledger, Disaster-Recovery-Tests.</td></tr>
+          <tr><td>Schlüsselpersonen-Risiko</td><td>Mittel</td><td>Hoch</td><td>Dokumentation, Pairing, Bus-Factor, Skill-Transfer.</td></tr>
+        </tbody>
+      </table>
+      <h3>20.2 Eskalations- &amp; Incident-Prozess</h3>
+      <ol>
+        <li><strong>Erkennung:</strong> Monitoring, Alert, manuelle Meldung.</li>
+        <li><strong>Klassifizierung:</strong> Sicherheit, Compliance, Performance, Verfügbarkeit.</li>
+        <li><strong>Containment:</strong> Automatischer Freeze, Isolation betroffener Komponenten.</li>
+        <li><strong>Investigation:</strong> Forensik-Team, Audit-Log-Analyse, Root-Cause.</li>
+        <li><strong>Recovery:</strong> Patch, Rollback, Kommunikation, Wiederinbetriebnahme.</li>
+        <li><strong>Post-Incident:</strong> Lessons-Learned, Prozessanpassung, Retraining.</li>
+      </ol>
+    </section>
+
+    <section id="sec-kpi">
+      <h2>21. KPIs &amp; Erfolgsmetriken</h2>
+      <h3>21.1 Technische KPIs</h3>
+      <table>
+        <thead><tr><th>KPI</th><th>Ziel</th><th>Messzyklus</th></tr></thead>
+        <tbody>
+          <tr><td>API-Verfügbarkeit</td><td>99.95 %</td><td>Monatlich</td></tr>
+          <tr><td>API-Latenz P99</td><td>&lt; 100 ms</td><td>Täglich</td></tr>
+          <tr><td>Fehlerrate</td><td>&lt; 0.1 %</td><td>Täglich</td></tr>
+          <tr><td>Mean Time To Recovery</td><td>&lt; 30 Minuten</td><td>Pro Incident</td></tr>
+          <tr><td>Code-Coverage</td><td>&gt; 80 %</td><td>Pro Build</td></tr>
+          <tr><td>Security-Findings (Critical)</td><td>0</td><td>Pro Release</td></tr>
+        </tbody>
+      </table>
+      <h3>21.2 Geschäftliche KPIs</h3>
+      <table>
+        <thead><tr><th>KPI</th><th>Ziel</th><th>Messzyklus</th></tr></thead>
+        <tbody>
+          <tr><td>Registrierte Benutzer</td><td>Monatliches Wachstum 15 %</td><td>Monatlich</td></tr>
+          <tr><td>KYC-Conversion</td><td>&gt; 70 %</td><td>Wöchentlich</td></tr>
+          <tr><td>Transaktionsvolumen</td><td>Monatliches Wachstum 20 %</td><td>Monatlich</td></tr>
+          <tr><td>Partner- onboarding-Zeit</td><td>&lt; 5 Werktage</td><td>Pro Partner</td></tr>
+          <tr><td>Auszahlungs-SLA-Einhaltung</td><td>&gt; 99 %</td><td>Monatlich</td></tr>
+          <tr><td>Compliance-Alert-False-Positive-Rate</td><td>&lt; 5 %</td><td>Monatlich</td></tr>
+          <tr><td>Customer Support NPS</td><td>&gt; 50</td><td>Quartalsweise</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sec-integration-catalog">
+      <h2>22. Integrationskatalog Open-Source Finance</h2>
+      <p>Aus dem vorhandenen Dokument <code>Open-Source Finance &amp; Trading Platforms Setup.json</code> lassen sich für verschiedene Finance-System-Module folgende Open-Source-Projekte als Referenz oder Integration in Betracht ziehen:</p>
+      <table>
+        <thead><tr><th>Systemkategorie</th><th>Beispiel-Projekte</th><th>Verwendungszweck im Finance System</th></tr></thead>
+        <tbody>
+          <tr><td>Portfolio-Tracking</td><td>Ghostfolio, Maybe</td><td>Anlagen- und Wallet-Übersicht für Endkunden und Partner.</td></tr>
+          <tr><td>Trading-Engine</td><td>QuantConnect Lean, Nautilus Trader, Hummingbot</td><td>Erweiterte Handels- und Routing-Algorithmen (Erweiterung).</td></tr>
+          <tr><td>Exchange / Matching</td><td>Peatio, Barong, Hummingbot</td><td>Token-Orderbuch und Liquiditätsmanagement (optional).</td></tr>
+          <tr><td>CRM / Partner</td><td>Twenty</td><td>Partner- und Kunden-Beziehungsmanagement, Vertrieb.</td></tr>
+          <tr><td>Headless CMS / Backoffice</td><td>Strapi, Directus</td><td>Admin-Inhalte, FAQ, Produktdaten, Konfiguration.</td></tr>
+          <tr><td>DeFi / Wallet</td><td>Uniswap Interface, MetaMask, Rainbow, Zerion</td><td>Krypto-Wallet-Referenz und Token-Swap-UI.</td></tr>
+          <tr><td>Block Explorer</td><td>Blockscout</td><td>Transparenz für Krypto-Transaktionen.</td></tr>
+          <tr><td>Notizen / Wissensmanagement</td><td>Karakeep</td><td>Interne Recherche und Knowledge Base.</td></tr>
+        </tbody>
+      </table>
+      <div class="warning-box"><strong>Integrationshinweis:</strong> Nicht alle Systeme können gemeinsam in einer einzigen Docker-Compose-Datei produktiv betrieben werden. Empfohlen wird ein modulares Deployment pro logischer Gruppe mit zentralem Reverse-Proxy (z. B. Traefik oder EasyPanel) und getrennten Datenbank-Instanzen.</div>
+    </section>
+
+    <section id="sec-glossary">
+      <h2>23. Glossar</h2>
+      <table>
+        <thead><tr><th>Begriff</th><th>Definition</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ABAC</strong></td><td>Attribute-Based Access Control — Zugriff basierend auf Attributen von Benutzer, Ressource und Umgebung.</td></tr>
+          <tr><td><strong>AML</strong></td><td>Anti-Money Laundering — Geldwäscheprävention.</td></tr>
+          <tr><td><strong>CASP</strong></td><td>Crypto-Asset Service Provider — Dienstleister für Krypto-Assets nach MiCA.</td></tr>
+          <tr><td><strong>CQRS</strong></td><td>Command Query Responsibility Segregation — Trennung von Lese- und Schreibmodellen.</td></tr>
+          <tr><td><strong>DORA</strong></td><td>Digital Operational Resilience Act — EU-Verordnung für digitale Resilienz.</td></tr>
+          <tr><td><strong>EVM</strong></td><td>Ethereum Virtual Machine — Laufzeitumgebung für Smart Contracts.</td></tr>
+          <tr><td><strong>HPS</strong></td><td>High-Potential-Scale Architecture — Zero-Downfall Crypto-Fiat Integration Framework.</td></tr>
+          <tr><td><strong>IGOS</strong></td><td>Integrated Governance &amp; Operational Score — 6-dimensionales Bewertungsmodell aus SystemHeaven.</td></tr>
+          <tr><td><strong>KYC</strong></td><td>Know Your Customer — Identitätsprüfung.</td></tr>
+          <tr><td><strong>MiCA</strong></td><td>Markets in Crypto-Assets — EU-Verordnung für Krypto-Wertpapier.</td></tr>
+          <tr><td><strong>MVP</strong></td><td>Minimum Viable Product — Minimal produktiv nutzbare Version.</td></tr>
+          <tr><td><strong>POS</strong></td><td>Point of Sale — Kassen-/Verkaufsstelle.</td></tr>
+          <tr><td><strong>RBAC</strong></td><td>Role-Based Access Control — rollenbasierte Zugriffssteuerung.</td></tr>
+          <tr><td><strong>SAGA</strong></td><td>Langlaufende Transaktion über mehrere Services mit Kompensationslogik.</td></tr>
+          <tr><td><strong>SCA</strong></td><td>Strong Customer Authentication — Starke Kundenauthentifizierung (PSD2).</td></tr>
+          <tr><td><strong>SEPA</strong></td><td>Single Euro Payments Area — Einheitlicher Euro-Zahlungsverkehrsraum.</td></tr>
+          <tr><td><strong>SIEM</strong></td><td>Security Information and Event Management — Zentrale Sicherheitsüberwachung.</td></tr>
+          <tr><td><strong>SystemHeaven</strong></td><td>8-Layer Enterprise Validation Framework mit IIOS-Verfassung.</td></tr>
+          <tr><td><strong>Zero-Trust</strong></td><td>Sicherheitsmodell ohne implizites Vertrauen innerhalb des Netzwerks.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sec-data-detail">
+      <h2>25. Detailliertes Datenmodell</h2>
+      <h3>25.1 Entitäts-Relationship-Modell</h3>
+      <p>Kerneinheiten und Kardinalitäten:</p>
+      <ul>
+        <li><strong>User</strong> 1:n Wallet, 1:n KYC-Dokumente, 1:n AuditLog</li>
+        <li><strong>Partner</strong> 1:n Contract, 1:n Payment, 1:n API-Key</li>
+        <li><strong>Wallet</strong> 1:n Payment (as source/target), 1:n LedgerEntry</li>
+        <li><strong>Payment</strong> 1:n LedgerEntry, 0:n ComplianceCase</li>
+        <li><strong>Product</strong> n:m Contract (via FeeSchedule)</li>
+        <li><strong>LedgerAccount</strong> 1:n LedgerEntry</li>
+        <li><strong>ComplianceCase</strong> n:m User/Partner/Payment</li>
+      </ul>
+      <h3>25.2 Attribute &amp; Constraints</h3>
+      <table>
+        <thead><tr><th>Tabelle</th><th>Schlüsselattribute</th><th>Constraints</th></tr></thead>
+        <tbody>
+          <tr><td><strong>users</strong></td><td>user_id (PK), email, phone, kyc_level, status, tenant_id</td><td>email UNIQUE, status IN (ACTIVE, SUSPENDED, FROZEN), kyc_level 1..3</td></tr>
+          <tr><td><strong>partners</strong></td><td>partner_id (PK), legal_name, tax_id, type, risk_class, status</td><td>tax_id UNIQUE, status IN (PENDING, ACTIVE, SUSPENDED, CLOSED)</td></tr>
+          <tr><td><strong>contracts</strong></td><td>contract_id (PK), partner_id (FK), type, start_date, fee_schedule_id</td><td>start_date &lt;= end_date, valid JSON fee_schedule</td></tr>
+          <tr><td><strong>wallets</strong></td><td>wallet_id (PK), owner_id (FK), owner_type, currency, balance, reserved_balance</td><td>balance &gt;= reserved_balance, currency ISO 4217</td></tr>
+          <tr><td><strong>payments</strong></td><td>payment_id (PK), type, amount, currency, source_id, target_id, status, idempotency_key</td><td>idempotency_key UNIQUE, amount &gt; 0, status valid enum</td></tr>
+          <tr><td><strong>ledger_entries</strong></td><td>entry_id (PK), payment_id (FK), account_id (FK), debit, credit, hash, previous_hash</td><td>debit/credit numeric, hash NOT NULL</td></tr>
+          <tr><td><strong>ledger_accounts</strong></td><td>account_id (PK), code, name, type, currency</td><td>code UNIQUE, type IN (ASSET, LIABILITY, EQUITY, REVENUE, EXPENSE)</td></tr>
+          <tr><td><strong>compliance_cases</strong></td><td>case_id (PK), type, entity_id, risk_score, status, reviewer_id</td><td>status IN (OPEN, REVIEW, ESCALATED, CLOSED), risk_score 0..100</td></tr>
+          <tr><td><strong>audit_log</strong></td><td>log_id (PK), entity_type, entity_id, action, actor_id, timestamp, payload_hash, signature</td><td>timestamp, hash, signature NOT NULL</td></tr>
+          <tr><td><strong>products</strong></td><td>product_id (PK), name, fee_fixed, fee_variable, min_fee, max_fee</td><td>fee_variable &gt;= 0, min_fee &lt;= max_fee</td></tr>
+        </tbody>
+      </table>
+      <h3>25.3 Beispiel-Journal</h3>
+      <table>
+        <thead><tr><th>entry_id</th><th>account</th><th>debit</th><th>credit</th><th>hash</th></tr></thead>
+        <tbody>
+          <tr><td>LE-001</td><td>2000 Kundenverbindlichkeiten</td><td>100.00</td><td>0.00</td><td>sha256:a1b2c3...</td></tr>
+          <tr><td>LE-002</td><td>1000 Bankguthaben</td><td>0.00</td><td>100.00</td><td>sha256:d4e5f6...</td></tr>
+          <tr><td>LE-003</td><td>4000 Gebührenerlöse</td><td>0.00</td><td>1.50</td><td>sha256:g7h8i9...</td></tr>
+        </tbody>
+      </table>
+      <h3>25.4 Partitionierung &amp; Indizierung</h3>
+      <ul>
+        <li>Partitionierung nach <code>tenant_id</code> und <code>created_at</code> für <code>payments</code> und <code>ledger_entries</code>.</li>
+        <li>Indizes: <code>idx_payments_status_created</code>, <code>idx_ledger_hash</code>, <code>idx_audit_actor_time</code>.</li>
+        <li>Read-Repliken für Reporting und Compliance-Abfragen.</li>
+      </ul>
+    </section>
+
+    <section id="sec-functions">
+      <h2>26. Funktionskatalog</h2>
+      <h3>26.1 Identity &amp; Access</h3>
+      <table>
+        <thead><tr><th>Funktion</th><th>Input</th><th>Output</th><th>Business Rules</th></tr></thead>
+        <tbody>
+          <tr><td>registerUser</td><td>email, phone, password, tenant_id</td><td>user_id, wallet_id</td><td>E-Mail-Verifizierung, keine Duplikate, Passwort-Policy</td></tr>
+          <tr><td>verifyKYC</td><td>user_id, level, documents</td><td>status, reviewer_id</td><td>Stufenabhängig, manuelle Review ab Level 2</td></tr>
+          <tr><td>authenticate</td><td>email/password, MFA-Code</td><td>access_token, refresh_token</td><td>Rate-Limit, MFA ab Level 2, Passkey optional</td></tr>
+          <tr><td>authorize</td><td>user_id, resource, action</td><td>allow/deny</td><td>RBAC + ABAC, Tenant-Isolation</td></tr>
+          <tr><td>resetPassword</td><td>email, reset-token</td><td>success</td><td>Token-Ablauf, Audit-Log</td></tr>
+        </tbody>
+      </table>
+      <h3>26.2 Payment Engine</h3>
+      <table>
+        <thead><tr><th>Funktion</th><th>Input</th><th>Output</th><th>Business Rules</th></tr></thead>
+        <tbody>
+          <tr><td>createPayment</td><td>amount, currency, source, target, idempotency_key</td><td>payment_id, status</td><td>Validierung, KYC-Check, Limit-Check</td></tr>
+          <tr><td>routePayment</td><td>payment_id</td><td>route (SEPA/Instant/Crypto/POS)</td><td>Routing-Regeln, SLA, Liquidität</td></tr>
+          <tr><td>clearPayment</td><td>payment_id</td><td>status CLEARED</td><td>Reservierung, Gegenbuchung, Provision</td></tr>
+          <tr><td>settlePayment</td><td>payment_id</td><td>status SETTLED</td><td>Endgültige Buchung, Notification</td></tr>
+          <tr><td>reversePayment</td><td>payment_id, reason</td><td>status REVERSED</td><td>Freigabe, Kompensationsbuchung</td></tr>
+        </tbody>
+      </table>
+      <h3>26.3 Wallet &amp; POS</h3>
+      <table>
+        <thead><tr><th>Funktion</th><th>Input</th><th>Output</th><th>Business Rules</th></tr></thead>
+        <tbody>
+          <tr><td>createWallet</td><td>owner_id, currency</td><td>wallet_id</td><td>Max. 1 Wallet pro Währung &amp; Owner</td></tr>
+          <tr><td>internalTransfer</td><td>from_wallet, to_wallet, amount</td><td>payment_id</td><td>Guthabenprüfung, same-tenant, sofort</td></tr>
+          <tr><td>generatePOSQR</td><td>merchant_id, amount, currency</td><td>qr_code, payment_id</td><td>Merchant aktiv, Gebührenmodell</td></tr>
+          <tr><td>confirmPOSPayment</td><td>payment_id, signature</td><td>receipt</td><td>Notarisierung optional</td></tr>
+          <tr><td>withdraw</td><td>wallet_id, amount, bank_account</td><td>withdrawal_id</td><td>KYC Level 2, Limit, SEPA-Validierung</td></tr>
+        </tbody>
+      </table>
+      <h3>26.4 Partner &amp; Contract</h3>
+      <table>
+        <thead><tr><th>Funktion</th><th>Input</th><th>Output</th><th>Business Rules</th></tr></thead>
+        <tbody>
+          <tr><td>submitPartner</td><td>legal_name, tax_id, type, documents</td><td>partner_id</td><td>Validierung, Sanctions-Screening</td></tr>
+          <tr><td>approvePartner</td><td>partner_id, reviewer_id</td><td>status ACTIVE</td><td>Due-Diligence abgeschlossen</td></tr>
+          <tr><td>createContract</td><td>partner_id, product_ids, fee_schedule</td><td>contract_id</td><td>Versionierung, Signatur</td></tr>
+          <tr><td>rotateApiKey</td><td>partner_id, key_id</td><td>new_key</td><td>Audit-Log, alte Key-Inaktivierung</td></tr>
+          <tr><td>generatePartnerReport</td><td>partner_id, period</td><td>PDF/CSV</td><td>Abrechnung nach Gebührenmodell</td></tr>
+        </tbody>
+      </table>
+      <h3>26.5 Compliance &amp; Risk</h3>
+      <table>
+        <thead><tr><th>Funktion</th><th>Input</th><th>Output</th><th>Business Rules</th></tr></thead>
+        <tbody>
+          <tr><td>screenEntity</td><td>entity_id, type</td><td>hits, risk_score</td><td>Sanctions, PEP, Adverse Media</td></tr>
+          <tr><td>evaluateRules</td><td>payment_id</td><td>alerts</td><td>Velocity, Limits, Geografie, Muster</td></tr>
+          <tr><td>createCase</td><td>entity_id, type, alerts</td><td>case_id</td><td>Auto-Eskalation ab Score 80</td></tr>
+          <tr><td>reviewCase</td><td>case_id, decision, reviewer_id</td><td>status</td><td>4-Augen bei Freeze/Meldung</td></tr>
+          <tr><td>freeze</td><td>entity_type, entity_id, reason, authority</td><td>freeze_id</td><td>Global, Tenant, User, Partner, Wallet</td></tr>
+          <tr><td>regulatoryReport</td><td>report_type, period</td><td>file</td><td>Genehmigungs-Workflow</td></tr>
+        </tbody>
+      </table>
+      <h3>26.6 Reporting &amp; Analytics</h3>
+      <table>
+        <thead><tr><th>Funktion</th><th>Input</th><th>Output</th><th>Business Rules</th></tr></thead>
+        <tbody>
+          <tr><td>liquidityReport</td><td>currency, date</td><td>balance, reserved, net</td><td>End-of-Day Snapshots</td></tr>
+          <tr><td>transactionReport</td><td>period, tenant, partner</td><td>CSV/PDF</td><td>Filter, Aggregation, Drill-Down</td></tr>
+          <tr><td>auditExport</td><td>entity_id, date_range</td><td>JSONL mit Hash-Chain</td><td>Unveränderlich, signiert</td></tr>
+          <tr><td>kpiDashboard</td><td>tenant, period</td><td>charts, metrics</td><td>Near-Real-Time</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sec-levels">
+      <h2>27. Ebenen- &amp; Framework-Mapping</h2>
+      <h3>27.1 SystemHeaven 8-Layer Mapping</h3>
+      <table>
+        <thead><tr><th>Layer</th><th>SystemHeaven-Name</th><th>Finance System-Ausprägung</th></tr></thead>
+        <tbody>
+          <tr><td>0</td><td>Eckstein / Barmherzigkeit</td><td>Ethik, kundenfreundliche Gebühren, Transparenz, Finanzbildung</td></tr>
+          <tr><td>1</td><td>Verfassung / IIOS</td><td>Compliance-Framework, Governance, RACI, Policies</td></tr>
+          <tr><td>2</td><td>Strategie</td><td>Produktvision, Roadmap, MiCA/CASP-Strategie, Partner-Ökosystem</td></tr>
+          <tr><td>3</td><td>Architektur</td><td>DDD, Event-Driven, SAGA, Zero-Trust, API-First</td></tr>
+          <tr><td>4</td><td>Engineering</td><td>NestJS/FastAPI, React, PostgreSQL, Redis, RabbitMQ, Docker</td></tr>
+          <tr><td>5</td><td>Integration</td><td>Banking, SEPA, Krypto, Open Banking, KYC, Webhooks</td></tr>
+          <tr><td>6</td><td>Operation</td><td>SystemD, Monitoring, Incident Response, Backup, DR</td></tr>
+          <tr><td>7</td><td>Continuous Improvement</td><td>IGOS-Scoring, KPIs, Pentests, Feedback-Loops, Retraining</td></tr>
+        </tbody>
+      </table>
+      <h3>27.2 IGOS-Score-Beispiel</h3>
+      <table>
+        <thead><tr><th>Dimension</th><th>Beispiel-Score</th><th>Begründung</th></tr></thead>
+        <tbody>
+          <tr><td>Intention</td><td>9/10</td><td>Klare ethische &amp; regulatorische Zielsetzung</td></tr>
+          <tr><td>Governance</td><td>8/10</td><td>RBAC, Policies, Compliance-Cases</td></tr>
+          <tr><td>Operation</td><td>8/10</td><td>Monitoring, Backup, Incident Response</td></tr>
+          <tr><td>Security</td><td>9/10</td><td>Zero-Trust, HSM, Audit-Ledger</td></tr>
+          <tr><td>Scalability</td><td>8/10</td><td>Partitionierung, Caching, Auto-Scaling</td></tr>
+          <tr><td>Integration</td><td>7/10</td><td>Adapter-Pattern, viele externe Schnittstellen geplant</td></tr>
+        </tbody>
+      </table>
+      <h3>27.3 HPS-Levels (High-Potential-Scale)</h3>
+      <table>
+        <thead><tr><th>Level</th><th>Charakteristik</th><th>Umsetzung</th></tr></thead>
+        <tbody>
+          <tr><td>Resilienz</td><td>Zero-Downfall</td><td>Multi-AZ, Quorum, Fallback, Circuit-Breaker</td></tr>
+          <tr><td>Sicherheit</td><td>Defense in Depth</td><td>Zero-Trust, HSM, Audit, Freeze</td></tr>
+          <tr><td>Skalierung</td><td>Horizontal &amp; Vertikal</td><td>Partitionierung, Read-Replicas, Auto-Scaling</td></tr>
+          <tr><td>Compliance</td><td>Regulatorik by Design</td><td>MiCA, PSD2, DORA, GDPR, AML</td></tr>
+          <tr><td>Integration</td><td>Symbiotisch</td><td>Fiat &lt;→ Krypto, Banking, Open Banking</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="sec-history">
+      <h2>28. Änderungshistorie</h2>
+      <table>
+        <thead><tr><th>Version</th><th>Datum</th><th>Autor</th><th>Änderungen</th></tr></thead>
+        <tbody>
+          <tr><td>1.0</td><td>26.06.2026</td><td>Daniel Pohl</td><td>Erstfassung des vollständigen Gesamtkonzepts für das Finance System inklusive Architektur, Datenmodell, Sicherheit, Compliance, Roadmap, Risiken, KPIs, Glossar.</td></tr>
+          <tr><td>2.0</td><td>26.06.2026</td><td>Daniel Pohl</td><td>Erweiterung um detailliertes Datenmodell (ERM, Attribute, Constraints, Beispiel-Journal), vollständigen Funktionskatalog (Identity, Payment, Wallet/POS, Partner, Compliance, Reporting) sowie Ebenen-Mapping (SystemHeaven, IGOS, HPS).</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="footer">
+      <p>Finance System — Gesamtkonzept · 26.06.2026 · Daniel Pohl</p>
+    </div>
+  </div>
+</body>
+</html>

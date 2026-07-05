@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Hnoss Genesis Asset — Detaillierte Projektbeschreibung" />
+  <meta name="author" content="Daniel Pohl (HolyThreeKings) - Expert-ID: EX2025D1218310" />
+  <title>Hnoss Genesis Asset — Detaillierte Projektbeschreibung</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+    body { font-family: 'JetBrains Mono', monospace; }
+    html { scroll-behavior: smooth; }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #1a1a1a; }
+    ::-webkit-scrollbar-thumb { background: #166534; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #22c55e; }
+  </style>
+</head>
+<body class="bg-gray-950 text-gray-300">
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden border-b border-green-900">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-900/20 via-gray-950 to-gray-950"></div>
+    <div class="relative max-w-6xl mx-auto px-6 py-20 md:py-28 text-center">
+      <div class="inline-block mb-6 px-4 py-1 border border-green-700 rounded-full text-xs text-green-400 tracking-widest uppercase">
+        Hnoss Corp. | D-U-N-S 315676980 | VAT DE441892129
+      </div>
+      <h1 class="text-4xl md:text-6xl font-black text-green-400 mb-6 tracking-tight drop-shadow-[0_0_15px_rgba(74,222,128,0.4)]">
+        👁️ Wizard Zorkara
+      </h1>
+      <h2 class="text-xl md:text-3xl text-gray-100 mb-8 font-light">
+        Das Hnoss Genesis Asset — RWA-Tokenisierung, Multi-Asset-Ökosystem & Web3 Command Center
+      </h2>
+      <p class="max-w-3xl mx-auto text-base md:text-lg text-gray-400 mb-10 leading-relaxed">
+        Eine Enterprise-Grade Infrastruktur, die Real-World-Assets, Krypto-Portfolios, DeFi-Protokolle,
+        NFT-Marktplätze und automatisierte Trading-Strategien in einem ERC-1155 Multi-Token-System vereint.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#terminal" class="px-8 py-4 bg-green-600 hover:bg-green-500 text-black font-bold tracking-widest uppercase rounded border-2 border-green-400 shadow-[0_0_25px_rgba(34,197,94,0.5)] transition-all">
+          🚀 Terminal öffnen
+        </a>
+        <a href="#architecture" class="px-8 py-4 bg-gray-900 hover:bg-gray-800 text-green-400 font-bold tracking-widest uppercase rounded border-2 border-green-800 transition-all">
+          📖 Architektur lesen
+        </a>
+        <a href="HNOSS_DETAILLIERTE_BESCHREIBUNG.md" class="px-8 py-4 bg-gray-900 hover:bg-gray-800 text-cyan-400 font-bold tracking-widest uppercase rounded border-2 border-cyan-800 transition-all">
+          📄 Markdown-Version
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TABLE OF CONTENTS -->
+  <nav class="max-w-6xl mx-auto px-6 py-8">
+    <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-5">
+      <h3 class="text-green-400 font-bold mb-4 text-sm uppercase tracking-wider">Inhaltsverzeichnis</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
+        <a href="#executive" class="text-gray-400 hover:text-green-400 truncate">01. Executive Summary</a>
+        <a href="#history" class="text-gray-400 hover:text-green-400 truncate">02. Projektgeschichte</a>
+        <a href="#vision" class="text-gray-400 hover:text-green-400 truncate">03. Vision & Konzept</a>
+        <a href="#architecture" class="text-gray-400 hover:text-green-400 truncate">04. Architektur</a>
+        <a href="#stack" class="text-gray-400 hover:text-green-400 truncate">05. Technologie-Stack</a>
+        <a href="#structure" class="text-gray-400 hover:text-green-400 truncate">06. Projektstruktur</a>
+        <a href="#contract" class="text-gray-400 hover:text-green-400 truncate">07. Smart Contract</a>
+        <a href="#assets" class="text-gray-400 hover:text-green-400 truncate">08. Asset-Taxonomie</a>
+        <a href="#apis" class="text-gray-400 hover:text-green-400 truncate">09. API-Ökosystem</a>
+        <a href="#features" class="text-gray-400 hover:text-green-400 truncate">10. Features</a>
+        <a href="#compliance" class="text-gray-400 hover:text-green-400 truncate">11. Compliance</a>
+        <a href="#pipeline" class="text-gray-400 hover:text-green-400 truncate">12. Build-Pipeline</a>
+        <a href="#deployment" class="text-gray-400 hover:text-green-400 truncate">13. Deployment</a>
+        <a href="#roadmap" class="text-gray-400 hover:text-green-400 truncate">14. Roadmap</a>
+        <a href="#risk" class="text-gray-400 hover:text-green-400 truncate">15. Risiken</a>
+        <a href="#glossary" class="text-gray-400 hover:text-green-400 truncate">16. Glossar</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- SECTION 01 -->
+  <section id="executive" class="max-w-6xl mx-auto px-6 py-16">
+    <div class="border-l-4 border-green-500 pl-6 mb-10">
+      <h2 class="text-2xl md:text-3xl font-bold text-green-400 mb-2">01. Executive Summary</h2>
+      <p class="text-sm text-gray-500">Worum geht es in diesem Projekt?</p>
+    </div>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="space-y-4 text-sm md:text-base leading-relaxed">
+        <p>Das <strong class="text-green-400">Hnoss Genesis Asset (HGA)</strong> ist ein selbstentwickeltes, asset-gedecktes Token-Ökosystem, das von Daniel Pohl (HolyThreeKings) unter der Hnoss Corp. betrieben wird. Es verbindet klassische Vermögenswerte (physisch und geistiges Eigentum) mit einer ERC-1155 Smart-Contract-Architektur.</p>
+        <p>Ziel ist es, ein <strong>MiCA-konformes</strong>, auf BaFin-Regulierung ausgerichtetes Real-World-Asset-Tokenization-System zu betreiben, das über 333+ APIs an Börsen, DeFi-Protokolle, Wallets und Datenfeeds angebunden ist.</p>
+        <p>Das Herzstück der Benutzerinteraktion ist das <strong>Wizard Zorkara Terminal</strong>: ein Web3 Command Center, das MetaMask-Connect, Echtzeit-Asset-Anzeige, Asset-Backing-Valuation und AML-validierte Transfers in einer React-Oberfläche bündelt.</p>
+      </div>
+      <div class="bg-gray-900/50 border border-green-800 rounded-lg p-6">
+        <h3 class="text-green-400 font-bold mb-4 text-sm uppercase tracking-wider">Kernkennzahlen</h3>
+        <ul class="space-y-3 text-sm">
+          <li class="flex justify-between border-b border-gray-800 pb-2"><span>Asset Taxis</span><span class="text-green-400 font-bold">347</span></li>
+          <li class="flex justify-between border-b border-gray-800 pb-2"><span>API-Endpunkte</span><span class="text-green-400 font-bold">333+</span></li>
+          <li class="flex justify-between border-b border-gray-800 pb-2"><span>Token-IDs</span><span class="text-green-400 font-bold">6</span></li>
+          <li class="flex justify-between border-b border-gray-800 pb-2"><span>Asset Backing</span><span class="text-green-400 font-bold">€3.796.972,86</span></li>
+          <li class="flex justify-between border-b border-gray-800 pb-2"><span>Blockchains</span><span class="text-green-400 font-bold">6+</span></li>
+          <li class="flex justify-between border-b border-gray-800 pb-2"><span>Wallet-Typen</span><span class="text-green-400 font-bold">8</span></li>
+          <li class="flex justify-between border-b border-gray-800 pb-2"><span>DeFi-Protokolle</span><span class="text-green-400 font-bold">20+</span></li>
+          <li class="flex justify-between"><span>NFT-Marktplätze</span><span class="text-green-400 font-bold">4</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 02 -->
+  <section id="history" class="bg-gray-900/20 border-y border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="border-l-4 border-teal-500 pl-6 mb-10">
+        <h2 class="text-2xl md:text-3xl font-bold text-teal-400 mb-2">02. Projektgeschichte & Motivation</h2>
+      </div>
+      <div class="space-y-6 text-sm md:text-base leading-relaxed">
+        <p>Hnoss entstand aus der Vision, einen <strong>dezentralen, aber regulierungskonformen Vermögensverbund</strong> zu schaffen, der nicht nur Kryptowährungen, sondern auch physische und immaterielle Werte abbilden kann. Die Inspiration stammt aus der SystemHeaven-Methodik: jede Komponente eines Systems sollte auf einem soliden, ethischen Fundament (Eckstein) ruhen und über transparente Layer validiert werden.</p>
+        <p>Aus dieser Philosophie heraus wurde das Projekt schrittweise ausgebaut: zuerst als Dokumentations- und Validierungs-Framework, dann als 333+ API-Integrationsplattform, später als Docker-Stack mit Dashboard, Trading-Bot und schließlich als ERC-1155 Token-Ökosystem.</p>
+        <p>Die Bezeichnung <strong>Wizard Zorkara</strong> steht für das zentrale Kontrollinterface — eine Art „Zauberer-Auge“, das alle Assets, Transfers und Marktdaten überblickt.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 03 -->
+  <section id="vision" class="bg-gray-900/30 border-y border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="border-l-4 border-blue-500 pl-6 mb-10">
+        <h2 class="text-2xl md:text-3xl font-bold text-blue-400 mb-2">03. Vision & Konzept</h2>
+      </div>
+      <div class="space-y-6 text-sm md:text-base leading-relaxed">
+        <p>Die Vision ist ein <strong>universelles Vermögens-Protokoll</strong>, das nicht nur Kryptowährungen, sondern physische Vermögenswerte (Edelsteine, Sphären, seltene Sammlerstücke), geistiges Eigentum, Lizenzen, Stablecoins und NFTs in einem einzigen Smart Contract abbildet.</p>
+        <p>Das Konzept basiert auf der Idee der <strong>„Asset Taxis“</strong>: jedes Asset hat einen eigenen Transport- und Bewertungskanal, der über APIs mit externen Datenquellen verbunden ist. 347 solcher Taxis sollen über Middleware-Aggregatoren angebunden werden.</p>
+        <p>Ein zentraler Baustein ist die <strong>SystemHeaven / Cornerstone-Methodology</strong>-Einfluss: Die Hnoss-Projektstruktur zeigt Parallelen zum 8-Layer-Framework (Eckstein, Verfassung, Governance, Technik, Umsetzung, Audit).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 04 -->
+  <section id="architecture" class="max-w-6xl mx-auto px-6 py-16">
+    <div class="border-l-4 border-purple-500 pl-6 mb-10">
+      <h2 class="text-2xl md:text-3xl font-bold text-purple-400 mb-2">04. Systemarchitektur</h2>
+    </div>
+    <div class="bg-gray-900 border border-purple-800/50 rounded-lg p-6 mb-8 overflow-x-auto">
+      <pre class="text-xs md:text-sm text-purple-300 font-mono whitespace-pre">
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                        USER INTERFACE LAYER                                  │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  👁️ Wizard Zorkara Terminal  (React + Vite + Tailwind)            │   │
+│  │  • MetaMask Connect • Asset-Inventory • AML-Transfer • Terminal   │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                        API & ORCHESTRATION LAYER                           │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐   │
+│  │   CoinAPI    │  │  CoinStats   │  │   Covalent   │  │   Moralis    │   │
+│  │   Adapter    │  │   Adapter    │  │   Adapter    │  │   Adapter    │   │
+│  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                        BUSINESS LOGIC LAYER                                │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐        │
+│  │  Wallet  │ │   NFT    │ │   DeFi   │ │  Trading │ │  Assets  │        │
+│  │  Module  │ │  Module  │ │  Module  │ │  Engine  │ │  Oracle  │        │
+│  └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘        │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                        BLOCKCHAIN LAYER                                    │
+│  ┌─────────────────────────────────────────────────────────────────────┐   │
+│  │  ERC-1155 Smart Contract: WizardZorkaraMarketMaker.sol            │   │
+│  │  Base Mainnet / Base Sepolia • AML Signer • Whitelist • DEX Router  │   │
+│  └─────────────────────────────────────────────────────────────────────┘   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                        INFRASTRUCTURE LAYER                                │
+│  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────┐        │
+│  │ Postgres │ │  Redis   │ │  Nginx   │ │ Prometheus│ │  Grafana │        │
+│  └──────────┘ └──────────┘ └──────────┘ └──────────┘ └──────────┘        │
+└─────────────────────────────────────────────────────────────────────────────┘
+      </pre>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="bg-gray-900/50 border border-gray-800 hover:border-green-700 rounded-lg p-5"><div class="text-3xl mb-3">🐳</div><h3 class="text-green-400 font-bold mb-2 text-sm">Docker & Compose</h3><p class="text-xs text-gray-400">Dashboard, Trading-Bot, Monitoring, Postgres, Redis, Nginx, Prometheus, Grafana</p></div>
+      <div class="bg-gray-900/50 border border-gray-800 hover:border-green-700 rounded-lg p-5"><div class="text-3xl mb-3">🗄️</div><h3 class="text-green-400 font-bold mb-2 text-sm">PostgreSQL 15</h3><p class="text-xs text-gray-400">Hauptdatenbank für Assets, Transaktionen, Audit-Logs</p></div>
+      <div class="bg-gray-900/50 border border-gray-800 hover:border-green-700 rounded-lg p-5"><div class="text-3xl mb-3">⚡</div><h3 class="text-green-400 font-bold mb-2 text-sm">Redis 7</h3><p class="text-xs text-gray-400">Cache-Layer für API-Antworten und Session-State</p></div>
+      <div class="bg-gray-900/50 border border-gray-800 hover:border-green-700 rounded-lg p-5"><div class="text-3xl mb-3">🛡️</div><h3 class="text-green-400 font-bold mb-2 text-sm">Nginx</h3><p class="text-xs text-gray-400">Reverse Proxy, Load Balancer, SSL, Rate-Limiting</p></div>
+      <div class="bg-gray-900/50 border border-gray-800 hover:border-green-700 rounded-lg p-5"><div class="text-3xl mb-3">📊</div><h3 class="text-green-400 font-bold mb-2 text-sm">Prometheus + Grafana</h3><p class="text-xs text-gray-400">Metriken, Alerts, Visualisierung</p></div>
+      <div class="bg-gray-900/50 border border-gray-800 hover:border-green-700 rounded-lg p-5"><div class="text-3xl mb-3">🔐</div><h3 class="text-green-400 font-bold mb-2 text-sm">Multi-Sig</h3><p class="text-xs text-gray-400">Mehrfachsignatur-Unterstützung für Treasury</p></div>
+    </div>
+  </section>
+
+  <!-- SECTION 05 -->
+  <section id="stack" class="bg-gray-900/20 border-y border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="border-l-4 border-cyan-500 pl-6 mb-10">
+        <h2 class="text-2xl md:text-3xl font-bold text-cyan-400 mb-2">05. Technologie-Stack</h2>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm text-left border border-gray-800">
+          <thead class="bg-gray-900 text-cyan-400 text-xs uppercase tracking-wider"><tr><th class="px-4 py-3 border-b border-gray-800">Layer</th><th class="px-4 py-3 border-b border-gray-800">Technologien</th></tr></thead>
+          <tbody class="divide-y divide-gray-800">
+            <tr class="hover:bg-gray-900/50"><td class="px-4 py-3 font-bold text-gray-300">Frontend</td><td class="px-4 py-3 text-gray-400">React 18, Vite 5, TailwindCSS 3, Ethers.js v6, MetaMask API</td></tr>
+            <tr class="hover:bg-gray-900/50"><td class="px-4 py-3 font-bold text-gray-300">Backend</td><td class="px-4 py-3 text-gray-400">Node.js 18, Express.js, Hardhat, Web3.js, REST + WebSocket</td></tr>
+            <tr class="hover:bg-gray-900/50"><td class="px-4 py-3 font-bold text-gray-300">Smart Contract</td><td class="px-4 py-3 text-gray-400">Solidity 0.8.24, OpenZeppelin ERC-1155, Ownable, ECDSA</td></tr>
+            <tr class="hover:bg-gray-900/50"><td class="px-4 py-3 font-bold text-gray-300">Blockchain</td><td class="px-4 py-3 text-gray-400">Base Mainnet (Chain 8453), Base Sepolia, Ethereum Sepolia</td></tr>
+            <tr class="hover:bg-gray-900/50"><td class="px-4 py-3 font-bold text-gray-300">Datenbank</td><td class="px-4 py-3 text-gray-400">PostgreSQL 15, Redis 7, CSV/JSON Datenarchive</td></tr>
+            <tr class="hover:bg-gray-900/50"><td class="px-4 py-3 font-bold text-gray-300">Monitoring</td><td class="px-4 py-3 text-gray-400">Prometheus, Grafana, Nginx, Docker, Docker Compose</td></tr>
+            <tr class="hover:bg-gray-900/50"><td class="px-4 py-3 font-bold text-gray-300">APIs</td><td class="px-4 py-3 text-gray-400">CoinAPI, CoinStats, Covalent, Moralis, Binance, Eurex/Deutsche Börse</td></tr>
+            <tr class="hover:bg-gray-900/50"><td class="px-4 py-3 font-bold text-gray-300">DevOps</td><td class="px-4 py-3 text-gray-400">systemd User-Service, Docker Healthchecks, Vite HMR</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 06 -->
+  <section id="structure" class="max-w-6xl mx-auto px-6 py-16">
+    <div class="border-l-4 border-pink-500 pl-6 mb-10">
+      <h2 class="text-2xl md:text-3xl font-bold text-pink-400 mb-2">06. Projektstruktur</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-3 text-sm">
+      <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-4"><span class="text-pink-400 font-mono">contracts/</span> — Solidity Smart Contracts</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-4"><span class="text-pink-400 font-mono">src/</span> — Node.js Backend, API-Module</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-4"><span class="text-pink-400 font-mono">frontend/</span> — React/Vite Web3-Terminal</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-4"><span class="text-pink-400 font-mono">scripts/</span> — Deploy-Skripte, Hardhat Tasks</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-4"><span class="text-pink-400 font-mono">test/</span> — Unit- und Integration-Tests</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-4"><span class="text-pink-400 font-mono">data/</span> — JSON/CSV Asset-Daten</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-4"><span class="text-pink-400 font-mono">docker-compose.yml</span> — Multi-Service-Definition</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-4"><span class="text-pink-400 font-mono">Dockerfile</span> — Dashboard-Server Image</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-4"><span class="text-pink-400 font-mono">hardhat.config.js</span> — Netzwerk-Config</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-4"><span class="text-pink-400 font-mono">package.json</span> — NPM-Skripte</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-4"><span class="text-pink-400 font-mono">.env.example</span> — Template für Secrets</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded-lg p-4"><span class="text-pink-400 font-mono">README.md</span> — Hauptdokumentation</div>
+    </div>
+  </section>
+
+  <!-- SECTION 07 -->
+  <section id="contract" class="bg-gray-900/30 border-y border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="border-l-4 border-yellow-500 pl-6 mb-10">
+        <h2 class="text-2xl md:text-3xl font-bold text-yellow-400 mb-2">07. Smart Contract</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="space-y-4 text-sm leading-relaxed">
+          <p>Der Hauptvertrag basiert auf <strong class="text-yellow-400">OpenZeppelin ERC-1155</strong> und bündelt sechs unterschiedliche Asset-Klassen in einem einzigen Contract.</p>
+          <p><strong>Owner-only Minting:</strong> Die Funktion <code>orchestrateAndAssignToMyAccount()</code> prägt die gesamte theoretische Supply auf die Owner-Wallet.</p>
+          <p><strong>AML-Transfers:</strong> Jeder Transfer zwischen Whitelist-Adressen erfordert eine ECDSA-Signatur eines designierten <code>amlComplianceSigner</code>.</p>
+          <p><strong>DEX-Integration:</strong> Der Contract hält Referenzen auf einen DEX-Router und einen Stablecoin-Contract. Die tatsächliche Liquiditäts-Provision ist als Platzhalter ausgelegt.</p>
+        </div>
+        <div class="bg-black/50 border border-yellow-700/50 rounded-lg p-5">
+          <h3 class="text-yellow-400 font-bold mb-4 text-sm uppercase">Vertragsfunktionen</h3>
+          <ul class="space-y-2 text-xs text-gray-400 font-mono">
+            <li>• constructor(uri, amlSigner, dexRouter, stableCoin)</li>
+            <li>• orchestrateAndAssignToMyAccount()</li>
+            <li>• updateWhitelist(account, status)</li>
+            <li>• establishLiquidPool(assetId, amount, stableAmount)</li>
+            <li>• validatedCrossTransfer(to, ids, amounts, signature)</li>
+            <li>• calculateTheoreticalTotalSupply()</li>
+            <li>• ERC-1155 Receiver Hooks</li>
+          </ul>
+          <div class="mt-4 pt-4 border-t border-gray-800 text-xs text-gray-500">
+            Deployed: <span class="text-yellow-400">Base Mainnet</span> (Chain 8453)<br />
+            Address: <span class="text-yellow-400">0xe50D419A538d9571238E14Ff4d3b6430E2b2ebbA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 08 -->
+  <section id="assets" class="max-w-6xl mx-auto px-6 py-16">
+    <div class="border-l-4 border-red-500 pl-6 mb-10">
+      <h2 class="text-2xl md:text-3xl font-bold text-red-400 mb-2">08. Asset-Taxonomie</h2>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="bg-gray-900/50 border-2 border-yellow-500/50 rounded-lg p-5"><div class="flex justify-between mb-4"><span class="text-3xl">🪙</span><span class="text-xs text-gray-500">ID 1</span></div><h3 class="font-bold text-lg text-yellow-400 mb-1">Master Tokens</h3><p class="text-xs text-gray-400 mb-3">Symbol: WZMT</p><div class="space-y-2 text-sm"><div class="flex justify-between"><span>Supply</span><span class="text-gray-200">9.999.999</span></div><div class="flex justify-between"><span>Backing</span><span class="text-gray-200">€1.708.638</span></div><div class="flex justify-between"><span>Anteil</span><span class="text-gray-200">45%</span></div></div></div>
+      <div class="bg-gray-900/50 border-2 border-orange-500/50 rounded-lg p-5"><div class="flex justify-between mb-4"><span class="text-3xl">💰</span><span class="text-xs text-gray-500">ID 2</span></div><h3 class="font-bold text-lg text-orange-400 mb-1">Münzen</h3><p class="text-xs text-gray-400 mb-3">Symbol: WZMN</p><div class="space-y-2 text-sm"><div class="flex justify-between"><span>Supply</span><span class="text-gray-200">999.999</span></div><div class="flex justify-between"><span>Backing</span><span class="text-gray-200">€189.849</span></div><div class="flex justify-between"><span>Anteil</span><span class="text-gray-200">5%</span></div></div></div>
+      <div class="bg-gray-900/50 border-2 border-purple-500/50 rounded-lg p-5"><div class="flex justify-between mb-4"><span class="text-3xl">🖼️</span><span class="text-xs text-gray-500">ID 3</span></div><h3 class="font-bold text-lg text-purple-400 mb-1">NFTs</h3><p class="text-xs text-gray-400 mb-3">Symbol: WZNFT</p><div class="space-y-2 text-sm"><div class="flex justify-between"><span>Supply</span><span class="text-gray-200">99.999</span></div><div class="flex justify-between"><span>Backing</span><span class="text-gray-200">€189.849</span></div><div class="flex justify-between"><span>Anteil</span><span class="text-gray-200">5%</span></div></div></div>
+      <div class="bg-gray-900/50 border-2 border-green-500/50 rounded-lg p-5"><div class="flex justify-between mb-4"><span class="text-3xl">💵</span><span class="text-xs text-gray-500">ID 4</span></div><h3 class="font-bold text-lg text-green-400 mb-1">Stablecoins</h3><p class="text-xs text-gray-400 mb-3">Symbol: WZST</p><div class="space-y-2 text-sm"><div class="flex justify-between"><span>Supply</span><span class="text-gray-200">999.999</span></div><div class="flex justify-between"><span>Backing</span><span class="text-gray-200">€379.697</span></div><div class="flex justify-between"><span>Anteil</span><span class="text-gray-200">10%</span></div></div></div>
+      <div class="bg-gray-900/50 border-2 border-blue-500/50 rounded-lg p-5"><div class="flex justify-between mb-4"><span class="text-3xl">💎</span><span class="text-xs text-gray-500">ID 5</span></div><h3 class="font-bold text-lg text-blue-400 mb-1">Assets</h3><p class="text-xs text-gray-400 mb-3">Symbol: WZAS</p><div class="space-y-2 text-sm"><div class="flex justify-between"><span>Supply</span><span class="text-gray-200">99.999</span></div><div class="flex justify-between"><span>Backing</span><span class="text-gray-200">€189.849</span></div><div class="flex justify-between"><span>Anteil</span><span class="text-gray-200">5%</span></div></div></div>
+      <div class="bg-gray-900/50 border-2 border-red-500/50 rounded-lg p-5"><div class="flex justify-between mb-4"><span class="text-3xl">📜</span><span class="text-xs text-gray-500">ID 6</span></div><h3 class="font-bold text-lg text-red-400 mb-1">Lizenzen</h3><p class="text-xs text-gray-400 mb-3">Symbol: WZLZ</p><div class="space-y-2 text-sm"><div class="flex justify-between"><span>Supply</span><span class="text-gray-200">9.999.999</span></div><div class="flex justify-between"><span>Backing</span><span class="text-gray-200">€1.139.092</span></div><div class="flex justify-between"><span>Anteil</span><span class="text-gray-200">30%</span></div></div></div>
+    </div>
+  </section>
+
+  <!-- SECTION 09 -->
+  <section id="apis" class="bg-gray-900/30 border-y border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="border-l-4 border-cyan-500 pl-6 mb-10">
+        <h2 class="text-2xl md:text-3xl font-bold text-cyan-400 mb-2">09. API-Ökosystem</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+        <div class="bg-gray-900 border border-cyan-900/50 rounded-lg p-5"><div class="flex justify-between items-start mb-3"><h3 class="text-cyan-400 font-bold">CoinAPI</h3><span class="text-xs text-cyan-600 border border-cyan-800 px-2 py-0.5 rounded">400+ Börsen</span></div><p class="text-xs text-gray-400">Marktdaten, OHLCV, Trades</p></div>
+        <div class="bg-gray-900 border border-cyan-900/50 rounded-lg p-5"><div class="flex justify-between items-start mb-3"><h3 class="text-cyan-400 font-bold">CoinStats</h3><span class="text-xs text-cyan-600 border border-cyan-800 px-2 py-0.5 rounded">300+ Börsen</span></div><p class="text-xs text-gray-400">Portfolio-Tracking, Preise</p></div>
+        <div class="bg-gray-900 border border-cyan-900/50 rounded-lg p-5"><div class="flex justify-between items-start mb-3"><h3 class="text-cyan-400 font-bold">Covalent</h3><span class="text-xs text-cyan-600 border border-cyan-800 px-2 py-0.5 rounded">100+ Blockchains</span></div><p class="text-xs text-gray-400">On-Chain-Daten, Balancen</p></div>
+        <div class="bg-gray-900 border border-cyan-900/50 rounded-lg p-5"><div class="flex justify-between items-start mb-3"><h3 class="text-cyan-400 font-bold">Moralis</h3><span class="text-xs text-cyan-600 border border-cyan-800 px-2 py-0.5 rounded">EVM-Chains</span></div><p class="text-xs text-gray-400">Web3-API, NFTs, Transfers</p></div>
+      </div>
+      <div class="bg-black/50 border border-gray-800 rounded-lg p-5">
+        <h3 class="text-cyan-400 font-bold mb-3 text-sm uppercase">Dashboard API-Endpunkte (Auswahl)</h3>
+        <div class="grid md:grid-cols-2 gap-2 text-xs font-mono text-gray-400">
+          <span>GET /api/health</span>
+          <span>GET /api/status</span>
+          <span>GET /api/wallet/:address/portfolio</span>
+          <span>GET /api/wallet/:address/transactions</span>
+          <span>GET /api/nft/wallet/:address</span>
+          <span>GET /api/nft/trending</span>
+          <span>GET /api/defi/positions/:address</span>
+          <span>GET /api/defi/yields</span>
+          <span>GET /api/trading/portfolio</span>
+          <span>POST /api/trading/order</span>
+          <span>GET /api/exchanges</span>
+          <span>GET /api/trading/arbitrage/:symbol</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 10 -->
+  <section id="features" class="max-w-6xl mx-auto px-6 py-16">
+    <div class="border-l-4 border-green-500 pl-6 mb-10">
+      <h2 class="text-2xl md:text-3xl font-bold text-green-400 mb-2">10. Features</h2>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="bg-gray-900/50 border border-gray-800 hover:border-green-700 rounded-lg p-5"><div class="text-2xl mb-3">🔗</div><h3 class="text-green-400 font-bold mb-2 text-sm">333+ API-Endpunkte</h3><p class="text-xs text-gray-400">Middleware-Aggregatoren mit Normalisierung und Fallback.</p></div>
+      <div class="bg-gray-900/50 border border-gray-800 hover:border-green-700 rounded-lg p-5"><div class="text-2xl mb-3">👛</div><h3 class="text-green-400 font-bold mb-2 text-sm">Wallet Integration</h3><p class="text-xs text-gray-400">8 Wallet-Typen, 6 Chains, Multichain-Portfolio.</p></div>
+      <div class="bg-gray-900/50 border border-gray-800 hover:border-green-700 rounded-lg p-5"><div class="text-2xl mb-3">🖼️</div><h3 class="text-green-400 font-bold mb-2 text-sm">NFT Integration</h3><p class="text-xs text-gray-400">4 Marktplätze (OpenSea, Blur, Magic Eden, LooksRare).</p></div>
+      <div class="bg-gray-900/50 border border-gray-800 hover:border-green-700 rounded-lg p-5"><div class="text-2xl mb-3">🏦</div><h3 class="text-green-400 font-bold mb-2 text-sm">DeFi Integration</h3><p class="text-xs text-gray-400">20+ Protokolle: Aave, Compound, Uniswap, Curve, Balancer.</p></div>
+      <div class="bg-gray-900/50 border border-gray-800 hover:border-green-700 rounded-lg p-5"><div class="text-2xl mb-3">📈</div><h3 class="text-green-400 font-bold mb-2 text-sm">Trading Engine</h3><p class="text-xs text-gray-400">Paper Trading und 4 automatisierte Strategien.</p></div>
+      <div class="bg-gray-900/50 border border-gray-800 hover:border-green-700 rounded-lg p-5"><div class="text-2xl mb-3">🌍</div><h3 class="text-green-400 font-bold mb-2 text-sm">RWA-Tokenisierung</h3><p class="text-xs text-gray-400">Real-World-Assets auf ERC-1155 mit Whitelist und AML.</p></div>
+    </div>
+  </section>
+
+  <!-- SECTION 11 -->
+  <section id="compliance" class="bg-gray-900/30 border-y border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="border-l-4 border-emerald-500 pl-6 mb-10">
+        <h2 class="text-2xl md:text-3xl font-bold text-emerald-400 mb-2">11. Compliance & Identität</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div class="bg-gray-900 border border-emerald-900/50 rounded-lg p-4"><p class="text-xs text-gray-500 uppercase mb-1">BaFin</p><p class="text-emerald-400 font-bold text-sm">Approved</p><p class="text-[10px] text-gray-500 mt-1">Deutsche Finanzaufsicht</p></div>
+        <div class="bg-gray-900 border border-emerald-900/50 rounded-lg p-4"><p class="text-xs text-gray-500 uppercase mb-1">EUIPO</p><p class="text-emerald-400 font-bold text-sm">Registered</p><p class="text-[10px] text-gray-500 mt-1">Europäisches Markenamt</p></div>
+        <div class="bg-gray-900 border border-emerald-900/50 rounded-lg p-4"><p class="text-xs text-gray-500 uppercase mb-1">EPA</p><p class="text-emerald-400 font-bold text-sm">Approved</p><p class="text-[10px] text-gray-500 mt-1">Umweltbehörde</p></div>
+        <div class="bg-gray-900 border border-emerald-900/50 rounded-lg p-4"><p class="text-xs text-gray-500 uppercase mb-1">MiCA</p><p class="text-emerald-400 font-bold text-sm">Compliant</p><p class="text-[10px] text-gray-500 mt-1">EU Krypto-Verordnung</p></div>
+        <div class="bg-gray-900 border border-emerald-900/50 rounded-lg p-4"><p class="text-xs text-gray-500 uppercase mb-1">D-U-N-S</p><p class="text-emerald-400 font-bold text-sm">315676980</p></div>
+        <div class="bg-gray-900 border border-emerald-900/50 rounded-lg p-4"><p class="text-xs text-gray-500 uppercase mb-1">VAT</p><p class="text-emerald-400 font-bold text-sm">DE441892129</p></div>
+        <div class="bg-gray-900 border border-emerald-900/50 rounded-lg p-4"><p class="text-xs text-gray-500 uppercase mb-1">LEI</p><p class="text-emerald-400 font-bold text-sm">894500GBJSIW8L6ET310</p></div>
+        <div class="bg-gray-900 border border-emerald-900/50 rounded-lg p-4"><p class="text-xs text-gray-500 uppercase mb-1">Expert-ID</p><p class="text-emerald-400 font-bold text-sm">EX2025D1218310</p></div>
+      </div>
+      <div class="mt-6 text-xs text-gray-500 bg-black/30 border border-gray-800 rounded p-4">
+        <strong>Hinweis:</strong> Die regulatorischen Status sind aus der Projekt-Dokumentation übernommen. Für rechtsverbindliche Verwendung sind externe Prüfungen erforderlich.
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 12 -->
+  <section id="pipeline" class="max-w-6xl mx-auto px-6 py-16">
+    <div class="border-l-4 border-indigo-500 pl-6 mb-10">
+      <h2 class="text-2xl md:text-3xl font-bold text-indigo-400 mb-2">12. Build-Pipeline & NPM-Skripte</h2>
+    </div>
+    <div class="bg-black/50 border border-gray-800 rounded-lg p-5 overflow-x-auto">
+      <table class="w-full text-xs text-left">
+        <thead class="text-indigo-400 uppercase"><tr><th class="py-2">Skript</th><th class="py-2">Beschreibung</th></tr></thead>
+        <tbody class="divide-y divide-gray-800 text-gray-400 font-mono">
+          <tr><td class="py-2">npm run dashboard</td><td class="py-2">Startet Dashboard-API und Vite-Dev-Server</td></tr>
+          <tr><td class="py-2">npm run deploy</td><td class="py-2">Kompiliert und deployed den Smart Contract</td></tr>
+          <tr><td class="py-2">npm run deploy:base</td><td class="py-2">Deployment auf Base Mainnet</td></tr>
+          <tr><td class="py-2">npm run deploy:base-sepolia</td><td class="py-2">Deployment auf Base Sepolia Testnet</td></tr>
+          <tr><td class="py-2">npm run test</td><td class="py-2">Führt Smart-Contract-Tests aus</td></tr>
+          <tr><td class="py-2">npm run compile</td><td class="py-2">Kompiliert Solidity mit Hardhat</td></tr>
+          <tr><td class="py-2">npm run api:health</td><td class="py-2">Prüft API-Gesundheit aller Adapter</td></tr>
+          <tr><td class="py-2">npm run api:full</td><td class="py-2">Startet alle 333+ API-Integrationen</td></tr>
+          <tr><td class="py-2">npm run trading:bot</td><td class="py-2">Startet Paper-Trading-Bot</td></tr>
+          <tr><td class="py-2">npm run trading:monitor</td><td class="py-2">Überwacht Trading-Performance</td></tr>
+          <tr><td class="py-2">npm run wallet:sync</td><td class="py-2">Synchronisiert Wallet-Portfolios</td></tr>
+          <tr><td class="py-2">npm run unified:integration</td><td class="py-2">End-to-End-Integration aller Module</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 13 -->
+  <section id="deployment" class="bg-gray-900/30 border-y border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="border-l-4 border-indigo-500 pl-6 mb-10">
+        <h2 class="text-2xl md:text-3xl font-bold text-indigo-400 mb-2">13. Deployment & Infrastruktur</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-black/50 border border-gray-800 rounded-lg p-5">
+          <h3 class="text-indigo-400 font-bold mb-3 text-sm uppercase">Lokale Entwicklung</h3>
+          <ol class="space-y-2 text-xs font-mono text-gray-400">
+            <li>1. cp .env.example .env</li>
+            <li>2. .env mit API-Keys und Private Key befüllen</li>
+            <li>3. npm install</li>
+            <li>4. npm run dashboard</li>
+            <li>5. http://localhost:5173</li>
+          </ol>
+        </div>
+        <div class="bg-black/50 border border-gray-800 rounded-lg p-5">
+          <h3 class="text-indigo-400 font-bold mb-3 text-sm uppercase">Docker Compose</h3>
+          <ol class="space-y-2 text-xs font-mono text-gray-400">
+            <li>1. .env befüllen</li>
+            <li>2. docker-compose up -d</li>
+            <li>3. Dashboard: http://localhost:3000</li>
+            <li>4. Grafana: http://localhost:3001</li>
+            <li>5. Prometheus: http://localhost:9090</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 14 -->
+  <section id="roadmap" class="max-w-6xl mx-auto px-6 py-16">
+    <div class="border-l-4 border-orange-500 pl-6 mb-10">
+      <h2 class="text-2xl md:text-3xl font-bold text-orange-400 mb-2">14. Status & Roadmap</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-gray-900/50 border border-green-800/50 rounded-lg p-5">
+        <h3 class="text-green-400 font-bold mb-3 text-sm uppercase">✅ Abgeschlossen</h3>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li>• 333+ API-Infrastruktur</li>
+          <li>• Wallet-Integration</li>
+          <li>• NFT-Integration</li>
+          <li>• DeFi-Integration</li>
+          <li>• Trading-Infrastruktur</li>
+          <li>• Docker-Stack</li>
+          <li>• Wizard Zorkara Terminal</li>
+        </ul>
+      </div>
+      <div class="bg-gray-900/50 border border-orange-800/50 rounded-lg p-5">
+        <h3 class="text-orange-400 font-bold mb-3 text-sm uppercase">⏳ Ausstehend</h3>
+        <ul class="space-y-2 text-sm text-gray-300">
+          <li>• Token-Infrastruktur vervollständigen</li>
+          <li>• Blockchain-Core härten</li>
+          <li>• Crypto-Ecosystem ausbauen</li>
+          <li>• Smart Contract Audit</li>
+          <li>• Metadata JSONs für alle Token</li>
+          <li>• Produktiv-Deployment (Mainnet)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 15 -->
+  <section id="risk" class="bg-gray-900/30 border-y border-gray-800">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+      <div class="border-l-4 border-red-600 pl-6 mb-6">
+        <h2 class="text-2xl md:text-3xl font-bold text-red-500 mb-2">15. Risiken & Hinweise</h2>
+      </div>
+      <div class="overflow-x-auto mb-6">
+        <table class="w-full text-xs border border-gray-800">
+          <thead class="bg-gray-900 text-red-400 uppercase"><tr><th class="px-3 py-2 border-b border-gray-800 text-left">Risiko</th><th class="px-3 py-2 border-b border-gray-800 text-left">Auswirkung</th><th class="px-3 py-2 border-b border-gray-800 text-left">Wahrscheinlichkeit</th><th class="px-3 py-2 border-b border-gray-800 text-left">Mitigation</th></tr></thead>
+          <tbody class="divide-y divide-gray-800 text-gray-400">
+            <tr><td class="px-3 py-2">Secret Leakage (.env in Docker)</td><td class="px-3 py-2">Hoch</td><td class="px-3 py-2">Hoch</td><td class="px-3 py-2">.env nicht im Image speichern, Docker Secrets verwenden</td></tr>
+            <tr><td class="px-3 py-2">Unaudited Smart Contract</td><td class="px-3 py-2">Hoch</td><td class="px-3 py-2">Mittel</td><td class="px-3 py-2">Externer Audit, Testnet, Bug-Bounty</td></tr>
+            <tr><td class="px-3 py-2">Zentralisierter Owner</td><td class="px-3 py-2">Mittel</td><td class="px-3 py-2">Hoch</td><td class="px-3 py-2">Multi-Sig, Zeitlocks, Governance</td></tr>
+            <tr><td class="px-3 py-2">API-Key-Abhängigkeit</td><td class="px-3 py-2">Mittel</td><td class="px-3 py-2">Mittel</td><td class="px-3 py-2">Fallbacks, Caching, eigene Nodes</td></tr>
+            <tr><td class="px-3 py-2">Regulatorische Unklarheit</td><td class="px-3 py-2">Hoch</td><td class="px-3 py-2">Mittel</td><td class="px-3 py-2">Rechtsprüfung, BaFin-Anzeige, MiCA-Checkliste</td></tr>
+            <tr><td class="px-3 py-2">Liquidity / DEX-Platzhalter</td><td class="px-3 py-2">Hoch</td><td class="px-3 py-2">Hoch</td><td class="px-3 py-2">Pool-Implementierung, Slippage-Tests</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="space-y-4 text-sm text-gray-400 leading-relaxed">
+        <p><strong class="text-gray-200">Sicherheit:</strong> Derzeit kopiert das Dockerfile die Datei <code>.env</code> in das Container-Image. Das ist ein erhebliches Risiko für Secret-Leaks.</p>
+        <p><strong class="text-gray-200">Regulierung:</strong> Die genannten Compliance-Status sind Projektangaben. Eine rechtsverbindliche Verwendung erfordert eine externe Rechtsprüfung.</p>
+        <p><strong class="text-gray-200">Code-Qualität:</strong> Das Repository ist sehr umfangreich (56 GB), enthält viele ähnliche Deploy-Scripts und große Rohdaten-Dateien. Eine Konsolidierung und ein Audit sind vor einem Mainnet-Deployment dringend empfohlen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 16 -->
+  <section id="glossary" class="max-w-6xl mx-auto px-6 py-16">
+    <div class="border-l-4 border-gray-500 pl-6 mb-10">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-400 mb-2">16. Glossar</h2>
+    </div>
+    <div class="grid md:grid-cols-2 gap-3 text-sm">
+      <div class="bg-gray-900/50 border border-gray-800 rounded p-3"><span class="text-gray-300 font-bold">HGA</span> — Hnoss Genesis Asset</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded p-3"><span class="text-gray-300 font-bold">ERC-1155</span> — Multi-Token-Standard</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded p-3"><span class="text-gray-300 font-bold">AML</span> — Anti-Money-Laundering</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded p-3"><span class="text-gray-300 font-bold">MiCA</span> — EU Krypto-Verordnung</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded p-3"><span class="text-gray-300 font-bold">RWA</span> — Real-World Asset</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded p-3"><span class="text-gray-300 font-bold">Asset Taxi</span> — Asset-Kanal mit API</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded p-3"><span class="text-gray-300 font-bold">DEX</span> — Decentralized Exchange</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded p-3"><span class="text-gray-300 font-bold">AML Signer</span> — Off-chain Signatur-Entität</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded p-3"><span class="text-gray-300 font-bold">Paper Trading</span> — Handelssimulation</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded p-3"><span class="text-gray-300 font-bold">Base</span> — Ethereum Layer-2</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded p-3"><span class="text-gray-300 font-bold">Hardhat</span> — Solidity-Dev-Tool</div>
+      <div class="bg-gray-900/50 border border-gray-800 rounded p-3"><span class="text-gray-300 font-bold">Vite</span> — Frontend-Build-Tool</div>
+    </div>
+  </section>
+
+  <!-- FOOTER CTA -->
+  <section id="terminal" class="max-w-6xl mx-auto px-6 py-20 text-center">
+    <h2 class="text-2xl md:text-4xl font-bold text-green-400 mb-6">Bereit, das Terminal zu betreten?</h2>
+    <p class="text-gray-400 mb-8 max-w-2xl mx-auto text-sm">Verbinde MetaMask, scanne deine ERC-1155 Assets, prüfe das Asset-Backing und orchestriere AML-validierte Transfers.</p>
+    <a href="http://localhost:5173" class="inline-block px-10 py-5 bg-green-600 hover:bg-green-500 text-black font-black tracking-widest uppercase rounded-lg border-2 border-green-400 shadow-[0_0_30px_rgba(34,197,94,0.6)] transition-all">🚀 Jetzt Terminal öffnen</a>
+    <div class="mt-12 text-xs text-gray-600 border-t border-gray-800 pt-6">
+      <p>Hnoss Corp. | Daniel Pohl (HolyThreeKings) | Expert-ID: EX2025D1218310</p>
+      <p class="mt-2">Wizard Zorkara Terminal v1.0.0 | Base Mainnet | Chain 8453</p>
+    </div>
+  </section>
+
+</body>
+</html>

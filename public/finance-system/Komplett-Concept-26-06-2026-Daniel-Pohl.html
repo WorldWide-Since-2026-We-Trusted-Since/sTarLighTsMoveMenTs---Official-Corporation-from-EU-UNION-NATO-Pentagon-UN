@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komplett-Concept: Wallet Concept · SystemHeaven · HPS-Architektur</title>
+    <meta name="description" content="Ausfuehrliches, detailliertes, ausgefaechertes und gigantisch informatives Gesamtconcept der drei Projekte: Wallet Concept, SystemHeaven Framework v3.0 und High-Potential-Scale (HPS) Architektur. Stand 26.06.2026, Daniel Pohl.">
+    <meta name="author" content="Daniel Pohl">
+    <meta name="date" content="2026-06-26">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #06b6d4;
+            --gold: #f59e0b;
+            --purple: #8b5cf6;
+            --emerald: #10b981;
+            --rose: #f43f5e;
+        }
+        * { scroll-behavior: smooth; }
+        body {
+            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e293b 100%);
+            color: #e2e8f0;
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.7;
+        }
+        .glass {
+            background: rgba(30, 41, 59, 0.72);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #06b6d4, #3b82f6, #8b5cf6, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card-hover {
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px rgba(6, 182, 212, 0.18);
+            border-color: rgba(6, 182, 212, 0.45);
+        }
+        .toc-link.active {
+            color: #06b6d4;
+            border-left: 3px solid #06b6d4;
+        }
+        .section-marker {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+        }
+        .code-block {
+            background: #0b1120;
+            border: 1px solid #1e293b;
+            border-radius: 0.75rem;
+            font-family: 'Consolas', 'Monaco', 'Fira Code', monospace;
+        }
+        .timeline-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #06b6d4;
+            box-shadow: 0 0 22px rgba(6, 182, 212, 0.7);
+        }
+        .pill {
+            background: rgba(6, 182, 212, 0.14);
+            color: #06b6d4;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(139, 92, 246, 0.1));
+            border-left: 4px solid #06b6d4;
+        }
+        .nav-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+        }
+        .table-striped tr:nth-child(even) { background: rgba(255,255,255,0.03); }
+        .table-header { background: rgba(6, 182, 212, 0.15); }
+        .hero-glow {
+            box-shadow: 0 0 120px rgba(6, 182, 212, 0.25);
+        }
+        .border-gradient {
+            border-image: linear-gradient(135deg, #06b6d4, #8b5cf6, #f59e0b) 1;
+        }
+        .layer-badge {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; color: black; }
+            .glass { background: white; border: 1px solid #ccc; }
+            .gradient-text { -webkit-text-fill-color: #000; color: #000; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="nav-fixed glass no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-cube text-cyan-400 text-xl"></i>
+                    <span class="font-bold text-lg tracking-wide">Komplett-Concept</span>
+                </div>
+                <div class="hidden lg:flex space-x-5 text-sm">
+                    <a href="#executive" class="hover:text-cyan-400 transition">Executive Summary</a>
+                    <a href="#wallet" class="hover:text-cyan-400 transition">Wallet Concept</a>
+                    <a href="#systemheaven" class="hover:text-cyan-400 transition">SystemHeaven</a>
+                    <a href="#hps" class="hover:text-cyan-400 transition">HPS-Architektur</a>
+                    <a href="#integration" class="hover:text-cyan-400 transition">Integration</a>
+                    <a href="#tech" class="hover:text-cyan-400 transition">Technik</a>
+                    <a href="#roadmap" class="hover:text-cyan-400 transition">Roadmap</a>
+                </div>
+                <button onclick="window.print()" class="pill px-4 py-1.5 rounded-full text-sm hover:bg-cyan-400/20 transition">
+                    <i class="fa-solid fa-print mr-2"></i>PDF / Drucken
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="pt-36 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+        <div class="glass rounded-3xl p-10 md:p-16 mb-10 hero-glow">
+            <div class="inline-block mb-6 px-4 py-1.5 rounded-full text-xs font-semibold bg-cyan-400/10 text-cyan-400 border border-cyan-400/20">
+                <i class="fa-regular fa-calendar mr-2"></i>26. Juni 2026 · by Daniel Pohl
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black mb-8">
+                <span class="gradient-text">Gesamt-Concept</span><br>
+                <span class="text-white">der drei tragenden Säulen</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed">
+                Eine ausführliche, detaillierte, ausgefächerte und gigantisch informative Dokumentation des Projektes, in die bereits vorhandene Strukturen, Dateien, Smart-Contract-Skizzen, Framework-Komponenten und regulatorische Blueprints vollständig eingepflegt sind.
+            </p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass rounded-2xl p-8 card-hover">
+                <i class="fa-solid fa-cash-register text-5xl text-cyan-400 mb-5"></i>
+                <h3 class="text-2xl font-bold">Wallet Concept</h3>
+                <p class="text-slate-400 mt-3">POS-Blockchain-Orchestrierung, Token Bound Accounts, Adressable Notebank, Kreislaufwirtschaft</p>
+                <div class="mt-4 flex flex-wrap gap-2 justify-center">
+                    <span class="pill px-3 py-1 rounded-full text-xs">ERC-6551</span>
+                    <span class="pill px-3 py-1 rounded-full text-xs">IPFS</span>
+                    <span class="pill px-3 py-1 rounded-full text-xs">POS-Connector</span>
+                </div>
+            </div>
+            <div class="glass rounded-2xl p-8 card-hover">
+                <i class="fa-solid fa-scale-balanced text-5xl text-emerald-400 mb-5"></i>
+                <h3 class="text-2xl font-bold">SystemHeaven v3.0</h3>
+                <p class="text-slate-400 mt-3">8-Layer-Framework, IIOS-Verfassung, IGOS-Scorecard, Zero-Prompt AI, Dashboards</p>
+                <div class="mt-4 flex flex-wrap gap-2 justify-center">
+                    <span class="pill px-3 py-1 rounded-full text-xs">Barmherzigkeit</span>
+                    <span class="pill px-3 py-1 rounded-full text-xs">IGOS</span>
+                    <span class="pill px-3 py-1 rounded-full text-xs">Digital Twin</span>
+                </div>
+            </div>
+            <div class="glass rounded-2xl p-8 card-hover">
+                <i class="fa-solid fa-bridge text-5xl text-amber-400 mb-5"></i>
+                <h3 class="text-2xl font-bold">HPS-Architektur</h3>
+                <p class="text-slate-400 mt-3">Zero-Downfall, Ledger-HRoT, PID-Regler, Cryptodraft/Stableloan, MiCA</p>
+                <div class="mt-4 flex flex-wrap gap-2 justify-center">
+                    <span class="pill px-3 py-1 rounded-full text-xs">Ledger</span>
+                    <span class="pill px-3 py-1 rounded-full text-xs">DCBM</span>
+                    <span class="pill px-3 py-1 rounded-full text-xs">MiCA</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-32">
+
+        <!-- Executive Summary -->
+        <section id="executive" class="mb-24">
+            <div class="flex items-center mb-8">
+                <div class="section-marker w-12 h-12 rounded-xl flex items-center justify-center mr-4">
+                    <i class="fa-solid fa-bullseye text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold">Executive Summary</h2>
+                    <p class="text-slate-400">Warum, wie und wohin das Projekt führt</p>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-8 md:p-10 mb-8">
+                <p class="text-slate-300 text-lg leading-relaxed mb-6">
+                    Dieses Dokument ist das zentrale, allumfassende <strong>Master-Concept</strong> für ein Blockchain-Ökosystem, das aus drei eng verwobenen Säulen besteht. Es verbindet die <strong>Realwirtschaft</strong> (Wallet Concept), die <strong>ethische Validierung</strong> (SystemHeaven) und die <strong>globale Krypto-Fiat-Integration</strong> (High-Potential-Scale / HPS). Alle bereits vorhandenen Dateien, Skizzen, Code-Beispiele, Dashboards und regulatorischen Analysen wurden in dieses Gesamtkonzept integriert.
+                </p>
+                <p class="text-slate-300 text-lg leading-relaxed mb-6">
+                    Das übergeordnete Ziel ist die Schaffung eines <strong>„Werte-Internets“</strong>: ein technisches, wirtschaftliches und regulatorisches Betriebssystem, in dem physische und digitale Assets unveränderlich nachweisbar, adressierbar, liquidierbar und wieder in einen geschlossenen Kreislauf rückführbar sind. Der Nutzer soll mit einem Klick, einem Chatbot-Befehl oder einem Kassen-Scan Liquidität, Sponsoring, Rücknahme oder Heilung auslösen können – ohne Blockchain-Expertise, aber mit mathematischer Sicherheit und regulatorischer Konformität.
+                </p>
+                <div class="highlight-box rounded-xl p-6">
+                    <h4 class="text-xl font-bold mb-3 text-cyan-400">Kernbehauptung</h4>
+                    <p class="text-slate-300 leading-relaxed">
+                        Wenn POS-Kassen, Sponsoring-Triggern, Kreditlinien, Hardware-Wallets, Stablecoins, Kartennetzwerke, Börsen und eine ethische Validierungsschicht in einem einzigen, standardisierten Regelwerk zusammenwirken, entsteht kein Spekulationsinstrument, sondern ein <strong>Asset-Driven Liquidity Network</strong> – ein System, das Werte aus der Realwirtschaft liquide macht, ohne sie zu veräußern.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="text-xl font-bold mb-3 text-cyan-400"><i class="fa-solid fa-rocket mr-2"></i>Ziele</h4>
+                    <ul class="space-y-3 text-slate-300">
+                        <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Verbindung von physischem Handel, DeFi und Kreislaufwirtschaft</li>
+                        <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Automatische, transparente und auditierbare Geld- und Ressourcenflüsse</li>
+                        <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Zero-Downfall-Krypto-Fiat-Brücke für Alltagszahlungen</li>
+                        <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Ethische, systemische und regulatorische Validierung nach IIOS</li>
+                        <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Eigenständige, adressierbare Notenbank-Adressen für jedes Asset</li>
+                    </ul>
+                </div>
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="text-xl font-bold mb-3 text-cyan-400"><i class="fa-solid fa-users mr-2"></i>Stakeholder</h4>
+                    <ul class="space-y-3 text-slate-300">
+                        <li><i class="fa-solid fa-user text-cyan-400 mr-2"></i>Endnutzer/Käufer: Alltagszahlungen, Kredite, Rücknahme, Credits</li>
+                        <li><i class="fa-solid fa-store text-cyan-400 mr-2"></i>Händler/Läden: Sofortiges Settlement, lückenloser Belegnachweis</li>
+                        <li><i class="fa-solid fa-building-columns text-cyan-400 mr-2"></i>Sponsoren/Zentralbanken: Zweckbindung, Audit-Trail, Trust-Anchor</li>
+                        <li><i class="fa-solid fa-shield-halved text-cyan-400 mr-2"></i>Regulatoren: MiCA, AML, KYC, BaFin, EBA, SEC Compliance</li>
+                        <li><i class="fa-solid fa-code text-cyan-400 mr-2"></i>Entwickler: Standardisierte APIs, Smart-Contract-Templates, Docker</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8">
+                <h3 class="text-2xl font-bold mb-6 text-cyan-400">Übersicht der drei tragenden Säulen</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left table-striped">
+                        <thead class="table-header">
+                            <tr>
+                                <th class="py-3 px-4 text-cyan-400 font-bold">Säule</th>
+                                <th class="py-3 px-4 text-cyan-400 font-bold">Domäne</th>
+                                <th class="py-3 px-4 text-cyan-400 font-bold">Kernfunktion</th>
+                                <th class="py-3 px-4 text-cyan-400 font-bold">Output</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="border-b border-slate-700">
+                                <td class="py-4 px-4 font-bold text-cyan-400">Wallet Concept</td>
+                                <td class="py-4 px-4">POS, Einzelhandel, Kreislaufwirtschaft</td>
+                                <td class="py-4 px-4">Adressable Notebank, POS-Connector, Asset-Circulator</td>
+                                <td class="py-4 px-4">Tokenisierte Assets, Smart Receipts, Credits, Sponsoring</td>
+                            </tr>
+                            <tr class="border-b border-slate-700">
+                                <td class="py-4 px-4 font-bold text-emerald-400">SystemHeaven</td>
+                                <td class="py-4 px-4">Governance, Ethik, Methodik, KI</td>
+                                <td class="py-4 px-4">8-Layer-Validierung, IGOS-Scorecard, Zero-Prompt AI</td>
+                                <td class="py-4 px-4">Zertifizierte, ethisch geprüfte Systementscheidungen</td>
+                            </tr>
+                            <tr>
+                                <td class="py-4 px-4 font-bold text-amber-400">HPS-Architektur</td>
+                                <td class="py-4 px-4">Krypto-Fiat-Integration, globale Finanznetzwerke</td>
+                                <td class="py-4 px-4">Ledger-HRoT, Cryptodraft/Stableloan, DCBM-PID-Regler</td>
+                                <td class="py-4 px-4">Zero-Downfall-Liquidität, MiCA-konforme Zahlungen</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projekt 1: Wallet Concept -->
+        <section id="wallet" class="mb-24">
+            <div class="flex items-center mb-8">
+                <div class="section-marker w-12 h-12 rounded-xl flex items-center justify-center mr-4">
+                    <i class="fa-solid fa-cash-register text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold">Projekt 1: Wallet Concept</h2>
+                    <p class="text-slate-400">Blockchain-Orchestrierungsplattform für Order, Sponsoring & Money Contracts</p>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-8 md:p-10 mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-cyan-400">1. Vision, Zielsetzung und Philosophie</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Das <strong>Wallet Concept</strong> ist der konzeptionelle Rahmen für eine <strong>dezentrale Handels- und Finanzinfrastruktur</strong>, in der jede physische Kasse (Point of Sale, POS) zu einem Knoten eines dezentralen Netzwerks wird. Jeder Einkaufsvorgang erzeugt nicht nur einen physischen Beleg, sondern auch einen <strong>unveränderlichen digitalen Nachweis</strong> auf der Blockchain.
+                </p>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Die zentrale Innovation ist die Verbindung dreier bisher getrennter Welten: <strong>physischem Handel</strong> (POS), <strong>dezentraler Finanzierung</strong> (Smart Contracts / DeFi) und <strong>nachhaltigem Ressourcenmanagement</strong> (Kreislaufwirtschaft, Heilungsmechanismen). Das System verlässt damit die Welt der „manuellen Buchhaltung“ und geht in die Welt der <strong>„Echtzeit-Asset-Validierung“</strong>.
+                </p>
+                <p class="text-slate-300 leading-relaxed">
+                    Die Philosophie ist <strong>„Peace by Design“</strong>: Da Sponsoring, Kredite und Rücknahmen vertraglich abgesichert sind, werden „Dumping“, „Schein-Kredit“ oder zweckentfremdete Gelder technisch unmöglich. Die Qualität der Ware und der nachweisbare Wert des Assets sind der einzige Maßstab für Liquidität.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="text-xl font-bold mb-3 text-cyan-400"><i class="fa-solid fa-network-wired mr-2"></i>Das Circulations Network</h4>
+                    <p class="text-slate-300 leading-relaxed mb-3">
+                        Ein Netzwerk aus verbundenen Akteuren: Verkäufer, Käufer, Sponsoren, Geldgeber, Logistik, Werkstätten und Regulatoren.
+                    </p>
+                    <div class="code-block p-3 text-sm text-slate-400">
+                        Order → Validierung → Sponsoring → Settlement → Audit
+                    </div>
+                </div>
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="text-xl font-bold mb-3 text-cyan-400"><i class="fa-solid fa-wallet mr-2"></i>Adressable Notebank</h4>
+                    <p class="text-slate-300 leading-relaxed">
+                        Jede Ressource (jedes Produkt, jedes Asset) erhält über <strong>ERC-6551</strong> eine eigene Blockchain-Adresse. Das Produkt wird damit zu einem eigenständigen „Bankkonto“, das Werte empfangen, halten und weiterleiten kann.
+                    </p>
+                </div>
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="text-xl font-bold mb-3 text-cyan-400"><i class="fa-solid fa-receipt mr-2"></i>Beleg-Hashing & Smart Receipt</h4>
+                    <p class="text-slate-300 leading-relaxed">
+                        Der POS-Connector erzeugt aus jedem Beleg einen <strong>SHA-256-Hash</strong>. Dieser Hash wird zusammen mit Zeitstempel, Händler-ID und Betrag auf der Blockchain verankert. Der Originalbeleg liegt verschlüsselt auf <strong>IPFS</strong>.
+                    </p>
+                </div>
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="text-xl font-bold mb-3 text-cyan-400"><i class="fa-solid fa-leaf mr-2"></i>Heilung, Rücknahme & Kreislauf</h4>
+                    <p class="text-slate-300 leading-relaxed">
+                        Defekte oder gebrauchte Produkte können in das System zurückgeführt werden. Ein Smart Contract berechnet den Restwert und löst automatisch eine Gutschrift oder ein Sponsoring für Reparatur / Recycling aus.
+                    </p>
+                </div>
+            </div>
+
+            <div class="highlight-box rounded-xl p-6 mb-8">
+                <h4 class="text-xl font-bold mb-3 text-cyan-400">Asset-Driven Liquidity</h4>
+                <p class="text-slate-300 leading-relaxed">
+                    Das Modell basiert auf der Idee, dass <strong>realwirtschaftliche Assets die Liquidität treiben</strong>, nicht spekulativer Handel. Ein tokenisierter Kühlschrank, ein Auto oder eine Waschmaschine kann als Collateral für Kredite dienen, als Gegenstand für Sponsoring-Programme genutzt werden und über Transaktionsgebühren wieder in das System zurückfließen.
+                </p>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-cyan-400">2. Technische Architektur im Detail</h3>
+
+                <div class="mb-8">
+                    <h4 class="text-lg font-bold mb-3">2.1 Datenfluss POS → Blockchain</h4>
+                    <div class="code-block p-5 overflow-x-auto text-sm">
+POS-System (Kasse)
+    ↓ Verkaufs-Event (JSON-API)
+POS-Connector (Python/Middleware auf Raspberry Pi / Kassenserver)
+    ├── SHA-256(Beleg) → Smart Contract (Registry)
+    ├── IPFS-Pinning → CID
+    └── On-Chain-Storage (Hash + CID + Betrag + Timestamp)
+    ↓
+Smart Contract (registerAndTransferAsset)
+    ├── ERC-6551 TBA-Ownership Transfer
+    ├── Sponsoring-Trigger prüfen
+    └── Settlement / Liquidität freigeben
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-lg font-bold mb-3">2.2 Smart-Contract-Stack</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left table-striped">
+                            <thead class="table-header">
+                                <tr>
+                                    <th class="py-3 px-4 text-cyan-400 font-bold">Contract</th>
+                                    <th class="py-3 px-4 text-cyan-400 font-bold">Verantwortung</th>
+                                    <th class="py-3 px-4 text-cyan-400 font-bold">Daten</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-300">
+                                <tr class="border-b border-slate-700">
+                                    <td class="py-3 px-4 font-mono text-sm">ResourceRegistry.sol</td>
+                                    <td class="py-3 px-4">Verwaltung aller tokenisierten Ressourcen mit Metadaten, Zustand und Eigentümer</td>
+                                    <td class="py-3 px-4">resourceId, uri, contentHash, provider, timestamp</td>
+                                </tr>
+                                <tr class="border-b border-slate-700">
+                                    <td class="py-3 px-4 font-mono text-sm">ResourceValueTracker.sol</td>
+                                    <td class="py-3 px-4">Erfasst und aktualisiert den Wertverlauf jeder Ressource</td>
+                                    <td class="py-3 px-4">valueHistory[tokenId] → value, auditHash, timestamp, valuer</td>
+                                </tr>
+                                <tr class="border-b border-slate-700">
+                                    <td class="py-3 px-4 font-mono text-sm">ValueHub.sol</td>
+                                    <td class="py-3 px-4">Zentrale Liquiditäts- und Verrechnungsstelle</td>
+                                    <td class="py-3 px-4">sponsorResource(), releaseResource(), escrow</td>
+                                </tr>
+                                <tr class="border-b border-slate-700">
+                                    <td class="py-3 px-4 font-mono text-sm">OrderAndSponsoring.sol</td>
+                                    <td class="py-3 px-4">Verbindet Bestellungen mit Sponsoring-Triggern und Zahlungsfreigaben</td>
+                                    <td class="py-3 px-4">orderId, sponsorId, triggerRules, settlement</td>
+                                </tr>
+                                <tr class="border-b border-slate-700">
+                                    <td class="py-3 px-4 font-mono text-sm">AddressableNotebank.sol</td>
+                                    <td class="py-3 px-4">ERC-6551-Implementierung: jedem NFT eine eigene Wallet-Adresse</td>
+                                    <td class="py-3 px-4">tbaAddress, userNotes, categoryRegistry</td>
+                                </tr>
+                                <tr class="border-b border-slate-700">
+                                    <td class="py-3 px-4 font-mono text-sm">NotenbankRegistry.sol</td>
+                                    <td class="py-3 px-4">Kategorisierung von Ressourcen wie ein Hauptbuch</td>
+                                    <td class="py-3 px-4">category → TBA-Adressen, resourceAuditHash</td>
+                                </tr>
+                                <tr class="border-b border-slate-700">
+                                    <td class="py-3 px-4 font-mono text-sm">QualityGuardian.sol</td>
+                                    <td class="py-3 px-4">Emergency- und Selbstheilungslogik</td>
+                                    <td class="py-3 px-4">triggerEmergency(), Sperre, Re-Validierung, Mittel-Umschichtung</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 px-4 font-mono text-sm">EmergencyRecoveryOrchestrator.sol</td>
+                                    <td class="py-3 px-4">Notfall- und Wiederherstellungslogik bei Komponentenausfällen</td>
+                                    <td class="py-3 px-4">112-Mode, Safety-Strukturen, Resilienz</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h4 class="text-lg font-bold mb-3">2.3 Token-Standards</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="pill rounded-xl p-5 text-center card-hover">
+                            <div class="font-bold text-xl">ERC-6551</div>
+                            <div class="text-sm text-slate-300 mt-2">Token Bound Accounts</div>
+                            <p class="text-xs text-slate-400 mt-2">Jedes Asset erhält eine eigene Wallet-Adresse</p>
+                        </div>
+                        <div class="pill rounded-xl p-5 text-center card-hover">
+                            <div class="font-bold text-xl">ERC-1155</div>
+                            <div class="text-sm text-slate-300 mt-2">Multi-Asset-Token</div>
+                            <p class="text-xs text-slate-400 mt-2">Mehrere Ressourcen in einem Contract</p>
+                        </div>
+                        <div class="pill rounded-xl p-5 text-center card-hover">
+                            <div class="font-bold text-xl">ERC-20</div>
+                            <div class="text-sm text-slate-300 mt-2">Liquiditäts-Token</div>
+                            <p class="text-xs text-slate-400 mt-2">Credits, Stablecoins, Kredit-Token</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h4 class="text-lg font-bold mb-3">2.4 Der POS-Connector (<code>pos_connector.py</code>)</h4>
+                    <p class="text-slate-300 mb-3">Das Python-Skript läuft als Middleware auf dem Gateway des Ladens (Raspberry Pi / Kassenserver). Es nimmt das Kassen-Event entgegen, berechnet kryptografische Hashes, sichert Daten off-chain und triggert die Adressable Notebank.</p>
+                    <div class="code-block p-4 overflow-x-auto text-sm">
+<pre><code class="language-python">import json, hashlib, time, requests
+from web3 import Web3
+
+class POSConnector:
+    def __init__(self, shop_id, private_key):
+        self.shop_id = shop_id
+        self.account = w3.eth.account.from_key(private_key)
+        self.contract = w3.eth.contract(address=REGISTRY_ADDRESS, abi=REGISTRY_ABI)
+
+    def _generate_receipt_hash(self, receipt_data):
+        serialized = json.dumps(receipt_data, sort_keys=True).encode('utf-8')
+        return hashlib.sha256(serialized).hexdigest()
+
+    def _upload_to_ipfs(self, receipt_data):
+        # In Produktion: POST an IPFS-Node
+        return "Qm" + hashlib.md5(str(receipt_data).encode()).hexdigest()
+
+    def process_sale(self, pos_event):
+        receipt_data = {
+            "shop_id": self.shop_id,
+            "item_id": pos_event["item_id"],
+            "tba_address": pos_event["tba_address"],
+            "buyer_wallet": pos_event["buyer_wallet"],
+            "amount": pos_event["amount"],
+            "currency": pos_event["currency"],
+            "timestamp": int(time.time())
+        }
+        receipt_hash = self._generate_receipt_hash(receipt_data)
+        ipfs_cid = self._upload_to_ipfs(receipt_data)
+        tx = self.contract.functions.registerAndTransferAsset(
+            pos_event["tba_address"],
+            pos_event["buyer_wallet"],
+            w3.to_bytes(hexstr=receipt_hash),
+            ipfs_cid
+        ).build_transaction({...})
+        signed_tx = w3.eth.account.sign_transaction(tx, private_key=self.private_key)
+        tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+        return {"status": "VALIDATED", "receipt_hash": receipt_hash, "tx_hash": tx_hash.hex(), "ipfs_cid": ipfs_cid}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-cyan-400">3. Use-Cases im Detail</h3>
+                <div class="space-y-6">
+                    <div class="border-l-4 border-cyan-400 pl-5">
+                        <h4 class="font-bold text-lg text-cyan-400">Use-Case A: Kauf im Einzelhandel mit Krypto-Bezahlung</h4>
+                        <p class="text-slate-300 mt-2">Kunde scannt Artikel. Kasse berechnet Fiat-Betrag. POS-Connector ruft den Smart Contract auf. Kunde autorisiert Zahlung aus seiner Wallet. Beleg wird gehasht und auf IPFS gespeichert. Eigentums-NFT wird auf das Kundenkonto übertragen. Der Kassierer merkt von der Blockchain nichts.</p>
+                    </div>
+                    <div class="border-l-4 border-purple-400 pl-5">
+                        <h4 class="font-bold text-lg text-purple-400">Use-Case B: Automatisches Sponsoring am Terminal</h4>
+                        <p class="text-slate-300 mt-2">Ein Sponsor hinterlegt Mittel in einem Smart Contract. Wenn ein bestimmtes Produkt gekauft wird (z.B. energiesparende Geräte, Bildungsmaterial, Mobilität), löst die Transaktion automatisch eine Zuschusszahlung an den Käufer aus. Der Sponsor kann seine Mittel steuern, ohne sie zu verlieren.</p>
+                    </div>
+                    <div class="border-l-4 border-amber-400 pl-5">
+                        <h4 class="font-bold text-lg text-amber-400">Use-Case C: Ressourcen-rücknahme und Restwert-Credit</h4>
+                        <p class="text-slate-300 mt-2">Kunde gibt ein gebrauchtes Gerät zurück. Validator prüft Zustand. Smart Contract berechnet Restwert. Kunde erhält Credit-Token, die für neue Käufe oder Kredite verwendet werden können. Das Gerät fließt in Reparatur, Refurbishment oder Recycling.</p>
+                    </div>
+                    <div class="border-l-4 border-emerald-400 pl-5">
+                        <h4 class="font-bold text-lg text-emerald-400">Use-Case D: Notenbank-Portal für Großprojekte</h4>
+                        <p class="text-slate-300 mt-2">Ein Nutzer drückt „Sponsoring-Suche 500M“. Der Smart Contract splittet die Suche in Tranchen, bindet Versicherung, Material, Arbeit in TBA-Adressen ein und entlässt Mittel nur bei Meilensteinen. Der Chatbot orchestriert den Prozess.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8">
+                <h3 class="text-2xl font-bold mb-6 text-cyan-400">4. Das „Blackbook“ und die virtuelle Notenbank</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Das <strong>Blackbook</strong> ist der Live-Index auf der Blockchain. Jedes Luxusgut, jedes Projekt und jedes Möbelstück ist ein Eintrag. Es ist kein statisches Buch, sondern ein dynamischer Vertrag, der bei jedem Scan, jedem Kredit und jeder Rücknahme aktualisiert wird.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div class="code-block p-4 text-sm">
+<pre><code>// Beispiel: Notenbank-Metadaten-Schema (JSON)
+{
+  "resourceId": "uuid-oder-hash",
+  "category": "Sponsoring / Credit / Asset / Dokument",
+  "name": "Projektname oder Referenz",
+  "provider": "DID:DeineNotenbank:ID",
+  "timestamp": "2026-06-15T17:30:00Z",
+  "value": { "amount": 10000, "currency": "EURC", "status": "verifiziert" },
+  "auditInfo": {
+    "docHash": "SHA256_HASH_DES_DOKUMENTS",
+    "verificationSource": "Zentralbank_ID_001"
+  },
+  "tbaAddress": "0xERC6551_WALLET_ADRESSE"
+}</code></pre>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg mb-2 text-cyan-400">Funktionen der Notenbank</h4>
+                        <ul class="space-y-2 text-slate-300 text-sm">
+                            <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Kategorisierung von Ressourcen</li>
+                            <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Strukturierte Auflistung aller TBA-Adressen</li>
+                            <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Adressierbare Noten für Sponsoring & Credits</li>
+                            <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Bilanzierung nach Kategorie</li>
+                            <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Audit-Hash pro Ressource</li>
+                            <li><i class="fa-solid fa-check text-cyan-400 mr-2"></i>Parent-Child-Beziehungen (Finanz-Stammbaum)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projekt 2: SystemHeaven -->
+        <section id="systemheaven" class="mb-24">
+            <div class="flex items-center mb-8">
+                <div class="section-marker w-12 h-12 rounded-xl flex items-center justify-center mr-4 bg-gradient-to-br from-emerald-500 to-teal-500">
+                    <i class="fa-solid fa-scale-balanced text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold">Projekt 2: SystemHeaven Framework v3.0</h2>
+                    <p class="text-slate-400">Cornerstone-Methodology: Enterprise-Validierungsframework für ethische Systeme</p>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-8 md:p-10 mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-emerald-400">1. Philosophische Grundlage: Der Eckstein</h3>
+                <p class="text-slate-300 leading-relaxed mb-6">
+                    SystemHeaven ist ein Framework, das technische Systementwicklung mit einer ethischen Grundordnung verbindet. Es basiert auf der <strong>Cornerstone Philosophy</strong>, deren oberster Wert <strong>Barmherzigkeit</strong> ist. Dieser Wert wird als „unerschütterlicher Eckstein“ bezeichnet.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="glass rounded-xl p-6 border-l-4 border-emerald-400">
+                        <h4 class="font-bold text-lg text-emerald-400 mb-2">Der Eckstein-Satz</h4>
+                        <p class="text-slate-300 italic leading-relaxed">
+                            „Barmherzigkeit ist der Eckstein;<br>
+                            Wahrheit ihr Maßstab,<br>
+                            Recht ihre Ordnung,<br>
+                            Entwicklung ihre Frucht."
+                        </p>
+                        <p class="text-slate-400 text-sm mt-2">— IIOS Constitution, Artikel I-VI</p>
+                    </div>
+                    <div class="glass rounded-xl p-6 border-l-4 border-cyan-400">
+                        <h4 class="font-bold text-lg text-cyan-400 mb-2">Säulen der Philosophie</h4>
+                        <ul class="space-y-2 text-slate-300 text-sm">
+                            <li><strong>Barmherzigkeit:</strong> Unerschütterlicher Eckstein</li>
+                            <li><strong>Wahrheit:</strong> Maßstab aller Entscheidungen</li>
+                            <li><strong>Recht:</strong> Ordnung und Regeln</li>
+                            <li><strong>Sicherheit & Nachhaltigkeit:</strong> Fundament</li>
+                            <li><strong>Entwicklung:</strong> Ziel und Frucht</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="text-slate-300 leading-relaxed">
+                    SystemHeaven provides <strong>measurable ethics</strong>, an <strong>8-layer architecture</strong>, <strong>IGOS scoring</strong>, <strong>certification tiers</strong> and <strong>AI-native zero-prompt execution</strong>. Es ist als SKILL für KI-Assistenten, als IDE-Extension und als CLI-Framework ausführbar.
+                </p>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-emerald-400">2. Die 8-Layer-Architektur</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-emerald-500 text-white mr-4 flex-shrink-0">L0</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-emerald-400">Layer 0 — Cornerstone:</strong> Barmherzigkeit als ethischer Grundwert. Unverrückbares Gesetz.
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-cyan-500 text-white mr-4 flex-shrink-0">L1</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-cyan-400">Layer 1 — Constitution:</strong> IIOS-Verfassung mit 7 Artikeln, Regeln und Rechten.
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-blue-500 text-white mr-4 flex-shrink-0">L2</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-blue-400">Layer 2 — Principles:</strong> ~10 Kernprinzipien (Transparenz, Verantwortung, Skalierung, Nachhaltigkeit, ...).
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-purple-500 text-white mr-4 flex-shrink-0">L3</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-purple-400">Layer 3 — Governance:</strong> Rollen, Prozesse, Entscheidungsstrukturen, 6 organizational roles.
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-amber-500 text-white mr-4 flex-shrink-0">L4</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-amber-400">Layer 4 — Technical Standards:</strong> Architektur- und Sicherheitsstandards, Reference Architecture.
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-rose-500 text-white mr-4 flex-shrink-0">L5</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-rose-400">Layer 5 — Implementation:</strong> Konkrete Ausführung, Code, Infrastruktur, Dashboards.
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-indigo-500 text-white mr-4 flex-shrink-0">L6</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-indigo-400">Layer 6 — Audit:</strong> Kontinuierliche Überprüfung, IGOS-Scorecard, Nachweis.
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-teal-500 text-white mr-4 flex-shrink-0">L7</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-teal-400">Layer 7 — Continuous Improvement:</strong> Lernen, Anpassen, Heilen, Evolution Loop.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="text-xl font-bold mb-3 text-emerald-400">Drei Hauptpakete</h4>
+                    <ul class="space-y-3 text-slate-300">
+                        <li><strong>1-Cornerstone-Methodology:</strong> Philosophie, Verfassung, Methodik, Templates, Glossary, Workflows</li>
+                        <li><strong>2-Strategic-Architect:</strong> Strategie, Architektur, Entscheidungsvorlagen, Decision Log</li>
+                        <li><strong>3-DeepDrive-Gigant:</strong> Implementierung, Code, Dashboards, RealTime Validator</li>
+                    </ul>
+                </div>
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="text-xl font-bold mb-3 text-emerald-400">IGOS-Scorecard</h4>
+                    <p class="text-slate-300 mb-3">Bewertung von Systemen nach sechs Dimensionen (0-100, gewichtet):</p>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                        <div class="pill rounded p-2 text-center">Cornerstone 20%</div>
+                        <div class="pill rounded p-2 text-center">Integrity 20%</div>
+                        <div class="pill rounded p-2 text-center">Compliance 20%</div>
+                        <div class="pill rounded p-2 text-center">Risk 15%</div>
+                        <div class="pill rounded p-2 text-center">Governance 15%</div>
+                        <div class="pill rounded p-2 text-center">Development 10%</div>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-xs">
+                        <div class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded p-2 text-center">Platinum 95-100%</div>
+                        <div class="bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 rounded p-2 text-center">Gold 90-94%</div>
+                        <div class="bg-slate-500/20 text-slate-300 border border-slate-500/30 rounded p-2 text-center">Silver 80-89%</div>
+                        <div class="bg-amber-700/20 text-amber-400 border border-amber-700/30 rounded p-2 text-center">Bronze 70-79%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-emerald-400">3. Zero-Prompt AI Integration</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Ein zentrales Feature ist die <strong>Zero-Prompt AI Integration</strong>. Das Framework kann als SKILL für KI-Assistenten (ChatGPT, Claude, GitHub Copilot, IDE-Extensions) eingebunden werden. Über die <code>SKILL.json</code> und <code>SKILL.md</code> lernt die KI die Regeln, Prinzipien und Ausführungslogik des Frameworks, ohne dass der Benutzer bei jedem Schritt erklären muss, was zu tun ist.
+                </p>
+                <div class="code-block p-4 text-sm overflow-x-auto">
+<pre><code>// Auszug aus SKILL.json (SystemHeaven Framework)
+{
+  "skill_name": "cornerstone-methodology-framework",
+  "version": "3.1.0",
+  "tagline": "Barmherzigkeit ist der Eckstein; Wahrheit ihr Maßstab, Recht ihre Ordnung und Entwicklung ihre Frucht.",
+  "runtime_environments": ["AI-Agent", "Chatbot", "IDE-Extension", "CLI", "OS-Terminal"],
+  "execution_rules": [
+    "Jeder Daten- oder Architekturkan MUSS die Bedingungen des methodology_guide.md erfüllen.",
+    "Systementscheidungen werden anhand der igos_scorecard_template.md bewertet.",
+    "Verstöße gegen den gewählten Eckstein führen zu einer Penalty-Score-Erhöhung.",
+    "KI-Systeme müssen ihre Begründungen für Entscheidungen transparent machen.",
+    "Alle Framework-Interaktionen müssen in Secure Audit Dashboard geloggt werden."
+  ]
+}</code></pre>
+                </div>
+                <p class="text-slate-300 leading-relaxed mt-4">
+                    Dies ermöglicht autonome Validierung, Governance-Checks und Architektur-Reviews durch KI-Agenten, die sich an die Verfassung und die Prinzipien des Frameworks halten. Beispiel: Bei der Frage „Welche Datenbank für unser Gesundheitssystem?“ antwortet die KI mit Eckstein-Bezug, Verdichtung, Hauptantwort, IGOS-Scores und Pflichtfeld-Eckstein-Validierung.
+                </p>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-emerald-400">4. Live-Dashboards</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="glass rounded-xl p-5 text-center card-hover">
+                        <i class="fa-solid fa-chart-line text-4xl text-emerald-400 mb-4"></i>
+                        <h4 class="font-bold text-lg">RealTime Validation</h4>
+                        <p class="text-sm text-slate-400 mt-2">Live-Prüfung von Systemzuständen, 6-dimensionales Radar-Chart</p>
+                    </div>
+                    <div class="glass rounded-xl p-5 text-center card-hover">
+                        <i class="fa-solid fa-cubes text-4xl text-cyan-400 mb-4"></i>
+                        <h4 class="font-bold text-lg">Digital Twin</h4>
+                        <p class="text-sm text-slate-400 mt-2">Visualisierung physischer/digitaler Assets über 8 Layer</p>
+                    </div>
+                    <div class="glass rounded-xl p-5 text-center card-hover">
+                        <i class="fa-solid fa-shield-halved text-4xl text-rose-400 mb-4"></i>
+                        <h4 class="font-bold text-lg">Secure Audit</h4>
+                        <p class="text-sm text-slate-400 mt-2">Nachweisbare Audit-Trails, Compliance-Tracking, GOLD-Level</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8">
+                <h3 class="text-2xl font-bold mb-4 text-emerald-400">5. Installation & Deployment</h3>
+                <div class="code-block p-4 text-sm overflow-x-auto mb-4">
+<pre><code># Linux / macOS
+ curl -sSL https://raw.githubusercontent.com/EU-UNION-AI-PACT/Cornerstone-Methodology-Style/main/systemheaven.py | python3
+
+# Windows PowerShell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/EU-UNION-AI-PACT/Cornerstone-Methodology-Style/main/systemheaven.py" -OutFile "systemheaven.py"; python systemheaven.py</code></pre>
+                </div>
+                <p class="text-slate-300">
+                    SystemHeaven erstellt drei Pakete: <code>1_Cornerstone-Methodology</code>, <code>2_Strategic-Architect</code>, <code>3_DeepDrive-IIOS-Ultimate-Gigant-v3</code>. Die HTML-Dashboards sind über GitHub Pages live erlebbar und mit Tailwind CSS, Chart.js, GSAP und Font Awesome gebaut.
+                </p>
+            </div>
+        </section>
+
+        <!-- Projekt 3: HPS -->
+        <section id="hps" class="mb-24">
+            <div class="flex items-center mb-8">
+                <div class="section-marker w-12 h-12 rounded-xl flex items-center justify-center mr-4 bg-gradient-to-br from-amber-500 to-red-500">
+                    <i class="fa-solid fa-bridge text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold">Projekt 3: High-Potential-Scale (HPS) Architektur</h2>
+                    <p class="text-slate-400">Zero-Downfall Financial Integration Framework</p>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-8 md:p-10 mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-amber-400">1. Das Problem: Der „Downfall“ klassischer Krypto-Ökonomien</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    In klassischen Krypto-Systemen muss für jede Alltagszahlung (Benzin, Brot, Miete) der Token in Fiat verkauft werden. Jede Verkaufstransaktion erzeugt einen permanenten Wertabfluss aus dem Token-Pool:
+                </p>
+                <ul class="space-y-2 text-slate-300 mb-4">
+                    <li><i class="fa-solid fa-arrow-down text-red-400 mr-2"></i>Preisdruck auf den Token</li>
+                    <li><i class="fa-solid fa-arrow-down text-red-400 mr-2"></i>Steuerpflichtige Realisierungsereignisse</li>
+                    <li><i class="fa-solid fa-arrow-down text-red-400 mr-2"></i>Abfluss von Liquidität aus dem Ökosystem</li>
+                    <li><i class="fa-solid fa-arrow-down text-red-400 mr-2"></i>Abhängigkeit von Spekulanten und Börsen</li>
+                    <li><i class="fa-solid fa-arrow-down text-red-400 mr-2"></i>Extreme Anfälligkeit für Arbitrage-Angriffe und Flash-Crashs</li>
+                </ul>
+                <p class="text-slate-300 leading-relaxed">
+                    Die HPS-Architektur entkoppelt die <strong>Nutzung</strong> von Krypto-Assets von der <strong>Veräußerung</strong> der Assets. Statt zu verkaufen, wird ein Kredit gegen das Asset aufgenommen. Der Kredit wird durch Alltagstransaktionen bedient. Ein Mikro-Prozentsatz jeder Kartenzahlung fließt über einen PID-Regler in einen Rückkauf-Pool zurück.
+                </p>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-amber-400">2. Die drei Säulen der HPS-Architektur</h3>
+
+                <div class="space-y-6">
+                    <div class="glass rounded-xl p-6 border-l-4 border-cyan-400">
+                        <h4 class="text-xl font-bold mb-3 text-cyan-400">Säule I: Hardware Root of Trust (HRoT)</h4>
+                        <p class="text-slate-300 leading-relaxed mb-3">
+                            Sicherheit durch <strong>Ledger-Chipmodule</strong> als Secure Elements. Private Schlüssel verlassen das Hardware-Tresor-Modul nie. Die Transaktionsautorisierung erfolgt in Echtzeit direkt über das Hardware-Modul.
+                        </p>
+                        <ul class="space-y-1 text-slate-300 ml-4 text-sm">
+                            <li><strong>Self-Custody:</strong> Nutzer besitzt die Schlüssel selbst</li>
+                            <li><strong>Transfer:</strong> Übergabe an einen treuhänderischen Dienst</li>
+                            <li><strong>Custodial:</strong> Institutionelle Verwahrung für Zahlungsabwicklung</li>
+                        </ul>
+                        <p class="text-slate-400 text-sm mt-3">
+                            Partner: Ledger, Baanx, CL Card, Monavate, Cross River Bank; FIPS-140-2 Level-3, Open-Source-Firmware, HSM, Multi-Sig, Cold-Storage-Backups.
+                        </p>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 border-l-4 border-purple-400">
+                        <h4 class="text-xl font-bold mb-3 text-purple-400">Säule II: Fiat-Krypto-Bridge</h4>
+                        <p class="text-slate-300 leading-relaxed mb-3">
+                            Anbindung an globale Zahlungsnetzwerke: Visa, Mastercard, American Express, PayPal. Über Partnerbanken und EMI-Lizenzen werden zwei Kreditprodukte angeboten:
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="glass rounded-lg p-4">
+                                <h5 class="font-bold text-cyan-400">Cryptodraft</h5>
+                                <p class="text-sm text-slate-300">Flexibler Kredit bis 60% LTV. Bei LTV unter 10% zinsfrei. Für Alltagszahlungen.</p>
+                            </div>
+                            <div class="glass rounded-lg p-4">
+                                <h5 class="font-bold text-cyan-400">Stableloan</h5>
+                                <p class="text-sm text-slate-300">Fester Kredit (3–24 Monate) in Stablecoins oder Fiat. Für größere Anschaffungen.</p>
+                            </div>
+                        </div>
+                        <p class="text-slate-400 text-sm mt-3">
+                            Partner: Swissquote, Revolut, Luxemburger Banken, Nasdaq, Deutsche Börse, SG-FORGE, Clearstream.
+                        </p>
+                    </div>
+
+                    <div class="glass rounded-xl p-6 border-l-4 border-amber-400">
+                        <h4 class="text-xl font-bold mb-3 text-amber-400">Säule III: Rückkopplungsschleife (DCBM)</h4>
+                        <p class="text-slate-300 leading-relaxed mb-3">
+                            Der <strong>Dynamic-Control Buyback Mechanism</strong> ist ein PID-Regler, der auf jede Transaktion reagiert. Ein kleiner Prozentsatz jeder Kartenzahlung fließt in einen Rückkauf-Pool:
+                        </p>
+                        <ul class="space-y-2 text-slate-300 ml-4 text-sm">
+                            <li><strong>Abwärtsphase:</strong> Algorithmus kauft Token zurück und stützt den Preis</li>
+                            <li><strong>Überhitzungsphase:</strong> Algorithmus baut Reserven auf und verhindert Spekulationsblasen</li>
+                            <li><strong>Neutralphase:</strong> Gebühren fließen in Infrastruktur und Treasury</li>
+                            <li><strong>Counter-Cyclical Reinvestment:</strong> In Phasen hoher Volatilität erhöht der Regler automatisch die Zuteilung zum Rückkauf</li>
+                        </ul>
+                        <div class="highlight-box rounded-lg p-4 mt-4">
+                            <p class="text-slate-300 text-sm">
+                                <strong>Ergebnisse der Simulation:</strong> Volatilitätsreduktion um ~66%, Operator-Churn von 19,5% auf 8,1%. Wissenschaftliche Basis: Jump-Diffusion-Prozesse, kontrolltheoretische Stabilisierung.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="text-xl font-bold mb-3 text-amber-400"><i class="fa-solid fa-gavel mr-2"></i>Regulatorik & MiCA</h4>
+                    <p class="text-slate-300 leading-relaxed text-sm">
+                        Die Architektur ist für MiCA konzipiert. Der „Plus-Impuls“ des DCBM wird nicht als Verzinsung, sondern als technische Systempflege für Order-Book-Support und Geschwindigkeitsstabilisierung klassifiziert. Das ist entscheidend für die rechtliche Zulässigkeit nach Art. 22(4) MiCA. Alle Stablecoins und Token-Klassen entsprechen präzise den MiCA-Kategorien EMT und ART.
+                    </p>
+                </div>
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="text-xl font-bold mb-3 text-amber-400"><i class="fa-solid fa-building-columns mr-2"></i>Institutionelle Einbettung</h4>
+                    <p class="text-slate-300 leading-relaxed text-sm">
+                        Ziel ist die Integration in bestehende Finanzinfrastrukturen: Börsen, Kartennetzwerke, Banken, Zahlungsdienstleister. Die Architektur nutzt etablierte Compliance-Pfade und Lizenzen, anstatt Regulatoren zu umgehen. Visa, Mastercard, Nasdaq und Deutsche Börse arbeiten bereits an entsprechenden Stablecoin- und Tokenisierungs-Piloten.
+                    </p>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-amber-400">3. Vergleich: klassisches Asset-Management vs. HPS</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left table-striped">
+                        <thead class="table-header">
+                            <tr>
+                                <th class="py-3 px-4 text-cyan-400 font-bold">Metrik</th>
+                                <th class="py-3 px-4 text-cyan-400 font-bold">Herkömmliches Asset-Management</th>
+                                <th class="py-3 px-4 text-cyan-400 font-bold">HPS-Architektur</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300 text-sm">
+                            <tr class="border-b border-slate-700">
+                                <td class="py-3 px-4 font-bold">Transaktions-Effekt</td>
+                                <td class="py-3 px-4">Permanenter Wertabfluss aus dem Token-Pool bei jeder Fiat-Konvertierung (Exit-Verkauf)</td>
+                                <td class="py-3 px-4">Wertzufuhr: Transaktionen generieren kontinuierliche Rückkaufvolumina über die PID-Schleife</td>
+                            </tr>
+                            <tr class="border-b border-slate-700">
+                                <td class="py-3 px-4 font-bold">Marktrisiko</td>
+                                <td class="py-3 px-4">Extreme Anfälligkeit für spekulative Abverkäufe, un kontrollierte Preisstürze, Arbitrage-Angriffe</td>
+                                <td class="py-3 px-4">Systemisch gestützt: DCBM-Regler stabilisiert den Basiswert dynamisch und dämpft Volatilität um bis zu 66%</td>
+                            </tr>
+                            <tr class="border-b border-slate-700">
+                                <td class="py-3 px-4 font-bold">Sicherheitsniveau</td>
+                                <td class="py-3 px-4">Softwarebasierte Hot/Cold-Wallets ohne direkte Hardware-Kopplung im POS-Zahlungsmoment</td>
+                                <td class="py-3 px-4">Hardware-determiniert: Kryptografischer Schutz über Ledger-Secure-Elemente bei der Kreditlinien-Autorisierung</td>
+                            </tr>
+                            <tr class="border-b border-slate-700">
+                                <td class="py-3 px-4 font-bold">Infrastruktur-Rolle</td>
+                                <td class="py-3 px-4">Passives Halten von Werten; Liquiditätsbereitstellung ist kapitalintensiv und ineffizient</td>
+                                <td class="py-3 px-4">Aktive Skalierungs-Bridge: Nahtlose Verknüpfung von Börsen-Schnittstellen und Zahlungsdienstleistern</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-bold">Kapitalnutzung</td>
+                                <td class="py-3 px-4">Konvertierung erzwingt Liquidation des Vermögenswerts unter Realisierung von Steuern</td>
+                                <td class="py-3 px-4">Steuereffiziente Liquiditätsschöpfung durch zinsfreie Cryptodrafts (LTV &lt; 10%) ohne Asset-Veräußerung</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8">
+                <h3 class="text-2xl font-bold mb-6 text-amber-400">4. Implementierungs-Roadmap</h3>
+                <div class="relative">
+                    <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-400 via-purple-400 to-amber-400"></div>
+                    <div class="space-y-6">
+                        <div class="flex items-start ml-12">
+                            <div class="glass rounded-lg p-4 flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-lg text-cyan-400">Phase 1: Proof of Bridge</h4>
+                                    <span class="pill px-3 py-1 rounded-full text-xs">Monat 1</span>
+                                </div>
+                                <p class="text-slate-300 text-sm mt-2">Sandbox-Tests, Ledger-Integration, erste Börsen-Schnittstellen, regulatorische Abklärung.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start ml-12">
+                            <div class="glass rounded-lg p-4 flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-lg text-purple-400">Phase 2: Payment Gateway Integration</h4>
+                                    <span class="pill px-3 py-1 rounded-full text-xs">Monat 2–3</span>
+                                </div>
+                                <p class="text-slate-300 text-sm mt-2">Pilot-Karten, Live-Konvertierung, Kreditlinien, erste Händler, BaFin-Reporting-Schnittstelle.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start ml-12">
+                            <div class="glass rounded-lg p-4 flex-1">
+                                <div class="flex justify-between items-start">
+                                    <h4 class="font-bold text-lg text-amber-400">Phase 3: Institutional Rollout</h4>
+                                    <span class="pill px-3 py-1 rounded-full text-xs">Monat 4+</span>
+                                </div>
+                                <p class="text-slate-300 text-sm mt-2">Partnerbanken, globale Treasury, DCBM-Vollbetrieb, regulatorische Freigaben, Massenmarkt.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Integration -->
+        <section id="integration" class="mb-24">
+            <div class="flex items-center mb-8">
+                <div class="section-marker w-12 h-12 rounded-xl flex items-center justify-center mr-4 bg-gradient-to-br from-green-500 to-teal-500">
+                    <i class="fa-solid fa-table-columns text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold">Integration & Interdependenzen</h2>
+                    <p class="text-slate-400">Wie die drei Projekte zusammenwirken</p>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8 mb-8 overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="table-header">
+                        <tr>
+                            <th class="py-3 px-4 text-cyan-400 font-bold">Aspekt</th>
+                            <th class="py-3 px-4 text-cyan-400 font-bold">Wallet Concept</th>
+                            <th class="py-3 px-4 text-cyan-400 font-bold">SystemHeaven</th>
+                            <th class="py-3 px-4 text-cyan-400 font-bold">HPS-Architektur</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-slate-300 text-sm">
+                        <tr class="border-b border-slate-700">
+                            <td class="py-3 px-4 font-bold">Domäne</td>
+                            <td class="py-3 px-4">Einzelhandel, POS, Kreislaufwirtschaft</td>
+                            <td class="py-3 px-4">Methodik, Governance, ethische KI</td>
+                            <td class="py-3 px-4">Krypto-Fiat-Integration, Finanzmärkte</td>
+                        </tr>
+                        <tr class="border-b border-slate-700">
+                            <td class="py-3 px-4 font-bold">Hauptziel</td>
+                            <td class="py-3 px-4">Blockchain-Orchestrierung physischer Transaktionen</td>
+                            <td class="py-3 px-4">Validierung und Zertifizierung von Systemen</td>
+                            <td class="py-3 px-4">Zero-Downfall-Brücke zwischen Krypto und Fiat</td>
+                        </tr>
+                        <tr class="border-b border-slate-700">
+                            <td class="py-3 px-4 font-bold">Kerntechnik</td>
+                            <td class="py-3 px-4">ERC-6551, IPFS, POS-Connector</td>
+                            <td class="py-3 px-4">8-Layer, IGOS-Scorecard</td>
+                            <td class="py-3 px-4">Ledger-HRoT, PID-Regler, Stableloan</td>
+                        </tr>
+                        <tr class="border-b border-slate-700">
+                            <td class="py-3 px-4 font-bold">Token-Modell</td>
+                            <td class="py-3 px-4">Asset-NFTs, Resource-Token, Credits</td>
+                            <td class="py-3 px-4">Score-/Zertifizierungstoken</td>
+                            <td class="py-3 px-4">E-Money/Asset-Referenced Token, Stablecoins</td>
+                        </tr>
+                        <tr class="border-b border-slate-700">
+                            <td class="py-3 px-4 font-bold">Regulativer Fokus</td>
+                            <td class="py-3 px-4">POS-Compliance, Belegnachweis</td>
+                            <td class="py-3 px-4">Ethik, Audit, Verfassung</td>
+                            <td class="py-3 px-4">MiCA, PSD2, AML5, BaFin</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-bold">Reifegrad</td>
+                            <td class="py-3 px-4">Konzept mit Code-Skizzen</td>
+                            <td class="py-3 px-4">Framework mit Installer und Dashboards</td>
+                            <td class="py-3 px-4">Architektur-Blueprint mit Simulationsdaten</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="highlight-box rounded-xl p-6 mb-8">
+                <h4 class="text-xl font-bold mb-3 text-cyan-400">Synergien</h4>
+                <p class="text-slate-300 leading-relaxed">
+                    Das <strong>Wallet Concept</strong> könnte mit der <strong>HPS-Architektur</strong> kombiniert werden: Krypto-Zahlungen am POS ohne Verkaufsdruck, finanziert durch Cryptodraft-Kreditlinien. Das <strong>SystemHeaven Framework</strong> würde die Validierung, Governance und Zertifizierung beider Systeme übernehmen — von der ethischen Prüfung bis zum technischen Audit. Zusammen entsteht ein vollständiges Ökosystem: <strong>ethisch geprüft, technisch validiert, regulatorisch konform und wirtschaftlich stabilisiert</strong>.
+                </p>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8">
+                <h3 class="text-2xl font-bold mb-4 text-cyan-400">Cross-Verfahren: Der Reflektor-Effekt</h3>
+                <p class="text-slate-300 leading-relaxed mb-4">
+                    Im Cross-Verfahren ist jedes reale Wirtschaftsgut ein Verbund aus drei synchronisierten Ebenen: <strong>Coin (Liquidität)</strong>, <strong>NFT/TBA (Identität & Zustand)</strong> und <strong>API/IPFS-Hash (Daten & Audit)</strong>. Jede Aktion in einer Ebene wirft ein „Echo“ in die anderen Ebenen.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div class="glass rounded-xl p-5 border-l-4 border-cyan-400">
+                        <h4 class="font-bold text-cyan-400 mb-2">API → NFT</h4>
+                        <p class="text-sm text-slate-300">Gutachter verändert Zustand → API sendet neuen Zustand → Smart Contract aktualisiert NFT.</p>
+                    </div>
+                    <div class="glass rounded-xl p-5 border-l-4 border-purple-400">
+                        <h4 class="font-bold text-purple-400 mb-2">NFT → Coin</h4>
+                        <p class="text-sm text-slate-300">Wert des NFTs steigt/validiert → ValueHub erhöht besicherten Kreditrahmen (Coins).</p>
+                    </div>
+                    <div class="glass rounded-xl p-5 border-l-4 border-amber-400">
+                        <h4 class="font-bold text-amber-400 mb-2">Coin → Finanzen</h4>
+                        <p class="text-sm text-slate-300">Sponsoren/Zentralbanken sehen validiertes Asset → Kapital wird ohne manuelle Prüfung geroutet.</p>
+                    </div>
+                </div>
+                <div class="code-block p-4 text-sm">
+<pre><code>[ Real-World / API-Trigger ]
+           ↓
+    API-GATEWAY
+           ↓
+IPFS / DATA LAYER  ↔  NFT / ERC-6551 LAYER  ↔  COIN / PAYMENT LAYER
+(unveränderliche Belege)  (Repräsentiert das Gut)  (Stablecoins / Kredit)</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technische Architektur -->
+        <section id="tech" class="mb-24">
+            <div class="flex items-center mb-8">
+                <div class="section-marker w-12 h-12 rounded-xl flex items-center justify-center mr-4 bg-gradient-to-br from-blue-500 to-indigo-500">
+                    <i class="fa-solid fa-microchip text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold">Technische Gesamtarchitektur</h2>
+                    <p class="text-slate-400">Stack, Schnittstellen, Datenflüsse und Infrastruktur</p>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-6 text-cyan-400">1. Layer-Modell der Technischen Architektur</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-cyan-500 text-white mr-4 flex-shrink-0">L1</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-cyan-400">Presentation & Visualization:</strong> HTML-Dashboards (Tailwind, Chart.js, GSAP), Notenbank-Portal, Chatbot-UI, Mobile Wallet.
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-blue-500 text-white mr-4 flex-shrink-0">L2</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-blue-400">API Gateway & Routing:</strong> REST/gRPC, POS-Connector, Payment-Listener, Oracle-Services, IBAN-Gateway.
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-purple-500 text-white mr-4 flex-shrink-0">L3</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-purple-400">AI Agents & Core Logic:</strong> SystemHeaven SKILL, Zero-Prompt AI, Orchestrator, Chatbot-Agent.
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-amber-500 text-white mr-4 flex-shrink-0">L4</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-amber-400">Data Validation & Processing:</strong> SHA-256, IPFS, Value-Oracles, Quality-Checks, IGOS-Score.
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-rose-500 text-white mr-4 flex-shrink-0">L5</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-rose-400">Security & Audit Layer:</strong> Ledger HRoT, Multi-Sig, KYC/AML, Audit-Log, QualityGuardian.
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-emerald-500 text-white mr-4 flex-shrink-0">L6</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-emerald-400">Integration & Connectors:</strong> Visa/MC APIs, Banking-as-a-Service, Börsen-Schnittstellen, ISO 20022.
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-indigo-500 text-white mr-4 flex-shrink-0">L7</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-indigo-400">Data Persistence:</strong> Blockchain (Hyperledger Besu / EVM), IPFS/Kubo, PostgreSQL, Elasticsearch.
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="layer-badge bg-slate-500 text-white mr-4 flex-shrink-0">L8</div>
+                        <div class="glass rounded-lg p-4 flex-1">
+                            <strong class="text-slate-400">Infrastructure & DevOps:</strong> Docker, Kubernetes, GitOps, Cloud, HSM, Monitoring.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="text-xl font-bold mb-3 text-cyan-400">Blockchain-Stack</h4>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li><strong>Framework:</strong> Hyperledger Besu (Enterprise EVM), Hardhat, Foundry, Anvil</li>
+                        <li><strong>Smart Contracts:</strong> Solidity ^0.8.20, OpenZeppelin, ERC-6551 Registry</li>
+                        <li><strong>Upgradeability:</strong> UUPS Proxy Pattern, Multi-Sig-Governance</li>
+                        <li><strong>Oracles:</strong> Chainlink / Eigenes Oracle für Asset-Bewertung</li>
+                        <li><strong>Indexer:</strong> The Graph / Eigener Go/Node.js-Indexer</li>
+                    </ul>
+                </div>
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="text-xl font-bold mb-3 text-cyan-400">Payment & Storage</h4>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li><strong>Storage:</strong> IPFS / Kubo, private Audit-Storage, verschlüsselter S3</li>
+                        <li><strong>Payment Hub:</strong> BTCPay Server, LND, Cosmos IBC, Interledger</li>
+                        <li><strong>Cards:</strong> Visa/MC/Amex, PayPal, Stablecoin-Prefunding</li>
+                        <li><strong>Banking:</strong> BaaS, Circle API, Bitvavo, Partnerbank-API</li>
+                        <li><strong>Compliance:</strong> Elliptic, Chainalysis, Sanctions-Checks</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-cyan-400">2. Notenbank-Portal Skizze</h3>
+                <p class="text-slate-300 mb-4">Das Portal ist die „Executive Command Suite“ mit Chatbot und Button-Board. Es orchestriert Kredit-Trigger, Emergency-Heilung, Blackbook-Updates und Sponsoring-Suche.</p>
+                <div class="code-block p-4 text-sm overflow-x-auto">
+<pre><code>class NotenbankPortal:
+    def __init__(self):
+        self.registry_contract = "0x..."
+
+    def execute_command(self, action, target_id):
+        if action == "TRIGGER_CREDIT":
+            return f"Credit für {target_id} angefordert."
+        elif action == "EMERGENCY_HEAL":
+            return f"Notfall-Heilung für {target_id} eingeleitet."
+        elif action == "SPONSOR_SEARCH":
+            return f"Sponsoring-Suche für {target_id} gestartet."
+
+    def chat_agent(self, user_input):
+        if "Möbel" in user_input:
+            return "Möbel-Katalog im Blackbook gefunden. Kredit-Button aktivieren?"
+        return "Welche Noten-Kategorie möchtest du heute orchestrieren?"</code></pre>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8">
+                <h3 class="text-2xl font-bold mb-4 text-cyan-400">3. Docker-Deployment (Audit-Bunker)</h3>
+                <div class="code-block p-4 text-sm overflow-x-auto">
+<pre><code>version: '3.8'
+services:
+  blockchain-node:
+    image: hyperledger/besu:latest
+    ports: ["8545:8545"]
+    volumes: ["./data:/opt/besu/database"]
+  file-storage:
+    image: ipfs/kubo:latest
+    ports: ["4001:4001", "5001:5001", "8080:8080"]
+  audit-api:
+    build: ./audit-service
+    depends_on: [blockchain-node, file-storage]
+  dashboard:
+    build: ./dashboard
+    ports: ["3000:3000"]
+    depends_on: [audit-api]</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compliance & Sicherheit -->
+        <section id="compliance" class="mb-24">
+            <div class="flex items-center mb-8">
+                <div class="section-marker w-12 h-12 rounded-xl flex items-center justify-center mr-4 bg-gradient-to-br from-rose-500 to-red-600">
+                    <i class="fa-solid fa-shield-halved text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold">Compliance, Sicherheit & Risiko</h2>
+                    <p class="text-slate-400">Regulatorische und technische Absicherung</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="glass rounded-xl p-6 card-hover border-l-4 border-rose-400">
+                    <h4 class="text-xl font-bold mb-3 text-rose-400"><i class="fa-solid fa-scale-balanced mr-2"></i>MiCA</h4>
+                    <p class="text-slate-300 text-sm">Einteilung in E-Money Tokens (EMT) und Asset-Referenced Tokens (ART). Reserve-Pools, segregierte Eigenmittel, Rückzahlungsanspruch, Art. 22(4).</p>
+                </div>
+                <div class="glass rounded-xl p-6 card-hover border-l-4 border-blue-400">
+                    <h4 class="text-xl font-bold mb-3 text-blue-400"><i class="fa-solid fa-file-contract mr-2"></i>AML / KYC</h4>
+                    <p class="text-slate-300 text-sm">Riskobasiertes KYC/AML-Framework, Travel Rule, Sanktionslisten, Blockchain-Analytics, EBA-Leitlinien, FATF.</p>
+                </div>
+                <div class="glass rounded-xl p-6 card-hover border-l-4 border-emerald-400">
+                    <h4 class="text-xl font-bold mb-3 text-emerald-400"><i class="fa-solid fa-lock mr-2"></i>Technik</h4>
+                    <p class="text-slate-300 text-sm">HSM, Secure Elements, FIPS-140-2 Level-3, Multi-Sig, Cold-Storage, TLS 1.3, OAuth2, Privacy by Design, DSGVO.</p>
+                </div>
+            </div>
+
+            <div class="glass rounded-2xl p-6 md:p-8">
+                <h3 class="text-2xl font-bold mb-6 text-rose-400">Implementierungs-Checkliste</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-300 text-sm">
+                    <div class="flex items-start"><i class="fa-solid fa-check text-rose-400 mr-2 mt-1"></i>Regulatorische Zulassung: MiCAR/MiFID-Lizenz oder Meldeverfahren klären</div>
+                    <div class="flex items-start"><i class="fa-solid fa-check text-rose-400 mr-2 mt-1"></i>Hardware-Sicherheit: Zertifizierte Secure Elements/HSM einbinden</div>
+                    <div class="flex items-start"><i class="fa-solid fa-check text-rose-400 mr-2 mt-1"></i>API-Integration: Visa/MC Developer Portale, OAuth2, TLS 1.3</div>
+                    <div class="flex items-start"><i class="fa-solid fa-check text-rose-400 mr-2 mt-1"></i>Transparenz: Jeder Token-Transfer öffentlich protokolliert + Fiat-Audit-Logs</div>
+                    <div class="flex items-start"><i class="fa-solid fa-check text-rose-400 mr-2 mt-1"></i>AML/KYC: Integrierte Prüfung aller Teilnehmer, laufende Transaktionsanalyse</div>
+                    <div class="flex items-start"><i class="fa-solid fa-check text-rose-400 mr-2 mt-1"></i>IT-Operations: Hochverfügbare Cloud, Monitoring, Incident Response</div>
+                    <div class="flex items-start"><i class="fa-solid fa-check text-rose-400 mr-2 mt-1"></i>Rechts & Verträge: Haftung, Custody, Datenschutz, Notfall-Oversight</div>
+                    <div class="flex items-start"><i class="fa-solid fa-check text-rose-400 mr-2 mt-1"></i>Skalierbarkeit: Microservices, Queues, Performance- und Fraud-Monitoring</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gesamt-Roadmap -->
+        <section id="roadmap" class="mb-24">
+            <div class="flex items-center mb-8">
+                <div class="section-marker w-12 h-12 rounded-xl flex items-center justify-center mr-4 bg-gradient-to-br from-purple-500 to-pink-500">
+                    <i class="fa-solid fa-road text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold">Gesamt-Roadmap</h2>
+                    <p class="text-slate-400">Von der Konzeption bis zum Massenmarkt</p>
+                </div>
+            </div>
+
+            <div class="relative">
+                <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-400 via-emerald-400 via-amber-400 to-rose-400"></div>
+                <div class="space-y-8">
+                    <div class="flex items-start ml-12">
+                        <div class="glass rounded-xl p-5 flex-1">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-lg text-cyan-400">Phase 0: Foundation & Concept</h4>
+                                <span class="pill px-3 py-1 rounded-full text-xs">Q3 2026</span>
+                            </div>
+                            <p class="text-slate-300 text-sm">Vollständige Dokumentation (dieses HTML), SystemHeaven-Framework-Installation, Smart-Contract-Skizzen, lokale Testnetzwerke.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start ml-12">
+                        <div class="glass rounded-xl p-5 flex-1">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-lg text-emerald-400">Phase 1: Prototypen</h4>
+                                <span class="pill px-3 py-1 rounded-full text-xs">Q4 2026</span>
+                            </div>
+                            <p class="text-slate-300 text-sm">POS-Connector, ERC-6551 Notebank, IPFS-Integration, erstes HPS-Proof-of-Bridge, Ledger-Tests.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start ml-12">
+                        <div class="glass rounded-xl p-5 flex-1">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-lg text-amber-400">Phase 2: Pilot</h4>
+                                <span class="pill px-3 py-1 rounded-full text-xs">Q1-Q2 2027</span>
+                            </div>
+                            <p class="text-slate-300 text-sm">Pilot-Laden, Sponsoring-Trigger, Kreditlinien, Cryptodraft, DCBM-Simulation, regulatorische Abklärung.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start ml-12">
+                        <div class="glass rounded-xl p-5 flex-1">
+                            <div class="flex justify-between items-start mb-2">
+                                <h4 class="font-bold text-lg text-rose-400">Phase 3: Scale</h4>
+                                <span class="pill px-3 py-1 rounded-full text-xs">Q3 2027+</span>
+                            </div>
+                            <p class="text-slate-300 text-sm">Partnerbanken, globale Treasury, DCBM-Vollbetrieb, Massenmarkt, SystemHeaven-Gold-Zertifizierung.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Datei-Referenzen -->
+        <section id="files" class="mb-24">
+            <div class="flex items-center mb-8">
+                <div class="section-marker w-12 h-12 rounded-xl flex items-center justify-center mr-4 bg-gradient-to-br from-slate-500 to-slate-700">
+                    <i class="fa-solid fa-folder-open text-white text-xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold">Integrierte Dateien & Referenzen</h2>
+                    <p class="text-slate-400">Vorhandene Strukturen, die in dieses Concept eingepflegt wurden</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="font-bold text-cyan-400 mb-3"><i class="fa-solid fa-wallet mr-2"></i>Wallet Concept</h4>
+                    <ul class="text-sm text-slate-300 space-y-2">
+                        <li><code>Projektuebersicht.html</code></li>
+                        <li><code>Blockchain Orchrestration Platform for Order & Sponsoring & Money Contract .txt</code></li>
+                        <li><code>250USA.pdf</code></li>
+                        <li><code>Contract Portal Blockchain and Others.pdf</code></li>
+                        <li><code>Daniel Pohl Concept of Kassen.pdf</code></li>
+                    </ul>
+                </div>
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="font-bold text-emerald-400 mb-3"><i class="fa-solid fa-gem mr-2"></i>SystemHeaven</h4>
+                    <ul class="text-sm text-slate-300 space-y-2">
+                        <li><code>README.md</code></li>
+                        <li><code>SKILL.json</code></li>
+                        <li><code>index.html</code></li>
+                        <li><code>systemheaven.py</code></li>
+                        <li><code>1-Cornerstone-Methodology/</code></li>
+                        <li><code>2-Strategic-Architect/</code></li>
+                        <li><code>3-DeepDrive-Gigant/</code></li>
+                    </ul>
+                </div>
+                <div class="glass rounded-xl p-6 card-hover">
+                    <h4 class="font-bold text-amber-400 mb-3"><i class="fa-solid fa-bridge mr-2"></i>HPS-Architektur</h4>
+                    <ul class="text-sm text-slate-300 space-y-2">
+                        <li><code>Analyse der High-Potential-Scale-Architektur.pdf</code></li>
+                        <li><code>Architektur-Konzepte und die HPS-Architektur.pdf</code></li>
+                        <li><code>High-Potential-Scale_ Symbiotische Architektur.pdf</code></li>
+                        <li><code>Krypto-Zahlungen ohne Verkaufsdruck dank HPS.mp3</code></li>
+                        <li><code>HPS-Architektur für globale Finanznetzwerke.png</code></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fazit -->
+        <section class="mb-24">
+            <div class="glass rounded-2xl p-8 md:p-12 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Fazit</h2>
+                <p class="text-slate-300 text-lg leading-relaxed max-w-4xl mx-auto mb-8">
+                    Das Gesamt-Concept verbindet drei mächtige Ansätze zu einem kohärenten Ökosystem: <strong>Wallet Concept</strong> macht physische Assets adressierbar und liquidierbar; <strong>SystemHeaven</strong> stellt ethische, technische und regulatorische Validierung sicher; <strong>HPS-Architektur</strong> schafft eine Zero-Downfall-Brücke zwischen Krypto und Fiat. Zusammen entsteht ein Werte-Internet, das realwirtschaftliche Assets in einen geschlossenen, transparenten und stabilen Kreislauf überführt.
+                </p>
+                <div class="inline-block glass rounded-xl p-6 border border-cyan-400/30">
+                    <p class="text-cyan-400 font-bold text-lg mb-1">„Peace by Design“</p>
+                    <p class="text-slate-400 text-sm">Technische Unveränderlichkeit + Ethische Validierung + Regulatorische Konformität = Vertrauen</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="glass rounded-2xl p-8 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 text-sm text-slate-400">
+                <div>
+                    <strong class="text-slate-200 block mb-2">Dokument</strong>
+                    Komplett-Concept<br>
+                    26. Juni 2026
+                </div>
+                <div>
+                    <strong class="text-slate-200 block mb-2">Autor</strong>
+                    Daniel Pohl
+                </div>
+                <div>
+                    <strong class="text-slate-200 block mb-2">Projekte</strong>
+                    Wallet Concept · SystemHeaven · HPS-Architektur
+                </div>
+            </div>
+            <p class="text-slate-500 text-sm">
+                Diese Seite kann als PDF gedruckt oder im Browser gespeichert werden. Alle Inhalte basieren auf den vorhandenen Projektdateien und wurden automatisch in dieses Gesamt-Concept integriert.
+            </p>
+        </footer>
+
+    </main>
+
+    <script>
+        // Scroll-Spy für Navigation
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-cyan-400');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('text-cyan-400');
+                }
+            });
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
