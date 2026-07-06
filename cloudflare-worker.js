@@ -12,7 +12,9 @@
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
-    
+    const clientIP = request.headers.get('cf-connecting-ip') || 'unknown';
+    const userAgent = request.headers.get('user-agent') || '';
+
     // Security Headers - verhindert DOM-Scanning und Rebuild
     const securityHeaders = {
       'X-Frame-Options': 'DENY',
@@ -27,43 +29,57 @@ export default {
       'Expires': '0'
     };
 
-    // Anti-Tampering Headers
+    // Anti-Tampering Headers mit Umgebungsvariablen
     const antiTamperHeaders = {
       ...securityHeaders,
       'X-Source-Auth': env.HNOSS_DOMAIN_SIGNATURE || 'HCOS-AUTHORIZED',
       'X-Tunnel-ID': env.TUNNEL_ID || 'secure-tunnel-active',
-      'X-Build-Hash': env.BUILD_HASH || 'production-locked'
+      'X-Build-Hash': env.BUILD_HASH || 'production-locked',
+      'X-Forwarded-For': clientIP
     };
 
-    // Blockierliste für bekannte Scanner/Bots
+    // Blockierliste für bekannte Scanner/Bots (Case-insensitive)
     const blockedUserAgents = [
       'bot', 'crawler', 'spider', 'scraper', 'wget', 'curl',
-      'nikto', 'sqlmap', 'nmap', 'masscan', 'zgrab'
+      'nikto', 'sqlmap', 'nmap', 'masscan', 'zgrab', 'python', 'java'
     ];
 
-    const userAgent = request.headers.get('user-agent')?.toLowerCase() || '';
-    if (blockedUserAgents.some(blocked => userAgent.includes(blocked))) {
+    if (blockedUserAgents.some(blocked => 
+      userAgent.toLowerCase().includes(blocked))) {
       return new Response('Access Denied - Security Violation', { 
         status: 403,
         headers: { ...antiTamperHeaders, 'Content-Type': 'text/plain' }
       });
     }
 
-    // Route zur Hauptdomain
+    // Route zur Hauptdomain mit korrekter Response-Handhabung
     if (url.pathname === '/' || url.pathname === '/index.html') {
-      const response = await fetch('https://pLedge250freedom.gov.eu', {
-        headers: {
-          'X-Forwarded-For': request.headers.get('cf-connecting-ip'),
-          'X-Real-IP': request.headers.get('cf-connecting-ip'),
-        }
-      });
-      return new Response(response.body, {
-        ...response,
-        headers: { ...response.headers, ...antiTamperHeaders }
-      });
+      try {
+        const response = await fetch('https://pLedge250freedom.gov.eu/', {
+          headers: {
+            'X-Forwarded-For': clientIP,
+            'X-Real-IP': clientIP,
+          }
+        });
+        
+        const newHeaders = new Headers(response.headers);
+        Object.entries(antiTamperHeaders).forEach(([key, value]) => {
+          newHeaders.set(key, value);
+        });
+
+        return new Response(response.body, {
+          status: response.status,
+          headers: newHeaders
+        });
+      } catch (error) {
+        return new Response('Tunnel Error: Origin unreachable', { 
+          status: 502,
+          headers: { ...antiTamperHeaders, 'Content-Type': 'text/plain' }
+        });
+      }
     }
 
-    return new Response('Secure Tunnel Active', {
+    return new Response('Secure Tunnel Active - HNOSS Protected', {
       status: 200,
       headers: { ...antiTamperHeaders, 'Content-Type': 'text/plain' }
     });

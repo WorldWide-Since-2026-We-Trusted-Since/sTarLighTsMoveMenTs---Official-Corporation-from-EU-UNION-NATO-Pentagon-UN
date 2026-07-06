@@ -2,82 +2,89 @@
  * @license
  * SPDX-License-Identifier: EU-NATO-CLASSIFIED-Pilot-2026
  * @copyright Copyright © 2024–2026 Daniel Pohl. All rights reserved worldwide.
- * 
+ *
  * HNOSS Security Middleware - DOM Protection & Anti-Copy
+ * Zero Trust Security - Keine sensiblen Daten im Code
  */
 
-// Copy Protection - verhindert einfaches Kopieren
+/**
+ * Anti-Copy Protection Script
+ * Verhindert einfaches Kopieren und DevTools-Zugriff
+ */
 export const antiCopyProtection = `
 <script>
-// Right Click Disable
-document.addEventListener('contextmenu', e => e.preventDefault());
-
-// DevTools Detection
-let devtools = { open: false, orientation: undefined };
-const threshold = 200;
-setInterval(() => {
-  if (window.outerHeight - window.innerHeight > threshold || 
-      window.outerWidth - window.innerWidth > threshold) {
-    if (!devtools.open) {
-      devtools.open = true;
-      console.clear();
-      document.body.innerHTML = '<h1 style="color:red;text-align:center;margin-top:50vh">Security Violation Detected</h1>';
-    }
-  } else {
-    devtools.open = false;
-  }
-}, 500);
-
-// Console Anti-Tamper
-const originalLog = console.log;
-console.log = function(...args) {
-  const stack = new Error().stack;
-  if (stack && stack.includes('eval')) return;
-  originalLog.apply(console, args);
-};
-
-// Selection Protection
-document.onselectstart = () => false;
-document.onmousedown = e => e.button === 2;
-
-// Keyboard Protection (Ctrl+C, Ctrl+U, etc.)
-document.onkeydown = e => {
-  if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'i')) {
+(function() {
+  'use strict';
+  
+  // Right Click Disable - nur für nicht autorisierte Elemente
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
     return false;
-  }
-};
+  });
+  
+  // DevTools Detection (non-blocking)
+  let devtoolsOpen = false;
+  const threshold = 200;
+  setInterval(function() {
+    if (window.outerHeight - window.innerHeight > threshold || 
+        window.outerWidth - window.innerWidth > threshold) {
+      if (!devtoolsOpen) {
+        devtoolsOpen = true;
+        console.clear();
+      }
+    } else {
+      devtoolsOpen = false;
+    }
+  }, 1000);
+})();
 </script>
 `;
 
-// Security Headers for Express/Vite
+/**
+ * Security Headers for Express/Vite
+ * All secrets from environment variables
+ */
 export const securityHeaders = {
   'X-Content-Type-Options': 'nosniff',
   'X-Frame-Options': 'DENY',
   'X-XSS-Protection': '1; mode=block',
-  'Referrer-Policy': 'no-referrer',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
   'Permissions-Policy': 'geolocation=(), microphone=(), camera=(), payment=()',
-  'Content-Security-Policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:;",
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' https:; connect-src 'self'; frame-ancestors 'none';",
   'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
-  'X-HNOS-Signature': process.env.HNOSS_SIG || 'AUTHORIZED-TUNNEL',
+  'X-HNOS-Signature': process?.env?.HNOSS_SIG || 'AUTHORIZED-TUNNEL',
   'X-Build-Timestamp': new Date().toISOString()
 };
 
-// DOM Mutation Observer - schützt vor Änderungen
+/**
+ * DOM Mutation Observer - protects against unauthorized modifications
+ */
 export const domProtection = `
 <script>
-const observer = new MutationObserver(mutations => {
-  mutations.forEach(m => {
-    if (m.type === 'childList' && m.target.tagName === 'BODY') {
-      const unauthorized = m.addedNodes.some(n => 
-        n.nodeType === 1 && n.tagName === 'SCRIPT' && !n.src?.includes('localhost')
-      );
-      if (unauthorized) {
-        console.error('Unauthorized DOM modification detected');
-        document.body.innerHTML = '';
+(function() {
+  'use strict';
+  
+  const allowedOrigins = ['localhost', 'pLedge250freedom.gov.eu'];
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'childList' && mutation.target.tagName === 'BODY') {
+        mutation.addedNodes.forEach(function(node) {
+          if (node.nodeType === 1 && node.tagName === 'SCRIPT') {
+            const src = node.src || '';
+            const isAllowed = allowedOrigins.some(function(origin) {
+              return src.includes(origin);
+            });
+            if (!isAllowed && !node.isContentEditable) {
+              console.warn('Blocked unauthorized script injection');
+              node.remove();
+            }
+          }
+        });
       }
-    }
+    });
   });
-});
-observer.observe(document.body, { childList: true, subtree: true });
+  
+  observer.observe(document.body, { childList: true, subtree: true });
+})();
 </script>
 `;

@@ -1,12 +1,15 @@
-# Cloudflare Worker Configuration
 # SPDX-License-Identifier: EU-NATO-CLASSIFIED-Pilot-2026
 # @copyright Copyright © 2024–2026 Daniel Pohl. All rights reserved worldwide.
+#
+# Cloudflare Worker Configuration - Zero Trust Deployment
+# Keine API Keys im Repo - nur Umgebungsvariablen
 
 name = "hnoss-secure-tunnel"
 main = "cloudflare-worker.js"
 account_id = "${CF_ACCOUNT_ID}"
 zone_id = "${CF_ZONE_ID}"
 
+# Workers v4 Syntax (Best Practice)
 workers_dev = true
 compatibility_date = "2024-01-01"
 
@@ -15,13 +18,14 @@ HNOSS_DOMAIN_SIGNATURE = "${HNOSS_DOMAIN_SIGNATURE}"
 TUNNEL_ID = "${TUNNEL_ID}"
 BUILD_HASH = "${BUILD_HASH}"
 
-# Secrets (werden über wrangler secret put gesetzt)
-# wrangler secret put API_TOKEN
-# wrangler secret put TUNNEL_KEY
+# Secrets via: wrangler secret put SECRET_NAME
+# - API_TOKEN (optional for advanced routing)
+# - TUNNEL_KEY (for tunnel authentication)
 
 [env.production]
 name = "hnoss-secure-tunnel-prod"
-route = "pLedge250freedom.gov.eu/*"
+# Route für pLedge250freedom.gov.eu
+routes = ["pLedge250freedom.gov.eu/*"]
 zone_id = "${CF_ZONE_ID_PROD}"
 
 [env.staging]
