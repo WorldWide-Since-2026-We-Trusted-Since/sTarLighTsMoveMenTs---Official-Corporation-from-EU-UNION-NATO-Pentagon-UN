@@ -18,9 +18,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Environment variables
+# Environment variables - NEVER commit secrets!
 .env*
 !.env.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Analysis and backup files
 analysis/
@@ -35,26 +39,51 @@ freedom250.html
 .vscode/
 *.swp
 *.swo
+*.suo
 
 # OS files
 .DS_Store
 .DS_Store?
 ._*
 
-# Security - Private keys and secrets
+# Security - Private keys and secrets (NEVER commit!)
 *.pem
 *.key
 *.p12
 *.pfx
+*.pub
 secrets/
 private/
+certs/
+tls/
+
+# Cloudflare Secrets (werden als Wrangler Secrets gesetzt)
+.wranger.toml.local
+.env.cloudflare
 
 # Production Security Headers
 .vercel/
 .netlify/
 .firebase/
+.cloudflare/
 
 # Backup/temporary files
 *.bak
 *.tmp
 *~
+*.orig
+
+# SSH/Deployment Keys
+*.ssh/
+id_rsa*
+id_ed25519*
+known_hosts
+authorized_keys
+
+# Security Logs
+security-audit.log
+tunnel-access.log
+
+# Production Configuration
+production.secrets.json
+deployment.keys.json
