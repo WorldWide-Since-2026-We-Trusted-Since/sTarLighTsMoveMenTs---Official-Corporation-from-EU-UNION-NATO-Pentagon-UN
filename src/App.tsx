@@ -335,11 +335,10 @@ export default function App() {
             >
               <MemorialTributePage />
             </motion.div>
-          )}
+           )}
 
-          {/* TAB 1: GOVERNMENT PLEDGE — AGENDA HEAVENLY SINCE PLEDGE (STARTSEITE) */}
-          {/* TAB 1: GOVERNMENT PLEDGE — AGENDA HEAVENLY SINCE PLEDGE (STARTSEITE) */}
-          {activeTab === "pledge" && (
+           {/* TAB 1: GOVERNMENT PLEDGE — AGENDA HEAVENLY SINCE PLEDGE (STARTSEITE) */}
+           {activeTab === "pledge" && (
             <motion.div
               key="pledge-view"
               initial={{ opacity: 0, y: 20 }}
