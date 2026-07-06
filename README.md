@@ -116,14 +116,31 @@ sequenceDiagram
 
 ## 5. Toolchain, Installation & Deployment Matrix
 
+
 | Tool / Service | Funktion / PNIA Ebene | Installations-Skript (Copy & Paste) | Repository / Herkunft |
 | :--- | :--- | :--- | :--- |
-| **EasyPanel** | Ebene 7: Container Orchestration & App-Deployment | `curl -sL https://get.easypanel.io \| sh` | [easypanel.io](https://easypanel.io) |
-| **LiteLLM** | Ebene 6: AI Gateway & Load Balancing | `docker run -d -p 4000:4000 ghcr.io/berriai/litellm:main-latest` | [ghcr.io/berriai/litellm](https://ghcr.io/berriai/litellm) |
-| **cloudflared** | Ebene 3: Zero-Trust Tunnels & Routing | `curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && sudo dpkg -i cloudflared.deb` | [github.com/cloudflare/cloudflared](https://github.com/cloudflare/cloudflared) |
-| **@modelcontextprotocol/sdk** | Ebene 5: Agent-to-Server Communication | `npm install @modelcontextprotocol/sdk` | [github.com/modelcontextprotocol](https://github.com/modelcontextprotocol) |
-
----
+| **@google/genai** | Ebene 5: Node.js Dependency | `npm install @google/genai` | [npmjs.com/package/@google/genai](https://www.npmjs.com/package/@google/genai) |
+| **@tailwindcss/vite** | Ebene 5: Node.js Dependency | `npm install @tailwindcss/vite` | [npmjs.com/package/@tailwindcss/vite](https://www.npmjs.com/package/@tailwindcss/vite) |
+| **@types/express** | Ebene 5: Node.js Dependency | `npm install @types/express` | [npmjs.com/package/@types/express](https://www.npmjs.com/package/@types/express) |
+| **@types/node** | Ebene 5: Node.js Dependency | `npm install @types/node` | [npmjs.com/package/@types/node](https://www.npmjs.com/package/@types/node) |
+| **@typescript-eslint/eslint-plugin** | Ebene 5: Node.js Dependency | `npm install @typescript-eslint/eslint-plugin` | [npmjs.com/package/@typescript-eslint/eslint-plugin](https://www.npmjs.com/package/@typescript-eslint/eslint-plugin) |
+| **@typescript-eslint/parser** | Ebene 5: Node.js Dependency | `npm install @typescript-eslint/parser` | [npmjs.com/package/@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser) |
+| **@vitejs/plugin-react** | Ebene 5: Node.js Dependency | `npm install @vitejs/plugin-react` | [npmjs.com/package/@vitejs/plugin-react](https://www.npmjs.com/package/@vitejs/plugin-react) |
+| **autoprefixer** | Ebene 5: Node.js Dependency | `npm install autoprefixer` | [npmjs.com/package/autoprefixer](https://www.npmjs.com/package/autoprefixer) |
+| **dotenv** | Ebene 5: Node.js Dependency | `npm install dotenv` | [npmjs.com/package/dotenv](https://www.npmjs.com/package/dotenv) |
+| **esbuild** | Ebene 5: Node.js Dependency | `npm install esbuild` | [npmjs.com/package/esbuild](https://www.npmjs.com/package/esbuild) |
+| **eslint** | Ebene 5: Node.js Dependency | `npm install eslint` | [npmjs.com/package/eslint](https://www.npmjs.com/package/eslint) |
+| **express** | Ebene 5: Node.js Dependency | `npm install express` | [npmjs.com/package/express](https://www.npmjs.com/package/express) |
+| **lucide-react** | Ebene 5: Node.js Dependency | `npm install lucide-react` | [npmjs.com/package/lucide-react](https://www.npmjs.com/package/lucide-react) |
+| **motion** | Ebene 5: Node.js Dependency | `npm install motion` | [npmjs.com/package/motion](https://www.npmjs.com/package/motion) |
+| **pdf-parse** | Ebene 5: Node.js Dependency | `npm install pdf-parse` | [npmjs.com/package/pdf-parse](https://www.npmjs.com/package/pdf-parse) |
+| **react** | Ebene 5: Node.js Dependency | `npm install react` | [npmjs.com/package/react](https://www.npmjs.com/package/react) |
+| **react-dom** | Ebene 5: Node.js Dependency | `npm install react-dom` | [npmjs.com/package/react-dom](https://www.npmjs.com/package/react-dom) |
+| **recharts** | Ebene 5: Node.js Dependency | `npm install recharts` | [npmjs.com/package/recharts](https://www.npmjs.com/package/recharts) |
+| **tailwindcss** | Ebene 5: Node.js Dependency | `npm install tailwindcss` | [npmjs.com/package/tailwindcss](https://www.npmjs.com/package/tailwindcss) |
+| **tsx** | Ebene 5: Node.js Dependency | `npm install tsx` | [npmjs.com/package/tsx](https://www.npmjs.com/package/tsx) |
+| **typescript** | Ebene 5: Node.js Dependency | `npm install typescript` | [npmjs.com/package/typescript](https://www.npmjs.com/package/typescript) |
+| **vite** | Ebene 5: Node.js Dependency | `npm install vite` | [npmjs.com/package/vite](https://www.npmjs.com/package/vite) |
 
 ## 6. Validation & Certificates
 
@@ -160,6 +177,45 @@ sequenceDiagram
 
 ---
 
+## 🔐 Zero-Key-in-Code Security Architecture
+
+### Überblick
+Dieses Repository implementiert eine **Zero-Key-in-Code** Architektur für `pLedge250freedom.gov.eu`. Keine API-Keys, Tokens oder Secrets werden jemals im Quellcode oder im Repository gespeichert.
+
+### Komponenten
+
+| Komponente | Datei | Funktion |
+|------------|-------|----------|
+| Cloudflare Worker | `cloudflare-worker.js` | Security Edge mit strikten Headers |
+| Wrangler Config | `wrangler.toml` | Zero Trust Deployment (keine Keys) |
+| SSH Tunnel Script | `scripts/ssh-tunnel.sh` | Browser-Auth Tunnel Setup |
+| Security Middleware | `scripts/security-headers.js` | Client-Side Anti-Copy & DOM Protection |
+| .gitignore | `.gitignore` | Verhindert Secret-Leaks |
+
+### Deployment (Zero Trust)
+
+```bash
+# 1. Lokale Authentifizierung (Einmalig - erzeugt ~/.wrangler/config/default.toml)
+wrangler login
+
+# 2. Tunnel optional einrichten
+chmod +x scripts/ssh-tunnel.sh
+./scripts/ssh-tunnel.sh
+
+# 3. Worker veröffentlichen (keine API-Keys nötig!)
+wrangler deploy
+```
+
+### Cloudflare Dashboard Konfiguration
+
+1. **Web Application Firewall (WAF)** aktivieren
+2. **Bot Fight Mode** aktivieren (schützt vor Scrapern)
+3. **Hotlink Protection** aktivieren
+4. **Rate Limiting** für `pLedge250freedom.gov.eu`
+5. **Access Policies** für Tunnel-Authentifizierung (optional)
+
+---
+
 ## 🛠️ Deployment Guide
 
 ```bash
@@ -170,7 +226,6 @@ npm run build      # Production Build
 
 # Cloudflare Zero-Trust
 wrangler login
-wrangler secret put TUNNEL_TOKEN
 wrangler deploy
 ```
 

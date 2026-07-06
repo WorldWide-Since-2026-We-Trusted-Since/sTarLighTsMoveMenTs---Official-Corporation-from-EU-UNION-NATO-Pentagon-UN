@@ -8,8 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+"lint": "eslint .",
+"lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit"
   },
   "license": "EU-NATO-CLASSIFIED-Pilot-2026",
@@ -35,9 +35,12 @@
     "autoprefixer": "^10.4.21",
     "esbuild": "^0.25.0",
     "eslint": "^9.0.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.3",
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
+    "typescript-eslint": "^8.62.1",
     "vite": "^6.2.3"
   }
 }

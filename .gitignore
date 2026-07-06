@@ -1,3 +1,9 @@
+# =============================================================================
+# 🔒 HNOSS Zero Trust Repository - .gitignore
+# ZERO-KEY-IN-CODE ARCHITEKTUR
+# Keine API-Keys, Tokens oder Zertifikate ins Repository!
+# =============================================================================
+
 # Dependencies
 node_modules/
 
@@ -46,7 +52,9 @@ freedom250.html
 .DS_Store?
 ._*
 
-# Security - Private keys and secrets (NEVER commit!)
+# =============================================================================
+# 🔒 SECURITY - Private keys and secrets (NEVER commit!)
+# =============================================================================
 *.pem
 *.key
 *.p12
@@ -57,9 +65,22 @@ private/
 certs/
 tls/
 
-# Cloudflare Secrets (werden als Wrangler Secrets gesetzt)
+# Cloudflare & Wrangler Secrets (werden als Wrangler Secrets gesetzt)
+# Diese Dateien enthalten Tokens und werden NIEMALS ins Repository gepushed!
+.wrangler/
 .wranger.toml.local
 .env.cloudflare
+
+# Wrangler Config mit Tokens (falls vorhanden)
+.wrangler/config/
+.wrangler/config/default.toml
+*.wrangler.json
+
+# Cloudflared Tunnel Credentials
+# Diese enthält die Tunnel-Authentifizierung und ist ultra-sensibel!
+.home/$(whoami)/.cloudflared/
+~/.cloudflared/
+*.json  # Cloudflare generierte JSON-Credential-Dateien
 
 # Production Security Headers
 .vercel/
@@ -87,3 +108,17 @@ tunnel-access.log
 # Production Configuration
 production.secrets.json
 deployment.keys.json
+
+# =============================================================================
+# 🔒 ZERO-TRUST DEPLOYMENT NOTES
+# =============================================================================
+# Dieses Repository enthält KEINE sensiblen Daten!
+# 
+# Deployment erfolgt ausschließlich über:
+#   1. wrangler login   (browser-based authentication)
+#   2. wrangler deploy    (nutzt ~/.wrangler/config/default.toml)
+#
+# Für Cloudflare Tunnel:
+#   - credentials liegen im ~/.cloudflared/ Verzeichnis (außerhalb Repo)
+#   - config.yml wird lokal erstellt (siehe scripts/ssh-tunnel.sh)
+#   - Tunnel Token wird NIEMALS ins Repository eingetragen!
