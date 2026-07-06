@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UniversalComplianceEnvelope",
+  "description": "Header-Protokoll für Gold Awareness und internationale Compliance-Validierung",
+  "$id": "https://starlight-movements.org/protocol-spec/schemas/uce_schema.json",
+  "type": "object",
+  "required": ["uce_version", "gold_awareness", "origin_identity", "compliance_chain"],
+  "properties": {
+    "uce_version": { 
+      "type": "string", 
+      "const": "1.0.0",
+      "description": "UCE-Protokoll Version"
+    },
+    "gold_awareness": {
+      "type": "object",
+      "description": "Gold Awareness Integritätsstatus",
+      "properties": {
+        "status": { 
+          "enum": ["VERIFIED", "UNVERIFIED", "PENDING_AUDIT", "EMERGENCY_MODE"],
+          "description": "Gold Awareness Status"
+        },
+        "atomic_timestamp": { 
+          "type": "string", 
+          "format": "date-time",
+          "description": "UTC-Zeitstempel basierend auf Cosmos Peace Uhr (ISO-8601)"
+        },
+        "integrity_hash": { 
+          "type": "string", 
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 Hash der Datenintegrität"
+        },
+        "metrology_reference": {
+          "type": "string",
+          "description": "Referenz zur Metrologie-Quelle (z.B. PTB-Cosmos-Peace)"
+        }
+      },
+      "required": ["status", "atomic_timestamp", "integrity_hash"]
+    },
+    "origin_identity": {
+      "type": "object",
+      "description": "Urheber-Identität",
+      "properties": {
+        "expert_id": { 
+          "type": "string", 
+          "pattern": "^EX[0-9]{10}$",
+          "default": "EX2025D1218310",
+          "description": "StarLightMovemenTz Foundation Expert ID"
+        },
+        "issuer": { 
+          "type": "string",
+          "default": "StarLightMovemenTz_Foundation"
+        },
+        "node_id": {
+          "type": "string",
+          "description": "Eindeutige Knoten-ID (z.B. DE_DETMOLD_001)"
+        }
+      },
+      "required": ["expert_id", "issuer"]
+    },
+    "compliance_chain": {
+      "type": "array",
+      "description": "Föderative Compliance-Kette (L0-L9)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "layer_id": { 
+            "type": "integer", 
+            "minimum": 0,
+            "maximum": 9,
+            "description": "Ebene der Compliance (0=Gold Awareness, 9=Deployment)"
+          },
+          "regulation_ref": { 
+            "type": "string",
+            "description": "Referenz (z.B. UN_SDGs, EU_UNION_PACT, BNatSchG, NATO_STANAG)"
+          },
+          "validation_result": { 
+            "type": "boolean"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["layer_id", "regulation_ref", "validation_result"]
+      }
+    },
+    "humanity_index": {
+      "type": "object",
+      "description": "Humanitärer Komponenten-Index",
+      "properties": {
+        "forgiveness": { "type": "boolean", "default": true },
+        "liberty": { "type": "boolean", "default": true },
+        "peace": { "type": "boolean", "default": true },
+        "empathy": { "type": "boolean", "default": true },
+        "hope": { "type": "boolean", "default": true }
+      }
+    }
+  }
+}
