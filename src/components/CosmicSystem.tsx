@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Sparkles, Zap, Flame, Heart, Compass, Volume2, VolumeX, ShieldAlert } from "lucide-react";
+import { Sparkles, Zap, Flame, Heart, Compass } from "lucide-react";
 
 // ==========================================
 // 1. STARFIELD / 3D WARP TUNNEL CANVAS

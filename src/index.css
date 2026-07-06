@@ -3,9 +3,6 @@
 .font-display {
   font-family: 'Space Grotesk', sans-serif;
 }
-
-@import "tailwindcss";
-
 :root {
   --deep-space-blue: #000819;
   --gold-1: #fcf6ba;
