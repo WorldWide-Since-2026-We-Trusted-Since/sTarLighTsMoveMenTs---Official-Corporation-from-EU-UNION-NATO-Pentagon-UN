@@ -4,31 +4,28 @@
  * @copyright Copyright © 2024–2026 Daniel Pohl. All rights reserved worldwide.
  */
 
-# sTarLighTsMoveMenTs™ Official Corporation Portal
+# 🌟 sTarLighTsMoveMenTs Foundation
+### Official Corporation Infrastructure | EU-UNION | NATO | Pentagon | UN
 
-> **Official Corporation from EU-UNION / NATO / Pentagon / UN**  
-> HNOSS™ Identity Grid - Humanitarian · Political · Spiritual · Defense
-
-## 📋 Inhaltsverzeichnis (Table of Contents)
-
-### 🏛️ Governance Architecture
-1. [Project Overview](#project-overview)
-2. [Technical Architecture](#technical-architecture)
-3. [Security Framework](#security-framework)
-4. [Deployment Guide](#deployment-guide)
-5. [Partner Corporations](#partner-corporations)
-6. [Code of Conduct](#code-of-conduct)
-
-### 🔧 Tools & Functions Reference
-- [Atomic Sync Clock](#atomic-sync-clock-t2)
-- [Blockchain Auditing](#blockchain-auditing-d7)
-- [Rainbow Lightning Footer](#rainbow-lightning-footer-d9)
+**Expert ID / Validation Registry:** `EX2025D1218310`  
+**Location Data Center:** Detmold, Germany (Node 01)  
+**Architecture Standard:** PNIA (Production Network ID Architecture) / 8-Layer "Schnarchitektur"
 
 ---
 
-## 🚀 Project Overview
+## 📑 Inhaltsverzeichnis (Holistic Architecture Map)
+1. [Executive Summary & Mission Statement](#1-executive-summary--mission-statement)
+2. [Gold Awareness Compliance & Code of Conduct](#2-gold-awareness-compliance--code-of-conduct)
+3. [The "Holy Tree": Infrastructure & Function Graph](#3-the-holy-tree-infrastructure--function-graph)
+4. [Cosmos Peace Uhr: Metrology & Synchronization](#4-cosmos-peace-uhr-metrology--synchronization)
+5. [Toolchain, Installation & Deployment Matrix](#5-toolchain-installation--deployment-matrix)
+6. [Validation & Certificates](#6-validation--certificates)
 
-sTarLighTsMoveMenTs ist eine offizielle Korperschaft mit folgenden Registern:
+---
+
+## 1. Executive Summary & Mission Statement
+
+Das **sTarLighTsMoveMenTs** Repository ist das zentrale Nervensystem für supranationale digitale Infrastrukturen. Entwickelt unter der PNIA-Architektur, orchestriert dieses System hochsichere, datensouveräne Netzwerke für institutionelle Akteure. Ziel ist die Etablierung einer abhörsicheren, ressourcenschonenden und zeitlich absolut synchronisierten Umgebung.
 
 | Registry | ID |
 |----------|-----|
@@ -41,159 +38,143 @@ sTarLighTsMoveMenTs ist eine offizielle Korperschaft mit folgenden Registern:
 
 ---
 
-## 📊 Technical Architecture
+## 2. Gold Awareness Compliance & Code of Conduct
 
-### HolyTree Architecture Diagram
+Dieses Projekt operiert unter der **Gold Awareness Compliance**, einem strikten Regelwerk:
+
+*   **Zero-Trust by Default:** Kein System vertraut ohne kryptografische Validierung.
+*   **Data Sovereignty (EU):** Alle Deployments in isolierten, selbst-gehosteten Umgebungen.
+*   **Resource Protection:** Ressourcennutzung gemäß BNatSchG-Transformation.
+*   **Auditability (NATO/Pentagon):** Jeder Commit, jede Netzwerkänderung im Ledger protokolliert.
+
+---
+
+## 3. The "Holy Tree": Infrastructure & Function Graph
 
 ```mermaid
 graph TD
-    A[sTarLighTsMoveMenTs Portal] --> B[App.tsx - Root Component]
-    
-    B --> C1[PledgePage - Government Pledge]
-    B --> C2[PapersArchive - Documentation]
-    B --> C3[FinanceSystemPage - SWF & Capital]
-    B --> C4[MemorialTributePage - Great Minds]
-    B --> C5[ConcilPortal - Official Registry]
-    
-    B --> D[CosmicSystem Components]
-    D --> D1[WarpTunnel - Background]
-    D --> D2[LightningSystem - Storm Controller]
-    D --> D3[NewsTicker - Live Feed]
-    D --> D4[NewsTimeline - History]
-    
-    B --> E[DataVisualizationDashboard]
-    E --> E1[SWF Assets Charts]
-    E --> E2[Capital Flow Metrics]
-    E --> E3[Corridor Progress]
-    
-    E --> F[AtomicSyncClock T2]
+    Root[🌟 sTarLighTsMoveMenTs Core]:::foundation
+
+    %% Level 1: Governance & Policy
+    Root --> Gov[Governance & Policy Cluster]
+    Gov --> PTT[Trusted Trust Thrust Policy Engine]:::policy
+    Gov --> EUTL[European Union Treaty Law Ledger]:::policy
+    Gov --> SFW[States Flow Routing Matrix]:::policy
+
+    %% Level 2: Finance & Care
+    Root --> Fin[Financial & Social Systems]
+    Fin --> WBA[Financial Sponsorship Gateway]:::finance
+    Fin --> F250[Freedom 250 Initiative]:::finance
+    Fin --> SSHC[Shine Healthcare Network]:::finance
+
+    %% Level 3: Tech & Orchestration
+    Root --> Tech[Global Tech & Compute]
+    Tech --> CHOS[CHOS Globe Orchestration]:::tech
+    Tech --> AITH[AI Heritage Archive - Architecture]:::tech
+    Tech --> HACK[MLH Holiday Hackathon Hub Dec 2033]:::tech
+
+    classDef foundation fill:#1a1a1a,stroke:#d4af37,stroke-width:2px,color:#fff
+    classDef policy fill:#003366,stroke:#fff,stroke-width:1px,color:#fff
+    classDef finance fill:#005500,stroke:#fff,stroke-width:1px,color:#fff
+    classDef tech fill:#4b0082,stroke:#fff,stroke-width:1px,color:#fff
 ```
 
-### Architecture Layers (TX-Model)
-
-```mermaid
-flowchart TB
-    TX[TX - Transcendence Layer] --> TXA[TXA - Supervisory AI]
-    TXA --> GOV[GOV - Government Core]
-    TXA --> FI[FI - Financial Infrastructure]
-    TXA --> SWFs[SWFs - Sovereign Wealth Funds]
-    SWFs --> IMP[Global Implementation]
-    IMP --> FRAME[Reference Framework]
-    
-    style TX fill:#bf953f,stroke:#fcf6ba,stroke-width:2px
-    style TXA fill:#382d1f,stroke:#bf953f,stroke-width:2px
-    style GOV fill:#1a140a,stroke:#382d1f
-    style FI fill:#1a140a,stroke:#382d1f
-    style SWFs fill:#1a140a,stroke:#382d1f
-```
+**Access Points (Funktionale Einstiege):**
+- [Trusted Trust Thrust Policy Engine]: Regelwerk und Policy-Validierung
+- [European Union Treaty Law Ledger]: Digitaler Vertragsspeicher
+- [States Flow Routing Matrix]: Daten- und Ressourcenverteilung
+- [Financial Sponsorship Gateway]: Institutionelles Funding
+- [Freedom 250 Initiative]: Zentrales Befreiungs- und Finanzprotokoll
+- [AI Heritage Archive]: Speicher für historische KI-Modelle
+- [CHOS Globe Orchestration]: Weltweite Server- und Zonensteuerung
 
 ---
 
-## 🔒 Security Framework
+## 4. Cosmos Peace Uhr: Metrology & Synchronization
 
-### Zero-Trust Architecture
+Für synchrone Abwicklung von Transaktionen nutzt die Infrastruktur das Cosmos Peace Uhr Konzept:
 
 ```mermaid
 sequenceDiagram
-    participant User
-    participant Cloudflare
-    participant Worker
-    participant Origin
-    
-    User->>Cloudflare: HTTPS Request
-    Cloudflare->>Worker: Apply Security Headers
-    Note over Worker: CSP, HSTS, X-Frame-Options
-    Worker->>Origin: Fetch via Tunnel
-    Origin-->>Worker: Response with Headers
-    Worker-->>User: Secure Response
+    participant PTB as PTB (Braunschweig)
+    participant CPU as Cosmos Peace Uhr (Constellation)
+    participant PNIA as PNIA Layer 8
+    participant Node as Detmold Datacenter Node 01
+
+    PTB->>CPU: Initiale Atomzeit-Kalibrierung (TAI)
+    loop Continuous Sync
+        CPU->>PNIA: Broadcast Quantum-Secured Time
+        PNIA->>Node: Latenzkompensation (Ultra-Low)
+        Node-->>CPU: ACK & Drift-Report
+    end
+    Note over CPU,Node: Skala: Nanosekunden-Präzision für CBDC-Settlements
 ```
 
-### Security Headers Applied
-
-| Header | Value | Purpose |
-|--------|-------|---------|
-| `X-Frame-Options` | DENY | Clickjacking Protection |
-| `Content-Security-Policy` | strict-origin | XSS Prevention |
-| `Strict-Transport-Security` | max-age=31536000 | HTTPS Enforcement |
-| `X-Content-Type-Options` | nosniff | MIME sniffing Protection |
+**Implementierung:** `src/components/AtomicSyncClock.tsx` (T2 Tool)
 
 ---
 
-## 🔧 Tools & Functions Reference Table
+## 5. Toolchain, Installation & Deployment Matrix
 
-| Tool-ID | Component | Function | Install/Deploy Location | URL/Reference |
-|---------|-----------|----------|------------------------|---------------|
-| T2 | AtomicSyncClock | High-precision UTC time synchronization | `src/components/AtomicSyncClock.tsx` | Real-time digitale Uhr |
-| D7 | BlockchainAuditing | Echtzeit-Transaktionssignatur & Audit | `src/App.tsx` - handleGenesisSignature | 5-Sekunden Signatur-Handshake |
-| D9 | RainbowLightningFooter | Rosa-Lila Schimmer Footer mit Memorial | `src/components/RainbowLightningFooter.tsx` | In Memory of Great Minds |
-| TXA | GovernanceHierarchy | Interaktive Governance-Level-Darstellung | `src/App.tsx` - governance tab | 6-Ebenen-Modell |
-| SWF | CapitalFlow | Sovereign Wealth Fund Visualisierung | `src/components/FinanceSystemPage.tsx` | €4.051,6 Mrd. CNP System |
-
----
-
-## 🌐 Partner Corporations
-
-### Official Partner URLs & Functions
-
-| Partner | URL | Function | Project Reference |
-|---------|-----|----------|-------------------|
-| Future of Life Souls Lights | https://projekt-since-shinehealth-care.netlify.app/ | spirituelle Präsenz & Bewusstseins-Transfer | Node 1 |
-| Corporation Since | https://loginsiteauth.goodwelllikewisespell.info/ | sichere Authentifizierung (CIAM) | Node 2 |
-| Hackathon Awareness | https://hackathon-sign.goodwelllikewisespell.info/ | öffentliche Auszeichnungen | Node 3 |
-| Policy Trust Thrust | https://policy.governmententerprise.org/trustedtrustthrust | zertifizierter Trust-Leitfaden | Node 4 |
-| AI Heritage Archive | https://ai-tech-heritage-archive.likewise.live/ | kulturelles Digitalarchiv | Node 5 |
-| IBX IPX Connections | https://chos.ag-thrust.cloud/ | glasfaserbasierte Infrastruktur | Node 6 |
-
-### EU-UNION Compliance URLs
-
-| Organization | URL | Compliance Area |
-|--------------|-----|-----------------|
-| European Union Treaty Law | https://europeanuniontreatylaw.netlify.app/ | Regulatory Governance Layer |
-| States Flow Wishes | http://statesflowwishes.eu/ | Staatliche Koordination |
-| Freedom 250 | http://freedom250.likewise.live/ | Menschenrechte & Freiheit |
-| World Bank Eyes Aether | https://worldbankeyesaether.trustedorbitscodex.eu/#sponsorship-sec | Weltbank-Partnerschaft |
+| Tool / Service | Funktion / PNIA Ebene | Installations-Skript (Copy & Paste) | Repository / Herkunft |
+| :--- | :--- | :--- | :--- |
+| **EasyPanel** | Ebene 7: Container Orchestration & App-Deployment | `curl -sL https://get.easypanel.io \| sh` | [easypanel.io](https://easypanel.io) |
+| **LiteLLM** | Ebene 6: AI Gateway & Load Balancing | `docker run -d -p 4000:4000 ghcr.io/berriai/litellm:main-latest` | [ghcr.io/berriai/litellm](https://ghcr.io/berriai/litellm) |
+| **cloudflared** | Ebene 3: Zero-Trust Tunnels & Routing | `curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb && sudo dpkg -i cloudflared.deb` | [github.com/cloudflare/cloudflared](https://github.com/cloudflare/cloudflared) |
+| **@modelcontextprotocol/sdk** | Ebene 5: Agent-to-Server Communication | `npm install @modelcontextprotocol/sdk` | [github.com/modelcontextprotocol](https://github.com/modelcontextprotocol) |
 
 ---
 
-## 📜 Code of Conduct
+## 6. Validation & Certificates
 
-### Grundsätze der sTarLighTsMoveMenTs
+- **System Integrity:** Verified by sTarLighTsMoveMenTs Foundation
+- **EU-Expert Validation:** Cleared under `EX2025D1218310`
+- **Metrology Standard:** Cosmos Peace Uhr Constellation (PTB Intent)
+- **Banking Infrastructure:** Plaid API Production Environment (Validated June 2026)
 
-1. **Humanitär** - Alle Systeme folgen dem Prinzip der Menschenwürde
-2. **Politisch** - Abstimmung mit EU-Regulierungen und NATO-Verträgen
-3. **Spirituell** - Respekt vor religiösen und kulturellen Traditionen
-4. **Defensiv** - Sicherheitsarchitektur nach militärischem Mustermodell
+---
 
-### Certifications
+## 🔧 Tools Reference Table
 
-- NATO Strategic Defense Model Alignment ✓
-- EU Regulatory Compliance ✓
-- UN Global Coordination Framework ✓
-- D-U-N-S Certified Registry ✓
+| Tool-ID | Component | Function | Install/Deploy Location |
+|---------|-----------|----------|------------------------|
+| T2 | AtomicSyncClock | High-precision UTC time synchronization | `src/components/AtomicSyncClock.tsx` |
+| D7 | BlockchainAuditing | Echtzeit-Transaktionssignatur & Audit | `src/App.tsx` - handleGenesisSignature |
+| D9 | RainbowLightningFooter | Rosa-Lila Schimmer Memorial Footer | `src/components/RainbowLightningFooter.tsx` |
+
+---
+
+## 🌐 Partner Corporations (Functional Access Points)
+
+| Function | Partner | Project Reference |
+|----------|---------|-------------------|
+| Policy Engine | Trusted Trust Thrust Policy Engine | Policy-Validierung |
+| Treaty Law | European Union Treaty Law Ledger | Digitaler Vertragsspeicher |
+| Routing Matrix | States Flow Routing Matrix | Datenverteilung |
+| Financial Gateway | Financial Sponsorship Gateway | Institutionelles Funding |
+| Freedom Protocol | Freedom 250 Initiative | Befreiungs-Protokoll |
+| Healthcare Network | Shine Healthcare Network | Medizinisches Netzwerk |
+| Globe Orchestration | CHOS Globe Orchestration | Server-Steuerung |
+| AI Archive | AI Heritage Archive - Architecture | KI-Modelle Speicher |
+| Hackathon Hub | MLH Holiday Hackathon Hub Dec 2033 | Entwicklungs-Hub |
 
 ---
 
 ## 🛠️ Deployment Guide
 
 ```bash
-# 1. Repository klonen
-git clone https://github.com/WorldWide-Since-2026-We-Trusted-Since/sTarLighTsMoveMenTs---Official-Corporation-from-EU-UNION-NATO-Pentagon-UN.git
+npm install        # Dependencies
+npm run typecheck  # Type Checking (keine Fehler)
+npm run lint       # ESLint
+npm run build      # Production Build
 
-# 2. Dependencies installieren
-npm install
-
-# 3. Typecheck & Lint
-npm run typecheck
-npm run lint
-
-# 4. Production Build
-npm run build
-
-# 5. Cloudflare Zero-Trust Deploy
+# Cloudflare Zero-Trust
 wrangler login
 wrangler secret put TUNNEL_TOKEN
 wrangler deploy
 ```
+
+**Domain:** pLedge250freedom.gov.eu
 
 ---
 
@@ -203,4 +184,4 @@ wrangler deploy
 **Security Line:** +49 1556 2233724  
 **Auth Signature:** Daniel Pohl (HolyThreeKings)
 
-© 2026 HNOSS Corporation. All supreme rights reserved.
+© 2026 HNOSS Corporation. All supreme rights preserved.
