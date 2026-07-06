@@ -483,6 +483,275 @@ body {
   animation: 2.5s linear infinite dash;
 }
 
+/* Document Overlay Styles */
+.document-overlay-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 8, 25, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.document-overlay-panel {
+  background: rgba(10, 15, 35, 0.92);
+  border: 1px solid rgba(191, 149, 63, 0.4);
+  border-radius: 8px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 50px rgba(191, 149, 63, 0.2);
+  overflow: hidden;
+}
+
+.document-overlay-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(191, 149, 63, 0.3);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.document-overlay-title {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.document-overlay-close {
+  background: rgba(191, 149, 63, 0.15);
+  border: 1px solid rgba(191, 149, 63, 0.5);
+  color: #fcf6ba;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.document-overlay-close:hover {
+  background: rgba(191, 149, 63, 0.3);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.document-overlay-content {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+  color: #e0e0e0;
+  line-height: 1.6;
+}
+
+.document-overlay-content h1,
+.document-overlay-content h2,
+.document-overlay-content h3,
+.document-overlay-content h4 {
+  color: #fcf6ba;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.document-overlay-content h1 { font-size: 1.5rem; }
+.document-overlay-content h2 { font-size: 1.3rem; }
+.document-overlay-content h3 { font-size: 1.1rem; }
+
+.document-overlay-content p {
+  margin-bottom: 1rem;
+}
+
+.document-overlay-content ul,
+.document-overlay-content ol {
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+
+.document-overlay-content li {
+  margin-bottom: 0.25rem;
+}
+
+.document-overlay-content strong {
+  color: #bf953f;
+  font-weight: 600;
+}
+
+.document-overlay-content code {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: #ffb6c1;
+}
+
+.document-overlay-content pre {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(191, 149, 63, 0.2);
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.document-overlay-content blockquote {
+  border-left: 3px solid #bf953f;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: #ffb6c1;
+  font-style: italic;
+}
+
+.document-overlay-content a {
+  color: #ffb6c1;
+  text-decoration: underline;
+}
+
+.document-overlay-content a:hover {
+  color: #fff;
+}
+
+.document-overlay-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.document-overlay-content th,
+.document-overlay-content td {
+  border: 1px solid rgba(191, 149, 63, 0.2);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.document-overlay-content th {
+  background: rgba(191, 149, 63, 0.15);
+  color: #fff;
+}
+
+/* Rosa Pink License Info Styles - transparent background with pink shimmer */
+.pink-license-backdrop {
+  background: rgba(255, 182, 193, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 182, 193, 0.25);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 0 30px rgba(255, 182, 193, 0.15);
+  transition: box-shadow 0.3s ease;
+}
+
+.pink-license-backdrop:hover {
+  box-shadow: 0 0 40px rgba(255, 182, 193, 0.25);
+}
+
+.pink-license-header {
+  border-bottom: 1px solid rgba(255, 182, 193, 0.3);
+}
+
+.pink-license-title {
+  color: #ffb6c1;
+}
+
+.pink-license-text {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.pink-license-section-title {
+  color: rgba(255, 182, 193, 0.9);
+}
+
+/* === TRANSPARENT CRYSTAL FOOTER STYLES === */
+.transparent-crystal-footer {
+  background: rgba(15, 5, 35, 0.25);
+  border-top: 1px solid rgba(255, 182, 193, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.crystal-droplet-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 182, 193, 0.2);
+  transition: all 0.3s ease;
+}
+
+.crystal-droplet-card:hover {
+  border-color: rgba(255, 105, 180, 0.5);
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+}
+
+/* Rosa-Lila Schimmer Gradient */
+.pink-purple-shimmer {
+  background: linear-gradient(90deg, 
+    rgba(255, 105, 180, 0.8), 
+    rgba(218, 112, 214, 0.6), 
+    rgba(147, 112, 219, 0.4), 
+    rgba(138, 43, 226, 0.6), 
+    rgba(153, 50, 204, 0.8));
+  background-size: 200% auto;
+  animation: shimmer-flow 8s linear infinite;
+}
+
+@keyframes shimmer-flow {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Text Lighthouse Effect - pulsierender Leuchtturm */
+.text-lighthouse {
+  background: linear-gradient(90deg, #ff69b4, #9370db, #8a2be2, #9932cc, #ff69b4);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: lighthouse-pulse 3s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(255, 105, 180, 0.5), 0 0 20px rgba(147, 112, 219, 0.3);
+}
+
+@keyframes lighthouse-pulse {
+  0%, 100% { background-position: 0% center; filter: brightness(1); }
+  50% { background-position: 100% center; filter: brightness(1.2); }
+}
+
+/* Water Drop Crystal Shimmer */
+@keyframes crystal-shimmer {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+.crystal-shimmer-overlay {
+  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.8), transparent 70%);
+  animation: crystal-shimmer 3s ease-in-out infinite;
+}
+
+/* Rainbow Lights Glow */
+@keyframes rainbow-glow-shift {
+  0% { background: linear-gradient(45deg, #ff69b4, #9370db, #8a2be2, #9932cc); }
+  25% { background: linear-gradient(45deg, #9932cc, #8a2be2, #9370db, #ff69b4); }
+  50% { background: linear-gradient(45deg, #ff69b4, #da70d6, #9370db, #8a2be2); }
+  75% { background: linear-gradient(45deg, #8a2be2, #9370db, #da70d6, #ff69b4); }
+  100% { background: linear-gradient(45deg, #ff69b4, #9370db, #8a2be2, #9932cc); }
+}
+
+/* Footer Trigger Line */
+.footer-trigger-line {
+  background: linear-gradient(90deg, transparent, #ff69b4, #9370db, #ff69b4, transparent);
+  opacity: 0.5;
+}
+
 /* Base styles */
 * {
   border-color: var(--border);

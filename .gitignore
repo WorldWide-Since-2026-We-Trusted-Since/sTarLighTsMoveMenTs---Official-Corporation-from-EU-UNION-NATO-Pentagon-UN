@@ -1,14 +1,60 @@
+# Dependencies
 node_modules/
+
+# Build outputs
 build/
 dist/
+
+# Testing
 coverage/
+
+# System files
 .DS_Store
+Thumbs.db
+
+# Logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
 .env*
 !.env.example
+
 # Analysis and backup files
 analysis/
-ReadyBLess
+ReadyBLess/
 freedom250.html
+
 # PDF files (keep only source md)
 *.pdf
+
+# IDE/Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+
+# Security - Private keys and secrets
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+private/
+
+# Production Security Headers
+.vercel/
+.netlify/
+.firebase/
+
+# Backup/temporary files
+*.bak
+*.tmp
+*~

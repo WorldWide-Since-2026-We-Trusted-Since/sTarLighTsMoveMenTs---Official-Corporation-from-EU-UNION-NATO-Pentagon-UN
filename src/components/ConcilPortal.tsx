@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, ChevronUp, FileText, Scale, BookOpen, Globe, ExternalLink, Shield, Lock } from "lucide-react";
+import { ChevronDown, ChevronUp, FileText, Scale, BookOpen, Globe, ExternalLink, Shield, Lock, X } from "lucide-react";
 
 // Categories for the portal
 const CATEGORIES = [
@@ -327,10 +327,104 @@ const DOCUMENTS = [
   }
 ];
 
+// Simple Markdown to HTML converter
+function renderMarkdown(content: string): string {
+  // Escape HTML
+  let html = content
+    .replace(/&/g, '&')
+    .replace(/</g, '<')
+    .replace(/>/g, '>');
+
+  // Headers
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+  // Bold
+  html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+  // Italic
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+  // Inline code
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // Links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+
+  // Horizontal rule
+  html = html.replace(/^---$/gm, '<hr>');
+
+  // Blockquotes
+  html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+
+  // Tables
+  html = html.replace(/\|(.+)\|( *)\n\|( *-+\|)+\|/g, (match) => {
+    const lines = match.trim().split('\n');
+    let tableHtml = '<table>\n';
+    
+    // Header row
+    const headerCells = lines[0].split('|').filter(cell => cell.trim());
+    tableHtml += '<thead><tr>';
+    headerCells.forEach(cell => {
+      tableHtml += `<th>${cell.trim()}</th>`;
+    });
+    tableHtml += '</tr></thead>\n<tbody>';
+
+    // Data rows (skip separator line)
+    for (let i = 2; i < lines.length; i++) {
+      const cells = lines[i].split('|').filter(cell => cell.trim());
+      tableHtml += '<tr>';
+      cells.forEach(cell => {
+        tableHtml += `<td>${cell.trim()}</td>`;
+      });
+      tableHtml += '</tr>';
+    }
+    
+    tableHtml += '</tbody></table>';
+    return tableHtml;
+  });
+
+  // Lists - unordered
+  const ulLines: string[] = [];
+  html = html.replace(/^(\s*)[*\-+]\s+(.+)$/gm, (match, indent, content) => {
+    return `<li>${content}</li>`;
+  });
+  html = html.replace(/(<li>.*?<\/li>\s*)+/g, '<ul>$&</ul>');
+
+  // Lists - ordered
+  html = html.replace(/^(\s*)\d+\.\s+(.+)$/gm, '<li>$2</li>');
+  html = html.replace(/(<li>.*?<\/li>\s*)+/g, (match) => {
+    if (!match.includes('<ul>')) {
+      return `<ol>${match}</ol>`;
+    }
+    return match;
+  });
+
+  // Paragraphs (wrap text blocks)
+  html = html.split('\n\n').map(block => {
+    if (!block.trim()) return '';
+    if (block.includes('<h') || block.includes('<table>') || block.includes('<ul>') || 
+        block.includes('<ol>') || block.includes('<blockquote>') || block.includes('<pre>')) {
+      return block;
+    }
+    return `<p>${block}</p>`;
+  }).join('\n');
+
+  // Line breaks
+  html = html.replace(/\n/g, ' ');
+
+  return html;
+}
+
 export default function ConcilPortal() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedDoc, setExpandedDoc] = useState<string | null>(null);
+  const [viewingDocument, setViewingDocument] = useState<{ id: string; title: string; url: string } | null>(null);
+  const [documentContent, setDocumentContent] = useState<string>("");
+  const [isLoadingDoc, setIsLoadingDoc] = useState(false);
 
   const filteredDocs = DOCUMENTS.filter(doc => {
     const matchesCategory = selectedCategory === "all" || doc.category === selectedCategory;
@@ -339,258 +433,337 @@ export default function ConcilPortal() {
     return matchesCategory && matchesSearch;
   });
 
+  // Load document content when viewingDocument changes
+  useEffect(() => {
+    if (viewingDocument) {
+      setIsLoadingDoc(true);
+      fetch(viewingDocument.url)
+        .then(response => response.text())
+        .then(text => {
+          setDocumentContent(renderMarkdown(text));
+          setIsLoadingDoc(false);
+        })
+        .catch(() => {
+          setDocumentContent('<p class="text-red-400">Dokument konnte nicht geladen werden.</p>');
+          setIsLoadingDoc(false);
+        });
+    }
+  }, [viewingDocument]);
+
+  const handleViewDocument = (doc: typeof DOCUMENTS[0]) => {
+    setViewingDocument({ id: doc.id, title: doc.title, url: doc.url });
+  };
+
+  const closeDocument = () => {
+    setViewingDocument(null);
+    setDocumentContent("");
+  };
+
+  // Get the document being viewed
+  const viewedDoc = viewingDocument ? DOCUMENTS.find(d => d.id === viewingDocument.id) : null;
+
   return (
-    <div className="concil-portal-wrapper w-full max-w-7xl mx-auto px-4 py-8">
-      {/* Portal Header */}
-      <div className="text-center mb-12">
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="inline-block mb-4"
-        >
-          <div className="text-6xl mb-2">🏛️</div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight">
-            Concil <span className="text-[#bf953f]">Portal</span>
-          </h1>
-          <p className="text-gray-400 text-sm max-w-3xl mx-auto">
-            Offizielle Dokumentation, Spezifikationen und Governance-Rahmenwerke des HNOSS Systems
-          </p>
-        </motion.div>
-
-        {/* Search and Filters */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
-          <div className="relative w-full md:w-96">
-            <input
-              type="text"
-              placeholder="🔍 Dokumente durchsuchen..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-black/60 border border-gray-800 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-[#bf953f] transition-all"
-            />
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2">
-            {CATEGORIES.map((cat) => {
-              const Icon = cat.icon;
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => setSelectedCategory(cat.id)}
-                  className={`px-3 py-1.5 border rounded text-xs font-mono uppercase tracking-wider transition-all ${
-                    selectedCategory === cat.id
-                      ? "border-[#bf953f] bg-[#bf953f]/25 text-white"
-                      : "border-gray-800 bg-black/40 text-gray-400 hover:text-white hover:border-gray-600"
-                  }`}
-                >
-                  <Icon className="inline-block w-4 h-4 mr-1" />
-                  {cat.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Results Count */}
-        <div className="text-xs text-gray-500 font-mono mb-6">
-          {filteredDocs.length} {filteredDocs.length === 1 ? "Dokument" : "Dokumente"} gefunden
-        </div>
-      </div>
-
-      {/* Documents Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {filteredDocs.map((doc) => (
+    <>
+      <div className="concil-portal-wrapper w-full max-w-7xl mx-auto px-4 py-8">
+        {/* Portal Header */}
+        <div className="text-center mb-12">
           <motion.div
-            key={doc.id}
-            layout
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="border border-gray-800 bg-black/50 rounded-lg overflow-hidden hover:border-[#bf953f]/50 transition-all duration-300"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="inline-block mb-4"
           >
-            <div
-              className="p-5 cursor-pointer"
-              onClick={() => setExpandedDoc(expandedDoc === doc.id ? null : doc.id)}
+            <div className="text-6xl mb-2">🏛️</div>
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight">
+              Concil <span className="text-[#bf953f]">Portal</span>
+            </h1>
+            <p className="text-gray-400 text-sm max-w-3xl mx-auto">
+              Offizielle Dokumentation, Spezifikationen und Governance-Rahmenwerke des HNOSS Systems
+            </p>
+          </motion.div>
+
+          {/* Search and Filters */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
+            <div className="relative w-full md:w-96">
+              <input
+                type="text"
+                placeholder="🔍 Dokumente durchsuchen..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-black/60 border border-gray-800 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-[#bf953f] transition-all"
+              />
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              {CATEGORIES.map((cat) => {
+                const Icon = cat.icon;
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`px-3 py-1.5 border rounded text-xs font-mono uppercase tracking-wider transition-all ${
+                      selectedCategory === cat.id
+                        ? "border-[#bf953f] bg-[#bf953f]/25 text-white"
+                        : "border-gray-800 bg-black/40 text-gray-400 hover:text-white hover:border-gray-600"
+                    }`}
+                  >
+                    <Icon className="inline-block w-4 h-4 mr-1" />
+                    {cat.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Results Count */}
+          <div className="text-xs text-gray-500 font-mono mb-6">
+            {filteredDocs.length} {filteredDocs.length === 1 ? "Dokument" : "Dokumente"} gefunden
+          </div>
+        </div>
+
+        {/* Documents Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {filteredDocs.map((doc) => (
+            <motion.div
+              key={doc.id}
+              layout
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="border border-gray-800 bg-black/50 rounded-lg overflow-hidden hover:border-[#bf953f]/50 transition-all duration-300"
             >
-              {/* Document Header */}
-              <div className="flex items-start gap-3 mb-3">
-                <div className="text-3xl flex-shrink-0">{doc.icon}</div>
-                <div className="flex-1 min-w-0">
-                  <span className="text-[10px] font-mono text-[#bf953f] uppercase tracking-wider">
-                    {doc.type}
-                  </span>
-                  <h3 className="text-sm font-bold text-white mt-1 leading-tight">
-                    {doc.title}
-                  </h3>
+              <div
+                className="p-5 cursor-pointer"
+                onClick={() => setExpandedDoc(expandedDoc === doc.id ? null : doc.id)}
+              >
+                {/* Document Header */}
+                <div className="flex items-start gap-3 mb-3">
+                  <div className="text-3xl flex-shrink-0">{doc.icon}</div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-[10px] font-mono text-[#bf953f] uppercase tracking-wider">
+                      {doc.type}
+                    </span>
+                    <h3 className="text-sm font-bold text-white mt-1 leading-tight">
+                      {doc.title}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Meta Info */}
+                <div className="space-y-1.5 mb-3">
+                  <p className="text-xs text-gray-400">
+                    <span className="text-gray-500">Kategorie:</span>{" "}
+                    <span className="text-[#bf953f] capitalize">{doc.category}</span>
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    <span className="text-gray-500">Datum:</span> {doc.date}
+                  </p>
+                </div>
+
+                {/* Preview */}
+                <p className="text-xs text-gray-300 leading-relaxed mb-4">
+                  {doc.preview}
+                </p>
+
+                {/* Expand/Collapse Indicator */}
+                <div className="flex items-center gap-1 text-xs text-[#bf953f] mb-3">
+                  {expandedDoc === doc.id ? (
+                    <>
+                      <ChevronUp className="w-4 h-4" />
+                      <span>Einklappen</span>
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown className="w-4 h-4" />
+                      <span>Details anzeigen</span>
+                    </>
+                  )}
+                </div>
+
+                {/* Expanded Content */}
+                <AnimatePresence>
+                  {expandedDoc === doc.id && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pt-4 border-t border-gray-800">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleViewDocument(doc);
+                          }}
+                          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#bf953f]/10 border border-[#bf953f]/30 rounded-lg hover:bg-[#bf953f]/20 transition-all group"
+                        >
+                          <FileText className="w-5 h-5 text-[#bf953f] group-hover:scale-110 transition-transform" />
+                          <span className="text-sm font-bold text-[#bf953f]">
+                            Dokument anzeigen
+                          </span>
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* No Results */}
+        {filteredDocs.length === 0 && (
+          <div className="text-center py-16">
+            <div className="text-6xl mb-4">🔍</div>
+            <h3 className="text-xl font-bold text-white mb-2">Keine Dokumente gefunden</h3>
+            <p className="text-sm text-gray-400">
+              Versuche andere Suchbegriffe oder Filter
+            </p>
+          </div>
+        )}
+
+        {/* Rosa Pink License Info - transparent with pink shimmer */}
+        <div className="mt-16 pt-8 border-t border-gray-800">
+          <div className="pink-license-backdrop">
+            <div className="text-center mb-4">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                <Scale className="w-6 h-6 pink-license-title" />
+                <h3 className="text-xl font-bold pink-license-title">
+                  ⚖️ EIGENTUMSRECHTLICHE LIZENZ
+                </h3>
+              </div>
+              <p className="text-lg font-black pink-license-title">
+                ALLE RECHTE VORBEHALTEN
+              </p>
+            </div>
+
+            <div className="space-y-3 text-xs pink-license-text">
+              <div>
+                <h4 className="pink-license-title font-bold mb-1">HCOS – HNOSS CONTROL OPERATING SYSTEM</h4>
+              </div>
+
+              <div>
+                <h5 className="pink-license-section-title font-semibold mb-1">URHEBERRECHTSHINWEIS:</h5>
+                <p>Copyright © 2024–2026 Daniel Pohl. Alle Rechte weltweit vorbehalten.</p>
+              </div>
+
+              <div>
+                <h5 className="pink-license-section-title font-semibold mb-1">EIGENTUMS- UND SCHUTZRECHTE:</h5>
+                <p>
+                  Diese Software, einschließlich Quellcode, Dokumentation, Algorithmen und Architekturdesigns,
+                  ist das exklusive Eigentum von Daniel Pohl sowie der folgenden autorisierten Unternehmen:
+                </p>
+                <p className="text-white font-bold mt-1">
+                  HNOSS Enterprises | PRISMANTHARION Corporation | SHINEHEALTHCARE GmbH | STARLIGHTMOVEMENTS AG
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3" style={{ borderTop: '1px solid rgba(255, 182, 193, 0.2)' }}>
+                <div>
+                  <h5 className="text-red-400 font-semibold mb-2">NUTZUNGSBESCHRÄNKUNGEN:</h5>
+                  <ul className="space-y-1 pink-license-text">
+                    <li>❌ KEINE NUTZUNG ohne ausdrückliche Genehmigung</li>
+                    <li>❌ KEINE KOPIEN oder Duplizierung</li>
+                    <li>❌ KEINE ÄNDERUNGEN oder abgeleitete Werke</li>
+                    <li>❌ KEINE VERBREITUNG oder Weitergabe</li>
+                    <li>❌ KEIN KLONEN von Repositories</li>
+                    <li>❌ KEINE REVERSE-ENGINEERING</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h5 className="text-yellow-400 font-semibold mb-2">RECHTSSTATUS:</h5>
+                  <p className="pink-license-text mb-2">
+                    Pilotprojekt in Zusammenarbeit mit:
+                  </p>
+                  <ul className="space-y-1 pink-license-text">
+                    <li>🏛️ Institutionen der Europäischen Union</li>
+                    <li>🛡️ NATO (North Atlantic Treaty Organization)</li>
+                    <li>🏢 The Pentagon / U.S. Department of Defense</li>
+                    <li>🌐 Vereinte Nationen (UN)</li>
+                    <li>💰 Deutsche Börse AG</li>
+                  </ul>
                 </div>
               </div>
 
-              {/* Meta Info */}
-              <div className="space-y-1.5 mb-3">
-                <p className="text-xs text-gray-400">
-                  <span className="text-gray-500">Kategorie:</span>{" "}
-                  <span className="text-[#bf953f] capitalize">{doc.category}</span>
-                </p>
-                <p className="text-xs text-gray-400">
-                  <span className="text-gray-500">Datum:</span> {doc.date}
+              <div className="pt-3" style={{ borderTop: '1px solid rgba(255, 182, 193, 0.2)' }}>
+                <h5 className="text-cyan-400 font-semibold mb-2">SCHUTZ DES GEISTIGEN EIGENTUMS:</h5>
+                <p className="pink-license-text">
+                  Geschützt durch: Internationales Urheberrecht, EU-Urheberrechtsrichtlinien, US Copyright Act,
+                  Deutsches Urheberrechtsgesetz (UrhG), Patentrecht, GeschGehG, Vertragsrecht
                 </p>
               </div>
 
-              {/* Preview */}
-              <p className="text-xs text-gray-300 leading-relaxed mb-4">
-                {doc.preview}
-              </p>
-
-              {/* Expand/Collapse Indicator */}
-              <div className="flex items-center gap-1 text-xs text-[#bf953f] mb-3">
-                {expandedDoc === doc.id ? (
-                  <>
-                    <ChevronUp className="w-4 h-4" />
-                    <span>Einklappen</span>
-                  </>
-                ) : (
-                  <>
-                    <ChevronDown className="w-4 h-4" />
-                    <span>Details anzeigen</span>
-                  </>
-                )}
+              <div className="pt-3" style={{ borderTop: '1px solid rgba(255, 182, 193, 0.2)' }}>
+                <h5 className="text-red-400 font-semibold mb-2">⚠️ VERSTÖSSE UND RECHTSVERFOLGUNG:</h5>
+                <p className="pink-license-text">
+                  Unbefugte Nutzung wird mit voller Härte des Gesetzes verfolgt – zivilrechtliche Schadensersatzforderungen,
+                  einstweilige Verfügungen, strafrechtliche Verfolgung sowie Meldung an INTERPOL.
+                </p>
               </div>
 
-              {/* Expanded Content */}
-              <AnimatePresence>
-                {expandedDoc === doc.id && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="pt-4 border-t border-gray-800">
-                      <a
-                        href={doc.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#bf953f]/10 border border-[#bf953f]/30 rounded-lg hover:bg-[#bf953f]/20 transition-all group"
-                      >
-                        <FileText className="w-5 h-5 text-[#bf953f] group-hover:scale-110 transition-transform" />
-                        <span className="text-sm font-bold text-[#bf953f]">
-                          Dokument öffnen
-                        </span>
-                        <ExternalLink className="w-4 h-4 text-[#bf953f] group-hover:translate-x-1 transition-transform" />
-                      </a>
+              <div className="pt-3" style={{ borderTop: '1px solid rgba(255, 182, 193, 0.2)' }}>
+                <p className="text-gray-500 font-mono">
+                  Kontakt: Rechtsabteilung – HNOSS Enterprises
+                </p>
+                <p className="text-gray-600 font-mono mt-1">
+                  Status: KLASSIFIZIERT – PILOTPROJEKT – NICHT FÜR DIE ÖFFENTLICHE VERBREITUNG
+                </p>
+                <p className="text-gray-600 font-mono text-[10px] mt-2">
+                  Version: PILOT-2026-EU-NATO-CLASSIFIED | Datum: 1. Januar 2024 | Letzte Änderung: 9. Mai 2026
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Document Overlay */}
+      <AnimatePresence>
+        {viewingDocument && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="document-overlay-backdrop"
+            onClick={closeDocument}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", damping: 20 }}
+              className="document-overlay-panel"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="document-overlay-header">
+                <h2 className="document-overlay-title">{viewedDoc?.title || "Dokument"}</h2>
+                <button
+                  onClick={closeDocument}
+                  className="document-overlay-close"
+                  aria-label="Schließen"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+              
+              <div className="document-overlay-content custom-scrollbar">
+                {isLoadingDoc ? (
+                  <div className="flex items-center justify-center py-12">
+                    <div className="text-[#bf953f]">
+                      <svg className="animate-spin h-8 w-8" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
                     </div>
-                  </motion.div>
+                  </div>
+                ) : (
+                  <div dangerouslySetInnerHTML={{ __html: documentContent }} />
                 )}
-              </AnimatePresence>
-            </div>
+              </div>
+            </motion.div>
           </motion.div>
-        ))}
-      </div>
-
-      {/* No Results */}
-      {filteredDocs.length === 0 && (
-        <div className="text-center py-16">
-          <div className="text-6xl mb-4">🔍</div>
-          <h3 className="text-xl font-bold text-white mb-2">Keine Dokumente gefunden</h3>
-          <p className="text-sm text-gray-400">
-            Versuche andere Suchbegriffe oder Filter
-          </p>
-        </div>
-      )}
-
-      {/* Footer with License Info */}
-      <div className="mt-16 pt-8 border-t border-gray-800">
-        <div className="caro-license-checkerboard p-6 rounded-lg">
-          <div className="text-center mb-4">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              <Scale className="w-6 h-6 text-[#bf953f]" />
-              <h3 className="text-xl font-bold text-white">
-                ⚖️ EIGENTUMSRECHTLICHE LIZENZ
-              </h3>
-            </div>
-            <p className="text-lg font-black text-[#bf953f]">
-              ALLE RECHTE VORBEHALTEN
-            </p>
-          </div>
-
-          <div className="space-y-3 text-xs text-gray-300">
-            <div>
-              <h4 className="text-[#bf953f] font-bold mb-1">HCOS – HNOSS CONTROL OPERATING SYSTEM</h4>
-            </div>
-
-            <div>
-              <h5 className="text-gray-400 font-semibold mb-1">URHEBERRECHTSHINWEIS:</h5>
-              <p>Copyright © 2024–2026 Daniel Pohl. Alle Rechte weltweit vorbehalten.</p>
-            </div>
-
-            <div>
-              <h5 className="text-gray-400 font-semibold mb-1">EIGENTUMS- UND SCHUTZRECHTE:</h5>
-              <p>
-                Diese Software, einschließlich Quellcode, Dokumentation, Algorithmen und Architekturdesigns,
-                ist das exklusive Eigentum von Daniel Pohl sowie der folgenden autorisierten Unternehmen:
-              </p>
-              <p className="text-white font-bold mt-1">
-                HNOSS Enterprises | PRISMANTHARION Corporation | SHINEHEALTHCARE GmbH | STARLIGHTMOVEMENTS AG
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 border-t border-gray-700">
-              <div>
-                <h5 className="text-red-400 font-semibold mb-2">NUTZUNGSBESCHRÄNKUNGEN:</h5>
-                <ul className="space-y-1 text-gray-400">
-                  <li>❌ KEINE NUTZUNG ohne ausdrückliche Genehmigung</li>
-                  <li>❌ KEINE KOPIEN oder Duplizierung</li>
-                  <li>❌ KEINE ÄNDERUNGEN oder abgeleitete Werke</li>
-                  <li>❌ KEINE VERBREITUNG oder Weitergabe</li>
-                  <li>❌ KEIN KLONEN von Repositories</li>
-                  <li>❌ KEINE REVERSE-ENGINEERING</li>
-                </ul>
-              </div>
-
-              <div>
-                <h5 className="text-yellow-400 font-semibold mb-2">RECHTSSTATUS:</h5>
-                <p className="text-gray-400 mb-2">
-                  Pilotprojekt in Zusammenarbeit mit:
-                </p>
-                <ul className="space-y-1 text-gray-400">
-                  <li>🏛️ Institutionen der Europäischen Union</li>
-                  <li>🛡️ NATO (North Atlantic Treaty Organization)</li>
-                  <li>🏢 The Pentagon / U.S. Department of Defense</li>
-                  <li>🌐 Vereinte Nationen (UN)</li>
-                  <li>💰 Deutsche Börse AG</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="pt-3 border-t border-gray-700">
-              <h5 className="text-cyan-400 font-semibold mb-2">SCHUTZ DES GEISTIGEN EIGENTUMS:</h5>
-              <p className="text-gray-400">
-                Geschützt durch: Internationales Urheberrecht, EU-Urheberrechtsrichtlinien, US Copyright Act,
-                Deutsches Urheberrechtsgesetz (UrhG), Patentrecht, GeschGehG, Vertragsrecht
-              </p>
-            </div>
-
-            <div className="pt-3 border-t border-red-900/50">
-              <h5 className="text-red-400 font-semibold mb-2">⚠️ VERSTÖSSE UND RECHTSVERFOLGUNG:</h5>
-              <p className="text-gray-400">
-                Unbefugte Nutzung wird mit voller Härte des Gesetzes verfolgt – zivilrechtliche Schadensersatzforderungen,
-                einstweilige Verfügungen, strafrechtliche Verfolgung sowie Meldung an INTERPOL.
-              </p>
-            </div>
-
-            <div className="pt-3 border-t border-gray-700 text-center">
-              <p className="text-gray-500 font-mono">
-                Kontakt: Rechtsabteilung – HNOSS Enterprises
-              </p>
-              <p className="text-gray-600 font-mono mt-1">
-                Status: KLASSIFIZIERT – PILOTPROJEKT – NICHT FÜR DIE ÖFFENTLICHE VERBREITUNG
-              </p>
-              <p className="text-gray-600 font-mono text-[10px] mt-2">
-                Version: PILOT-2026-EU-NATO-CLASSIFIED | Datum: 1. Januar 2024 | Letzte Änderung: 9. Mai 2026
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
