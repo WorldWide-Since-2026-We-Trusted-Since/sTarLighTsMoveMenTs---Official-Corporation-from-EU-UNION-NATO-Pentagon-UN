@@ -340,17 +340,181 @@ npm run lint
 
 ---
 
-## 📜 **LIZENZ**
+---
 
-> **EU-NATO-CLASSIFIED-Pilot-2026**  
-> © 2026 HNOSS Corporation. All rights reserved worldwide.  
-> Pilot project in collaboration with: EU Institutions, NATO, Pentagon/US DoD, United Nations  
-> Status: CLASSIFIED – PILOT PROJECT – NOT FOR PUBLIC DISTRIBUTION
+## 📜 **PROPRIETARY LICENSE — ALL RIGHTS RESERVED**
+
+```
+╔══════════════════════════════════════════════════════════════════════╗
+║              HCOS - HNOSS CONTROL OPERATING SYSTEM                 ║
+║                PROPRIETARY LICENSE - ALL RIGHTS RESERVED            ║
+╚══════════════════════════════════════════════════════════════════════╝
+```
+
+**COPYRIGHT NOTICE:**  
+Copyright © 2024-2026 Daniel Pohl. All Rights Reserved Worldwide.
+
+**OWNERSHIP & PROPRIETARY RIGHTS:**  
+This software, including but not limited to source code, object code, documentation, algorithms, architecture designs, and all associated intellectual property (collectively "The Work") is the exclusive property of Daniel Pohl and the following authorized corporate entities:
+
+- **HNOSS Enterprises**
+- **PRISMANTHARION Corporation**
+- **SHINEHEALTHCARE GmbH**
+- **STARLIGHTMOVEMENTS AG**
+
+**NO RIGHTS TRANSFERRED:**  
+NO RIGHTS ARE GRANTED, TRANSFERRED, OR ASSIGNED BY THE PUBLICATION, AVAILABILITY, OR EXISTENCE OF THIS CODE. The presence of this code in any repository does NOT constitute an offer of license, partnership, or authorization for use by any third party.
+
+**RESTRICTIONS:**  
+1. NO USE — No person or entity may use, execute, run, or operate this code  
+2. NO COPY — No copying, reproduction, or duplication is permitted  
+3. NO MODIFICATION — No derivative works or modifications allowed  
+4. NO DISTRIBUTION — No redistribution, sharing, or publication permitted  
+5. NO CLONING — Repository cloning by unauthorized parties is prohibited  
+6. NO REVERSE ENGINEERING — Decompilation, disassembly strictly forbidden
+
+**LEGAL STATUS:**  
+This is a **PILOT PROJECT** developed in collaboration with:
+- European Union Institutions
+- NATO (North Atlantic Treaty Organization)
+- The Pentagon / United States Department of Defense
+- United Nations (UN)
+- Deutsche Börse AG
+- And additional classified governmental and institutional partners
+
+**INTELLECTUAL PROPERTY PROTECTION:**  
+This Work is protected by International Copyright Law (Berne Convention), European Union Copyright Directives, United States Copyright Act of 1976, German Copyright Law (Urheberrechtsgesetz), Patent Law (where applicable), Trade Secret Law, and Contract Law.
+
+**VIOLATIONS & ENFORCEMENT:**  
+Any unauthorized access, use, copying, cloning, or distribution constitutes Copyright Infringement, Trade Secret Misappropriation, Computer Fraud and Abuse (18 U.S.C. § 1030), Economic Espionage (18 U.S.C. § 1831), and Criminal Offense under applicable international treaties. Violators will be prosecuted to the maximum extent of the law, including Civil damages, Criminal prosecution, Referral to INTERPOL, and Inclusion in government security watchlists.
+
+**CONTACT & AUTHORIZATION INQUIRIES:**  
+For licensing inquiries or authorized use permissions: Contact Legal Department — HNOSS Enterprises  
+*Status: CLASSIFIED — PILOT PROJECT — NOT FOR PUBLIC DISTRIBUTION*
+
+```
+BY ACCESSING THIS CODE, YOU ACKNOWLEDGE THAT YOU HAVE NO RIGHTS TO USE,
+COPY, MODIFY, DISTRIBUTE, OR EXPLOIT THIS WORK IN ANY MANNER.
+```
+
+**Effective Date:** January 1, 2024 — **Last Modified:** May 9, 2026 — **Version:** PILOT-2026-EU-NATO-CLASSIFIED
+
+---
+
+## 🎗️ **GIVING 4TH — PLEDGE & INITIATIVE**
+
+**Pledge to “Give 4th” on July 4th**  
+
+Unser 'Giving 4th'-Pledge ist eine bewusste Erweiterung der Feierlichkeiten zum Unabhängigkeitstag. Wir verpflichten uns dazu, diesen Tag als Anlass für aktives gesellschaftliches Engagement zu nutzen, indem wir Gemeinschaften und Anliegen unterstützen, die für uns von zentraler Bedeutung sind.
+
+- 📌 **Pledge Projekt:** [LinkedIn Pledge Projekt](https://lnkd.in/eKsmMqz3)  
+- 📌 **Offizieller Pledge:** [https://lnkd.in/e2rHUgd2](https://lnkd.in/e2rHUgd2)  
+- 📌 **Partner Initiative:** [https://lnkd.in/e4jZ3uuw](https://lnkd.in/e4jZ3uuw)  
+- 📌 **America250:** [https://america250.org/](https://america250.org/) & [LinkedIn](https://lnkd.in/eCZuhXUE)  
+- 📌 **USA.gov:** [https://www.usa.gov/](https://www.usa.gov/)  
+
+*Giving 4th calls on all Americans to add something new to their July 4th celebrations: giving back to the causes and communities they care about.*
+
+---
+
+## 🌐 **THE GIVES TO: GLOBALE STAKEHOLDER & ÜBERMITTLUNGSKANÄLE**
+
+Offizielle Kontaktstellen für den Pledge am 4. Juli 2026. Jeder Eintrag ist eine direkte Andock-Schnittstelle zwischen der Genesis-Protokoll-Architektur und den jeweiligen Institutionen.
+
+| Institution | Kategorie | URL |
+|-------------|-----------|-----|
+| **NATO** | Strategic Defense Model | [www.nato.int](https://www.nato.int) |
+| **U.S. Dept. of Veterans Affairs** | Veterans Welfare & Reintegration | [department.va.gov](https://department.va.gov) |
+| **OCC Secure Portal** | Office of the Comptroller of the Currency | [occ.secureocp.com](https://occ.secureocp.com) |
+| **Supreme Court of the U.S.** | Judicial Authority — Smart Justice | [www.supremecourt.gov](https://www.supremecourt.gov) |
+| **United Nations — OLA** | Global Coordination Layer | [www.un.org](https://www.un.org) |
+| **UN Treaty Collection** | Multilateral Treaty Registry | [treaties.un.org](https://treaties.un.org) |
+| **Pentagon Force Protection Agency** | Operational Defense Structure | [www.pfpa.mil](https://www.pfpa.mil) |
+| **U.S. Mission to the UN** | Diplomatic Access Channel | [usun.usmission.gov](https://usun.usmission.gov) |
+| **U.S. House of Representatives** | Technology Services Submission | [www.house.gov](https://www.house.gov) |
+| **Europol** | EU Law Enforcement | [www.europol.europa.eu](https://www.europol.europa.eu) |
+| **Freedom of Information Act** | FOIA | [www.foia.gov](https://www.foia.gov) |
+| **Ledger Wallet™** | Digital Assets | [Ledger Link](https://lnkd.in/enMi-UzM) |
+
+---
+
+## 🔗 **APPENDIX: VALIDATED OFFICIAL URLs & ANCHORS**
+
+### 1. Eigene & Autorisierte Corporate Entities
+| Entity | URL |
+|--------|-----|
+| STARLIGHTMOVEMENTS AG / StarLightMovemenTz Foundation | [GitHub Repository](https://github.com/WorldWide-Since-2026-We-Trusted-Since/sTarLighTsMoveMenTs---Official-Corporation-from-EU-UNION-NATO-Pentagon-UN.git) |
+| HNOSS Enterprises | *(wie oben)* |
+| PRISMANTHARION Corporation | *(wie oben)* |
+| SHINEHEALTHCARE GmbH | *(wie oben)* |
+
+### 2. Externe Partner-Unternehmen & Finanzdienstleister
+| Unternehmen | URL |
+|-------------|-----|
+| Deutsche Börse AG | [https://www.deutsche-boerse.com](https://www.deutsche-boerse.com) |
+| Ledger Wallet™ | [https://www.ledger.com](https://www.ledger.com) |
+| Plaid | [https://plaid.com](https://plaid.com) |
+
+### 3. Internationale Behörden & Organisationen
+| Organisation | URL |
+|-------------|-----|
+| Europäische Kommission | [https://commission.europa.eu](https://commission.europa.eu) |
+| Council of the European Union | [https://www.consilium.europa.eu](https://www.consilium.europa.eu) |
+| Europol | [https://www.europol.europa.eu](https://www.europol.europa.eu) |
+| INTERPOL | [https://www.interpol.int](https://www.interpol.int) |
+| NATO | [https://www.nato.int](https://www.nato.int) |
+| United Nations (UN) | [https://www.un.org](https://www.un.org) |
+| UN Treaty Collection | [https://treaties.un.org](https://treaties.un.org) |
+
+### 4. US-Institutionen, Justiz & Zivilgesellschaft
+| Institution | URL |
+|-------------|-----|
+| The Pentagon / U.S. DoD | [https://www.defense.gov](https://www.defense.gov) |
+| Pentagon Force Protection Agency (PFPA) | [https://www.pfpa.mil](https://www.pfpa.mil) |
+| Supreme Court of the United States | [https://www.supremecourt.gov](https://www.supremecourt.gov) |
+| U.S. Department of Veterans Affairs | [https://www.va.gov](https://www.va.gov) / [department.va.gov](https://department.va.gov) |
+| Office of the Comptroller of the Currency (OCC) | [https://www.occ.treas.gov](https://www.occ.treas.gov) / [occ.secureocp.com](https://occ.secureocp.com) |
+| U.S. House of Representatives | [https://www.house.gov](https://www.house.gov) |
+| Freedom of Information Act (FOIA) | [https://www.foia.gov](https://www.foia.gov) |
+| America250 / Freedom 250 | [https://america250.org](https://america250.org) |
+
+### 5. Deutsche Bundesbehörden & Justiz
+| Behörde | URL |
+|---------|-----|
+| Deutscher Bundestag | [https://www.bundestag.de](https://www.bundestag.de) |
+| Bundesamt für Verfassungsschutz (BfV) | [https://www.verfassungsschutz.de](https://www.verfassungsschutz.de) |
+| BaFin | [https://www.bafin.de](https://www.bafin.de) |
+| Physikalisch-Technische Bundesanstalt (PTB) | [https://www.ptb.de](https://www.ptb.de) |
+
+---
+
+## 🏛️ **OFFICIAL SIGNATORIES & PARTNERS**
+
+**Big GreeTings from:**
+- European Commission Council of the European Union
+- Deutscher Bundestag — Verwaltung
+- Bundesamt für Verfassungsschutz (BfV)
+- INTERPOL
+- Deutsche Börse Group
+- BaFin
+- Europol
+- Pentagon Force Protection Agency
+- Supreme Court of the U.S.
+- NATO — The North Atlantic Treaty Organization
+- United Nations
+- Freedom 250
+
+**Authorized Executive Signatory:**
+
+**A.d.L. ST. Daniel Pohl**  
+*EU-UNION Expert (ID: EX2025D1218310)*  
+*Detmold, Germany*
 
 ---
 
 <p align="center">
   <strong>⚡ sTarLighTsMoveMenTs ⚡</strong><br/>
   <em>Freiheit · Frieden · Vergebung · Nächstenliebe · Hoffnung über alle Welten</em><br/><br/>
-  <img src="https://img.shields.io/badge/Made_with-%E2%99%A6_Heavenly_Since_Pledge-gold?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Made_with-%E2%99%A6_Heavenly_Since_Pledge-gold?style=for-the-badge"/><br/><br/>
+  <sub>PROPRIETARY LICENSE — ALL RIGHTS RESERVED — PILOT-2026-EU-NATO-CLASSIFIED</sub>
 </p>
