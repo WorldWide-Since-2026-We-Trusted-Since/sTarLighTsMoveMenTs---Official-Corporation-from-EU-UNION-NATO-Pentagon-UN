@@ -1,242 +1,356 @@
-/**
- * @license
- * SPDX-License-Identifier: EU-NATO-CLASSIFIED-Pilot-2026
- * @copyright Copyright © 2024–2026 Daniel Pohl. All rights reserved worldwide.
- */
+# 🌟 **STARLIGHTMOVEMENTS** — Official Corporation Portal
 
-# 🌟 sTarLighTsMoveMenTs Foundation
-### Official Corporation Infrastructure | EU-UNION | NATO | Pentagon | UN
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Active_%E2%99%A6%20PILOT-green?style=flat-square"/>
+  <img src="https://img.shields.io/badge/License-EU--NATO--CLASSIFIED--Pilot--2026-blue?style=flat-square"/>
+  <img src="https://img.shields.io/badge/ESLint-0%20Errors-brightgreen?style=flat-square"/>
+  <img src="https://img.shields.io/badge/Snapshot-ArchYTecTIaLObItZFaCe-orange?style=flat-square"/>
+</p>
 
-**Expert ID / Validation Registry:** `EX2025D1218310`  
-**Location Data Center:** Detmold, Germany (Node 01)  
-**Architecture Standard:** PNIA (Production Network ID Architecture) / 8-Layer "Schnarchitektur"
-
----
-
-## 📑 Inhaltsverzeichnis (Holistic Architecture Map)
-1. [Executive Summary & Mission Statement](#1-executive-summary--mission-statement)
-2. [Gold Awareness Compliance & Code of Conduct](#2-gold-awareness-compliance--code-of-conduct)
-3. [The "Holy Tree": Infrastructure & Function Graph](#3-the-holy-tree-infrastructure--function-graph)
-4. [Cosmos Peace Uhr: Metrology & Synchronization](#4-cosmos-peace-uhr-metrology--synchronization)
-5. [Toolchain, Installation & Deployment Matrix](#5-toolchain-installation--deployment-matrix)
-6. [Validation & Certificates](#6-validation--certificates)
+> **📸 Snapshot:** `ArchYTecTIaLObItZFaCe` — Vollständiger Projektstand nach Deep Scan & Reconstructive Debugging  
+> **🔖 Tag:** `git checkout ArchYTecTIaLObItZFaCe`  
+> **🌐 Live:** `http://localhost:3000/` *(Vite Dev Server)*
 
 ---
 
-## 1. Executive Summary & Mission Statement
+## 📋 **EXECUTIVE SUMMARY** — *Komplette Projektübersicht*
 
-Das **sTarLighTsMoveMenTs** Repository ist das zentrale Nervensystem für supranationale digitale Infrastrukturen. Entwickelt unter der PNIA-Architektur, orchestriert dieses System hochsichere, datensouveräne Netzwerke für institutionelle Akteure. Ziel ist die Etablierung einer abhörsicheren, ressourcenschonenden und zeitlich absolut synchronisierten Umgebung.
-
-| Registry | ID |
-|----------|-----|
-| D-U-N-S | 315676980 \| 317066336 |
-| UNGM | 1172700 |
-| PIC | 873042778 |
-| Swiss National ID | 756.6199.0539.28 |
-| Global LEI | 894500GBJSIW8L6ET310 |
-| VAT ID | DE441892129 |
-
----
-
-## 2. Gold Awareness Compliance & Code of Conduct
-
-Dieses Projekt operiert unter der **Gold Awareness Compliance**, einem strikten Regelwerk:
-
-*   **Zero-Trust by Default:** Kein System vertraut ohne kryptografische Validierung.
-*   **Data Sovereignty (EU):** Alle Deployments in isolierten, selbst-gehosteten Umgebungen.
-*   **Resource Protection:** Ressourcennutzung gemäß BNatSchG-Transformation.
-*   **Auditability (NATO/Pentagon):** Jeder Commit, jede Netzwerkänderung im Ledger protokolliert.
-
----
-
-## 3. The "Holy Tree": Infrastructure & Function Graph
-
-```mermaid
-graph TD
-    Root[🌟 sTarLighTsMoveMenTs Core]:::foundation
-
-    %% Level 1: Governance & Policy
-    Root --> Gov[Governance & Policy Cluster]
-    Gov --> PTT[Trusted Trust Thrust Policy Engine]:::policy
-    Gov --> EUTL[European Union Treaty Law Ledger]:::policy
-    Gov --> SFW[States Flow Routing Matrix]:::policy
-
-    %% Level 2: Finance & Care
-    Root --> Fin[Financial & Social Systems]
-    Fin --> WBA[Financial Sponsorship Gateway]:::finance
-    Fin --> F250[Freedom 250 Initiative]:::finance
-    Fin --> SSHC[Shine Healthcare Network]:::finance
-
-    %% Level 3: Tech & Orchestration
-    Root --> Tech[Global Tech & Compute]
-    Tech --> CHOS[CHOS Globe Orchestration]:::tech
-    Tech --> AITH[AI Heritage Archive - Architecture]:::tech
-    Tech --> HACK[MLH Holiday Hackathon Hub Dec 2033]:::tech
-
-    classDef foundation fill:#1a1a1a,stroke:#d4af37,stroke-width:2px,color:#fff
-    classDef policy fill:#003366,stroke:#fff,stroke-width:1px,color:#fff
-    classDef finance fill:#005500,stroke:#fff,stroke-width:1px,color:#fff
-    classDef tech fill:#4b0082,stroke:#fff,stroke-width:1px,color:#fff
+```
+╔══════════════════════════════════════════════════════════════════════╗
+║                   STARLIGHTMOVEMENTS OFFICIAL PORTAL               ║
+║        Humanitarian · Political · Spiritual · Defense              ║
+║                                                                     ║
+║   Ein globales Bündnis für menschliche Souveränität und             ║
+║   Regeneration — basierend auf PNIA, Genesis-Protokoll und         ║
+║   dem System der Zweiten Chance als Daseinsvorsorge.               ║
+╚══════════════════════════════════════════════════════════════════════╝
 ```
 
-**Access Points (Funktionale Einstiege):**
-- [Trusted Trust Thrust Policy Engine]: Regelwerk und Policy-Validierung
-- [European Union Treaty Law Ledger]: Digitaler Vertragsspeicher
-- [States Flow Routing Matrix]: Daten- und Ressourcenverteilung
-- [Financial Sponsorship Gateway]: Institutionelles Funding
-- [Freedom 250 Initiative]: Zentrales Befreiungs- und Finanzprotokoll
-- [AI Heritage Archive]: Speicher für historische KI-Modelle
-- [CHOS Globe Orchestration]: Weltweite Server- und Zonensteuerung
+### 🔷 **Projekt-Kern**
+
+| Dimension | Beschreibung |
+|-----------|-------------|
+| **🇪🇺 EU-UNION** | Regulatory Governance Layer — eID-Brücken (Freja eID / Schweden ID) |
+| **🛡️ NATO** | Strategic Defense Model — Operational Defense Structure |
+| **🏛️ Pentagon** | Strategic Planning & Defense Blueprint |
+| **🌍 United Nations** | Global Coordination Layer & UNGM Node |
+| **💠 HNOSS** | PrisMaTHarIOn — Global Reference Governance System |
+
+### 📊 **Tabellen: Projekt-Kennzahlen**
+
+| Metrik | Wert |
+|--------|------|
+| **Gesamt-Sovereign-Kapital** | € 4.051,6 Mrd. (CNP System) |
+| **SWF Asset Pools** | 4 (SAGA-PEZ, HNOSS™, EU-NATO-DP, UNGM-PIC) |
+| **Projekt-Korridore** | 5 (Energy, AI, Financial, Defense, Humanitarian) |
+| **Governance-Ebenen** | 6 Level (TX → TXA → GOV/FI/SWFs → HUB → Projects → Framework) |
+| **Registry IDs** | D-U-N-S, VAT, UNGM, LEI, Swiss ID |
+| **Navigation-Tabs** | 9 (Pledge, Papers, Finance, Memorial, Portal, Governance, Capital, Audit, Concil) |
 
 ---
 
-## 4. Cosmos Peace Uhr: Metrology & Synchronization
-
-Für synchrone Abwicklung von Transaktionen nutzt die Infrastruktur das Cosmos Peace Uhr Konzept:
+## 🏗️ **ARCHITEKTUR-DIAGRAMM** — *Governance & Marktstruktur*
 
 ```mermaid
-sequenceDiagram
-    participant PTB as PTB (Braunschweig)
-    participant CPU as Cosmos Peace Uhr (Constellation)
-    participant PNIA as PNIA Layer 8
-    participant Node as Detmold Datacenter Node 01
-
-    PTB->>CPU: Initiale Atomzeit-Kalibrierung (TAI)
-    loop Continuous Sync
-        CPU->>PNIA: Broadcast Quantum-Secured Time
-        PNIA->>Node: Latenzkompensation (Ultra-Low)
-        Node-->>CPU: ACK & Drift-Report
+graph TB
+    subgraph "Level 1: TRANSCENDENCE LAYER"
+        TX[TX — Meta Governance<br/>Strategic Intelligence]
     end
-    Note over CPU,Node: Skala: Nanosekunden-Präzision für CBDC-Settlements
+    
+    subgraph "Level 2: TRANSCENDENT AUTHORITY"
+        TXA[TXA — TSAI<br/>Supervisory AI Infrastructure<br/>SRA · GCA · RGC · ABN · ESA · NSA · NCA · CA · RA]
+    end
+    
+    subgraph "Level 3: KERN-EBENEN"
+        GOV[GOV Core<br/>GovNet · GovID · GovAPI · GovX]
+        FI[FI Financial<br/>CB · Settlement · LEI]
+        SWF[SWFs Sovereign<br/>EpsLGSEz · GPs/LPs]
+    end
+    
+    subgraph "Level 4: GOVERNANCE HUB"
+        HUB[World's Star SWFs<br/>PgEz · EpsLGSEz · pg_slz · GLp · SAGA-PEZ]
+    end
+    
+    subgraph "Level 5: IMPLEMENTATION"
+        PROJ[Global Projects<br/>Energy · AI · Financial · Defense · Humanitarian]
+    end
+    
+    subgraph "Level 6: FRAMEWORK"
+        FRAME[Global Reference Framework<br/>NATO · EU · Pentagon · United Nations]
+    end
+    
+    TX --> TXA
+    TXA --> GOV
+    TXA --> FI
+    TXA --> SWF
+    GOV --> HUB
+    FI --> HUB
+    SWF --> HUB
+    HUB --> PROJ
+    PROJ --> FRAME
 ```
 
-**Implementierung:** `src/components/AtomicSyncClock.tsx` (T2 Tool)
+---
+
+## 🗺️ **INTERAKTIVE FUNKTIONS-LANDKARTE**
+
+### 🔹 **1. Government Pledge Page** — *Das Globale Bündnis*
+- 📜 10 Institutionen (NATO, VA, OCC, SCOTUS, UN OLA, UN Treaties, PFPA, USUN, U.S. House, Europol)
+- ✉️ Interaktives Submission-Formular mit automatischer Betreff-Anpassung
+- 📋 Copy-to-Clipboard für Cover Letters
+- 🏛️ Pledge-Vertragstext (Präambel, Artikel I-VI, Schlussbestimmungen)
+
+### 🔹 **2. Papers Archive** — *Wissenschaftliche Dokumentation*
+- 📚 8 Analyse-Dokumente aus dem `analysis/` Ordner
+- 🔍 Overlay-Viewer für Markdown-Dokumente
+- 🏷️ Kategorisiert nach Thema
+
+### 🔹 **3. Finance System** — *Finanzsystem-Architektur*
+- 💰 SWF Asset Pools mit Allokations-Balken
+- 📊 Graphische Aufteilung der Sovereign Wealth Funds
+- 📈 Projekt-Korridore mit Fortschrittsbalken
+- 🏦 SAGA-PEZ Partner-Framework
+
+### 🔹 **4. Memorial Tribute** — *Gedenkstätte*
+- 🕊️ Tribute-Ansicht mit persönlicher Widmung
+- 👤 Verstorbene Key-Personen aus 20+ Ländern
+- ⚰️ Friedhofs- und Team-Informationen
+
+### 🔹 **5. Identity Portal** — *100% Original Identity Design*
+- ⭐ 8 Orbit Stars (s1-s8)
+- 🔷 Hexagon-Frame mit 6 Hex-Stars
+- 🌟 Metallic-Gold/Silver Text Effekte
+- 🌈 Rainbow-Glow Animationen
+- 🔐 Secure Terminal Access mit E-Mail/Telefon
+- 🔗 SAGA-PEZ Verification Info Hub (6 Nodes)
+- 📜 Heavenly Chronicles Timeline
+
+### 🔹 **6. Governance Hierarchy** — *Institutionelle Governance-Architektur*
+- 🎯 6 Ebenen interaktive Nodes (TX → TXA → GOV/FI/SWFs → HUB → Projects → Framework)
+- ✨ Cosmic Pulse Ring & Shimmer Effekte bei Hover
+- 📋 Detail-Panel mit Mandat, Politik, Wissenschaft, Spiritual, Krypto-Modulen
+- 📜 ASCII Spec Blueprint-Ansicht
+- 📊 DataVisualizationDashboard (Recharts)
+
+### 🔹 **7. Capital & Corridor Map** — *Finanzmarkt- & Infrastrukturdaten*
+- 💼 SWF_ASSETS: SAGA-PEZ (35%), HNOSS™ (24%), EU-NATO-DP (22%), UNGM-PIC (19%)
+- 🚀 PROJECT_CORRIDORS: Energy (€950B), AI (€1.200B), Financial (€780B), Defense (€1.100B), Humanitarian (€650B)
+
+### 🔹 **8. Live Audits & Signer** — *Kryptographischer Transaktions-Signierer*
+- ✍️ Digital Signing Form mit Quellen/Zielen/Beträgen
+- 🔗 Echtzeit-Blockchain-Ledger-Stream
+- 🟢 TSAI Audit Status: GREEN
+- ⚡ Live Ticker (4 Sekunden Intervall)
+
+### 🔹 **9. Concil Portal** — *Official Documentation Archive*
+- 📑 Concil-Protokolle (CP01)
+- 📄 Vollständige PNIA-Dokumentation
+- 🏛️ Staatliche Strukturen
 
 ---
 
-## 5. Toolchain, Installation & Deployment Matrix
+## 💠 **SWF ASSET ALLOCATION** — *Sovereign Wealth Funds*
 
+```mermaid
+pie title SWF Asset Allocation (€4.051,6 Mrd. Gesamt)
+    "SAGA-PEZ" : 35
+    "HNOSS™ Treasury" : 24
+    "EU-NATO Defense" : 22
+    "UN Humanitarian" : 19
+```
 
-| Tool / Service | Funktion / PNIA Ebene | Installations-Skript (Copy & Paste) | Repository / Herkunft |
-| :--- | :--- | :--- | :--- |
-| **@google/genai** | Ebene 5: Node.js Dependency | `npm install @google/genai` | [npmjs.com/package/@google/genai](https://www.npmjs.com/package/@google/genai) |
-| **@tailwindcss/vite** | Ebene 5: Node.js Dependency | `npm install @tailwindcss/vite` | [npmjs.com/package/@tailwindcss/vite](https://www.npmjs.com/package/@tailwindcss/vite) |
-| **@types/express** | Ebene 5: Node.js Dependency | `npm install @types/express` | [npmjs.com/package/@types/express](https://www.npmjs.com/package/@types/express) |
-| **@types/node** | Ebene 5: Node.js Dependency | `npm install @types/node` | [npmjs.com/package/@types/node](https://www.npmjs.com/package/@types/node) |
-| **@typescript-eslint/eslint-plugin** | Ebene 5: Node.js Dependency | `npm install @typescript-eslint/eslint-plugin` | [npmjs.com/package/@typescript-eslint/eslint-plugin](https://www.npmjs.com/package/@typescript-eslint/eslint-plugin) |
-| **@typescript-eslint/parser** | Ebene 5: Node.js Dependency | `npm install @typescript-eslint/parser` | [npmjs.com/package/@typescript-eslint/parser](https://www.npmjs.com/package/@typescript-eslint/parser) |
-| **@vitejs/plugin-react** | Ebene 5: Node.js Dependency | `npm install @vitejs/plugin-react` | [npmjs.com/package/@vitejs/plugin-react](https://www.npmjs.com/package/@vitejs/plugin-react) |
-| **autoprefixer** | Ebene 5: Node.js Dependency | `npm install autoprefixer` | [npmjs.com/package/autoprefixer](https://www.npmjs.com/package/autoprefixer) |
-| **dotenv** | Ebene 5: Node.js Dependency | `npm install dotenv` | [npmjs.com/package/dotenv](https://www.npmjs.com/package/dotenv) |
-| **esbuild** | Ebene 5: Node.js Dependency | `npm install esbuild` | [npmjs.com/package/esbuild](https://www.npmjs.com/package/esbuild) |
-| **eslint** | Ebene 5: Node.js Dependency | `npm install eslint` | [npmjs.com/package/eslint](https://www.npmjs.com/package/eslint) |
-| **express** | Ebene 5: Node.js Dependency | `npm install express` | [npmjs.com/package/express](https://www.npmjs.com/package/express) |
-| **lucide-react** | Ebene 5: Node.js Dependency | `npm install lucide-react` | [npmjs.com/package/lucide-react](https://www.npmjs.com/package/lucide-react) |
-| **motion** | Ebene 5: Node.js Dependency | `npm install motion` | [npmjs.com/package/motion](https://www.npmjs.com/package/motion) |
-| **pdf-parse** | Ebene 5: Node.js Dependency | `npm install pdf-parse` | [npmjs.com/package/pdf-parse](https://www.npmjs.com/package/pdf-parse) |
-| **react** | Ebene 5: Node.js Dependency | `npm install react` | [npmjs.com/package/react](https://www.npmjs.com/package/react) |
-| **react-dom** | Ebene 5: Node.js Dependency | `npm install react-dom` | [npmjs.com/package/react-dom](https://www.npmjs.com/package/react-dom) |
-| **recharts** | Ebene 5: Node.js Dependency | `npm install recharts` | [npmjs.com/package/recharts](https://www.npmjs.com/package/recharts) |
-| **tailwindcss** | Ebene 5: Node.js Dependency | `npm install tailwindcss` | [npmjs.com/package/tailwindcss](https://www.npmjs.com/package/tailwindcss) |
-| **tsx** | Ebene 5: Node.js Dependency | `npm install tsx` | [npmjs.com/package/tsx](https://www.npmjs.com/package/tsx) |
-| **typescript** | Ebene 5: Node.js Dependency | `npm install typescript` | [npmjs.com/package/typescript](https://www.npmjs.com/package/typescript) |
-| **vite** | Ebene 5: Node.js Dependency | `npm install vite` | [npmjs.com/package/vite](https://www.npmjs.com/package/vite) |
-
-## 6. Validation & Certificates
-
-- **System Integrity:** Verified by sTarLighTsMoveMenTs Foundation
-- **EU-Expert Validation:** Cleared under `EX2025D1218310`
-- **Metrology Standard:** Cosmos Peace Uhr Constellation (PTB Intent)
-- **Banking Infrastructure:** Plaid API Production Environment (Validated June 2026)
+| Asset | Code | Kapital | Anteil | LPs | GPs |
+|-------|------|---------|--------|-----|-----|
+| SAGA-PEZ Sovereign Capital | SAGA-PEZ | €1.420,5 Mrd. | 35% | EpsLGSEz | PgEz |
+| Hnoss Treasury Reserve | HNOSS™ | €980,2 Mrd. | 24% | Daniel Pohl (HolyThreeKings) | GLp |
+| EU-NATO Defense Capital | EU-NATO-DP | €890,1 Mrd. | 22% | Pentagon Structure | pg_slz |
+| United Nations Humanitarian | UNGM-PIC | €760,8 Mrd. | 19% | UN Global Coordination | EpsLGSEz |
 
 ---
 
-## 🔧 Tools Reference Table
+## 🚀 **PROJEKT-KORRIDORE** — *Infrastruktur-Entwicklung*
 
-| Tool-ID | Component | Function | Install/Deploy Location |
-|---------|-----------|----------|------------------------|
-| T2 | AtomicSyncClock | High-precision UTC time synchronization | `src/components/AtomicSyncClock.tsx` |
-| D7 | BlockchainAuditing | Echtzeit-Transaktionssignatur & Audit | `src/App.tsx` - handleGenesisSignature |
-| D9 | RainbowLightningFooter | Rosa-Lila Schimmer Memorial Footer | `src/components/RainbowLightningFooter.tsx` |
+```mermaid
+gantt
+    title Projekt-Fortschritt
+    dateFormat  YYYY-MM-DD
+    axisFormat  %Q
+    
+    section Energy
+    Strategic Energy Grid           :done, 2025Q1, 2026Q3
+    
+    section AI
+    Transcendent AI & Digital       :done, 2025Q1, 2026Q2
+    
+    section Financial
+    Central Bank & Clearing         :done, 2025Q1, 2026Q2
+    
+    section Defense
+    NATO Strategic Defense          :active, 2025Q1, 2026Q4
+    
+    section Humanitarian
+    UN Humanitarian Programs        :done, 2025Q1, 2026Q2
+```
+
+| Projekt | Kategorie | Budget | Fortschritt | Nodes | Architekt |
+|---------|-----------|--------|-------------|-------|-----------|
+| Strategic Energy Grid | Energy | €950 Mrd. | ████████░░ 88% | 140 | HNOSS Architecture Core |
+| Transcendent AI & Digital | AI | €1.200 Mrd. | █████████░ 94% | 280 | Daniel Pohl / H31mBL42ur |
+| Central Bank & Clearing | Financial | €780 Mrd. | █████████░ 91% | 95 | D-U-N-S Certified Partners |
+| NATO Strategic Defense | Defense | €1.100 Mrd. | ████████░░ 85% | 165 | Pentagon Joint Coordination |
+| UN Humanitarian Programs | Humanitarian | €650 Mrd. | █████████▉ 97% | 210 | HolyThreeKings Charitable Trust |
 
 ---
 
-## 🌐 Partner Corporations (Functional Access Points)
+## 🧩 **KOMPONENTEN-STRUKTUR** — *React Component Tree*
 
-| Function | Partner | Project Reference |
-|----------|---------|-------------------|
-| Policy Engine | Trusted Trust Thrust Policy Engine | Policy-Validierung |
-| Treaty Law | European Union Treaty Law Ledger | Digitaler Vertragsspeicher |
-| Routing Matrix | States Flow Routing Matrix | Datenverteilung |
-| Financial Gateway | Financial Sponsorship Gateway | Institutionelles Funding |
-| Freedom Protocol | Freedom 250 Initiative | Befreiungs-Protokoll |
-| Healthcare Network | Shine Healthcare Network | Medizinisches Netzwerk |
-| Globe Orchestration | CHOS Globe Orchestration | Server-Steuerung |
-| AI Archive | AI Heritage Archive - Architecture | KI-Modelle Speicher |
-| Hackathon Hub | MLH Holiday Hackathon Hub Dec 2033 | Entwicklungs-Hub |
+```mermaid
+graph LR
+    subgraph "Core"
+        App[App.tsx<br/>Main Router]
+        main[main.tsx<br/>Entry Point]
+    end
+    
+    subgraph "Tabs"
+        Pledge[PledgePage]
+        Papers[PapersArchive]
+        Finance[FinanceSystemPage]
+        Memorial[MemorialTributePage]
+        Portal[Portal Section]
+        Gov[Governance Hierarchy]
+        Capital[Capital & Corridor]
+        Audit[Live Audits & Signer]
+        Concil[ConcilPortal]
+    end
+    
+    subgraph "Shared"
+        Cosmic[CosmicSystem<br/>WarpTunnel, Lightning, NewsTicker, TwinklingStars]
+        Atomic[AtomicSyncClock]
+        DataViz[DataVisualizationDashboard]
+        Rainbow[RainbowLightningFooter]
+        GovBtn[GovernanceNodeButton<br/>Reusable Node Component]
+    end
+    
+    App --> Pledge
+    App --> Papers
+    App --> Finance
+    App --> Memorial
+    App --> Portal
+    App --> Gov
+    App --> Capital
+    App --> Audit
+    App --> Concil
+    App --> Cosmic
+    App --> Atomic
+    App --> DataViz
+    App --> Rainbow
+    Gov --> GovBtn
+```
 
 ---
 
-## 🔐 Zero-Key-in-Code Security Architecture
+## 🛡️ **SECURITY LAYER** — *Autonome Schutzmechanismen*
 
-### Überblick
-Dieses Repository implementiert eine **Zero-Key-in-Code** Architektur für `pLedge250freedom.gov.eu`. Keine API-Keys, Tokens oder Secrets werden jemals im Quellcode oder im Repository gespeichert.
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                  HNOSS AUTONOMOUS SECURITY                      │
+├─────────────────────────────────────────────────────────────────┤
+│  • Hardware-Token: Browser-Fingerprint (UserAgent, Screen,     │
+│    HardwareConcurrency, Plugins) → sessionStorage              │
+│  • Anti-Forensics: Autocomplete/Spellcheck deaktiviert         │
+│  • MutationObserver: Blockiert unautorisierte Script-Injection │
+│  • CSP: default-src 'self'; style-src fonts.googleapis.com;    │
+│    font-src fonts.gstatic.com; img-src 'self' data:;           │
+└─────────────────────────────────────────────────────────────────┘
+```
 
-### Komponenten
+---
 
-| Komponente | Datei | Funktion |
-|------------|-------|----------|
-| Cloudflare Worker | `cloudflare-worker.js` | Security Edge mit strikten Headers |
-| Wrangler Config | `wrangler.toml` | Zero Trust Deployment (keine Keys) |
-| SSH Tunnel Script | `scripts/ssh-tunnel.sh` | Browser-Auth Tunnel Setup |
-| Security Middleware | `scripts/security-headers.js` | Client-Side Anti-Copy & DOM Protection |
-| .gitignore | `.gitignore` | Verhindert Secret-Leaks |
+## 🔐 **REGISTRY & ZERTIFIZIERUNGEN**
 
-### Deployment (Zero Trust)
+| Registrierung | ID |
+|---------------|-----|
+| **D-U-N-S Registry** | `315676980` \| `317066336` |
+| **VAT ID & EU-Ref** | `DE441892129` \| `EX2025D1218310` |
+| **UNGM & PIC** | `1172700` \| `873042778` |
+| **Global LEI System** | `894500GBJSIW8L6ET310` |
+| **Swiss National ID** | `756.6199.0539.28` |
+
+---
+
+## 🛠️ **TECH-STACK**
+
+| Technologie | Version | Zweck |
+|-------------|---------|-------|
+| **Vite** | 6.4.3 | Build-Tool & Dev-Server |
+| **React** | 19.0.1 | UI Framework |
+| **TypeScript** | 5.8.2 | Type Safety |
+| **Tailwind CSS** | 4.1.14 | Utility-First CSS |
+| **Motion (Framer Motion)** | 12.23.24 | Animationen |
+| **Lucide React** | 0.546.0 | Icons |
+| **Recharts** | 3.8.1 | Diagramme |
+| **ESLint** | 9.x | Code Quality (0 Errors ✅) |
+| **@tailwindcss/vite** | 4.1.14 | Tailwind v4 Vite Plugin |
+
+---
+
+## 📂 **PROJEKTSTRUKTUR** — *Dateibaum*
+
+```
+src/
+├── App.tsx                          # Haupt-Router (9 Tabs)
+├── main.tsx                         # Entry Point
+├── index.css                        # Global Styles + Tailwind
+├── data.ts                          # Daten (Nodes, Assets, Corridors, Audits)
+├── types.ts                         # TypeScript Interfaces
+├── autonomous-security.ts           # Security Layer
+└── components/
+    ├── AtomicSyncClock.tsx          # Atomuhr-Komponente
+    ├── ConcilPortal.tsx             # Concil Dokumentation
+    ├── CosmicSystem.tsx             # WarpTunnel, Lightning, NewsTicker, Stars
+    ├── DataVisualizationDashboard.tsx # Recharts Dashboard
+    ├── FinanceSystemPage.tsx        # Finanzsystem
+    ├── GovernanceNodeButton.tsx     # Wiederverwendbarer Node-Button
+    ├── MemorialTributePage.tsx      # Gedenkstätte
+    ├── PapersArchive.tsx            # Dokumenten-Archiv
+    ├── PledgePage.tsx               # Government Pledge
+    ├── RainbowLightningFooter.tsx   # Footer mit Memorial + Crystal
+    └── ToolchainMap.tsx             # Toolchain-Übersicht
+```
+
+---
+
+## 🚀 **QUICKSTART**
 
 ```bash
-# 1. Lokale Authentifizierung (Einmalig - erzeugt ~/.wrangler/config/default.toml)
-wrangler login
+# 1. Snapshot wiederherstellen (Backup-Punkt)
+git checkout ArchYTecTIaLObItZFaCe
 
-# 2. Tunnel optional einrichten
-chmod +x scripts/ssh-tunnel.sh
-./scripts/ssh-tunnel.sh
+# 2. Entwicklungsserver starten
+npm run dev
+# → http://localhost:3000/
 
-# 3. Worker veröffentlichen (keine API-Keys nötig!)
-wrangler deploy
+# 3. Build für Produktion
+npm run build
+
+# 4. ESLint prüfen
+npm run lint
+# → ✅ 0 Errors
 ```
-
-### Cloudflare Dashboard Konfiguration
-
-1. **Web Application Firewall (WAF)** aktivieren
-2. **Bot Fight Mode** aktivieren (schützt vor Scrapern)
-3. **Hotlink Protection** aktivieren
-4. **Rate Limiting** für `pLedge250freedom.gov.eu`
-5. **Access Policies** für Tunnel-Authentifizierung (optional)
 
 ---
 
-## 🛠️ Deployment Guide
+## 📜 **LIZENZ**
 
-```bash
-npm install        # Dependencies
-npm run typecheck  # Type Checking (keine Fehler)
-npm run lint       # ESLint
-npm run build      # Production Build
-
-# Cloudflare Zero-Trust
-wrangler login
-wrangler deploy
-```
-
-**Domain:** pLedge250freedom.gov.eu
+> **EU-NATO-CLASSIFIED-Pilot-2026**  
+> © 2026 HNOSS Corporation. All rights reserved worldwide.  
+> Pilot project in collaboration with: EU Institutions, NATO, Pentagon/US DoD, United Nations  
+> Status: CLASSIFIED – PILOT PROJECT – NOT FOR PUBLIC DISTRIBUTION
 
 ---
 
-## 📧 Contact
-
-**Secure Terminal Access:** government-enterprise@ag-thrust.cloud  
-**Security Line:** +49 1556 2233724  
-**Auth Signature:** Daniel Pohl (HolyThreeKings)
-
-© 2026 HNOSS Corporation. All supreme rights preserved.
+<p align="center">
+  <strong>⚡ sTarLighTsMoveMenTs ⚡</strong><br/>
+  <em>Freiheit · Frieden · Vergebung · Nächstenliebe · Hoffnung über alle Welten</em><br/><br/>
+  <img src="https://img.shields.io/badge/Made_with-%E2%99%A6_Heavenly_Since_Pledge-gold?style=for-the-badge"/>
+</p>
