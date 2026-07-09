@@ -5,22 +5,13 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { 
-  Shield, 
-  Database, 
-  Activity, 
-  Cpu, 
-  Layers, 
-  Globe, 
-  RefreshCw, 
-  FileCheck, 
-  ExternalLink,
-  Search,
+import {
+  Activity,
+  Layers,
   CheckCircle,
-  AlertTriangle,
   Fingerprint,
-  PieChart as PieIcon,
   TrendingUp,
+  Shield,
   Server
 } from "lucide-react";
 import { 
@@ -30,7 +21,7 @@ import {
   SEED_AUDITS, 
   simulateSignAndHash 
 } from "./data";
-import { AuditRecord, GovernanceNode, SWFAsset, ProjectCorridor } from "./types";
+import { AuditRecord, GovernanceNode } from "./types";
 import { 
   WarpTunnel, 
   LightningSystem, 
@@ -51,7 +42,7 @@ import ConcilPortal from "./components/ConcilPortal";
 export default function App() {
   // Navigation tabs: pledge (default start page), papers, finance, memorial, portal, governance, capital, audit, concil
   const [activeTab, setActiveTab] = useState<"pledge" | "papers" | "finance" | "memorial" | "portal" | "governance" | "capital" | "audit" | "concil">("pledge");
-  const [nodes, setNodes] = useState<GovernanceNode[]>(GOVERNANCE_NODES);
+  const [nodes] = useState<GovernanceNode[]>(GOVERNANCE_NODES);
   const [selectedNode, setSelectedNode] = useState<GovernanceNode>(GOVERNANCE_NODES[0]);
   const [audits, setAudits] = useState<AuditRecord[]>(SEED_AUDITS);
   
@@ -59,7 +50,7 @@ export default function App() {
   const [customSource, setCustomSource] = useState("SAGA-PEZ (Representative)");
   const [customDestination, setCustomDestination] = useState("Transcendent AI & Digital Infrastructure");
   const [customAmount, setCustomAmount] = useState(15.5);
-  const [customCurrency, setCustomCurrency] = useState("EUR");
+  const [customCurrency] = useState("EUR");
   const [customLayer, setCustomLayer] = useState<"TX" | "TXA" | "GOV" | "FI" | "SWFs">("SWFs");
   const [isSigning, setIsSigning] = useState(false);
   const [recentSigningMsg, setRecentSigningMsg] = useState("");
@@ -69,7 +60,7 @@ export default function App() {
 
   // Cosmic features
   const [isLightningActive, setIsLightningActive] = useState(false);
-  const [warpSpeed, setWarpSpeed] = useState(2.2);
+  const [warpSpeed] = useState(2.2);
   const [showTimeline, setShowTimeline] = useState(false);
   const [govSubView, setGovSubView] = useState<"visual" | "blueprint">("visual");
 

@@ -8,7 +8,7 @@ import {
   Tooltip,
   CartesianGrid,
 } from "recharts";
-import { TrendingUp, ArrowUpRight, DollarSign, Activity } from "lucide-react";
+import { TrendingUp, Activity } from "lucide-react";
 
 // 7-day trend data for Sovereign Wealth Fund Capital Flows (SAGA-PEZ, EpsLGSEz & Anchor LPs)
 const INITIAL_FLOW_DATA = [

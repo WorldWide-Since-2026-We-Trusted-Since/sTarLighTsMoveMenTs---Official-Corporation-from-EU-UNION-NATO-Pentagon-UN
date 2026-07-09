@@ -15,7 +15,7 @@
  */
 import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, ChevronUp, Heart, ExternalLink, Shield, Lock, X, FileText, Scale, BookOpen, Globe } from "lucide-react";
+import { Heart, ExternalLink, Shield, Lock } from "lucide-react";
 
 // Verstorbene Key-Personen Daten (aus den Markdown-Dateien)
 const MEMORIAL_PERSONS = [

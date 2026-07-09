@@ -465,7 +465,6 @@ export function NewsTimeline() {
 
       <div className="relative pl-4 border-l border-zinc-800 flex flex-col gap-6">
         {steps.map((step, idx) => {
-          const StepIcon = step.icon;
           return (
             <div key={idx} className="relative group">
               {/* Dot indicator */}

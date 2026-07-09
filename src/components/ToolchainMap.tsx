@@ -12,7 +12,6 @@ import {
   Globe, 
   Shield, 
   Package, 
-  Server,
   ExternalLink,
   Code,
   Cloud

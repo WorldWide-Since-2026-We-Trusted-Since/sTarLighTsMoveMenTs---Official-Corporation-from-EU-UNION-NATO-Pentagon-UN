@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, ChevronUp, FileText, Scale, BookOpen, Globe, ExternalLink, Shield, Lock, X } from "lucide-react";
+import { ChevronDown, ChevronUp, FileText, Scale, BookOpen, Globe, X } from "lucide-react";
 
 // Categories for the portal
 const CATEGORIES = [
@@ -387,7 +387,6 @@ function renderMarkdown(content: string): string {
   });
 
   // Lists - unordered
-  const ulLines: string[] = [];
   html = html.replace(/^(\s*)[*\-+]\s+(.+)$/gm, (match, indent, content) => {
     return `<li>${content}</li>`;
   });

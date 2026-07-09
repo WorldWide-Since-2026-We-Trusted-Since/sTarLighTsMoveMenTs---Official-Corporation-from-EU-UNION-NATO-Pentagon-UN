@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, ChevronUp, Download, Share2, Copy, FileText, Lightbulb, BookOpen, Cpu, Info, FileCheck, Scale, Zap } from "lucide-react";
+import { FileText, Lightbulb, BookOpen, Cpu, Info, FileCheck, Scale, Zap } from "lucide-react";
 
 // Paper categories matching the required types
 const CATEGORIES = [
