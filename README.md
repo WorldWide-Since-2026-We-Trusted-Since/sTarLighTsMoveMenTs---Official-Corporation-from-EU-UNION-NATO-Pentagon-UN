@@ -174,22 +174,22 @@ pie title SWF Asset Allocation (€4.051,6 Mrd. Gesamt)
 gantt
     title Projekt-Fortschritt
     dateFormat  YYYY-MM-DD
-    axisFormat  %Q
+    axisFormat  %Y-%m
     
     section Energy
-    Strategic Energy Grid           :done, 2025Q1, 2026Q3
+    Strategic Energy Grid           :done, 2025-01-01, 2026-09-30
     
     section AI
-    Transcendent AI & Digital       :done, 2025Q1, 2026Q2
+    Transcendent AI & Digital       :done, 2025-01-01, 2026-06-30
     
     section Financial
-    Central Bank & Clearing         :done, 2025Q1, 2026Q2
+    Central Bank & Clearing         :done, 2025-01-01, 2026-06-30
     
     section Defense
-    NATO Strategic Defense          :active, 2025Q1, 2026Q4
+    NATO Strategic Defense          :active, 2025-01-01, 2026-12-31
     
     section Humanitarian
-    UN Humanitarian Programs        :done, 2025Q1, 2026Q2
+    UN Humanitarian Programs        :done, 2025-01-01, 2026-06-30
 ```
 
 | Projekt | Kategorie | Budget | Fortschritt | Nodes | Architekt |
