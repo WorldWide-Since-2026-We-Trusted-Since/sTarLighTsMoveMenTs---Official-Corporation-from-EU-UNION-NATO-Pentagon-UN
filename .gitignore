@@ -122,3 +122,5 @@ deployment.keys.json
 #   - credentials liegen im ~/.cloudflared/ Verzeichnis (außerhalb Repo)
 #   - config.yml wird lokal erstellt (siehe scripts/ssh-tunnel.sh)
 #   - Tunnel Token wird NIEMALS ins Repository eingetragen!
+# Sensitive login security files
+.secure_vault/login-security/

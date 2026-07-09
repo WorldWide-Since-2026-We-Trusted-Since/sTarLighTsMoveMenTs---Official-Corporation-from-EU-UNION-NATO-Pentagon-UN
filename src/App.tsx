@@ -38,6 +38,7 @@ import FinanceSystemPage from "./components/FinanceSystemPage";
 import MemorialTributePage from "./components/MemorialTributePage";
 import RainbowLightningFooter from "./components/RainbowLightningFooter";
 import ConcilPortal from "./components/ConcilPortal";
+import LoginGate from "./components/LoginGate";
 
 export default function App() {
   // Navigation tabs: pledge (default start page), papers, finance, memorial, portal, governance, capital, audit, concil
@@ -142,6 +143,7 @@ export default function App() {
   };
 
   return (
+    <LoginGate>
     <div className="relative min-h-screen bg-[#000819] overflow-x-hidden selection:bg-[#bf953f] selection:text-black">
       {/* Background radial atmosphere - Interactive Warp Tunnel with Twinkling Stars */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -1917,5 +1919,6 @@ export default function App() {
       {/* Rainbow Lightning Thunder Footer */}
       <RainbowLightningFooter />
     </div>
+    </LoginGate>
   );
 }
