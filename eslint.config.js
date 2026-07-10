@@ -13,7 +13,7 @@ export default ts.config(
   js.configs.recommended,
   ...ts.configs.recommended,
   {
-    ignores: ['dist', 'node_modules', 'public/documents', '.eslintrc.cjs', 'cloudflare-worker.js', 'gov-autonomous-worker.js', 'scripts/*.js', 'scripts/*.cjs'],
+      ignores: ['dist', 'node_modules', 'public/documents', '.secure_vault', '.eslintrc.cjs', 'cloudflare-worker.js', 'gov-autonomous-worker.js', 'scripts/*.js', 'scripts/*.cjs'],
   },
   {
     files: ['**/*.{ts,tsx}'],

@@ -751,6 +751,146 @@ body {
   opacity: 0.5;
 }
 
+/* === UNIVERSAL DOCUMENT OVERLAY — PAPER DESIGN TOKENS === */
+/* Conceptual integration: documents inherit the site's typography & spacing
+   so they read as part of the HNOSS web design, not detached "papers". */
+
+.paper-container {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.paper-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.5px;
+}
+.paper-breadcrumb-root {
+  color: rgba(191, 149, 63, 0.7);
+}
+.paper-breadcrumb-section {
+  color: #fcf6ba;
+}
+.paper-breadcrumb-current {
+  color: #fff;
+  font-weight: 700;
+}
+.paper-breadcrumb-sep {
+  color: rgba(191, 149, 63, 0.5);
+}
+
+.paper-title {
+  text-shadow: 0 0 12px rgba(191, 149, 63, 0.25);
+}
+
+.paper-content {
+  color: #e6e9f0;
+  font-size: 15px;
+  line-height: 1.75;
+  max-width: 70ch;
+}
+
+.paper-paragraph {
+  margin: 0 0 1.1rem;
+  color: #d7dbe6;
+}
+
+.paper-heading {
+  color: #fcf6ba;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 1.8rem 0 0.9rem;
+  background: linear-gradient(90deg, #fcf6ba, #bf953f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.paper-h1 { font-size: 1.7rem; }
+.paper-h2 { font-size: 1.4rem; }
+.paper-h3 { font-size: 1.15rem; }
+.paper-h4, .paper-h5, .paper-h6 { font-size: 1rem; }
+
+.paper-divider {
+  border: 0;
+  height: 1px;
+  margin: 1.6rem 0;
+  background: linear-gradient(90deg, transparent, rgba(191, 149, 63, 0.6), transparent);
+}
+
+.paper-quote {
+  margin: 0 0 1.1rem;
+  padding: 0.8rem 1.1rem;
+  border-left: 3px solid #bf953f;
+  background: rgba(191, 149, 63, 0.08);
+  border-radius: 0 6px 6px 0;
+  color: #cdd2dd;
+  font-style: italic;
+}
+
+.paper-list {
+  margin: 0 0 1.1rem;
+  padding-left: 1.5rem;
+  color: #d7dbe6;
+}
+.paper-list-unordered { list-style: disc; }
+.paper-list-ordered { list-style: decimal; }
+.paper-list li { margin: 0.35rem 0; }
+
+.paper-code,
+.paper-inline-code {
+  font-family: 'JetBrains Mono', monospace;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(191, 149, 63, 0.25);
+  border-radius: 4px;
+  color: #ffb6c1;
+}
+.paper-inline-code { padding: 0.1rem 0.35rem; font-size: 0.85em; }
+.paper-code {
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0 0 1.1rem;
+}
+
+.paper-link {
+  color: #ffb6c1;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+.paper-link:hover { color: #fff; }
+
+.paper-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.2rem;
+  font-size: 0.9rem;
+}
+.paper-table th,
+.paper-table td {
+  border: 1px solid rgba(191, 149, 63, 0.25);
+  padding: 0.55rem 0.8rem;
+  text-align: left;
+  color: #d7dbe6;
+}
+.paper-table th {
+  background: rgba(191, 149, 63, 0.15);
+  color: #fcf6ba;
+  font-weight: 700;
+}
+
+/* Responsive: tighten container on small screens */
+@media (max-width: 640px) {
+  .paper-content { font-size: 14px; }
+  .paper-h1 { font-size: 1.4rem; }
+  .paper-h2 { font-size: 1.2rem; }
+}
+
 /* Base styles */
 * {
   border-color: var(--border);

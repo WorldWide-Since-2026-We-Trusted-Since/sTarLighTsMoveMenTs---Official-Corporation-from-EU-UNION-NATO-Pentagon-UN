@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FileText, Lightbulb, BookOpen, Cpu, Info, FileCheck, Scale, Zap } from "lucide-react";
+import DocumentOverlay, { type DocumentOverlayData } from "./DocumentOverlay";
+import { renderMarkdown } from "../utils/markdown";
 
 // Paper categories matching the required types
 const CATEGORIES = [
@@ -11,136 +13,194 @@ const CATEGORIES = [
   { id: "informations", label: "Informations Paper", icon: Info },
   { id: "one", label: "One Paper", icon: FileCheck },
   { id: "executive", label: "Executive Paper", icon: Scale },
-  { id: "protocol", label: "Protocol Paper", icon: FileCheck }
+  { id: "protocol", label: "Protocol Paper", icon: FileCheck },
 ];
 
-// All papers classified by category
+// All papers classified by category. `source` points to a fetchable
+// document under /documents so the content can be rendered inside the
+// integrated overlay instead of opening a detached file. Metadata and
+// abstracts reflect the original source documents in their argumentative
+// structure — institutionally worded, scientifically coherent, no placeholders.
 const PAPERS = [
   {
     id: "paper-01",
     title: "Vergebung, Freiheit, Frieden, Nächstenliebe, Hoffnung und Zuversicht",
-    author: "Daniel Pohl (State Flow Wish)",
+    author: "🌌State Flow Wish🪄 (Daniel Pohl)",
     date: "19. März 2026",
-    source: "analysis/01-vergebung-freiheit-frieden.md",
+    source: "/documents/analysis/01-vergebung-freiheit-frieden.md",
     type: "White Paper",
     category: "white",
-    abstract: "Philosophische Grundlagen der Genesis-Protokoll-Architektur. Eine umfassende Analyse der anthropologischen und spirituellen Grundlagen, die die ethische Grundlage für infrastrukturelle Menschenrechte bilden.",
-    icon: "💖"
+    abstract:
+      "Dieses Grundsatzpapier legt Werte als universelles Fundament der Menschlichkeit aus — unabhängig von Herkunft, Kultur oder Glaubensrichtung. Es entfaltet eine Argumentationskette von der Kernbotschaft der 'Multi-Ewiglichkeit' über den Aufruf zum Friedensstopp ('Bis hierhin — und nicht weiter') bis zur These, dass Frieden im Individuum beginnt: Liebe für andere entsteht aus Liebe für sich selbst. Das Papier gedenkt der Gefallenen und formuliert den Wendepunkt als bewussten zivilisatorischen Entschluss für Menschlichkeit und Leben.",
+    icon: "💖",
   },
   {
     id: "paper-02",
     title: "One Peace 4 World – Internationale Botschaft von Frieden, Liebe und Hoffnung",
-    author: "Daniel Pohl (State Flow Wish)",
+    author: "🌌State Flow Wish🪄 (Daniel Pohl)",
     date: "17. Januar 2026",
-    source: "analysis/03-one-peace-4-world.md",
+    source: "/documents/analysis/03-one-peace-4-world.md",
     type: "One Paper",
     category: "one",
-    abstract: "Eine weltweite Botschaft an alle Zivilisationen, Glaubensrichtungen und Wesen. Eine umfassende Friedensmission, die PNIA als Instrument für globale Versöhnung und regenerativen Frieden vorschlägt.",
-    icon: "☮️"
+    abstract:
+      "Eine universelle Friedensbotschaft an alle Völker, Glaubensrichtungen, Kulturen und Wesen — adressiert an die 'Himmlische Familie' sowie an Präsidenten und Staatsoberhäupter gleichermaßen. Das Papier skizziert eine Vision gemeinschaftlicher Fürsorge auf Erden wie im Himmel, verortet ein Gebet für die Vergessenen (Leidende, Veteranen, Gefangene) und schließt mit dem Appell, Vergangenes ruhen zu lassen und gemeinsam regenerative Heilung zu formen — 'Peace shall move us all'.",
+    icon: "☮️",
   },
   {
     id: "paper-03",
-    title: "Gründungscharta: WorldBanks EyesAether – Der Peace-Cycle",
+    title: "Gründungscharta: WorldBanks EyesAether",
     author: "Daniel Pohl",
     date: "21. Januar 2026",
-    source: "analysis/02-gruendungscharta-worldbanks-eyesaether.md",
+    source: "/documents/analysis/02-gruendungscharta-worldbanks-eyesaether.md",
     type: "Concept Paper",
     category: "concept",
-    abstract: "Systemische Architektur-Konzepte für die Transformation von Infrastruktur, Governance und sozialen Systemen. Der Peace-Cycle als zentrales Betriebssystem für die WorldBanks EyesAether-Infrastruktur.",
-    icon: "📜"
+    abstract:
+      "Verfassungsgebende Charta eines lebendigen Organismus der Förderung, Heilung und Transformation. Im Zentrum steht der 'Peace-Cycle' mit fünf Leitprinzipien (Nothing Negatives; Time for Future; Back(2)Reality Erdung; sHIFTing(4)PeaceWorlds; (2)Never-Standing-Alone). Die Charta fordert die Rüstungs-Wende — 'Abrüstung der Waffen, um die Aufrüstung der Herzen zu ermöglichen' — und ersetzt Hierarchie der Macht durch eine Hierarchie der Fürsorge, gerichtet an UN und Global ThinkTanks (Botschaft an das World Economic Forum, Davos 2026).",
+    icon: "📜",
   },
   {
     id: "paper-04",
     title: "Menschenleben vor Linien auf der Karte – Ein Plädoyer für eine humane Lösung",
     author: "Daniel Pohl",
     date: "27. Dezember 2025",
-    source: "analysis/04-menschenleben-vor-linien.md",
+    source: "/documents/analysis/04-menschenleben-vor-linien.md",
     type: "White Paper",
     category: "white",
-    abstract: "Technische Policy-Grundlagen für humane Infrastruktur-Entscheidungen. Definition des Menschen als primäre Einheit aller Berechnungen und Etablierung von gegenkritischen Schutzmechanismen für zivilisatorische Systeme.",
-    icon: "🕊️"
+    abstract:
+      "Ein geopolitisch fundierter Humanitätsaufsatz, der territoriale Souveränität als real, aber Menschenleben als nicht ersetzbar setzt. Jede diplomatische Strategie wird an der Leitfrage gemessen: 'Reduziert das Leid — oder verlängert es das Sterben?'. Das Papier benennt fünf überprüfbare Prioritäten einer humanen Lösung (Zivilschutz, humanitäre Korridore, Kriegsgefangenen-Schutz, ernsthafte Diplomatie, Deeskalation) und appelliert an Führungsverantwortung, Menschlichkeit über das Momentane zu stellen — ohne die Opfer zu vergessen.",
+    icon: "🕊️",
   },
   {
     id: "paper-05",
-    title: "Manifest der Synchronen Transformation – Strategische Entscheidungsgrundlage",
-    author: "🌌Orbit's Tunes🪄 (Daniel Pohl)",
-    date: "26. Oktober 2025",
-    source: "analysis/07-manifest-synchrone-transformation.md",
-    type: "Executive Paper",
-    category: "executive",
-    abstract: "Strategische Entscheidungsgrundlage für Regierungen und Institutionen. Ein systemischer Wandel, der nicht an Kampfworten sondern an zeitbewussten, synchronisierten Übergängen orientiert ist.",
-    icon: "📜"
-  },
-  {
-    id: "paper-06",
     title: "Von Buße und Heilung begleitet – Heilige Pferde und Pferdeheilige",
     author: "Daniel Pohl",
     date: "2. November 2025",
-    source: "analysis/05-von-busse-und-heilung.md",
+    source: "/documents/analysis/05-von-busse-und-heilung.md",
     type: "Protocol Paper",
     category: "protocol",
-    abstract: "Formelle Protokolle und Verfahrensregeln für spirituelle Traditionen und symbolische Handlungen. Eine umfassende Zusammenstellung von über 160+ heiligen Pferden und Pferdeheiligen mit historischen und mythologischen Bezügen.",
-    icon: "🐴"
+    abstract:
+      "Eine systematische Kompilation von über 160 heiligen und segensreichen Pferden mit historischen, mythologischen und biblischen Bezügen. Das Papier analysiert die vier apokalyptischen Reiter der Offenbarung (Sieger, Krieg, Hungersnot, Tod) als symbolische Ordnungsmächte und ordnet legendäre Rösser (Bucephalus, Rocinante, Shadowfax, Pegasus) sowie Patron-Heilige (Georg, Martin, Johanna von Orléans, Hubertus) der spirituellen Bedeutungsachse göttliche Stärke, Reinheit, Buße, Heilung, Treue und Erlösung zu.",
+    icon: "🐴",
+  },
+  {
+    id: "paper-06",
+    title: "World Social Nature Way – Masterabschluss, Was ist das? Finale Verpenne",
+    author: "🌌Orbit's Tunes🪄 (Daniel Pohl)",
+    date: "29. Oktober 2025",
+    source: "/documents/analysis/06-world-social-nature-way.md",
+    type: "Informations Paper",
+    category: "informations",
+    abstract:
+      "Eine reflexive Standortbestimmung zur Vision von Daten, Technologie und sozial-ökologischer Erneuerung. Der Autor beschreibt einen kontinuierlichen Aktualisierungsprozess (Updates, Upgrades, neue Verfahren) auf Basis eines Datenbestands im Petabyte-Maßstab und formuliert den Auftrag, die Welt in einen harmonischen Rhythmus zurückzuführen — getragen von Vergebung, Freiheit, Nächstenliebe, Rassismusfreiheit, Hoffnung und Zuversicht als innerem Licht, das im Guten weitergegeben wird.",
+    icon: "🌍",
   },
   {
     id: "paper-07",
-    title: "World Social Nature Way – Weltweite Sozial-Natur-Architektur",
-    author: "Daniel Pohl",
-    date: "27. Dezember 2025",
-    source: "analysis/06-world-social-nature-way.md",
-    type: "Informations Paper",
-    category: "informations",
-    abstract: "Öffentlichkeitswirksame Darstellung der sozialen und natürlichen Dimensionen der Genesis-Protokoll-Architektur. Verbindet ökologische Nachhaltigkeit mit sozialer Gerechtigkeit für technische Systeme im Einklang mit natürlichen Systemen.",
-    icon: "🌍"
+    title: "Manifest der Synchronen Transformation – Eine detaillierte Ausarbeitung zur globalen Heilung und Neuausrichtung",
+    author: "🌌Orbit's Tunes🪄 (Daniel Pohl)",
+    date: "26. Oktober 2025",
+    source: "/documents/analysis/07-manifest-synchrone-transformation.md",
+    type: "Executive Paper",
+    category: "executive",
+    abstract:
+      "Ein fünfartikliges Zukunfts-Manifest: (1) spirituelles Fundament der 'Gottes Himmlischen Familie' als universelle Konvergenz aller Glaubensrichtungen; (2) sozioökonomische Neuordnung durch gleichen Lohn und Eliminierung finanziellen Drucks; (3) Transformation der Justiz von Verwahrung zu Heilung inklusive JVA-Auflösung; (4) Heilung der Zeit und Würde aller Lebewesen (Ende der Massentierhaltung); (5) Methodik der synchronen, ehrlichen, manipulationsfreien Umsetzung. Die Transformation erfolgt nicht durch Konfrontation, sondern durch zeitbewusste, synchronisierte Übergänge.",
+    icon: "📜",
   },
   {
     id: "paper-08",
     title: "Protokoll Infrastruktur-Implementierung – Genesis-Protokoll Spezifikation",
     author: "Daniel Pohl (Strategic Infrastructure Architect)",
     date: "4. Juli 2026",
-    source: "public/documents/protocol-implementation.txt",
+    source: "/documents/protocol-implementation.txt",
     type: "Technical Paper",
     category: "technical",
-    abstract: "Technische Spezifikation des Genesis-Protokolls und der Production Network ID Architecture (PNIA). Enthält Schnittstellen-Definitionen, kryptographische Algorithmen, Datenmodelle und Integrations-Richtlinien für NATO, EU und UN-Systeme.",
-    icon: "⚙️"
+    abstract:
+      "Technische Spezifikation des Genesis-Protokolls und der Production Network ID Architecture (PNIA). Das Dokument umfasst Schnittstellen-Definitionen, kryptographische Verfahren, Datenmodelle sowie Integrationsrichtlinien und adressiert die interoperable Anbindung an NATO-, EU- und UN-Systeme als verbindliche Referenzarchitektur für sicherheitskritische Infrastruktur.",
+    icon: "⚙️",
   },
   {
     id: "paper-09",
     title: "NATO PAPER – Community of Interest (COI) Registrierung",
     author: "Daniel Pohl (HolyThreeKings)",
     date: "2026",
-    source: "public/documents/nato-paper.txt",
+    source: "/documents/nato-paper.txt",
     type: "Registrierungs-Papier",
     category: "architect",
-    abstract: "Formelle Registrierung für NATO-MILMED-COE-Communities. Etablierung der D-U-N-S-Registry, VAT-ID, UNGM/PIC und Global-LEI-Identifikationssysteme für militärische und humanitäre Portale.",
-    icon: "🏛️"
+    abstract:
+      "Formelle Registrierungsdokumentation für NATO-MILMED-COE-Communities of Interest. Das Papier etabliert die identitätsrechtlichen Grundlagen über D-U-N-S-Registry, VAT-ID, UNGM/PIC und Global-LEI und definiert die Registratur- und Anschlussverfahren für militärische wie humanitäre Portal-Infrastrukturen im Rahmen verbündeter Standards.",
+    icon: "🏛️",
   },
   {
     id: "paper-10",
     title: "WorldWide Structur – Globale Governance-Architektur",
     author: "Daniel Pohl (Copyright Daniel Pohl by. Hnoss - ShineHealthCare from EU-UNION)",
     date: "2026",
-    source: "public/documents/worldwide-structur.txt",
+    source: "/documents/worldwide-structur.txt",
     type: "Architektur-Papier",
     category: "architect",
-    abstract: "Globale Referenzsysteme und Governance-Architektur für das HNOSS Identity Grid. Definition der CNP-System-Spektren und registry-integrierten Identifikationsstandards für NATO, EU, Pentagon und UN.",
-    icon: "🌐"
-  }
+    abstract:
+      "Rahmendokument der globalen Referenzsysteme und Governance-Architektur für das HNOSS Identity Grid. Es definiert die CNP-System-Spektren (Concil, NATO, Pentagon, EU, UN) sowie registry-integrierte Identifikationsstandards und beschreibt die strukturelle Verzahnung supranationaler Organisationsebenen zu einem kohärenten Steuerungsgitter.",
+    icon: "🌐",
+  },
 ];
 
 // Papers Archive Component
 export default function PapersArchive() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [expandedPaper, setExpandedPaper] = useState<string | null>(null);
+  const [activeDoc, setActiveDoc] = useState<DocumentOverlayData | null>(null);
 
-  const filteredPapers = PAPERS.filter(paper => {
+  const filteredPapers = PAPERS.filter((paper) => {
     const matchesCategory = selectedCategory === "all" || paper.category === selectedCategory;
-    const matchesSearch = paper.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         paper.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         paper.abstract.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch =
+      paper.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      paper.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      paper.abstract.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+  // Load + render the selected paper content into the integrated overlay
+  const openPaper = async (paper: (typeof PAPERS)[number]) => {
+    setActiveDoc({
+      title: paper.title,
+      category: paper.type,
+      breadcrumbRoot: "Papers Archive",
+      meta: `${paper.author} · ${paper.date}`,
+      html: '<p class="paper-paragraph">Lade Dokument…</p>',
+      source: paper.source,
+    });
+    try {
+      const res = await fetch(paper.source);
+      const raw = await res.text();
+      setActiveDoc({
+        title: paper.title,
+        category: paper.type,
+        breadcrumbRoot: "Papers Archive",
+        meta: `${paper.author} · ${paper.date}`,
+        html: renderMarkdown(raw),
+        source: paper.source,
+      });
+    } catch {
+      setActiveDoc({
+        title: paper.title,
+        category: paper.type,
+        breadcrumbRoot: "Papers Archive",
+        meta: `${paper.author} · ${paper.date}`,
+        html: '<p class="paper-paragraph text-[#f43f5e]">Dokument konnte nicht geladen werden.</p>',
+        source: paper.source,
+      });
+    }
+  };
+
+  // Close overlay on Escape (handled inside DocumentOverlay too)
+  useEffect(() => {
+    if (!activeDoc) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActiveDoc(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [activeDoc]);
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-8">
@@ -155,7 +215,6 @@ export default function PapersArchive() {
 
         {/* Search and Filters */}
         <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
-          {/* Search Input */}
           <div className="relative w-full md:w-96">
             <input
               type="text"
@@ -166,7 +225,6 @@ export default function PapersArchive() {
             />
           </div>
 
-          {/* Category Filter */}
           <div className="flex flex-wrap items-center gap-2">
             {CATEGORIES.map((category) => {
               const Icon = category.icon;
@@ -188,7 +246,6 @@ export default function PapersArchive() {
           </div>
         </div>
 
-        {/* Results Count */}
         <div className="text-xs text-gray-500 font-mono mb-6">
           {filteredPapers.length} {filteredPapers.length === 1 ? "Paper" : "Papers"} gefunden
         </div>
@@ -199,23 +256,19 @@ export default function PapersArchive() {
         {filteredPapers.map((paper) => (
           <div
             key={paper.id}
-            className="border border-gray-800 bg-black/50 rounded-lg p-6 hover:border-[#bf953f]/50 transition-all duration-300 cursor-pointer"
-            onClick={() => setExpandedPaper(expandedPaper === paper.id ? null : paper.id)}
+            className="border border-gray-800 bg-black/50 rounded-lg p-6 cursor-pointer hover:border-[#bf953f]/50 transition-all duration-300"
+            onClick={() => openPaper(paper)}
           >
-            {/* Paper Header */}
             <div className="flex items-start gap-3 mb-3">
               <div className="text-3xl">{paper.icon}</div>
               <div className="flex-1">
                 <span className="text-[10px] font-mono text-[#bf953f] uppercase tracking-wider">
                   {paper.type}
                 </span>
-                <h3 className="text-sm font-bold text-white mt-1 leading-tight">
-                  {paper.title}
-                </h3>
+                <h3 className="text-sm font-bold text-white mt-1 leading-tight">{paper.title}</h3>
               </div>
             </div>
 
-            {/* Paper Meta */}
             <div className="space-y-1.5 mb-4">
               <p className="text-xs text-gray-400">
                 <span className="text-gray-500">Autor:</span> {paper.author}
@@ -225,48 +278,30 @@ export default function PapersArchive() {
               </p>
             </div>
 
-            {/* Abstract */}
-            <p className="text-xs text-gray-300 leading-relaxed mb-4">
-              {paper.abstract}
-            </p>
+            <p className="text-xs text-gray-300 leading-relaxed mb-4">{paper.abstract}</p>
 
-            {/* Actions */}
-            <div className="flex items-center gap-2">
-              <a
-                href={`/documents/analysis/${paper.id.split('-')[1]}.md`}
-                target="_blank"
-                rel="noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="flex-1 text-center px-3 py-2 border border-[#bf953f]/30 text-[#bf953f] text-xs rounded hover:bg-[#bf953f]/10 transition-all"
-              >
-                📄 Lesen
-              </a>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  alert('Download-Funktion kommt bald!');
-                }}
-                className="px-3 py-2 border border-gray-700 text-gray-400 text-xs rounded hover:border-gray-600 hover:text-white transition-all"
-              >
-                ⬇️
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                openPaper(paper);
+              }}
+              className="w-full text-center px-3 py-2 border border-[#bf953f]/30 text-[#bf953f] text-xs rounded hover:bg-[#bf953f]/10 transition-all"
+            >
+              📄 Im Portal öffnen
+            </button>
           </div>
         ))}
       </div>
 
-      {/* No Results */}
       {filteredPapers.length === 0 && (
         <div className="text-center py-16">
           <div className="text-6xl mb-4">🔍</div>
           <h3 className="text-xl font-bold text-white mb-2">Keine Papers gefunden</h3>
-          <p className="text-sm text-gray-400">
-            Versuche andere Suchbegriffe oder Filter
-          </p>
+          <p className="text-sm text-gray-400">Versuche andere Suchbegriffe oder Filter</p>
         </div>
       )}
 
-      {/* Footer */}
       <div className="mt-16 pt-8 border-t border-gray-800 text-center">
         <p className="text-xs text-gray-500 font-mono">
           Papers Archive · Version 1.0 · 2026 · Autor: Daniel Pohl
@@ -274,6 +309,8 @@ export default function PapersArchive() {
           Alle Rechte vorbehalten · HNOSS™ Identity · © 2026
         </p>
       </div>
+
+      <DocumentOverlay doc={activeDoc} onClose={() => setActiveDoc(null)} />
     </div>
   );
 }

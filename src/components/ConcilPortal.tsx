@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, ChevronUp, FileText, Scale, BookOpen, Globe, X } from "lucide-react";
+import { ChevronDown, ChevronUp, FileText, Scale, BookOpen, Globe } from "lucide-react";
+import DocumentOverlay, { type DocumentOverlayData } from "./DocumentOverlay";
+import { renderMarkdown } from "../utils/markdown";
 
 // Categories for the portal
 const CATEGORIES = [
@@ -21,7 +23,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "🏛️",
     url: "/documents/staatliche-structuren/Governance_und_Rechtsgrundlagen_Staatenliste_Part1.md",
-    preview: "Umfassende Tabelle der Staaten A–F mit ISO-Codes, Hauptstädten, Rechtsformen, Unabhängigkeitsdaten und Verfassungsgeschichte."
+    preview: "Systematische Referenztabelle der Staaten A–F mit ISO-Codes, Hauptstädten, Staatsformen, Unabhängigkeitsdaten und verfassungsrechtlicher Historie als Grundlage staatlicher Identifikations- und Governance-Rahmen."
   },
   {
     id: "staatliche-2",
@@ -31,7 +33,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "🏛️",
     url: "/documents/staatliche-structuren/Governance_und_Rechtsgrundlagen_Staatenliste_Part2.md",
-    preview: "Staaten G–M mit vollständigen Governance-Daten, Rechtsgrundlagen und historischen Kontexten."
+    preview: "Fortführung der Staatenreferenz G–M: Staatsformen, Rechtsgrundlagen, völkerrechtlicher Status und historische Kontextierung im Sinne konsistenter Registry-Strukturen."
   },
   {
     id: "staatliche-3",
@@ -41,7 +43,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "🏛️",
     url: "/documents/staatliche-structuren/Governance_und_Rechtsgrundlagen_Staatenliste_Part3.md",
-    preview: "Fortführung der Staatenliste mit vollständigen regulatorischen und historischen Daten."
+    preview: "Abschluss der Staatenreferenz N–Z mit regulatorischen, verfassungsrechtlichen und historischen Daten zur Vollständigkeit des staatlichen Identifikationsgitters."
   },
   {
     id: "staatliche-4",
@@ -51,7 +53,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "🕊️",
     url: "/documents/staatliche-structuren/Verstorbene_Key_Personen_Friedhoefe_Teams_Part1.md",
-    preview: "Verzeichnis verstorbener Schlüsselpersonen mit Friedhofs- und Team-Zuordnungen."
+    preview: "Dokumentierte Erfassung verstorbener Schlüsselpersonen mit Friedhofs-, Team- und institutionsbezogenen Zuordnungen als memoriale Registry-Ebene staatlicher Strukturen."
   },
   {
     id: "staatliche-5",
@@ -61,7 +63,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "🕊️",
     url: "/documents/staatliche-structuren/Verstorbene_Key_Personen_Friedhoefe_Teams_Part2.md",
-    preview: "Fortführung des Verzeichnisses mit weiteren Schlüsselpersonen und institutionellen Zuordnungen."
+    preview: "Erweiterte Dokumentation verstorbener Schlüsselpersonen sowie ihrer institutionellen und teambezogenen Einbindung zur kontinuierlichen Archivpflege."
   },
   {
     id: "staatliche-6",
@@ -71,7 +73,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "🕊️",
     url: "/documents/staatliche-structuren/Verstorbene_Key_Personen_Friedhoefe_Teams_Part3.md",
-    preview: "Abschluss des Verzeichnisses mit vollständigen personellen und institutionellen Bezügen."
+    preview: "Abschließende Zusammenführung der memorialen Datensätze mit vollständigen personellen, familiären und institutionellen Bezugsebenen."
   },
   {
     id: "staatliche-7",
@@ -81,7 +83,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "🔐",
     url: "/documents/staatliche-structuren/Staatliche_Key_Faktoren_Codesysteme.md",
-    preview: "Kritische Faktoren und Codesysteme für staatliche Identifikations- und Governance-Rahmen."
+    preview: "Analyse kritischer Faktoren und codesystemischer Grundlagen (ISO, LEI, D-U-N-S) für staatliche Identifikations- und Governance-Rahmenwerke im HNOSS-Kontext."
   },
   {
     id: "staatliche-8",
@@ -91,7 +93,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "✅",
     url: "/documents/staatliche-structuren/Validation_Protocol.md",
-    preview: "Formelles Validierungsprotokoll für staatliche und institutionelle Prüfprozesse."
+    preview: "Formelles Validierungsprotokoll, das Prüfschritte, Verantwortlichkeiten und Nachweiskriterien für staatliche und institutionelle Abnahmeprozesse verbindlich regelt."
   },
   {
     id: "staatliche-9",
@@ -101,7 +103,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "🔗",
     url: "/documents/staatliche-structuren/URLs_Staatliche_Strukturen_Real.md",
-    preview: "Verifizierte URLs staatlicher Institutionen, Behörden und internationaler Organisationen."
+    preview: "Kuratierte, verifizierte URL-Referenzliste staatlicher Institutionen, Behörden und internationaler Organisationen (EU, NATO, UN, Pentagon) als vertrauenswürdige Zugriffsebene."
   },
   {
     id: "staatliche-10",
@@ -111,7 +113,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "👑",
     url: "/documents/staatliche-structuren/Inhaber_Entwickler_Fuehrung_Internationaler_Codesysteme.md",
-    preview: "Verantwortlichkeiten und Führungsstrukturen internationaler Codesysteme und Standards."
+    preview: "Darstellung der Inhaberschaft, Entwicklungsverantwortung und Führungsstrukturen internationaler Codesysteme und Standards (W3C, ISO, IEEE, D-U-N-S, LEI) im Regime des HNOSS Identity Grid."
   },
   {
     id: "staatliche-11",
@@ -121,7 +123,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "🛡️",
     url: "/documents/staatliche-structuren/HNOSS_Security_Team_Bridge_Architektur.md",
-    preview: "Technische Sicherheitsarchitektur für HNOSS/MCCI mit Whitelisting, Bridge-Komponenten und Audit-Logging."
+    preview: "Konkrete, auditierbare Sicherheitsarchitektur für HNOSS/MCCI: rollenbasierte Governance (CISO, SOC, Audit), Whitelisting als zentrales Zugriffsprinzip, Bridge/Gateway als kontrollierter Domänenübergang und lückenloses Audit-Logging kritischer Transaktionen."
   },
   {
     id: "staatliche-12",
@@ -131,7 +133,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "🌉",
     url: "/documents/staatliche-structuren/HNOSS_Bridge_Spezifikation.md",
-    preview: "Detaillierte Spezifikation der Bridge- und Gateway-Komponenten für sichere Domain-Übergänge."
+    preview: "Technische Spezifikation der Bridge- und Gateway-Komponenten: kontrollierter, protokollierter Übergang zwischen Sicherheitsdomänen mit Whitelist-gesteuerter Zugriffskaskade und Verschlüsselungsnachweis."
   },
   {
     id: "staatliche-13",
@@ -141,7 +143,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "📊",
     url: "/documents/staatliche-structuren/HNOSS_Audit_Log_Datenstruktur.md",
-    preview: "Datenstruktur für Audit-Logs und Sicherheitsprotokolle im HNOSS-System."
+    preview: "Definition der Audit-Log-Datenstruktur inklusive Feldsemantik, Signaturkette und Aufbewahrungsrichtlinien für forensisch belastbare Sicherheitsprotokolle im HNOSS-System."
   },
   {
     id: "staatliche-14",
@@ -151,7 +153,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "🎭",
     url: "/documents/staatliche-structuren/Fiktion_Real_Matrix.md",
-    preview: "Mapping zwischen fiktionalen Konzepten (Warehouse 13, Eureka) und realen staatlichen Institutionen."
+    preview: "Methodisches Mapping fiktionaler Referenzkonzepte (Warehouse 13, Eureka) auf reale staatliche Institutionen und rechtliche Träger zur Trennschärfe zwischen Narrativ und Registry-Wirklichkeit."
   },
   {
     id: "staatliche-15",
@@ -161,7 +163,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "🌉",
     url: "/documents/staatliche-structuren/Bridge_Access_Points_Workspace.md",
-    preview: "Workspace-Dokumentation für Bridge-Access-Punkte und API-Endpunkte."
+    preview: "Workspace-Dokumentation der Bridge-Access-Points mit definierten API-Endpunkten, Authentifizierungswegen und Domänenübergängen für betreibende Institutionen."
   },
   {
     id: "staatliche-16",
@@ -171,7 +173,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "🌐",
     url: "/documents/staatliche-structuren/Portale_Access_Points_International.md",
-    preview: "Internationale Zugriffswege und Portale für institutionelle Dokumentation."
+    preview: "Katalog internationaler Zugriffswege und Portal-Endpunkte für institutionelle Dokumentation und Querbezüge zwischen Staaten, Behörden und supranationalen Organisationen."
   },
   {
     id: "staatliche-17",
@@ -181,7 +183,7 @@ const DOCUMENTS = [
     date: "28. Juni 2026",
     icon: "🏛️",
     url: "/documents/staatliche-structuren/Portale_Access_Points_Staatliche_Organisationen.md",
-    preview: "Staatliche Zugriffswege und Portale für institutionelle Dokumentation."
+    preview: "Verzeichnis staatlicher Zugriffswege und Portal-Endpunkte mit Zuordnung zu zuständigen Organisationen, Registern und Ansprechinstanzen."
   },
 
   // Concil Architektur
@@ -327,103 +329,11 @@ const DOCUMENTS = [
   }
 ];
 
-// Simple Markdown to HTML converter
-function renderMarkdown(content: string): string {
-  // Escape HTML
-  let html = content
-    .replace(/&/g, '&')
-    .replace(/</g, '<')
-    .replace(/>/g, '>');
-
-  // Headers
-  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
-  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
-  html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
-
-  // Bold
-  html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
-  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-
-  // Italic
-  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-
-  // Inline code
-  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-  // Links
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-
-  // Horizontal rule
-  html = html.replace(/^---$/gm, '<hr>');
-
-  // Blockquotes
-  html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
-
-  // Tables
-  html = html.replace(/\|(.+)\|( *)\n\|( *-+\|)+\|/g, (match) => {
-    const lines = match.trim().split('\n');
-    let tableHtml = '<table>\n';
-    
-    // Header row
-    const headerCells = lines[0].split('|').filter(cell => cell.trim());
-    tableHtml += '<thead><tr>';
-    headerCells.forEach(cell => {
-      tableHtml += `<th>${cell.trim()}</th>`;
-    });
-    tableHtml += '</tr></thead>\n<tbody>';
-
-    // Data rows (skip separator line)
-    for (let i = 2; i < lines.length; i++) {
-      const cells = lines[i].split('|').filter(cell => cell.trim());
-      tableHtml += '<tr>';
-      cells.forEach(cell => {
-        tableHtml += `<td>${cell.trim()}</td>`;
-      });
-      tableHtml += '</tr>';
-    }
-    
-    tableHtml += '</tbody></table>';
-    return tableHtml;
-  });
-
-  // Lists - unordered
-  html = html.replace(/^(\s*)[*\-+]\s+(.+)$/gm, (match, indent, content) => {
-    return `<li>${content}</li>`;
-  });
-  html = html.replace(/(<li>.*?<\/li>\s*)+/g, '<ul>$&</ul>');
-
-  // Lists - ordered
-  html = html.replace(/^(\s*)\d+\.\s+(.+)$/gm, '<li>$2</li>');
-  html = html.replace(/(<li>.*?<\/li>\s*)+/g, (match) => {
-    if (!match.includes('<ul>')) {
-      return `<ol>${match}</ol>`;
-    }
-    return match;
-  });
-
-  // Paragraphs (wrap text blocks)
-  html = html.split('\n\n').map(block => {
-    if (!block.trim()) return '';
-    if (block.includes('<h') || block.includes('<table>') || block.includes('<ul>') || 
-        block.includes('<ol>') || block.includes('<blockquote>') || block.includes('<pre>')) {
-      return block;
-    }
-    return `<p>${block}</p>`;
-  }).join('\n');
-
-  // Line breaks
-  html = html.replace(/\n/g, ' ');
-
-  return html;
-}
-
 export default function ConcilPortal() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedDoc, setExpandedDoc] = useState<string | null>(null);
-  const [viewingDocument, setViewingDocument] = useState<{ id: string; title: string; url: string } | null>(null);
-  const [documentContent, setDocumentContent] = useState<string>("");
-  const [isLoadingDoc, setIsLoadingDoc] = useState(false);
+  const [activeDoc, setActiveDoc] = useState<DocumentOverlayData | null>(null);
 
   const filteredDocs = DOCUMENTS.filter(doc => {
     const matchesCategory = selectedCategory === "all" || doc.category === selectedCategory;
@@ -432,34 +342,38 @@ export default function ConcilPortal() {
     return matchesCategory && matchesSearch;
   });
 
-  // Load document content when viewingDocument changes
-  useEffect(() => {
-    if (viewingDocument) {
-      setIsLoadingDoc(true);
-      fetch(viewingDocument.url)
-        .then(response => response.text())
-        .then(text => {
-          setDocumentContent(renderMarkdown(text));
-          setIsLoadingDoc(false);
-        })
-        .catch(() => {
-          setDocumentContent('<p class="text-red-400">Dokument konnte nicht geladen werden.</p>');
-          setIsLoadingDoc(false);
-        });
+  // Load + render the selected document into the integrated overlay
+  const openDocument = async (doc: typeof DOCUMENTS[0]) => {
+    setActiveDoc({
+      title: doc.title,
+      category: doc.type,
+      breadcrumbRoot: "Concil Portal",
+      meta: `Kategorie: ${doc.category} · ${doc.date}`,
+      html: '<p class="paper-paragraph">Lade Dokument…</p>',
+      source: doc.url,
+    });
+    try {
+      const res = await fetch(doc.url);
+      const raw = await res.text();
+      setActiveDoc({
+        title: doc.title,
+        category: doc.type,
+        breadcrumbRoot: "Concil Portal",
+        meta: `Kategorie: ${doc.category} · ${doc.date}`,
+        html: renderMarkdown(raw),
+        source: doc.url,
+      });
+    } catch {
+      setActiveDoc({
+        title: doc.title,
+        category: doc.type,
+        breadcrumbRoot: "Concil Portal",
+        meta: `Kategorie: ${doc.category} · ${doc.date}`,
+        html: '<p class="paper-paragraph text-[#f43f5e]">Dokument konnte nicht geladen werden.</p>',
+        source: doc.url,
+      });
     }
-  }, [viewingDocument]);
-
-  const handleViewDocument = (doc: typeof DOCUMENTS[0]) => {
-    setViewingDocument({ id: doc.id, title: doc.title, url: doc.url });
   };
-
-  const closeDocument = () => {
-    setViewingDocument(null);
-    setDocumentContent("");
-  };
-
-  // Get the document being viewed
-  const viewedDoc = viewingDocument ? DOCUMENTS.find(d => d.id === viewingDocument.id) : null;
 
   return (
     <>
@@ -591,7 +505,7 @@ export default function ConcilPortal() {
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleViewDocument(doc);
+                            openDocument(doc);
                           }}
                           className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#bf953f]/10 border border-[#bf953f]/30 rounded-lg hover:bg-[#bf953f]/20 transition-all group"
                         >
@@ -716,53 +630,7 @@ export default function ConcilPortal() {
         </div>
       </div>
 
-      {/* Document Overlay */}
-      <AnimatePresence>
-        {viewingDocument && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="document-overlay-backdrop"
-            onClick={closeDocument}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ type: "spring", damping: 20 }}
-              className="document-overlay-panel"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="document-overlay-header">
-                <h2 className="document-overlay-title">{viewedDoc?.title || "Dokument"}</h2>
-                <button
-                  onClick={closeDocument}
-                  className="document-overlay-close"
-                  aria-label="Schließen"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-              
-              <div className="document-overlay-content custom-scrollbar">
-                {isLoadingDoc ? (
-                  <div className="flex items-center justify-center py-12">
-                    <div className="text-[#bf953f]">
-                      <svg className="animate-spin h-8 w-8" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                    </div>
-                  </div>
-                ) : (
-                  <div dangerouslySetInnerHTML={{ __html: documentContent }} />
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <DocumentOverlay doc={activeDoc} onClose={() => setActiveDoc(null)} />
     </>
   );
 }
