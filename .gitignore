@@ -33,7 +33,12 @@ yarn-error.log*
 .env.production.local
 
 # Analysis and backup files
+# NOTE: public/documents/analysis/ holds runtime content fetched by the app
+# (see src/components/PapersArchive.tsx) and MUST be deployed, so it is
+# explicitly re-included below.
 analysis/
+!public/documents/analysis/
+!public/documents/analysis/*.md
 ReadyBLess/
 freedom250.html
 
@@ -80,7 +85,7 @@ tls/
 # Diese enthält die Tunnel-Authentifizierung und ist ultra-sensibel!
 .home/$(whoami)/.cloudflared/
 ~/.cloudflared/
-*.json  # Cloudflare generierte JSON-Credential-Dateien
+*.credentials.json  # Cloudflare generierte JSON-Credential-Dateien
 
 # Production Security Headers
 .vercel/
