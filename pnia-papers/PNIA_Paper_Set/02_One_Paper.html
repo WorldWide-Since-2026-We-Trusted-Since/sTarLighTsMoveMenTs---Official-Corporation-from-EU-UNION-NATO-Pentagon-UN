@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>One-Paper — Alles in einem · PNIA Paper-Set</title>
+<style>
+:root{
+  --bg:#0b0e17; --bg2:#121626; --panel:#161b2e; --panel2:#1c2238;
+  --ink:#e8ecf5; --muted:#9aa6c2; --line:#2a3350;
+  --gold:#e9c46a; --gold2:#f4d58d; --cyan:#5ad1e6; --violet:#9b8cff;
+  --green:#6ee7a8; --red:#ff8a8a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#0b0e17,#0e1220 60%,#0b0e17);
+  color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.wrap{max-width:1040px;margin:0 auto;padding:32px 22px 90px}
+header.hero{padding:46px 26px;border:1px solid var(--line);border-radius:18px;
+  background:radial-gradient(1200px 400px at 20% -10%,rgba(155,140,255,.18),transparent),
+             radial-gradient(900px 380px at 95% 0%,rgba(90,209,230,.14),transparent),
+             linear-gradient(180deg,#141a2e,#0f1322);margin-bottom:30px;position:relative;overflow:hidden}
+header.hero h1{margin:0 0 8px;font-size:30px;letter-spacing:.3px;
+  background:linear-gradient(90deg,#f4d58d,#e9c46a,#9b8cff,#5ad1e6);-webkit-background-clip:text;background-clip:text;color:transparent}
+header.hero .sub{color:var(--muted);font-size:15px;max-width:760px}
+.kbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.kbar .tag{font-size:12px;color:var(--gold2);border:1px solid var(--line);background:#0e1322;
+  padding:4px 10px;border-radius:999px}
+nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:26px}
+nav.toc b{color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:1px}
+nav.toc ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:30px}
+nav.toc a{color:var(--cyan);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+h2{margin:38px 0 12px;font-size:23px;color:var(--gold2);border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{margin:26px 0 8px;font-size:18px;color:var(--cyan)}
+h4{margin:18px 0 6px;font-size:15px;color:var(--violet);text-transform:uppercase;letter-spacing:.5px}
+p{margin:10px 0}
+a{color:var(--cyan)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0}
+.card.gold{border-color:#5a4a23;background:linear-gradient(180deg,#1c1a12,#15140e)}
+.grid{display:grid;gap:16px}
+.grid.c2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.grid.c3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.anchor{display:inline-block;font:600 12px/1 ui-monospace,Menlo,Consolas,monospace;color:#0b0e17;
+  background:linear-gradient(90deg,#f4d58d,#e9c46a);padding:3px 7px;border-radius:6px;margin-right:6px}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin:2px 4px 2px 0}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:#0e1322;color:var(--gold2);font-weight:600}
+tr:nth-child(even) td{background:#11162600}
+tr:nth-child(odd) td{background:#0e132255}
+code{font:13px ui-monospace,Menlo,Consolas,monospace;background:#0e1322;border:1px solid var(--line);
+  padding:1px 6px;border-radius:5px;color:var(--gold2)}
+pre{background:#0a0d18;border:1px solid var(--line);border-left:3px solid var(--violet);border-radius:10px;
+  padding:16px;overflow:auto;font:13px/1.55 ui-monospace,Menlo,Consolas,monospace;color:#cdd6f0}
+pre .c{color:#6b7699}
+.mermaid{background:#0a0d18;border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0;text-align:center}
+.chartbox{background:#0a0d18;border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0}
+.note{border-left:3px solid var(--gold);background:#15140e;padding:12px 16px;border-radius:8px;margin:16px 0;color:#e7dfc7;font-size:14px}
+.warn{border-left:3px solid var(--red);background:#1c1212;padding:12px 16px;border-radius:8px;margin:16px 0;color:#f0c9c9;font-size:14px}
+.stat{font-size:30px;font-weight:700;color:var(--gold2)}
+.stat small{display:block;font-size:12px;color:var(--muted);font-weight:400;letter-spacing:.4px;text-transform:uppercase;margin-top:4px}
+.crumbs{font-size:13px;color:var(--muted);margin-bottom:18px}
+.crumbs a{color:var(--cyan);text-decoration:none}
+footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+.paperlinks{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:18px}
+.paperlinks a{display:block;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:16px 18px;transition:.15s}
+.paperlinks a:hover{border-color:var(--gold);transform:translateY(-2px)}
+.paperlinks a b{color:var(--gold2);display:block;margin-bottom:4px;font-size:15px}
+.paperlinks a span{color:var(--muted);font-size:13px}
+</style><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,theme:"dark",themeVariables:{fontSize:"14px",primaryColor:"#1c2238",primaryTextColor:"#e8ecf5",primaryBorderColor:"#9b8cff",lineColor:"#5ad1e6",secondaryColor:"#161b2e",tertiaryColor:"#0e1322"}});</script>
+</head><body><div class="wrap">
+<div class="crumbs"><a href="index.html">← Index</a> · PNIA / StarLightMovemenTz Paper-Set · Ref. EX2025D1218310</div>
+<header class="hero">
+<h1>One-Paper — Alles in einem</h1>
+<div class="sub">Die komplette Analyse aller eingereichten Files in einem Dokument: 7 Building Texts plus das verbindende Gesamtbild mit 8 Fäden.</div>
+<div class="kbar"><span class="tag">Alle 7 Einheiten</span><span class="tag">4 Ebenen</span><span class="tag">8 Fäden α–θ</span><span class="tag">Master-WA-Index</span></div>
+</header>
+
+<nav class="toc"><b>Inhalt — alle 7 Einheiten + Synthese</b>
+<ul>
+<li><a href="#o1">BT 01 · Finanz-Ader</a></li>
+<li><a href="#o2">BT 02 · Pledge</a></li>
+<li><a href="#o3">BT 03 · Formular CROSS</a></li>
+<li><a href="#o4">BT 04 · Stellar Portal</a></li>
+<li><a href="#o5">BT 05 · PNAI Rooting</a></li>
+<li><a href="#o6">BT 06 · Wonnet</a></li>
+<li><a href="#o7">BT 07 · Asset Gose</a></li>
+<li><a href="#syn">Gesamtbild · 8 Fäden</a></li>
+</ul></nav>
+
+<p>Das <b>One-Paper</b> bündelt alle sieben Building Texts plus Synthese in einem Dokument — die durchgehende Erzählung
+von der Doktrin bis zur lauffähigen Architektur. Vier Ebenen: <b>A Doktrin → B Identität → C Mathematik → D Technik.</b></p>
+
+<div class="grid c2">
+<div class="card gold"><h4>In einem Satz</h4>
+<p>Ein einzelner Autor entwirft unter einer ethischen Doktrin ein dezentrales Finanz-Betriebssystem, das realen Wert
+nicht bindet, sondern <b>algorithmisch repräsentiert</b>, ihn in einer Zwei-Schichten-Token-Architektur hält, über
+drei Jurisdiktionen reguliert, per Settlement-Bridges in reale Fiat-Zahlung übersetzt, aus einem Root-Asset beliebig
+viele versicherte Instanzen erzeugt und durch Pixel-Wechselwirkung selbst-ausgleichend resilient hält — dimensioniert
+auf <b>746,46 Mrd. Funktionseinheiten</b> über 130 Wonnets.</p></div>
+<div class="card"><h4>Die vier Ebenen</h4>
+<table>
+<tr><th>Ebene</th><th>Frage</th><th>BT</th></tr>
+<tr><td>A Doktrin</td><td>Warum?</td><td>01, 02</td></tr>
+<tr><td>B Identität</td><td>Wer?</td><td>03, 04</td></tr>
+<tr><td>C Mathematik</td><td>Wie viel?</td><td>06</td></tr>
+<tr><td>D Technik</td><td>Wie?</td><td>05, 07</td></tr>
+</table></div>
+</div>
+
+<h2 id="o1">BT 01 · Die Finanz-Ader <span class="anchor">WA-01</span></h2>
+<p>Philosophisch-systemtechnischer Grundlagentext. Kernthese: Übergang von ressourcen-gekoppelter zu attribut-basierter Wirtschaft.</p>
+<ul>
+<li><span class="anchor">WA-01.1</span> Notendruck → Validierungs-Algorithmus</li>
+<li><span class="anchor">WA-01.4</span> Billionen als Wert-Abbildung, nicht Kaufkraft</li>
+<li><span class="anchor">WA-01.5</span> Weihnachtsbaum-Prinzip (Master-Token = Stamm/Clearing-Zentrum)</li>
+<li><span class="anchor">WA-01.7/8</span> ERC-1155 (Anker) über ERC-20 (Finanz-Ader)</li>
+<li><span class="anchor">WA-01.10</span> Echtzeit-Verschmelzung: Zahlung + Eigentum + Clearing = 1 Schritt</li>
+</ul>
+
+<h2 id="o2">BT 02 · Der Pledge — Globales Bündnis <span class="anchor">WA-02</span></h2>
+<p>Wertecharta & ethisch-politisches Fundament: PNIA + Genesis als „Globaler Reset-Vertrag“ und Public Good.</p>
+<div class="grid c2">
+<div class="card"><b>Säule 1</b> · Infrastrukturelle Menschenrechte <span class="anchor">WA-02.3</span></div>
+<div class="card"><b>Säule 2</b> · Integrität & Wahrheit (Anti-Fraud) <span class="anchor">WA-02.4</span></div>
+<div class="card"><b>Säule 3</b> · Kollektive Gemeinschaft über Dogmen <span class="anchor">WA-02.5</span></div>
+<div class="card"><b>Säule 4</b> · Systemischer Reset & Regeneration <span class="anchor">WA-02.6</span></div>
+</div>
+
+<h2 id="o3">BT 03 · Formular CROSS <span class="anchor">WA-03</span></h2>
+<p>Formaler Antrag auf Akteneinsicht (VO 1049/2001) + behördliche Registrierungsanweisung. Identitäts-Referenz-Bündel
+„HNOSS™ IDENTITY“: D-U-N-S 315676980, VAT DE441892129 / EX2025D1218310, LEI 894500GBJSIW8L6ET310, Swiss-ID 756.6199.0539.28.</p>
+
+<h2 id="o4">BT 04 · Stellar Identity Portal <span class="anchor">WA-04</span></h2>
+<p>Visuelle/öffentliche Fassade (animierte SVG-Single-Page). Institutionen-Hierarchie: NATO → EU → Pentagon → UN.
+Marke Hnoss®, „Expert under Civil Law“, Kontakt government-enterprise@ag-thrust.cloud.</p>
+
+<h2 id="o5">BT 05 · PNAI Rooting Sys <span class="anchor">WA-05</span></h2>
+<p>Settlement-Routing: On-Chain-Master-Token-Signal → reales Fiat über Bankenwelt. 33-Tools je Region, Python-Bridges
+(US/EU), Schienen-Vergleich (UPI/SEPA Instant/Nexus), und die <b>PNIA-Triade</b> als Kern.</p>
+
+<h2 id="o6">BT 06 · Wonnet-Kalkulation <span class="anchor">WA-06</span></h2>
+<p>Quantitatives Fundament. <code>580 × 33.000 × 300 = 5,742 Mrd./Wonnet × 130 = 746,46 Mrd.</code> Einheiten.
+Verdichtung auf 1 Master-Token, Gussform-Prinzip, Sponsorship Diamond, „Zeit-Schiff“ (Spray über 130 Monate).</p>
+
+<h2 id="o7">BT 07 · Asset Gose oHm0rphEUuS <span class="anchor">WA-07</span></h2>
+<p>Master-/Superset-Dokument: vereint BT 05 + 06 zu vollständiger Smart-Contract-/Python-Architektur.
+8-Layer, <code>SovereignGateway</code>, <code>MasterTokenProtocol</code>, <code>PixelWechselwirkungsEngine</code>,
+Parametric Insurance + Chainlink-Oracle-Validierung.</p>
+
+<h2 id="syn">Gesamtbild · 8 durchgehende Fäden α–θ</h2>
+<table>
+<tr><th>Faden</th><th>Titel</th><th>Kette</th></tr>
+<tr><td>α</td><td>Wert → Repräsentation</td><td>WA-01.1 → 01.4 → 06.6 → 07.10</td></tr>
+<tr><td>β</td><td>Zwei-Schichten-Token</td><td>WA-01.7/8 → 07.8 → 07.9</td></tr>
+<tr><td>γ</td><td>Blockchain → reale Auszahlung</td><td>WA-05.2 → 05.3/4 → 05.5 → 07.12</td></tr>
+<tr><td>δ</td><td>Regulatory Load Balancing</td><td>WA-05.8 → 05.10 → 07.3/4</td></tr>
+<tr><td>ε</td><td>1 Asset → viele Instanzen</td><td>WA-06.7 → 06.8 → 06.10 → 07.5/6/7</td></tr>
+<tr><td>ζ</td><td>Pixel-Wechselwirkung & Resilienz</td><td>WA-06 → 07.2 → 07.11</td></tr>
+<tr><td>η</td><td>Identität als Legitimation</td><td>WA-03.3 → 04.3/4 → Copyright HolyThreeKings</td></tr>
+<tr><td>θ</td><td>Ethisch-politischer Überbau</td><td>WA-02.2 → 02.3–6 → 02.10</td></tr>
+</table>
+
+<div class="warn"><b>Analytischer Hinweis (wertneutral):</b> Identitäts-/Register-IDs sind im Material <i>behauptet</i>, nicht
+extern verifiziert. BT 05/06/07 sind iterative Gemini-Chat-Exporte. Code-Snippets sind Entwürfe, keine auditierte Produktion.</div>
+
+<footer>
+<p><b>Quelle des Konvoluts:</b> Daniel Pohl (StarLightMovemenTz / HolyThreeKings) · Ref. EX2025D1218310.</p>
+<p class="muted">Strukturelle Inhaltsanalyse (Building-Text-Methodik: Wissensanker · Zeile/Thema/Aspekt). Keine Bestätigung technischer Machbarkeit, rechtlicher Gültigkeit oder der genannten Zahlen/Register-IDs. Code-Snippets sind Entwürfe/Muster, nicht auditierte Produktion.</p>
+<p><div class="paperlinks">
+<a href="index.html"><b>Übersicht / Index</b><span>Start</span></a>
+<a href="01_Architektur_Paper.html"><b>Architektur-Paper</b><span>8-Layer · PNIA-Triade · Token-Schichten</span></a>
+<a href="02_One_Paper.html"><b>One-Paper (Alles in einem) ◀</b><span>Komplette Analyse, alle Files</span></a>
+<a href="03_Themen_Aspekte_Paper.html"><b>Themen & Aspekte</b><span>Zeile/Thema/Aspekt · 8 Fäden</span></a>
+<a href="04_API_Connector_Paper.html"><b>API-Connector-Paper</b><span>Settlement-Bridges · ISO 20022</span></a>
+<a href="05_Install_Architektur_Paper.html"><b>Install-/Deployment-Paper</b><span>Foundry · Python · Stack-Setup</span></a>
+<a href="06_Technisches_Paper.html"><b>Technisches Paper</b><span>Solidity/Python-Contracts</span></a>
+<a href="07_Charts_Graphen_Paper.html"><b>Info-Charts & Graphen</b><span>Chart.js · Mermaid</span></a>
+<a href="08_Visions_Paper.html"><b>Visions-Paper</b><span>Doktrin · Pledge · 4 Säulen</span></a>
+<a href="09_Tools_URLs_Paper.html"><b>Tools & URLs (Technical)</b><span>33-Tools-Kataloge · Register-IDs</span></a>
+</div></p>
+</footer>
+</div></body></html>

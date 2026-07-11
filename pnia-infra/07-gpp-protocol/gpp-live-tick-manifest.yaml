@@ -1,0 +1,18 @@
+# PNIA Infrastructure Bundle — 07-gpp-protocol/gpp-live-tick-manifest.yaml
+# Source: ProtokolInfrastructurImplementation.txt, lines 1513-1527
+# Extracted verbatim on 2026-07-06.
+# GPP live-tick / event-sourcing manifest.
+
+# Good Public Protocol - Live Tick Manifest
+tick_metadata:
+  tick_id: 89472109841 # Die globale Sequenznummer
+  timestamp: 1720050000.452 # High-Precision Time
+  origin_rbx: "RBX-NODE-001"
+
+payload:
+  inference_id: "AI-MODEL-X"
+  result_hash: "sha256:d82...f9" # Hash des KI-Ergebnisses
+  input_provenance: "doi:10.5072/GPP-DATA-001"
+
+validation:
+  gpp_signature: "sig_e9a...55" # Signatur des Knotens

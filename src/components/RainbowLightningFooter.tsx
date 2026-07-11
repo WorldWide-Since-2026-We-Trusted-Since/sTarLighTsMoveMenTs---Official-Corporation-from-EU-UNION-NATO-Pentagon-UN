@@ -13,7 +13,7 @@
  * 
  * Status: CLASSIFIED – PILOT PROJECT – NOT FOR PUBLIC DISTRIBUTION
  */
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Heart, ExternalLink, Shield, Lock } from "lucide-react";
 

@@ -1,0 +1,4 @@
+ID,DB_TYPE,DB_PORT,DB_NAME
+EXAMPLE-001,postgres,5432,example_alpha_db
+EXAMPLE-002,clickhouse,8123,example_analytics_db
+EXAMPLE-003,mysql,3306,example_content_db

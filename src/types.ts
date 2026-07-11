@@ -44,3 +44,24 @@ export interface ProjectCorridor {
   activeNodes: number;
   leadArchitect: string;
 }
+
+// ---- HNOSS Invite Governance (EU AI Act / Digital Act / Ethics Act) ----
+export type AccessRequestStatus =
+  | "PENDING_VERIFICATION"
+  | "VERIFIED"
+  | "APPROVED"
+  | "REJECTED";
+
+export interface AccessRequest {
+  id: string;
+  integration_name: string;
+  business_email: string;
+  e_signature_hash: string;
+  e_signature_initials: string | null;
+  status: AccessRequestStatus;
+  admin_notes: string | null;
+  requested_at: string;
+  verified_at: string | null;
+  admin_action_at: string | null;
+  is_active: number;
+}

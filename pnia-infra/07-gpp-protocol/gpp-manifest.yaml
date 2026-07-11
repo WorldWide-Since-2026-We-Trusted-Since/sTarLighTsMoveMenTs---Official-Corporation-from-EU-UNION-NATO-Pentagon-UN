@@ -1,0 +1,24 @@
+# PNIA Infrastructure Bundle — 07-gpp-protocol/gpp-manifest.yaml
+# Source: ProtokolInfrastructurImplementation.txt, lines 1114-1134
+# Extracted verbatim on 2026-07-06.
+# Good-Public-Protocol compliance manifest (v1).
+
+# Good Public Protocol - Compliance Manifest
+version: "2026.07.gpp"
+meta:
+  protocol: "Good-Public-Integrity"
+  governance_layer: "International-GovTech"
+
+validation:
+  no_placeholder_allowed: true
+  source_verification: "cryptographic_signing"
+  integrity_proof: "merkle_tree_root_id"
+
+registry:
+  doi_anchor: "10.5072/GPP-GLOBAL-ID"
+  compliance_check:
+    iso_standard: "ISO-IEC-307"
+    verification_mode: "Strict-Audit"
+
+provenance:
+  signer: "Verified-Entity-ID"

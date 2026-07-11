@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown, ChevronUp, FileText, Scale, BookOpen, Globe } from "lucide-react";
 import DocumentOverlay, { type DocumentOverlayData } from "./DocumentOverlay";

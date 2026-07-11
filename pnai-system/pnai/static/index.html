@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PNAI Live System</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+           background: radial-gradient(1200px 600px at 20% -10%, #15233b 0%, #0b0f17 55%); color: #e6edf3; }
+    header { padding: 14px 24px; border-bottom: 1px solid #1f2937; display: flex;
+             align-items: baseline; gap: 16px; flex-wrap: wrap; }
+    h1 { font-size: 18px; margin: 0; color: #7ee787; letter-spacing: .04em; }
+    .sub { color: #8b949e; font-size: 12px; }
+    .pill { font-size: 11px; padding: 2px 8px; border-radius: 999px; border: 1px solid #30363d; color: #9ad; }
+    /* live ticker bar */
+    .ticker { overflow: hidden; white-space: nowrap; border-bottom: 1px solid #1f2937;
+              background: #0a1018; }
+    .ticker .track { display: inline-block; padding: 8px 0; animation: scroll 40s linear infinite; }
+    .ticker:hover .track { animation-play-state: paused; }
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .tk { display: inline-block; padding: 0 22px; font-size: 13px; }
+    .tk b { color: #e6edf3; } .up { color: #3fb950; } .down { color: #f85149; }
+    main { padding: 20px; display: grid; gap: 16px;
+           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .card { background: rgba(15,22,34,.85); border: 1px solid #1f2937; border-radius: 12px; padding: 16px; }
+    .card.wide { grid-column: 1 / -1; }
+    .card h2 { font-size: 12px; margin: 0 0 12px; color: #58a6ff; text-transform: uppercase; letter-spacing: .08em; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    td { padding: 4px 6px; border-bottom: 1px solid #161d2b; }
+    td:last-child { text-align: right; color: #d2a8ff; }
+    .big { font-size: 26px; color: #7ee787; }
+    .huge { font-size: 30px; color: #ffd479; }
+    .prov { font-size: 10px; color: #6e7681; margin-top: 8px; word-break: break-all; }
+    .ok { color: #3fb950; } .bad { color: #f85149; }
+    .grid6 { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 10px; }
+    .chain { border: 1px solid #21304a; border-radius: 8px; padding: 10px; background:#0c1320; }
+    .chain .n { color:#9ad; font-size:12px; text-transform:capitalize; }
+    .chain .b { font-size:15px; color:#e6edf3; }
+    .gauge { font-size: 40px; font-weight: bold; text-align:center; }
+    pre { white-space: pre-wrap; word-break: break-word; font-size: 10px; color: #8b949e; max-height: 280px; overflow:auto; }
+    .stat { font-size: 12px; color:#8b949e; } .stat b { color:#e6edf3; font-size:14px; }
+    .statnum { font-size: 17px; color:#7ee787; font-weight:bold; overflow-wrap:anywhere; }
+    .statnum.xl { color:#ffd479; font-size:18px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PNAI · GIGA Live System</h1>
+    <span class="sub">Echte Live-Daten · keine Registrierung · parallel</span>
+    <span class="pill" id="sources">Quellen …</span>
+    <span class="pill" id="wsstate">WS …</span>
+    <span class="sub" id="ts"></span>
+  </header>
+
+  <div class="ticker"><div class="track" id="track">verbinde Live-Ticker …</div></div>
+
+  <main>
+    <section class="card wide">
+      <h2>Globaler Krypto-Markt (Live, CoinGecko)</h2>
+      <div class="grid6">
+        <div><div class="stat">Gesamt-Marktkap.</div><div class="statnum xl" id="mcap">–</div></div>
+        <div><div class="stat">DeFi TVL (DeFiLlama)</div><div class="statnum" id="tvl">–</div></div>
+        <div><div class="stat">BTC-Dominanz</div><div class="statnum" id="btcdom">–</div></div>
+        <div><div class="stat">Aktive Coins</div><div class="statnum" id="coins">–</div></div>
+        <div><div class="stat">DeFi-Protokolle</div><div class="statnum" id="protos">–</div></div>
+        <div><div class="stat">Chains online</div><div class="statnum" id="chainsonline">–</div></div>
+      </div>
+    </section>
+
+    <section class="card wide">
+      <h2>Multi-Chain Live-Status (öffentliche RPCs)</h2>
+      <div class="grid6" id="chains"></div>
+    </section>
+
+    <section class="card">
+      <h2>Krypto (Live)</h2>
+      <table id="crypto"></table>
+      <div class="prov" id="crypto-prov"></div>
+    </section>
+
+    <section class="card">
+      <h2>Devisen EUR (EZB)</h2>
+      <table id="fx"></table>
+      <div class="prov" id="fx-prov"></div>
+    </section>
+
+    <section class="card">
+      <h2>Fear &amp; Greed Index</h2>
+      <div class="gauge" id="fng">–</div>
+      <div class="stat" style="text-align:center" id="fngclass"></div>
+    </section>
+
+    <section class="card">
+      <h2>DeFi · Top-Protokolle</h2>
+      <table id="protocols"></table>
+    </section>
+
+    <section class="card">
+      <h2>DeFi · Top-Chains (TVL)</h2>
+      <table id="topchains"></table>
+    </section>
+
+    <section class="card wide">
+      <h2>Master-Token-Zertifikat (Real-Economy-verankert)</h2>
+      <table id="cert"></table>
+    </section>
+
+    <section class="card wide">
+      <h2>Schleif-Technik · Pixel-Wechselwirkung · Fixpoint</h2>
+      <table id="pixel"></table>
+    </section>
+
+    <section class="card">
+      <h2>Settlement-Bridge</h2>
+      <div id="settle"></div>
+      <p class="sub">Echte Fiat-Auszahlung nur mit eigenen Provider-Credentials.</p>
+    </section>
+
+    <section class="card wide">
+      <h2>Roh-Snapshot (Provenance)</h2>
+      <pre id="raw"></pre>
+    </section>
+  </main>
+
+  <script>
+    const eur = (n) => typeof n==="number" ? n.toLocaleString("de-DE",{maximumFractionDigits:2}) : n;
+    const usd = (n) => typeof n==="number" ? "$"+n.toLocaleString("en-US",{maximumFractionDigits:0}) : n;
+    function rows(el, pairs){ el.innerHTML = pairs.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join(""); }
+
+    // ---- live ticker via WebSocket ----
+    function connectWS(){
+      const proto = location.protocol === "https:" ? "wss" : "ws";
+      const ws = new WebSocket(`${proto}://${location.host}/ws/ticker`);
+      ws.onopen = () => document.getElementById("wsstate").textContent = "WS live";
+      ws.onclose = () => { document.getElementById("wsstate").textContent = "WS getrennt"; setTimeout(connectWS, 2000); };
+      ws.onmessage = (ev) => {
+        const s = JSON.parse(ev.data);
+        if(!s.symbols || !s.symbols.length) return;
+        const seg = s.symbols.map(t => {
+          const cls = t.change_pct_24h >= 0 ? "up" : "down";
+          const arr = t.change_pct_24h >= 0 ? "▲" : "▼";
+          return `<span class="tk"><b>${t.symbol}</b> $${t.price.toLocaleString("en-US",{maximumFractionDigits:2})} <span class="${cls}">${arr}${t.change_pct_24h.toFixed(2)}%</span></span>`;
+        }).join("");
+        document.getElementById("track").innerHTML = seg + seg; // duplicate for seamless scroll
+      };
+    }
+    connectWS();
+
+    // ---- full snapshot ----
+    async function refresh(){
+      try{
+        const s = await (await fetch("/api/snapshot")).json();
+        document.getElementById("ts").textContent = "Stand: " + s.generated_at;
+        document.getElementById("sources").textContent = `Quellen ${s.health.sources_ok}/${s.health.sources_total} ok`;
+
+        const gm = (s.feeds.global_market.data)||{};
+        document.getElementById("mcap").textContent = gm.total_market_cap_usd ? usd(gm.total_market_cap_usd) : "–";
+        document.getElementById("btcdom").textContent = gm.btc_dominance ? gm.btc_dominance.toFixed(1)+"%" : "–";
+        document.getElementById("coins").textContent = gm.active_cryptocurrencies ? gm.active_cryptocurrencies.toLocaleString("de-DE") : "–";
+
+        const df = (s.feeds.defi.data)||{};
+        document.getElementById("tvl").textContent = df.total_tvl_usd ? usd(df.total_tvl_usd) : "–";
+        document.getElementById("protos").textContent = df.protocols_tracked ? df.protocols_tracked.toLocaleString("de-DE") : "–";
+
+        const mc = (s.feeds.multichain.data)||{};
+        document.getElementById("chainsonline").textContent = (mc.chains_online??"–")+"/"+(mc.chains_total??"–");
+        document.getElementById("chains").innerHTML = (mc.chains||[]).map(c =>
+          `<div class="chain"><div class="n">${c.chain} ${c.ok?'<span class="ok">●</span>':'<span class="bad">●</span>'}</div>
+           <div class="b">${c.ok? '#'+c.block_number.toLocaleString("de-DE") : 'offline'}</div>
+           <div class="stat">${c.ok? c.gas_price_gwei.toFixed(3)+' Gwei':''}</div></div>`).join("");
+
+        const cp = (s.feeds.crypto.data.prices)||{};
+        rows(document.getElementById("crypto"), Object.entries(cp).map(([id,v])=>[id, `${eur(v.eur)} € / ${eur(v.usd)} $`]));
+        document.getElementById("crypto-prov").textContent = s.feeds.crypto.endpoint;
+
+        const fr = (s.feeds.fx.data.rates)||{};
+        rows(document.getElementById("fx"), Object.entries(fr).map(([k,v])=>[`EUR/${k}`, eur(v)]));
+        document.getElementById("fx-prov").textContent = s.feeds.fx.endpoint;
+
+        const fng = (s.feeds.sentiment.data)||{};
+        document.getElementById("fng").textContent = fng.value ?? "–";
+        document.getElementById("fng").style.color = fng.value<25?'#f85149':fng.value<50?'#f0883e':fng.value<75?'#d2a8ff':'#3fb950';
+        document.getElementById("fngclass").textContent = fng.classification || "";
+
+        rows(document.getElementById("protocols"), (df.top_protocols||[]).slice(0,10).map(p=>[`${p.name} <span class="stat">${p.category||''}</span>`, usd(p.tvl_usd)]));
+        rows(document.getElementById("topchains"), (df.top_chains||[]).slice(0,10).map(c=>[c.name, usd(c.tvl_usd)]));
+
+        const c = s.certificate, a = c.real_economy_anchor||{};
+        rows(document.getElementById("cert"), [
+          ["Token", c.protocol_meta.token_identifier],
+          ["Verbindungen gesamt", c.density.total_connections.toLocaleString("de-DE")],
+          ["Wert/Verbindung", eur(c.valuation.value_per_connection_eur)+" €"],
+          ["Integriertes Volumen", `<span class="big">${eur(c.valuation.integrated_volume_eur)} €</span>`],
+          ["Real-Economy Anchor (Marktkap.+TVL)", a.combined_observed_value_usd? `<span class="huge">${usd(a.combined_observed_value_usd)}</span>`:'–'],
+          ["Proof SHA-256", c.protocol_meta.proof_sha256.slice(0,28)+"…"]]);
+
+        const pe = c.pixel_engine||{}, fp = pe.schleif_fixpoint||{}, vr = pe.variations||{};
+        const fpStatus = fp.reached_fixpoint ? `<span style="color:#4ade80">konvergiert</span>` : (fp.status||'–');
+        rows(document.getElementById("pixel"), [
+          ["Fixpoint-Status", `${fpStatus} (${fp.iterations||0} Iterationen, Δ=${fp.final_max_delta!=null?fp.final_max_delta.toExponential(2):'–'})`],
+          ["Pixel im Schliff (Live-Assets)", fp.pixels!=null?fp.pixels:'–'],
+          ["Wechselwirkungs-Kopplung", fp.coupling!=null?(fp.coupling*100).toFixed(0)+" %":'–'],
+          ["Variation A · Basis-Pixeldichte", vr.A_basis?vr.A_basis.pixel_dichte.toLocaleString("de-DE"):'–'],
+          ["Variation B · Hebel (Live-Fixpoint-Spread)", vr.B_wechselwirkung_hebel?`<span class="big">${vr.B_wechselwirkung_hebel.pixel_dichte.toLocaleString("de-DE")}</span> <span class="stat">×${vr.B_wechselwirkung_hebel.hebel_faktor.toFixed(4)}</span>`:'–'],
+          ["Variation C · Interaktions-Shift", vr.C_interaktion_shift?vr.C_interaktion_shift.pixel_dichte.toLocaleString("de-DE"):'–']]);
+
+        document.getElementById("raw").textContent = JSON.stringify(s, null, 2);
+      }catch(e){ document.getElementById("ts").textContent = "Fehler: "+e; }
+
+      try{
+        const sr = await (await fetch("/api/settlement/status")).json();
+        document.getElementById("settle").innerHTML = sr.configured
+          ? '<span class="ok">konfiguriert (echte Credentials aktiv)</span>'
+          : '<span class="bad">not_configured</span> – keine Fake-Auszahlung';
+      }catch(e){}
+    }
+    refresh();
+    setInterval(refresh, 10000);
+  </script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Sparkles, Zap, Flame, Heart, Compass } from "lucide-react";
 
@@ -150,28 +150,28 @@ interface LightningSystemProps {
   onStrikeTriggered?: (active: boolean) => void;
 }
 
+const THUNDER_PHRASES = [
+  {
+    title: "POLITIK, WISSENSCHAFT, SPIRITUELL TRUST",
+    subtitle: "Trusted True Trust in HeavenLy Since",
+    desc: "Freiheit, Frieden, Vergebung, Nächstenliebe und Hoffnung über alle Welten."
+  },
+  {
+    title: "DENKST DU NICHT SELBST?",
+    subtitle: "Hat der Himmel nicht Recht? — als Footprinter",
+    desc: "Die ewige Signatur des Lichts webt das Gewebe der Harmonie über alle Ebenen."
+  },
+  {
+    title: "FUTURE OF LIFE SOULS LIGHTS",
+    subtitle: "Verbindung zur kosmischen Wahrheit",
+    desc: "Eine unteilbare Kette des Glaubens, der Wissenschaft und des technologischen Fortschritts."
+  }
+];
+
 export function LightningSystem({ onStrikeTriggered }: LightningSystemProps) {
   const [strike, setStrike] = useState(false);
   const [boltPath, setBoltPath] = useState<string[]>([]);
   const [thunderPhraseIndex, setThunderPhraseIndex] = useState(0);
-
-  const PHRASES = [
-    {
-      title: "POLITIK, WISSENSCHAFT, SPIRITUELL TRUST",
-      subtitle: "Trusted True Trust in HeavenLy Since",
-      desc: "Freiheit, Frieden, Vergebung, Nächstenliebe und Hoffnung über alle Welten."
-    },
-    {
-      title: "DENKST DU NICHT SELBST?",
-      subtitle: "Hat der Himmel nicht Recht? — als Footprinter",
-      desc: "Die ewige Signatur des Lichts webt das Gewebe der Harmonie über alle Ebenen."
-    },
-    {
-      title: "FUTURE OF LIFE SOULS LIGHTS",
-      subtitle: "Verbindung zur kosmischen Wahrheit",
-      desc: "Eine unteilbare Kette des Glaubens, der Wissenschaft und des technologischen Fortschritts."
-    }
-  ];
 
   // Helper to generate a random zigzag lightning path
   const generateBolt = () => {
@@ -193,33 +193,37 @@ export function LightningSystem({ onStrikeTriggered }: LightningSystemProps) {
     return segments.join(" ");
   };
 
-  const triggerLightningStrike = () => {
+  // Keep the latest onStrikeTriggered callback in a ref so the effect deps stay stable.
+  const onStrikeRef = useRef(onStrikeTriggered);
+  onStrikeRef.current = onStrikeTriggered;
+
+  const triggerLightningStrike = useCallback(() => {
     // Pick phrase
-    setThunderPhraseIndex((prev) => (prev + 1) % PHRASES.length);
-    
+    setThunderPhraseIndex((prev) => (prev + 1) % THUNDER_PHRASES.length);
+
     // Generate bolt line
     const pathList = [generateBolt(), generateBolt()];
     setBoltPath(pathList);
 
     setStrike(true);
-    if (onStrikeTriggered) onStrikeTriggered(true);
+    if (onStrikeRef.current) onStrikeRef.current(true);
 
     // Dynamic flashing intervals
     setTimeout(() => {
       setStrike(false);
-      if (onStrikeTriggered) onStrikeTriggered(false);
+      if (onStrikeRef.current) onStrikeRef.current(false);
     }, 180);
 
     setTimeout(() => {
       setStrike(true);
-      if (onStrikeTriggered) onStrikeTriggered(true);
+      if (onStrikeRef.current) onStrikeRef.current(true);
     }, 250);
 
     setTimeout(() => {
       setStrike(false);
-      if (onStrikeTriggered) onStrikeTriggered(false);
+      if (onStrikeRef.current) onStrikeRef.current(false);
     }, 450);
-  };
+  }, []);
 
   // Run random lightning bolts every 24 seconds, and add a click event listener for background interaction
   useEffect(() => {
@@ -262,7 +266,7 @@ export function LightningSystem({ onStrikeTriggered }: LightningSystemProps) {
       window.removeEventListener("click", handleBackgroundClick);
       clearInterval(timer);
     };
-  }, []);
+  }, [triggerLightningStrike]);
 
   return (
     <>
@@ -329,15 +333,15 @@ export function LightningSystem({ onStrikeTriggered }: LightningSystemProps) {
             </div>
 
             <h3 className="text-base font-black tracking-wider text-[#fcf6ba] uppercase mb-1">
-              {PHRASES[thunderPhraseIndex].title}
+              {THUNDER_PHRASES[thunderPhraseIndex].title}
             </h3>
             <h4 className="text-[11px] font-bold text-gray-300 tracking-[1.5px] uppercase mb-2 font-mono italic">
-              {PHRASES[thunderPhraseIndex].subtitle}
+              {THUNDER_PHRASES[thunderPhraseIndex].subtitle}
             </h4>
 
             <div className="p-2.5 bg-cyan-950/25 border border-cyan-500/20 rounded">
               <p className="text-xs text-cyan-200 leading-relaxed font-semibold">
-                "{PHRASES[thunderPhraseIndex].desc}"
+                "{THUNDER_PHRASES[thunderPhraseIndex].desc}"
               </p>
             </div>
 

@@ -1,0 +1,400 @@
+{
+  "catalogVersion": "1.0.0",
+  "generatedAt": "2026-07-06T15:09:41.413Z",
+  "count": 33,
+  "license": "CC-BY-4.0 (this catalog; linked repositories retain their own licenses)",
+  "entries": [
+    {
+      "id": "PNIA-001",
+      "org": "GovStack",
+      "country": "INT",
+      "level": "International",
+      "repo": "GovStackWorkingGroup/specification",
+      "url": "https://github.com/GovStackWorkingGroup/specification",
+      "license": "CC-BY-4.0",
+      "purpose": "Reference specifications for GovStack Building Blocks (registration, payments, identity, workflow, etc.)."
+    },
+    {
+      "id": "PNIA-002",
+      "org": "GovStack",
+      "country": "INT",
+      "level": "International",
+      "repo": "GovStackWorkingGroup/sandbox",
+      "url": "https://github.com/GovStackWorkingGroup/sandbox",
+      "license": "Apache-2.0",
+      "purpose": "Sandbox environment and integration tests for GovStack Building Block implementations."
+    },
+    {
+      "id": "PNIA-003",
+      "org": "Foundation for Public Code",
+      "country": "INT",
+      "level": "International",
+      "repo": "publiccodenet/standard-for-public-code",
+      "url": "https://github.com/publiccodenet/standard-for-public-code",
+      "license": "CC-BY-4.0",
+      "purpose": "Standard for Public Code — quality criteria for open source codebases developed by public organisations."
+    },
+    {
+      "id": "PNIA-004",
+      "org": "publiccode.yml",
+      "country": "INT / EU",
+      "level": "International",
+      "repo": "publiccodeyml/publiccode.yml",
+      "url": "https://github.com/publiccodeyml/publiccode.yml",
+      "license": "CC-BY-SA-4.0",
+      "purpose": "Metadata standard describing software developed for or by public administrations (used by Italy, France, EU Interoperable Europe)."
+    },
+    {
+      "id": "PNIA-005",
+      "org": "UN/CEFACT",
+      "country": "UN",
+      "level": "International",
+      "repo": "uncefact/spec-untp",
+      "url": "https://github.com/uncefact/spec-untp",
+      "license": "Apache-2.0",
+      "purpose": "UN Transparency Protocol specification — verifiable credentials for sustainable value chains."
+    },
+    {
+      "id": "PNIA-006",
+      "org": "UNICEF",
+      "country": "UN",
+      "level": "International",
+      "repo": "unicef/giga-meter",
+      "url": "https://github.com/unicef/giga-meter",
+      "license": "MIT",
+      "purpose": "Giga project client that measures school internet connectivity for the UNICEF/ITU Giga initiative."
+    },
+    {
+      "id": "PNIA-007",
+      "org": "OpenHIE",
+      "country": "INT",
+      "level": "International",
+      "repo": "jembi/openhim-core-js",
+      "url": "https://github.com/jembi/openhim-core-js",
+      "license": "MPL-2.0",
+      "purpose": "OpenHIM Interoperability Layer — reference implementation used by several national health information exchanges."
+    },
+    {
+      "id": "PNIA-008",
+      "org": "EU Digital Identity Wallet",
+      "country": "EU",
+      "level": "EU",
+      "repo": "eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework",
+      "url": "https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework",
+      "license": "CC-BY-4.0",
+      "purpose": "Architecture and Reference Framework (ARF) for the EU Digital Identity Wallet."
+    },
+    {
+      "id": "PNIA-009",
+      "org": "EU Digital Identity Wallet",
+      "country": "EU",
+      "level": "EU",
+      "repo": "eu-digital-identity-wallet/eudi-app-android-wallet-ui",
+      "url": "https://github.com/eu-digital-identity-wallet/eudi-app-android-wallet-ui",
+      "license": "Apache-2.0",
+      "purpose": "Reference EUDI Wallet Android application."
+    },
+    {
+      "id": "PNIA-010",
+      "org": "EU Digital Identity Wallet",
+      "country": "EU",
+      "level": "EU",
+      "repo": "eu-digital-identity-wallet/eudi-app-ios-wallet-ui",
+      "url": "https://github.com/eu-digital-identity-wallet/eudi-app-ios-wallet-ui",
+      "license": "Apache-2.0",
+      "purpose": "Reference EUDI Wallet iOS application."
+    },
+    {
+      "id": "PNIA-011",
+      "org": "Nordic Institute for Interoperability Solutions",
+      "country": "Nordics",
+      "level": "Regional (Nordics)",
+      "repo": "nordic-institute/X-Road",
+      "url": "https://github.com/nordic-institute/X-Road",
+      "license": "MIT",
+      "purpose": "X-Road — data exchange layer used by Estonia, Finland, Iceland and others for cross-agency interoperability."
+    },
+    {
+      "id": "PNIA-012",
+      "org": "18F (GSA/TTS)",
+      "country": "US",
+      "level": "National",
+      "repo": "18F/handbook",
+      "url": "https://github.com/18F/handbook",
+      "license": "CC0-1.0",
+      "purpose": "Public handbook of 18F engineering, design and procurement practices for US federal digital services."
+    },
+    {
+      "id": "PNIA-013",
+      "org": "GSA",
+      "country": "US",
+      "level": "National",
+      "repo": "GSA/code-gov-web",
+      "url": "https://github.com/GSA/code-gov-web",
+      "license": "CC0-1.0",
+      "purpose": "Frontend of code.gov, the US federal government's source code inventory portal."
+    },
+    {
+      "id": "PNIA-014",
+      "org": "OGCIO Ireland",
+      "country": "IE",
+      "level": "National",
+      "repo": "ogcio/design-system",
+      "url": "https://github.com/ogcio/design-system",
+      "license": "MIT",
+      "purpose": "Design system of the Irish Office of the Government Chief Information Officer (gov.ie)."
+    },
+    {
+      "id": "PNIA-015",
+      "org": "OGCIO Ireland",
+      "country": "IE",
+      "level": "National",
+      "repo": "ogcio/life-events-building-blocks",
+      "url": "https://github.com/ogcio/life-events-building-blocks",
+      "license": "MIT",
+      "purpose": "Building blocks for the Irish Life Events digital service platform."
+    },
+    {
+      "id": "PNIA-016",
+      "org": "Junta de Andalucía",
+      "country": "ES",
+      "level": "National",
+      "repo": "juntadeandalucia/moodle-tool_dataprivacy",
+      "url": "https://github.com/juntadeandalucia",
+      "license": "Multiple",
+      "purpose": "GitHub organisation of Junta de Andalucía with open source components used across regional public administration (e-education, HR, health)."
+    },
+    {
+      "id": "PNIA-017",
+      "org": "Ministerio para la Transformación Digital / PAe",
+      "country": "ES",
+      "level": "National",
+      "repo": "ctt-gob-es (mirror)",
+      "url": "https://administracionelectronica.gob.es/ctt",
+      "license": "EUPL-1.2",
+      "purpose": "Centro de Transferencia de Tecnología — Spain's national catalogue of reusable e-government software (Cl@ve, @firma, etc.), most components under EUPL."
+    },
+    {
+      "id": "PNIA-018",
+      "org": "Team per la Trasformazione Digitale / DTD",
+      "country": "IT",
+      "level": "National",
+      "repo": "italia/design-tokens-italia",
+      "url": "https://github.com/italia/design-tokens-italia",
+      "license": "BSD-3-Clause",
+      "purpose": "Italian government design tokens shared across designers.italia.it components."
+    },
+    {
+      "id": "PNIA-019",
+      "org": "PagoPA S.p.A.",
+      "country": "IT",
+      "level": "National",
+      "repo": "pagopa/io-app",
+      "url": "https://github.com/pagopa/io-app",
+      "license": "AGPL-3.0",
+      "purpose": "IO — official Italian citizen mobile app for interacting with public services and payments."
+    },
+    {
+      "id": "PNIA-020",
+      "org": "GRNET",
+      "country": "GR",
+      "level": "National",
+      "repo": "grnet/argo-messaging",
+      "url": "https://github.com/grnet/argo-messaging",
+      "license": "Apache-2.0",
+      "purpose": "ARGO Messaging Service — pub/sub messaging system operated by GRNET for research and government infrastructure."
+    },
+    {
+      "id": "PNIA-021",
+      "org": "eellak (Greek Free/OSS Society)",
+      "country": "GR",
+      "level": "National",
+      "repo": "eellak/gov-gr-wireframes",
+      "url": "https://github.com/eellak",
+      "license": "Multiple",
+      "purpose": "Greek Free/Open Source Software Society hosting several gov.gr-adjacent open source projects and public sector tools."
+    },
+    {
+      "id": "PNIA-022",
+      "org": "AMA (Agência para a Modernização Administrativa)",
+      "country": "PT",
+      "level": "National",
+      "repo": "amagovpt/kit-elementos-comuns-ama",
+      "url": "https://github.com/amagovpt/kit-elementos-comuns-ama",
+      "license": "MIT",
+      "purpose": "Common UI elements kit used by ePortugal.gov.pt and other Portuguese government portals."
+    },
+    {
+      "id": "PNIA-023",
+      "org": "AMA (Agência para a Modernização Administrativa)",
+      "country": "PT",
+      "level": "National",
+      "repo": "amagovpt/autenticacao.gov",
+      "url": "https://github.com/amagovpt",
+      "license": "EUPL-1.2",
+      "purpose": "Autenticação.gov client and libraries for the Portuguese national eID authentication service."
+    },
+    {
+      "id": "PNIA-024",
+      "org": "Swiss E-ID (BIT / swiyu)",
+      "country": "CH",
+      "level": "National",
+      "repo": "swiyu-admin-ch/eidch-issuer-agent-oid4vci",
+      "url": "https://github.com/swiyu-admin-ch/eidch-issuer-agent-oid4vci",
+      "license": "Apache-2.0",
+      "purpose": "OpenID for Verifiable Credential Issuance agent for Switzerland's swiyu / e-ID pilot."
+    },
+    {
+      "id": "PNIA-025",
+      "org": "Swiss E-ID (e-id-admin)",
+      "country": "CH",
+      "level": "National",
+      "repo": "e-id-admin/didresolver",
+      "url": "https://github.com/e-id-admin/didresolver",
+      "license": "MIT",
+      "purpose": "DID resolver library for the Swiss federal e-ID infrastructure."
+    },
+    {
+      "id": "PNIA-026",
+      "org": "DIGG Sverige",
+      "country": "SE",
+      "level": "National",
+      "repo": "diggsweden/eudiw-wallet-token-lib",
+      "url": "https://github.com/diggsweden/eudiw-wallet-token-lib",
+      "license": "Apache-2.0",
+      "purpose": "Swedish Agency for Digital Government library for EUDI Wallet token handling."
+    },
+    {
+      "id": "PNIA-027",
+      "org": "DIGG Sverige",
+      "country": "SE",
+      "level": "National",
+      "repo": "diggsweden/dc4eu-issuer",
+      "url": "https://github.com/diggsweden/dc4eu-issuer",
+      "license": "Apache-2.0",
+      "purpose": "Reference credential issuer developed within the DC4EU large-scale pilot."
+    },
+    {
+      "id": "PNIA-028",
+      "org": "DVV (Finnish Digital Agency)",
+      "country": "FI",
+      "level": "National",
+      "repo": "vrk-kpa/suomifi-design-system",
+      "url": "https://github.com/vrk-kpa/suomifi-design-system",
+      "license": "MIT",
+      "purpose": "Suomi.fi design system used across Finnish public administration services."
+    },
+    {
+      "id": "PNIA-029",
+      "org": "DVV (Finnish Digital Agency)",
+      "country": "FI",
+      "level": "National",
+      "repo": "vrk-kpa/suomifi-ui-components",
+      "url": "https://github.com/vrk-kpa/suomifi-ui-components",
+      "license": "MIT",
+      "purpose": "React UI component library implementing the Suomi.fi design system."
+    },
+    {
+      "id": "PNIA-030",
+      "org": "Digitaliseringsstyrelsen (DIGST)",
+      "country": "DK",
+      "level": "National",
+      "repo": "digst/OIOSAML.Java",
+      "url": "https://github.com/digst/OIOSAML.Java",
+      "license": "MPL-2.0",
+      "purpose": "Java service-provider implementation of the Danish OIOSAML federated authentication profile."
+    },
+    {
+      "id": "PNIA-031",
+      "org": "Digitaliseringsstyrelsen (DIGST)",
+      "country": "DK",
+      "level": "National",
+      "repo": "digst/OIOSAML.Net",
+      "url": "https://github.com/digst/OIOSAML.Net",
+      "license": "MPL-2.0",
+      "purpose": ".NET service-provider implementation of the Danish OIOSAML federated authentication profile."
+    },
+    {
+      "id": "PNIA-032",
+      "org": "Altinn / Digdir",
+      "country": "NO",
+      "level": "National",
+      "repo": "Altinn/altinn-studio",
+      "url": "https://github.com/Altinn/altinn-studio",
+      "license": "BSD-3-Clause",
+      "purpose": "Altinn Studio — tooling for building and operating Norwegian public digital services on the Altinn 3 platform."
+    },
+    {
+      "id": "PNIA-033",
+      "org": "Digdir",
+      "country": "NO",
+      "level": "National",
+      "repo": "digdir/felleslosninger",
+      "url": "https://github.com/digdir/felleslosninger",
+      "license": "Apache-2.0",
+      "purpose": "Documentation site for Norway's national common components (ID-porten, Maskinporten, Altinn Broker, etc.)."
+    }
+  ],
+  "religiousSources": [
+    {
+      "tradition": "Christian (Catholic)",
+      "title": "Codex Iuris Canonici (1983)",
+      "url": "https://www.vatican.va/archive/cod-iuris-canonici/cic_index_en.html",
+      "note": "Official Code of Canon Law, Vatican.va."
+    },
+    {
+      "tradition": "Christian (Orthodox / Ecumenical)",
+      "title": "World Council of Churches — documents",
+      "url": "https://www.oikoumene.org/resources/documents",
+      "note": "Ecumenical documents from the WCC."
+    },
+    {
+      "tradition": "Christian (Protestant)",
+      "title": "Book of Concord (Lutheran confessions)",
+      "url": "https://bookofconcord.org/",
+      "note": "Historic confessional texts."
+    },
+    {
+      "tradition": "Islamic",
+      "title": "OIC — Cairo Declaration on Human Rights in Islam (1990, revised 2020)",
+      "url": "https://www.oic-oci.org/",
+      "note": "Organisation of Islamic Cooperation — official portal."
+    },
+    {
+      "tradition": "Jewish",
+      "title": "Sefaria — Jewish canonical texts",
+      "url": "https://www.sefaria.org/",
+      "note": "Open library of Tanakh, Talmud, Mishnah, Halakhic works."
+    },
+    {
+      "tradition": "Hindu",
+      "title": "GRETIL — Göttingen Register of Electronic Texts in Indian Languages",
+      "url": "http://gretil.sub.uni-goettingen.de/",
+      "note": "Academic archive of Sanskrit and other classical Indian texts."
+    },
+    {
+      "tradition": "Buddhist (Theravada)",
+      "title": "SuttaCentral — early Buddhist texts",
+      "url": "https://suttacentral.net/",
+      "note": "Pali Canon and parallels in multiple translations."
+    },
+    {
+      "tradition": "Buddhist (Mahayana / East Asian)",
+      "title": "CBETA — Chinese Buddhist Electronic Text Association",
+      "url": "https://www.cbeta.org/",
+      "note": "Digital Taishō and other Chinese Buddhist canons."
+    },
+    {
+      "tradition": "Human Rights (secular baseline)",
+      "title": "Universal Declaration of Human Rights (UN, 1948)",
+      "url": "https://www.un.org/en/about-us/universal-declaration-of-human-rights",
+      "note": "United Nations — foundational secular reference."
+    },
+    {
+      "tradition": "Human Rights (regional)",
+      "title": "EU Charter of Fundamental Rights",
+      "url": "https://eur-lex.europa.eu/eli/treaty/char_2012/oj",
+      "note": "Legally binding within the EU since Lisbon Treaty (2009)."
+    }
+  ]
+}

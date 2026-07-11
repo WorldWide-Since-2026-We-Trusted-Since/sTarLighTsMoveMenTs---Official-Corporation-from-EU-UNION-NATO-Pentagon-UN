@@ -1,0 +1,22 @@
+# PNIA Infrastructure Bundle — 03-service-mesh/pnia_service.yaml
+# Source: ProtokolInfrastructurImplementation.txt, lines 195-213
+# Extracted verbatim on 2026-07-06.
+# Headless Service manifest enabling direct pod addressing.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: pnia-db-service
+  labels:
+    app: pnia-database
+spec:
+  clusterIP: None  # Das macht den Service "Headless" (Direkte Pod-IPs)
+  ports:
+  - port: 5432
+    name: postgres
+  - port: 8123
+    name: clickhouse
+  - port: 3306
+    name: mysql
+  selector:
+    app: pnia-database # Selektiert alle 1000 Instanzen

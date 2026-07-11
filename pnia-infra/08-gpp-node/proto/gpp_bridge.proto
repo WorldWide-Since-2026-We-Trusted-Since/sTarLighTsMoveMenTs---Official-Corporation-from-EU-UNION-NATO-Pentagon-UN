@@ -1,0 +1,28 @@
+// PNIA Infrastructure Bundle — 08-gpp-node/proto/gpp_bridge.proto
+// Source: ProtokolInfrastructurImplementation.txt, lines 1569-1593
+// Extracted verbatim on 2026-07-06.
+// gRPC contract for HPC → GPP high-frequency tick stream.
+
+syntax = "proto3";
+
+package gpp.v1;
+
+// Der "Tick" repräsentiert eine validierte Einheit deiner Infrastruktur
+message GPP_Tick {
+  uint64 sequence_number = 1;      // Fortlaufende Tick-ID
+  int64 timestamp_ns = 2;          // Nanosekunden-Präzision
+  string provenance_hash = 3;      // "Der Fingerabdruck der Berechnung"
+  bytes inference_payload = 4;     // Das eigentliche KI-Ergebnis (binär)
+  string state_root_hash = 5;      // Verweis auf den aktuellen Building State
+  bytes signature = 6;             // Kryptographischer Nachweis der Authentizität
+}
+
+message TickResponse {
+  bool accepted = 1;               // "Geduscht" & Validiert
+  string status_message = 2;
+  string audit_issue_id = 3;       // Die Issue-ID für die Langzeitarchivierung
+}
+
+service GPP_Bridge {
+  // Bi-direktionaler Stream für High-Frequency Ingest
+  rpc StreamTicks(stream GPP_Tick) returns (stream TickResponse);

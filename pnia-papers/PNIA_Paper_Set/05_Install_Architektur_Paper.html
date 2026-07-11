@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Install- / Deployment-Architektur · PNIA Paper-Set</title>
+<style>
+:root{
+  --bg:#0b0e17; --bg2:#121626; --panel:#161b2e; --panel2:#1c2238;
+  --ink:#e8ecf5; --muted:#9aa6c2; --line:#2a3350;
+  --gold:#e9c46a; --gold2:#f4d58d; --cyan:#5ad1e6; --violet:#9b8cff;
+  --green:#6ee7a8; --red:#ff8a8a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#0b0e17,#0e1220 60%,#0b0e17);
+  color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.wrap{max-width:1040px;margin:0 auto;padding:32px 22px 90px}
+header.hero{padding:46px 26px;border:1px solid var(--line);border-radius:18px;
+  background:radial-gradient(1200px 400px at 20% -10%,rgba(155,140,255,.18),transparent),
+             radial-gradient(900px 380px at 95% 0%,rgba(90,209,230,.14),transparent),
+             linear-gradient(180deg,#141a2e,#0f1322);margin-bottom:30px;position:relative;overflow:hidden}
+header.hero h1{margin:0 0 8px;font-size:30px;letter-spacing:.3px;
+  background:linear-gradient(90deg,#f4d58d,#e9c46a,#9b8cff,#5ad1e6);-webkit-background-clip:text;background-clip:text;color:transparent}
+header.hero .sub{color:var(--muted);font-size:15px;max-width:760px}
+.kbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.kbar .tag{font-size:12px;color:var(--gold2);border:1px solid var(--line);background:#0e1322;
+  padding:4px 10px;border-radius:999px}
+nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:26px}
+nav.toc b{color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:1px}
+nav.toc ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:30px}
+nav.toc a{color:var(--cyan);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+h2{margin:38px 0 12px;font-size:23px;color:var(--gold2);border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{margin:26px 0 8px;font-size:18px;color:var(--cyan)}
+h4{margin:18px 0 6px;font-size:15px;color:var(--violet);text-transform:uppercase;letter-spacing:.5px}
+p{margin:10px 0}
+a{color:var(--cyan)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0}
+.card.gold{border-color:#5a4a23;background:linear-gradient(180deg,#1c1a12,#15140e)}
+.grid{display:grid;gap:16px}
+.grid.c2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.grid.c3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.anchor{display:inline-block;font:600 12px/1 ui-monospace,Menlo,Consolas,monospace;color:#0b0e17;
+  background:linear-gradient(90deg,#f4d58d,#e9c46a);padding:3px 7px;border-radius:6px;margin-right:6px}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin:2px 4px 2px 0}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:#0e1322;color:var(--gold2);font-weight:600}
+tr:nth-child(even) td{background:#11162600}
+tr:nth-child(odd) td{background:#0e132255}
+code{font:13px ui-monospace,Menlo,Consolas,monospace;background:#0e1322;border:1px solid var(--line);
+  padding:1px 6px;border-radius:5px;color:var(--gold2)}
+pre{background:#0a0d18;border:1px solid var(--line);border-left:3px solid var(--violet);border-radius:10px;
+  padding:16px;overflow:auto;font:13px/1.55 ui-monospace,Menlo,Consolas,monospace;color:#cdd6f0}
+pre .c{color:#6b7699}
+.mermaid{background:#0a0d18;border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0;text-align:center}
+.chartbox{background:#0a0d18;border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0}
+.note{border-left:3px solid var(--gold);background:#15140e;padding:12px 16px;border-radius:8px;margin:16px 0;color:#e7dfc7;font-size:14px}
+.warn{border-left:3px solid var(--red);background:#1c1212;padding:12px 16px;border-radius:8px;margin:16px 0;color:#f0c9c9;font-size:14px}
+.stat{font-size:30px;font-weight:700;color:var(--gold2)}
+.stat small{display:block;font-size:12px;color:var(--muted);font-weight:400;letter-spacing:.4px;text-transform:uppercase;margin-top:4px}
+.crumbs{font-size:13px;color:var(--muted);margin-bottom:18px}
+.crumbs a{color:var(--cyan);text-decoration:none}
+footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+.paperlinks{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:18px}
+.paperlinks a{display:block;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:16px 18px;transition:.15s}
+.paperlinks a:hover{border-color:var(--gold);transform:translateY(-2px)}
+.paperlinks a b{color:var(--gold2);display:block;margin-bottom:4px;font-size:15px}
+.paperlinks a span{color:var(--muted);font-size:13px}
+</style><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,theme:"dark",themeVariables:{fontSize:"14px",primaryColor:"#1c2238",primaryTextColor:"#e8ecf5",primaryBorderColor:"#9b8cff",lineColor:"#5ad1e6",secondaryColor:"#161b2e",tertiaryColor:"#0e1322"}});</script>
+</head><body><div class="wrap">
+<div class="crumbs"><a href="index.html">← Index</a> · PNIA / StarLightMovemenTz Paper-Set · Ref. EX2025D1218310</div>
+<header class="hero">
+<h1>Install- / Deployment-Architektur</h1>
+<div class="sub">Plausibel rekonstruierter Deployment-Stack: Foundry + Python + DeFi + Oracles, Deployment-Reihenfolge, OpSec-Standards (.gitignore) und asynchrone High-Performance-Execution.</div>
+<div class="kbar"><span class="tag">Foundry</span><span class="tag">Async Worker</span><span class="tag">OpSec</span><span class="tag">.gitignore</span></div>
+</header>
+
+<nav class="toc"><b>Inhalt</b>
+<ul>
+<li><a href="#stack">1 · Deployment-Stack</a></li>
+<li><a href="#seq">2 · Deployment-Reihenfolge</a></li>
+<li><a href="#opsec">3 · OpSec-Standards & .gitignore</a></li>
+<li><a href="#async">4 · Async High-Performance Execution</a></li>
+<li><a href="#check">5 · Setup-Checkliste</a></li>
+</ul></nav>
+
+<div class="warn"><b>Wichtig:</b> Die Quellen enthalten keine fertige, geprüfte Install-Anleitung. Dieses Paper rekonstruiert
+eine <i>plausible</i> Deployment-Architektur aus den genannten Werkzeugen (Foundry, Python, DeFi) und üblichen OpSec-Praktiken.
+Es ist eine analytische Ableitung, kein produktionsreifes Runbook.</div>
+
+<h2 id="stack">1 · Deployment-Stack <span class="anchor">WA-07.8</span></h2>
+<div class="mermaid">
+flowchart TB
+  subgraph DEV["Entwicklung"]
+    F["Foundry<br/>(forge/cast/anvil)"]
+    PY["Python 3.11+<br/>(web3.py, asyncio)"]
+  end
+  subgraph CHAIN["On-Chain"]
+    SOL["Solidity 0.8.24<br/>SovereignGateway"]
+    DEFI["Aave · Uniswap V3"]
+    ORC["Chainlink DON + Automation"]
+  end
+  subgraph OFF["Off-Chain / Settlement"]
+    BR["Settlement-Bridges (Python)"]
+    API["Stripe · Circle · Monerium · Coinmotion"]
+  end
+  F-->SOL
+  PY-->BR
+  SOL<-->DEFI
+  SOL<-->ORC
+  BR<-->API
+  SOL-->BR
+</div>
+
+<h2 id="seq">2 · Deployment-Reihenfolge</h2>
+<div class="mermaid">
+flowchart LR
+  S1["1 · SPV/RAIF<br/>rechtl. Hülle (CH/LU)"]-->S2["2 · Contracts<br/>forge script deploy"]
+  S2-->S3["3 · Oracle-Setup<br/>Chainlink DON 7–21 Nodes"]
+  S3-->S4["4 · DeFi-Anbindung<br/>Aave/Uniswap Pools"]
+  S4-->S5["5 · Bridges<br/>API-Keys, SEPA/ACH"]
+  S5-->S6["6 · Automation<br/>Temporal Tranches/130 Mo"]
+</div>
+<pre><span class="c"># Beispielhafte Foundry-Schritte (illustrativ)</span>
+forge install
+forge build
+forge test
+forge script script/Deploy.s.sol \
+    --rpc-url $RPC --broadcast --verify
+
+<span class="c"># Settlement-Bridge starten (async worker)</span>
+python -m bridge.eu_settlement --config config/eu.yaml</pre>
+
+<h2 id="opsec">3 · OpSec-Standards & .gitignore <span class="anchor">WA-02.4</span></h2>
+<p>Strikte Trennung von Code und Geheimnissen — Schlüssel/Keys nie ins Repository. Konsistent mit der „Integrität & Wahrheit“-Säule.</p>
+<pre><span class="c"># .gitignore (OpSec-Baseline)</span>
+.env
+.env.*
+*.key
+*.pem
+secrets/
+keystore/
+config/*.local.yaml
+broadcast/          <span class="c"># Foundry deploy artefacts mit Adressen</span>
+__pycache__/
+node_modules/</pre>
+<div class="grid c3">
+<div class="card"><h4>Secrets / RAM-only</h4><p>API-Keys in Vault/Env-Vars, niemals im Code. Kryptographische Schlüssel werden strikt vom Code getrennt und
+ausschließlich im <b>Systemspeicher (RAM)</b> geladen — keine Persistenz auf Disk. Rotierbare Keys, least-privilege.</p></div>
+<div class="card"><h4>Schlüssel-Verwahrung</h4><p>Treasury-Keys via HSM/Custody (Sygnum); Multisig für privilegierte Calls.</p></div>
+<div class="card"><h4>Audit-Trail</h4><p>ISO-20022-konforme, unwiderrufliche Logs; jeder Payout nachverfolgbar.</p></div>
+</div>
+
+<h2 id="async">4 · Async High-Performance Execution</h2>
+<p>Die Settlement-Bridges sind als <b>asynchrone Event-Worker</b> ausgelegt: ein Listener auf Chain-Events, eine
+non-blocking API-Schicht für Payouts — Ziel ist der ≤9-Sekunden-Pfad (TIPS).</p>
+<p>Umsetzung mit <b>Python/HTTPX</b> (asynchroner HTTP-Client), um blockierende Netzwerk-Calls und Ladezeiten zu eliminieren.</p>
+<pre><span class="c"># Muster: async Event-Loop mit HTTPX (illustrativ)</span>
+import httpx
+
+async def run():
+    async with httpx.AsyncClient() as client:
+        async for event in master_token.events():   <span class="c"># non-blocking listen</span>
+            if is_settlement_trigger(event):
+                await client.post(PAYOUT_URL, json=event.payload)   <span class="c"># ISO 20022</span></pre>
+
+<h2 id="check">5 · Setup-Checkliste</h2>
+<table>
+<tr><th>#</th><th>Schritt</th><th>Ebene</th></tr>
+<tr><td>1</td><td>Rechtliche Hülle: Root-SPV (CH) + RAIF/CSSF (LU)</td><td>Treasury</td></tr>
+<tr><td>2</td><td>Foundry-Toolchain + Solidity-Contracts deployen</td><td>Smart Contracts</td></tr>
+<tr><td>3</td><td>Chainlink-Oracle-Netz + Automation einrichten</td><td>Validierung</td></tr>
+<tr><td>4</td><td>DeFi-Pools (Aave/Uniswap V3) verbinden</td><td>Liquidity</td></tr>
+<tr><td>5</td><td>Settlement-Bridges + API-Keys (Stripe/Circle/Monerium)</td><td>Fiat-Bridge</td></tr>
+<tr><td>6</td><td>OpSec: .gitignore, Vault, Multisig, Audit-Logs</td><td>Compliance</td></tr>
+<tr><td>7</td><td>Temporal Tranches (130 Monate) via Automation</td><td>Tokenomics</td></tr>
+</table>
+
+<footer>
+<p><b>Quelle des Konvoluts:</b> Daniel Pohl (StarLightMovemenTz / HolyThreeKings) · Ref. EX2025D1218310.</p>
+<p class="muted">Strukturelle Inhaltsanalyse (Building-Text-Methodik: Wissensanker · Zeile/Thema/Aspekt). Keine Bestätigung technischer Machbarkeit, rechtlicher Gültigkeit oder der genannten Zahlen/Register-IDs. Code-Snippets sind Entwürfe/Muster, nicht auditierte Produktion.</p>
+<p><div class="paperlinks">
+<a href="index.html"><b>Übersicht / Index</b><span>Start</span></a>
+<a href="01_Architektur_Paper.html"><b>Architektur-Paper</b><span>8-Layer · PNIA-Triade · Token-Schichten</span></a>
+<a href="02_One_Paper.html"><b>One-Paper (Alles in einem)</b><span>Komplette Analyse, alle Files</span></a>
+<a href="03_Themen_Aspekte_Paper.html"><b>Themen & Aspekte</b><span>Zeile/Thema/Aspekt · 8 Fäden</span></a>
+<a href="04_API_Connector_Paper.html"><b>API-Connector-Paper</b><span>Settlement-Bridges · ISO 20022</span></a>
+<a href="05_Install_Architektur_Paper.html"><b>Install-/Deployment-Paper ◀</b><span>Foundry · Python · Stack-Setup</span></a>
+<a href="06_Technisches_Paper.html"><b>Technisches Paper</b><span>Solidity/Python-Contracts</span></a>
+<a href="07_Charts_Graphen_Paper.html"><b>Info-Charts & Graphen</b><span>Chart.js · Mermaid</span></a>
+<a href="08_Visions_Paper.html"><b>Visions-Paper</b><span>Doktrin · Pledge · 4 Säulen</span></a>
+<a href="09_Tools_URLs_Paper.html"><b>Tools & URLs (Technical)</b><span>33-Tools-Kataloge · Register-IDs</span></a>
+</div></p>
+</footer>
+</div></body></html>

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from "react";
+import type { ReactNode } from "react";
 import { motion } from "motion/react";
 import { GovernanceNode } from "../types";
 
@@ -11,7 +11,7 @@ interface GovernanceNodeButtonProps {
   nodeId: string;
   selectedId: string;
   onClick: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
 }
 
@@ -89,7 +89,9 @@ export function GovernanceNodeButton({
 
 /**
  * Helper to find a governance node by ID with a fallback.
+ * Exported as a utility (not a component) — fast-refresh rule disabled intentionally.
  */
+// eslint-disable-next-line react-refresh/only-export-components
 export function findNodeById(nodes: GovernanceNode[], id: string, fallbackIndex = 0): GovernanceNode {
   return nodes.find((n) => n.id === id) ?? nodes[fallbackIndex] ?? nodes[0];
 }

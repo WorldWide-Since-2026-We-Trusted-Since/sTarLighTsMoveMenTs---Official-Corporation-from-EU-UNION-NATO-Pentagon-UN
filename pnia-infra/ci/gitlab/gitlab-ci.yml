@@ -1,0 +1,30 @@
+stages: [lint, plan, deploy]
+
+variables:
+  REGISTRY_FILE: infra/00-core/registry.csv
+
+shellcheck:
+  stage: lint
+  image: koalaman/shellcheck-alpine:stable
+  script:
+    - find infra -name '*.sh' -print0 | xargs -0 shellcheck -x
+
+plan:
+  stage: plan
+  image: python:3.12-alpine
+  script:
+    - apk add --no-cache bash
+    - python3 -c "import csv; [print(r['ID']) for r in csv.DictReader(open('infra/00-core/registry.csv'))]"
+
+deploy:
+  stage: deploy
+  image: docker:27
+  services: [docker:27-dind]
+  parallel:
+    matrix:
+      - PNIA_ID: [PNIA-001, PNIA-002, PNIA-003, PNIA-004, PNIA-005]
+  script:
+    - apk add --no-cache bash
+    - bash infra/01-registry/deploy_service.v2.sh "$PNIA_ID"
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"

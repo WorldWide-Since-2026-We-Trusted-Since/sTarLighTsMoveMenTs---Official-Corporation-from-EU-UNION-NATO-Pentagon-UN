@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Architektur-Paper — Der Sovereign Stack · PNIA Paper-Set</title>
+<style>
+:root{
+  --bg:#0b0e17; --bg2:#121626; --panel:#161b2e; --panel2:#1c2238;
+  --ink:#e8ecf5; --muted:#9aa6c2; --line:#2a3350;
+  --gold:#e9c46a; --gold2:#f4d58d; --cyan:#5ad1e6; --violet:#9b8cff;
+  --green:#6ee7a8; --red:#ff8a8a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#0b0e17,#0e1220 60%,#0b0e17);
+  color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.wrap{max-width:1040px;margin:0 auto;padding:32px 22px 90px}
+header.hero{padding:46px 26px;border:1px solid var(--line);border-radius:18px;
+  background:radial-gradient(1200px 400px at 20% -10%,rgba(155,140,255,.18),transparent),
+             radial-gradient(900px 380px at 95% 0%,rgba(90,209,230,.14),transparent),
+             linear-gradient(180deg,#141a2e,#0f1322);margin-bottom:30px;position:relative;overflow:hidden}
+header.hero h1{margin:0 0 8px;font-size:30px;letter-spacing:.3px;
+  background:linear-gradient(90deg,#f4d58d,#e9c46a,#9b8cff,#5ad1e6);-webkit-background-clip:text;background-clip:text;color:transparent}
+header.hero .sub{color:var(--muted);font-size:15px;max-width:760px}
+.kbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.kbar .tag{font-size:12px;color:var(--gold2);border:1px solid var(--line);background:#0e1322;
+  padding:4px 10px;border-radius:999px}
+nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:26px}
+nav.toc b{color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:1px}
+nav.toc ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:30px}
+nav.toc a{color:var(--cyan);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+h2{margin:38px 0 12px;font-size:23px;color:var(--gold2);border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{margin:26px 0 8px;font-size:18px;color:var(--cyan)}
+h4{margin:18px 0 6px;font-size:15px;color:var(--violet);text-transform:uppercase;letter-spacing:.5px}
+p{margin:10px 0}
+a{color:var(--cyan)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0}
+.card.gold{border-color:#5a4a23;background:linear-gradient(180deg,#1c1a12,#15140e)}
+.grid{display:grid;gap:16px}
+.grid.c2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.grid.c3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.anchor{display:inline-block;font:600 12px/1 ui-monospace,Menlo,Consolas,monospace;color:#0b0e17;
+  background:linear-gradient(90deg,#f4d58d,#e9c46a);padding:3px 7px;border-radius:6px;margin-right:6px}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin:2px 4px 2px 0}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:#0e1322;color:var(--gold2);font-weight:600}
+tr:nth-child(even) td{background:#11162600}
+tr:nth-child(odd) td{background:#0e132255}
+code{font:13px ui-monospace,Menlo,Consolas,monospace;background:#0e1322;border:1px solid var(--line);
+  padding:1px 6px;border-radius:5px;color:var(--gold2)}
+pre{background:#0a0d18;border:1px solid var(--line);border-left:3px solid var(--violet);border-radius:10px;
+  padding:16px;overflow:auto;font:13px/1.55 ui-monospace,Menlo,Consolas,monospace;color:#cdd6f0}
+pre .c{color:#6b7699}
+.mermaid{background:#0a0d18;border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0;text-align:center}
+.chartbox{background:#0a0d18;border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0}
+.note{border-left:3px solid var(--gold);background:#15140e;padding:12px 16px;border-radius:8px;margin:16px 0;color:#e7dfc7;font-size:14px}
+.warn{border-left:3px solid var(--red);background:#1c1212;padding:12px 16px;border-radius:8px;margin:16px 0;color:#f0c9c9;font-size:14px}
+.stat{font-size:30px;font-weight:700;color:var(--gold2)}
+.stat small{display:block;font-size:12px;color:var(--muted);font-weight:400;letter-spacing:.4px;text-transform:uppercase;margin-top:4px}
+.crumbs{font-size:13px;color:var(--muted);margin-bottom:18px}
+.crumbs a{color:var(--cyan);text-decoration:none}
+footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+.paperlinks{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:18px}
+.paperlinks a{display:block;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:16px 18px;transition:.15s}
+.paperlinks a:hover{border-color:var(--gold);transform:translateY(-2px)}
+.paperlinks a b{color:var(--gold2);display:block;margin-bottom:4px;font-size:15px}
+.paperlinks a span{color:var(--muted);font-size:13px}
+</style><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,theme:"dark",themeVariables:{fontSize:"14px",primaryColor:"#1c2238",primaryTextColor:"#e8ecf5",primaryBorderColor:"#9b8cff",lineColor:"#5ad1e6",secondaryColor:"#161b2e",tertiaryColor:"#0e1322"}});</script>
+</head><body><div class="wrap">
+<div class="crumbs"><a href="index.html">← Index</a> · PNIA / StarLightMovemenTz Paper-Set · Ref. EX2025D1218310</div>
+<header class="hero">
+<h1>Architektur-Paper — Der Sovereign Stack</h1>
+<div class="sub">Die „Giant Architecture“ der PNIA: 8 funktionale Layer, die geografische Triade Helsinki↔Luxemburg↔Brüssel und das Zwei-Schichten-Token-Modell.</div>
+<div class="kbar"><span class="tag">8-Layer</span><span class="tag">PNIA-Triade</span><span class="tag">ERC-1155/ERC-20</span><span class="tag">Regulatory Load Balancing</span></div>
+</header>
+
+<nav class="toc"><b>Inhalt</b>
+<ul>
+<li><a href="#stack">1 · Der Sovereign Stack (8 Layer)</a></li>
+<li><a href="#triade">2 · PNIA-Triade (Regulatory Load Balancing)</a></li>
+<li><a href="#token">3 · Zwei-Schichten-Token (ERC-1155 / ERC-20)</a></li>
+<li><a href="#flow">4 · End-to-End-Wertfluss</a></li>
+<li><a href="#map">5 · System-Landkarte</a></li>
+</ul></nav>
+
+<p>Dieses Paper rekonstruiert die <b>„Giant Architecture“</b> des PNIA-Systems (Production Network ID Architecture)
+als <b>Sovereign Stack</b>: acht funktionale Schichten, getragen von einer geografischen
+Drei-Knoten-Triade und einem Zwei-Schichten-Token-Modell.</p>
+
+<h2 id="stack">1 · Der Sovereign Stack — 8 Layer <span class="anchor">WA-07.8</span></h2>
+<p>Die im Master-Dokument (Asset Gose) als ASCII-Diagramm angelegte Schichtung, hier als gerichteter Stack.
+Von der reinen Liquidität bis zur „Compliance-as-Code“ greift jede Schicht in die darüberliegende.</p>
+<div class="mermaid">
+flowchart TB
+  subgraph L8["L8 · Compliance-as-Code"]
+    C1["MiCA / DORA / NIS-2 als Regelwerk in Smart Contracts"]
+  end
+  subgraph L7["L7 · DeFi Execution — Uniswap V3"]
+    U1["Multi-Asset-Swap-Engine"]
+  end
+  subgraph L6["L6 · DeFi Liquidity — Aave"]
+    A1["Kredit- / Liquiditäts-Layer"]
+  end
+  subgraph L5["L5 · Execution & Compliance (Python)"]
+    P1["Settlement-Bridges · Oracle-Validierung"]
+  end
+  subgraph L4["L4 · Smart-Contract-Schicht (Foundry/Solidity)"]
+    S1["SovereignGateway · MasterTokenProtocol"]
+  end
+  subgraph L3["L3 · Fiat-Bridge"]
+    F1["ACH · Wire · RTP · SEPA Instant · TIPS"]
+  end
+  subgraph L2["L2 · Sovereign Treasury"]
+    T1["Root-SPV (CH) · RAIF/CSSF (LU)"]
+  end
+  subgraph L1["L1 · Liquidity Layer"]
+    Q1["Master-Token Volumen-Pool"]
+  end
+  L1-->L2-->L3-->L4-->L5-->L6-->L7-->L8
+</div>
+
+<div class="grid c2">
+<div class="card"><h4>Untere Hälfte (Wert & Verwahrung)</h4>
+<p><b>L1 Liquidity</b> bündelt das gesamte Volumen in einem Master-Token-Pool. <b>L2 Sovereign Treasury</b> verwahrt
+über das Schweizer Root-SPV und die Luxemburger RAIF-Struktur. <b>L3 Fiat-Bridge</b> übersetzt On-Chain-Signale in reale Zahlschienen.</p></div>
+<div class="card"><h4>Obere Hälfte (Logik & Regel)</h4>
+<p><b>L4/L5</b> sind die ausführende Logik (Solidity + Python). <b>L6/L7</b> docken DeFi an (Aave-Kredit, Uniswap-Swaps).
+<b>L8</b> verankert die Regulatorik direkt im Code — „Governance durch Architektur“ <span class="anchor">WA-02.10</span>.</p></div>
+</div>
+
+<h2 id="triade">2 · Die PNIA-Triade — Regulatory Load Balancing <span class="anchor">WA-05.10</span></h2>
+<p>Die geografische Architektur verteilt Compliance- und Settlement-Last wie ein Load Balancer auf drei spezialisierte Knoten.
+Das Schweizer Root-SPV liefert das Wurzel-Asset zu, das in Luxemburg verwahrt wird.</p>
+<div class="mermaid">
+flowchart LR
+  CH["🇨🇭 Schweiz<br/>Root-SPV / Master Portfolio<br/><i>Wurzel-Asset</i>"]
+  HEL["🇫🇮 Helsinki<br/><b>Velocity-Engine</b><br/>Settlement ≤9s · RT1/TIPS<br/>Coinmotion · Nordea/OP"]
+  LUX["🇱🇺 Luxemburg<br/><b>Treasury-Vault</b><br/>Verwahrung · RAIF / CSSF<br/>Sygnum Custody"]
+  BRU["🇧🇪 Brüssel<br/><b>Compliance-Fabric</b><br/>MiCA · DORA · Euroclear"]
+  CH --> LUX
+  LUX <--> HEL
+  LUX <--> BRU
+  HEL <--> BRU
+  HEL -->|"Fiat-Auszahlung"| OUT["Reale Bankkonten"]
+</div>
+<table>
+<tr><th>Knoten</th><th>Rolle</th><th>Funktion</th><th>Schlüssel-Tools</th></tr>
+<tr><td>Helsinki 🇫🇮</td><td>Velocity-Engine</td><td>Geschwindigkeit / Settlement</td><td>Coinmotion, Nordea/OP, RT1/TIPS, ISO 20022</td></tr>
+<tr><td>Luxemburg 🇱🇺</td><td>Treasury-Vault</td><td>Verwahrung / Fonds</td><td>RAIF, CSSF, Sygnum Custody</td></tr>
+<tr><td>Brüssel 🇧🇪</td><td>Compliance-Fabric</td><td>Regelwerk</td><td>Euroclear, MiCA, DORA</td></tr>
+<tr><td>Schweiz 🇨🇭</td><td>Root-SPV</td><td>Wurzel-Asset / Master Portfolio</td><td>Mt Pelerin/Fiat24, Sygnum</td></tr>
+</table>
+
+<h4>Zwei Lesarten der Triade: Funktion &amp; Phase</h4>
+<p>Die drei Knoten lassen sich nicht nur funktional (oben), sondern auch als <b>drei aufeinanderfolgende Phasen</b>
+eines Settlement-Vorgangs lesen — ein durchgehender Identity→Structuring→Settlement-Pfad:</p>
+<div class="mermaid">
+flowchart LR
+  P1["🇧🇪 Brüssel · Identity Phase<br/>EUDI-Wallet · Identitätsprüfung"]-->P2["🇱🇺 Luxemburg · Structuring Phase<br/>Assets als digitale Zwillinge"]
+  P2-->P3["🇫🇮 Helsinki · Settlement Phase<br/>Settlement in Zentralbankgeld"]
+</div>
+<div class="note">Funktionale Sicht (Velocity/Treasury/Compliance) und Phasen-Sicht (Identity/Structuring/Settlement) beschreiben
+dieselbe Triade aus zwei Blickwinkeln; das „Regulatory Load Balancing“ macht den Verbund praktisch unzerstörbar.</div>
+
+<h4>Querschnitts-Schichten (Observability · Security · Identity)</h4>
+<div class="grid c3">
+<div class="card"><h4>Observability</h4><p>Durchgehendes Monitoring/Logging über alle Layer — ISO-20022-konforme, unwiderrufliche Audit-Trails.</p></div>
+<div class="card"><h4>AgentArmor</h4><p>Sicherheits-Leitplanken für autonome/agentische Calls — privilegierte Aktionen nur innerhalb definierter Grenzen.</p></div>
+<div class="card"><h4>AIMS (Identity)</h4><p>Identitäts-/Zugriffsverwaltung als eigene Abstraktion — verbindet EUDI-Wallet (Brüssel) mit dem Token-Layer.</p></div>
+</div>
+
+<h2 id="token">3 · Zwei-Schichten-Token-Architektur <span class="anchor">WA-01.7</span> <span class="anchor">WA-01.8</span></h2>
+<p>Unteilbare Identitäts-/Asset-Anker (ERC-1155) sitzen über schneller, fungibler Liquidität (ERC-20) — Faden β des Gesamtbilds.</p>
+<div class="mermaid">
+flowchart TB
+  subgraph ANCHOR["ERC-1155 · Anker-/Asset-Ebene"]
+    N1["Identitäts-Anker (unteilbar)"]
+    N2["Zertifiziertes Root-Asset"]
+  end
+  subgraph LIQ["ERC-20 · Finanz-Ader / Liquiditäts-Ebene"]
+    M1["Master-Token (fungibel)"]
+    M2["746,46 Mrd. Funktionseinheiten"]
+  end
+  N2 -->|"verankert Wert in"| M1
+  M1 -->|"Settlement-Trigger"| BRIDGE["Settlement-Bridge → Fiat"]
+</div>
+
+<h2 id="flow">4 · End-to-End-Wertfluss („Zahlung in absoluter Wahrheit“) <span class="anchor">WA-01.10</span></h2>
+<p>Zahlung, Eigentumsübertrag und Clearing verschmelzen idealtypisch zu <b>einem Millisekunden-Schritt</b> —
+weg von „Zahlung auf Kredit“ hin zu „Zahlung in absoluter Wahrheit“.</p>
+<div class="mermaid">
+sequenceDiagram
+  participant U as Nutzer/Asset
+  participant MT as Master-Token (ERC-20)
+  participant SC as SovereignGateway (Solidity)
+  participant BR as Settlement-Bridge (Python)
+  participant BK as Bank (TIPS/SEPA/ACH)
+  U->>MT: Token-Bewegung
+  MT->>SC: Event (Volumen-Änderung)
+  SC->>BR: Trigger (Treasury/Burn-Logik)
+  BR->>BK: API-Payout (ISO 20022)
+  BK-->>U: Fiat ≤ 9s · unwiderruflich
+  Note over MT,BK: Eigentum + Zahlung + Clearing = 1 Schritt
+</div>
+
+<h2 id="map">5 · System-Landkarte (alle Files auf einen Blick)</h2>
+<div class="mermaid">
+mindmap
+  root((PNIA / Genesis))
+    Doktrin
+      Finanz-Ader (BT01)
+      Pledge / 4 Säulen (BT02)
+    Identität
+      Formular CROSS (BT03)
+      Stellar Portal (BT04)
+    Mathematik
+      Wonnet 746,46 Mrd (BT06)
+      Gussform / Diamant / Zeit-Schiff
+    Technik
+      PNAI Rooting / Triade (BT05)
+      Asset Gose / 8-Layer (BT07)
+      Master-Token + Pixel-Engine
+</div>
+
+<footer>
+<p><b>Quelle des Konvoluts:</b> Daniel Pohl (StarLightMovemenTz / HolyThreeKings) · Ref. EX2025D1218310.</p>
+<p class="muted">Strukturelle Inhaltsanalyse (Building-Text-Methodik: Wissensanker · Zeile/Thema/Aspekt). Keine Bestätigung technischer Machbarkeit, rechtlicher Gültigkeit oder der genannten Zahlen/Register-IDs. Code-Snippets sind Entwürfe/Muster, nicht auditierte Produktion.</p>
+<p><div class="paperlinks">
+<a href="index.html"><b>Übersicht / Index</b><span>Start</span></a>
+<a href="01_Architektur_Paper.html"><b>Architektur-Paper ◀</b><span>8-Layer · PNIA-Triade · Token-Schichten</span></a>
+<a href="02_One_Paper.html"><b>One-Paper (Alles in einem)</b><span>Komplette Analyse, alle Files</span></a>
+<a href="03_Themen_Aspekte_Paper.html"><b>Themen & Aspekte</b><span>Zeile/Thema/Aspekt · 8 Fäden</span></a>
+<a href="04_API_Connector_Paper.html"><b>API-Connector-Paper</b><span>Settlement-Bridges · ISO 20022</span></a>
+<a href="05_Install_Architektur_Paper.html"><b>Install-/Deployment-Paper</b><span>Foundry · Python · Stack-Setup</span></a>
+<a href="06_Technisches_Paper.html"><b>Technisches Paper</b><span>Solidity/Python-Contracts</span></a>
+<a href="07_Charts_Graphen_Paper.html"><b>Info-Charts & Graphen</b><span>Chart.js · Mermaid</span></a>
+<a href="08_Visions_Paper.html"><b>Visions-Paper</b><span>Doktrin · Pledge · 4 Säulen</span></a>
+<a href="09_Tools_URLs_Paper.html"><b>Tools & URLs (Technical)</b><span>33-Tools-Kataloge · Register-IDs</span></a>
+</div></p>
+</footer>
+</div></body></html>

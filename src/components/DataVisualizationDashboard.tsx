@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -11,7 +11,14 @@ import {
 import { TrendingUp, Activity } from "lucide-react";
 
 // 7-day trend data for Sovereign Wealth Fund Capital Flows (SAGA-PEZ, EpsLGSEz & Anchor LPs)
-const INITIAL_FLOW_DATA = [
+interface FlowDatum {
+  date: string;
+  inflow: number;
+  outflow: number;
+  net: number;
+}
+
+const INITIAL_FLOW_DATA: FlowDatum[] = [
   { date: "26. May", inflow: 4041.2, outflow: 3950.4, net: 90.8 },
   { date: "27. May", inflow: 4043.5, outflow: 3951.0, net: 92.5 },
   { date: "28. May", inflow: 4046.1, outflow: 3952.1, net: 94.0 },
@@ -22,7 +29,7 @@ const INITIAL_FLOW_DATA = [
 ];
 
 export function DataVisualizationDashboard() {
-  const [hoveredData, setHoveredData] = useState<any>(null);
+  const [hoveredData, setHoveredData] = useState<FlowDatum | null>(null);
 
   // Formatting for currency
   const formatValue = (val: number) => {
@@ -61,9 +68,12 @@ export function DataVisualizationDashboard() {
           <AreaChart
             data={INITIAL_FLOW_DATA}
             margin={{ top: 5, right: 5, left: -25, bottom: 0 }}
-            onMouseMove={(state: any) => {
-              if (state && state.activePayload) {
-                setHoveredData(state.activePayload[0].payload);
+            onMouseMove={(state) => {
+              const mouseState = state as unknown as {
+                activePayload?: Array<{ payload: FlowDatum }>;
+              };
+              if (mouseState?.activePayload) {
+                setHoveredData(mouseState.activePayload[0].payload);
               }
             }}
             onMouseLeave={() => setHoveredData(null)}

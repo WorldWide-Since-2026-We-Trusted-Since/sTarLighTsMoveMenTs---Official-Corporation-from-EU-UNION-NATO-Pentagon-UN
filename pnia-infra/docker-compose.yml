@@ -1,0 +1,28 @@
+# Top-level compose: profiles per stage.
+# Usage: docker compose --profile registry up -d
+name: pnia
+services:
+  registry:
+    profiles: [registry]
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${DB_INSTANCE_NAME:-alpha_db}
+      POSTGRES_PASSWORD: pnia
+    ports: ["${DB_INTERNAL_PORT:-5432}:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 10
+  orchestrator:
+    profiles: [orchestrator]
+    image: python:3.12-slim
+    working_dir: /app
+    volumes: [".:/app"]
+    command: python3 06-orchestrator/pnia_orchestrator.v2.py
+  gateway:
+    profiles: [gateway]
+    image: kong:3.7
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /kong/kong.yml
+    ports: ["8000:8000", "8001:8001"]

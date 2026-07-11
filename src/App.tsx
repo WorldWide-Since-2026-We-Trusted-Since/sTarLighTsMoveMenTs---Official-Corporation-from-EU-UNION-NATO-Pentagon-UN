@@ -1,4 +1,4 @@
-/**
+ /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -39,10 +39,13 @@ import MemorialTributePage from "./components/MemorialTributePage";
 import RainbowLightningFooter from "./components/RainbowLightningFooter";
 import ConcilPortal from "./components/ConcilPortal";
 import LoginGate from "./components/LoginGate";
+import InvitePortal from "./components/InvitePortal";
+import EmailValidationPortal from "./components/EmailValidationPortal";
+import AdminGovernance from "./components/AdminGovernance";
 
 export default function App() {
   // Navigation tabs: pledge (default start page), papers, finance, memorial, portal, governance, capital, audit, concil
-  const [activeTab, setActiveTab] = useState<"pledge" | "papers" | "finance" | "memorial" | "portal" | "governance" | "capital" | "audit" | "concil">("pledge");
+  const [activeTab, setActiveTab] = useState<"pledge" | "papers" | "finance" | "memorial" | "portal" | "governance" | "capital" | "audit" | "concil" | "invite" | "admin" | "validate">("pledge");
   const [nodes] = useState<GovernanceNode[]>(GOVERNANCE_NODES);
   const [selectedNode, setSelectedNode] = useState<GovernanceNode>(GOVERNANCE_NODES[0]);
   const [audits, setAudits] = useState<AuditRecord[]>(SEED_AUDITS);
@@ -51,7 +54,7 @@ export default function App() {
   const [customSource, setCustomSource] = useState("SAGA-PEZ (Representative)");
   const [customDestination, setCustomDestination] = useState("Transcendent AI & Digital Infrastructure");
   const [customAmount, setCustomAmount] = useState(15.5);
-  const [customCurrency] = useState("EUR");
+  const customCurrency = "EUR";
   const [customLayer, setCustomLayer] = useState<"TX" | "TXA" | "GOV" | "FI" | "SWFs">("SWFs");
   const [isSigning, setIsSigning] = useState(false);
   const [recentSigningMsg, setRecentSigningMsg] = useState("");
@@ -61,7 +64,7 @@ export default function App() {
 
   // Cosmic features
   const [isLightningActive, setIsLightningActive] = useState(false);
-  const [warpSpeed] = useState(2.2);
+  const warpSpeed = 2.2;
   const [showTimeline, setShowTimeline] = useState(false);
   const [govSubView, setGovSubView] = useState<"visual" | "blueprint">("visual");
 
@@ -108,6 +111,22 @@ export default function App() {
     return () => clearInterval(interval);
   }, [liveTickerActive]);
 
+  // Auto-process Double-Opt-In verification links (Gate 2): #verify=<token>
+  // Deep-scans the URL hash on load and whenever it changes, then routes to the
+  // Email-Validation portal (second instance) which consumes the token.
+  useEffect(() => {
+    const tryConsumeHash = () => {
+      const hash = window.location.hash || "";
+      const match = /#verify=([^&]+)/.exec(hash);
+      if (match) {
+        setActiveTab("validate");
+      }
+    };
+    tryConsumeHash();
+    window.addEventListener("hashchange", tryConsumeHash);
+    return () => window.removeEventListener("hashchange", tryConsumeHash);
+  }, []);
+
   // Handle manual programmatic signature generation
   const handleGenesisSignature = (e: React.FormEvent) => {
     e.preventDefault();
@@ -131,7 +150,7 @@ export default function App() {
         hash: cryptoResult.hash
       };
 
-      setAudits(prev => [generatedRecord, ...prev]);
+      setAudits(prev => [generatedRecord, ...prev.slice(0, 7)]);
       setIsSigning(false);
       setRecentSigningMsg(`Successfully signed & indexed database node! TXID: ${generatedRecord.id}`);
       
@@ -276,6 +295,39 @@ export default function App() {
               }`}
             >
               🏛️ Concil Portal
+            </button>
+            <button
+              id="btn-invite"
+              onClick={() => setActiveTab("invite")}
+              className={`px-4 py-2 border rounded text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                activeTab === "invite"
+                  ? "border-[#fcf6ba] bg-[#bf953f]/25 text-white shadow-[0_0_12px_rgba(191,149,63,0.3)]"
+                  : "border-gray-800 bg-black/40 text-gray-400 hover:text-white hover:border-gray-600"
+              }`}
+            >
+              ✉️ Zugangsantrag
+            </button>
+            <button
+              id="btn-admin"
+              onClick={() => setActiveTab("admin")}
+              className={`px-4 py-2 border rounded text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                activeTab === "admin"
+                  ? "border-[#fcf6ba] bg-[#bf953f]/25 text-white shadow-[0_0_12px_rgba(191,149,63,0.3)]"
+                  : "border-gray-800 bg-black/40 text-gray-400 hover:text-white hover:border-gray-600"
+              }`}
+            >
+              🛡️ Admin Governance
+            </button>
+            <button
+              id="btn-validate"
+              onClick={() => setActiveTab("validate")}
+              className={`px-4 py-2 border rounded text-xs font-mono uppercase tracking-wider transition-all duration-300 cursor-pointer ${
+                activeTab === "validate"
+                  ? "border-[#fcf6ba] bg-[#bf953f]/25 text-white shadow-[0_0_12px_rgba(191,149,63,0.3)]"
+                  : "border-gray-800 bg-black/40 text-gray-400 hover:text-white hover:border-gray-600"
+              }`}
+            >
+              ✉️ Email-Validierung
             </button>
           </nav>
         </div>
@@ -1763,7 +1815,11 @@ export default function App() {
                           <select
                             id="select-custom-layer"
                             value={customLayer}
-                            onChange={(e) => setCustomLayer(e.target.value as any)}
+                            onChange={(e) =>
+                              setCustomLayer(
+                                e.target.value as "TX" | "TXA" | "GOV" | "FI" | "SWFs"
+                              )
+                            }
                             className="w-full bg-[#000d25] border border-amber-500/35 rounded px-2.5 py-2 text-white outline-none"
                           >
                             <option value="TX">TX Layer</option>
@@ -1868,6 +1924,36 @@ export default function App() {
             </motion.div>
           )}
 
+          {/* INVITE PORTAL - Zugangsantrag (autark) */}
+          {activeTab === "invite" && (
+            <motion.div
+              key="invite-view"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="w-full"
+              id="invite-tab-panel"
+            >
+              <InvitePortal />
+            </motion.div>
+          )}
+
+          {/* ADMIN GOVERNANCE - autarke Verwaltung der Zugangsanfragen */}
+          {activeTab === "admin" && (
+            <motion.div
+              key="admin-view"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="w-full"
+              id="admin-tab-panel"
+            >
+              <AdminGovernance />
+            </motion.div>
+          )}
+
           {/* CONCIL PORTAL - Official Documentation Archive */}
           {activeTab === "concil" && (
             <motion.div
@@ -1880,6 +1966,21 @@ export default function App() {
               id="concil-tab-panel"
             >
               <ConcilPortal />
+            </motion.div>
+          )}
+
+          {/* EMAIL VALIDATION PORTAL - ZWEITE INSTANZ (Login/Validation) */}
+          {activeTab === "validate" && (
+            <motion.div
+              key="validate-view"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="w-full"
+              id="validate-tab-panel"
+            >
+              <EmailValidationPortal />
             </motion.div>
           )}
 

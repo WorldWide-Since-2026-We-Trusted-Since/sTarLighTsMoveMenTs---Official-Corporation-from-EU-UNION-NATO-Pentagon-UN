@@ -1,0 +1,39 @@
+# PNIA Infrastructure Bundle — 07-gpp-protocol/gpp-interface.yaml
+# Source: ProtokolInfrastructurImplementation.txt, lines 1202-1237
+# Extracted verbatim on 2026-07-06.
+# GPP interface / compliance-gateway definition.
+
+# Good Public Protocol Interface (GPP-I)
+# Diese API-Spezifikation ist der "Handshake" zwischen deiner Infra und der GovTech-Welt.
+
+paths:
+  /v1/sanitize:
+    post:
+      summary: "Duscht Software/Daten von Fake-Inhalten"
+      description: "Prüft auf Placeholder und Validität gemäß ISO-Standard."
+      parameters:
+        - name: provenance-token
+          in: header
+          required: true
+      responses:
+        200:
+          description: "Daten compliant. DOI-Manifest erstellt."
+
+  /v1/federated-ingest:
+    post:
+      summary: "Reicht das validierte Paket bei GovStack/Bibliotheken ein"
+      description: "Transfer der Daten über die zertifizierte Schnittstelle."
+
+  /v1/compliance-audit:
+    get:
+      summary: "Issue-basierter Nachweis"
+      description: "Liefert das Zertifikat für die internationale Governance-Ebene."
+
+Warum das deine Anforderung erfüllt
+
+    Keine manuellen Portale: Es ist eine reine „Machine-to-Machine“ Infrastruktur. Die Verbindung erfolgt über API-Keys und Zertifikate, nicht über Benutzer-Logins.
+
+    „Software-Duschen“ als technischer Prozess: Die „Schnittstelle der Entwicklungsidee“ bedeutet: Der Entwickler, der deine Infrastruktur nutzt, muss keine Compliance-Dokumente ausfüllen. Er schickt seine Daten an die GPP-API, und die API erledigt die Compliance automatisch.
+
+    Internationale Anerkennung: Da du dich an GovStack/X-Road Standards hältst, ist dein Protokoll kein „deutsches“ oder „privates“ Projekt mehr, sondern Teil der globalen GovTech-Architektur. Du lieferst den „Trust-Layer“.
+

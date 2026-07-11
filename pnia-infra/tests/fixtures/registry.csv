@@ -1,0 +1,5 @@
+ID,DB_TYPE,DB_PORT,DB_NAME,DEPENDS_ON,LICENSE,DOI,GPP_TIER
+PNIA-T01,postgres,5432,t_alpha,,MIT,10.5555/t01,core
+PNIA-T02,redis,6379,t_cache,,BSD-3,10.5555/t02,cache
+PNIA-T03,clickhouse,8123,t_analytics,PNIA-T01,MIT,10.5555/t03,analytics
+PNIA-T04,mongo,27017,t_docs,PNIA-T01|PNIA-T02,SSPL,10.5555/t04,docs

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Themen & Aspekte · PNIA Paper-Set</title>
+<style>
+:root{
+  --bg:#0b0e17; --bg2:#121626; --panel:#161b2e; --panel2:#1c2238;
+  --ink:#e8ecf5; --muted:#9aa6c2; --line:#2a3350;
+  --gold:#e9c46a; --gold2:#f4d58d; --cyan:#5ad1e6; --violet:#9b8cff;
+  --green:#6ee7a8; --red:#ff8a8a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#0b0e17,#0e1220 60%,#0b0e17);
+  color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.wrap{max-width:1040px;margin:0 auto;padding:32px 22px 90px}
+header.hero{padding:46px 26px;border:1px solid var(--line);border-radius:18px;
+  background:radial-gradient(1200px 400px at 20% -10%,rgba(155,140,255,.18),transparent),
+             radial-gradient(900px 380px at 95% 0%,rgba(90,209,230,.14),transparent),
+             linear-gradient(180deg,#141a2e,#0f1322);margin-bottom:30px;position:relative;overflow:hidden}
+header.hero h1{margin:0 0 8px;font-size:30px;letter-spacing:.3px;
+  background:linear-gradient(90deg,#f4d58d,#e9c46a,#9b8cff,#5ad1e6);-webkit-background-clip:text;background-clip:text;color:transparent}
+header.hero .sub{color:var(--muted);font-size:15px;max-width:760px}
+.kbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.kbar .tag{font-size:12px;color:var(--gold2);border:1px solid var(--line);background:#0e1322;
+  padding:4px 10px;border-radius:999px}
+nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:26px}
+nav.toc b{color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:1px}
+nav.toc ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:30px}
+nav.toc a{color:var(--cyan);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+h2{margin:38px 0 12px;font-size:23px;color:var(--gold2);border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{margin:26px 0 8px;font-size:18px;color:var(--cyan)}
+h4{margin:18px 0 6px;font-size:15px;color:var(--violet);text-transform:uppercase;letter-spacing:.5px}
+p{margin:10px 0}
+a{color:var(--cyan)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0}
+.card.gold{border-color:#5a4a23;background:linear-gradient(180deg,#1c1a12,#15140e)}
+.grid{display:grid;gap:16px}
+.grid.c2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.grid.c3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.anchor{display:inline-block;font:600 12px/1 ui-monospace,Menlo,Consolas,monospace;color:#0b0e17;
+  background:linear-gradient(90deg,#f4d58d,#e9c46a);padding:3px 7px;border-radius:6px;margin-right:6px}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin:2px 4px 2px 0}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:#0e1322;color:var(--gold2);font-weight:600}
+tr:nth-child(even) td{background:#11162600}
+tr:nth-child(odd) td{background:#0e132255}
+code{font:13px ui-monospace,Menlo,Consolas,monospace;background:#0e1322;border:1px solid var(--line);
+  padding:1px 6px;border-radius:5px;color:var(--gold2)}
+pre{background:#0a0d18;border:1px solid var(--line);border-left:3px solid var(--violet);border-radius:10px;
+  padding:16px;overflow:auto;font:13px/1.55 ui-monospace,Menlo,Consolas,monospace;color:#cdd6f0}
+pre .c{color:#6b7699}
+.mermaid{background:#0a0d18;border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0;text-align:center}
+.chartbox{background:#0a0d18;border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0}
+.note{border-left:3px solid var(--gold);background:#15140e;padding:12px 16px;border-radius:8px;margin:16px 0;color:#e7dfc7;font-size:14px}
+.warn{border-left:3px solid var(--red);background:#1c1212;padding:12px 16px;border-radius:8px;margin:16px 0;color:#f0c9c9;font-size:14px}
+.stat{font-size:30px;font-weight:700;color:var(--gold2)}
+.stat small{display:block;font-size:12px;color:var(--muted);font-weight:400;letter-spacing:.4px;text-transform:uppercase;margin-top:4px}
+.crumbs{font-size:13px;color:var(--muted);margin-bottom:18px}
+.crumbs a{color:var(--cyan);text-decoration:none}
+footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+.paperlinks{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:18px}
+.paperlinks a{display:block;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:16px 18px;transition:.15s}
+.paperlinks a:hover{border-color:var(--gold);transform:translateY(-2px)}
+.paperlinks a b{color:var(--gold2);display:block;margin-bottom:4px;font-size:15px}
+.paperlinks a span{color:var(--muted);font-size:13px}
+</style><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script><script>mermaid.initialize({startOnLoad:true,theme:"dark",themeVariables:{fontSize:"14px",primaryColor:"#1c2238",primaryTextColor:"#e8ecf5",primaryBorderColor:"#9b8cff",lineColor:"#5ad1e6",secondaryColor:"#161b2e",tertiaryColor:"#0e1322"}});</script>
+</head><body><div class="wrap">
+<div class="crumbs"><a href="index.html">← Index</a> · PNIA / StarLightMovemenTz Paper-Set · Ref. EX2025D1218310</div>
+<header class="hero">
+<h1>Themen & Aspekte</h1>
+<div class="sub">Methodik Zeile→Thema→Aspekt: thematische Block-Matrix je Einheit, Querschnitts-Aspekte und die acht durchgehenden Fäden.</div>
+<div class="kbar"><span class="tag">Block-Matrix</span><span class="tag">Querschnitt</span><span class="tag">8 Fäden</span><span class="tag">Zeilenbezug</span></div>
+</header>
+
+<nav class="toc"><b>Inhalt</b>
+<ul>
+<li><a href="#matrix">1 · Themen-Matrix (Block / Zeile / Aspekt)</a></li>
+<li><a href="#cross">2 · Querschnitts-Aspekte</a></li>
+<li><a href="#faeden">3 · Die 8 Aspekt-Fäden</a></li>
+</ul></nav>
+
+<p>Dieses Paper folgt strikt der Methodik <b>Zeile → Thema → Aspekt</b>: Für jede Einheit die thematischen Blöcke
+mit Zeilenbezug und dem analytischen Aspekt, plus acht durchgehende Querschnitts-Fäden.</p>
+
+<h2 id="matrix">1 · Themen-Matrix nach Block</h2>
+
+<h3>BT 05 · PNAI Rooting Sys</h3>
+<table><tr><th>Block</th><th>Zeilen</th><th>Thema</th><th>Aspekt</th><th>WA</th></tr>
+<tr><td>A</td><td>19–100</td><td>33 US-Tools</td><td>Kategorisierung: Exchanges/Custody/Ramps/Neo-Banks/Treasury</td><td>05.1</td></tr>
+<tr><td>B</td><td>100–270</td><td>US-Settlement-Bridge</td><td>Event-Listener → API-Payload → Instant-Settlement</td><td>05.3</td></tr>
+<tr><td>C</td><td>272–430</td><td>EU-Settlement-Bridge</td><td>Spiegelung auf SEPA Instant</td><td>05.4</td></tr>
+<tr><td>D</td><td>~1000</td><td>Finnischer Pfad</td><td>≤9s, ISO 20022, RT1/TIPS, Nordea/OP</td><td>05.5</td></tr>
+<tr><td>E</td><td>~1060–1450</td><td>Schienen-Vergleich</td><td>UPI vs SEPA vs Nexus; EU-„Regulierungswut“ vs Asien-Dichte</td><td>05.6</td></tr>
+<tr><td>F</td><td>~1450–1557</td><td>PNIA-Triade</td><td>Drei-Städte-Microservice; Regulatory Load Balancing</td><td>05.10</td></tr></table>
+
+<h3>BT 06 · Wonnet-Kalkulation</h3>
+<table><tr><th>Block</th><th>Zeilen</th><th>Thema</th><th>Aspekt</th><th>WA</th></tr>
+<tr><td>A</td><td>1–32</td><td>Skalierungs-Mathematik</td><td>Multiplikationskette 580×30k×300×130</td><td>06.1/2</td></tr>
+<tr><td>B</td><td>34–89</td><td>Python-Kostenrechner</td><td>reproduzierbare Szenario-Rechnung</td><td>06.5</td></tr>
+<tr><td>C</td><td>93–315</td><td>Verdichtung auf 1 Token</td><td>Komplexitäts-Kompression</td><td>06.6</td></tr>
+<tr><td>D</td><td>317–345</td><td>33.000 Assets</td><td>Gussform → 746,46 Mrd.</td><td>06.7/3</td></tr>
+<tr><td>E</td><td>~2000–2180</td><td>Sponsorship Diamond + Tree</td><td>fractional Spray + Auto-Spray nach Wallet-Analyse</td><td>06.8/9</td></tr>
+<tr><td>F</td><td>~2180–2400</td><td>Zeit-Schiff & Tranchen</td><td>Root-SPV + monatlicher Spray über 130 Monate</td><td>06.10/11</td></tr></table>
+
+<h3>BT 07 · Asset Gose</h3>
+<table><tr><th>Block</th><th>Zeilen</th><th>Thema</th><th>Aspekt</th><th>WA</th></tr>
+<tr><td>A</td><td>1–900</td><td>Mathematik & Pixel-Basis</td><td>746,46 Mrd. als „totale Pixel-Basis“</td><td>07.1/2</td></tr>
+<tr><td>B</td><td>935–1850</td><td>33-Tools länderweise</td><td>CH/SE/IE/ES/IT/IL/SV, je 4 Gruppen bis 33</td><td>07.3</td></tr>
+<tr><td>C</td><td>2069–2650</td><td>Diamond + Insurance + Oracle</td><td>Parametric Insurance via Trigger; Chainlink-DON-Consensus</td><td>07.5/6/7</td></tr>
+<tr><td>D</td><td>4000–4590</td><td>Regulatorik-Matrix 2026</td><td>MiCA-Passporting; nationale Aufsichten als Knoten</td><td>07.4</td></tr>
+<tr><td>E</td><td>4815–6000</td><td>8-Layer + Code</td><td>Liquidity/Treasury/Fiat-Bridge; SovereignGateway; Aave/Uniswap</td><td>07.8/9/12</td></tr>
+<tr><td>F</td><td>3487–3936</td><td>Master-Token & Pixel-Engine</td><td>Verdichtung + Selbstausgleich (Resilienz)</td><td>07.10/11</td></tr></table>
+
+<h2 id="cross">2 · Querschnitts-Aspekte (über alle Files)</h2>
+<div class="grid c2">
+<div class="card"><h4>Ökonomie</h4><p>Wert als Information statt Ressourcenbindung; Micro-Cent-Stückkosten × gigantisches Volumen = Wert-Hebel <span class="anchor">WA-06.4</span>.</p></div>
+<div class="card"><h4>Recht / Regulatorik</h4><p>MiCA/DORA/NIS-2, VO 1049/2001, RAIF/CSSF, Twin-Peaks — rechtliche Akzeptanz ist der Engpass <span class="anchor">WA-01.6</span>.</p></div>
+<div class="card"><h4>Technik</h4><p>Solidity + Python + DeFi (Aave/Uniswap) + Oracles (Chainlink DON) + ISO 20022.</p></div>
+<div class="card"><h4>Ethik / Politik</h4><p>Infrastruktur als Menschenrecht; Governance durch Architektur; „zweite Chance“ <span class="anchor">WA-02.2</span>.</p></div>
+<div class="card"><h4>Identität</h4><p>Konsolidiertes ID-Bündel als Autoritäts-Signatur über alle Dokumente (Faden η).</p></div>
+<div class="card"><h4>Geografie</h4><p>Detmold (Autor) · Schweiz (Root-SPV) · Helsinki/Luxemburg/Brüssel (Triade) · Genf (UN-Norm).</p></div>
+</div>
+
+<h2 id="faeden">3 · Die 8 Aspekt-Fäden α–θ</h2>
+<div class="mermaid">
+flowchart LR
+  A["α Wert→Repräsentation"]-->B["β Zwei-Schichten-Token"]
+  B-->C["γ Settlement-Bridge"]
+  C-->D["δ Load Balancing"]
+  D-->E["ε 1 Asset→viele"]
+  E-->F["ζ Pixel-Resilienz"]
+  G["η Identität"]-.->A
+  H["θ Ethik/Politik"]-.->A
+  F-->Z["746,46 Mrd. Einheiten"]
+</div>
+
+<footer>
+<p><b>Quelle des Konvoluts:</b> Daniel Pohl (StarLightMovemenTz / HolyThreeKings) · Ref. EX2025D1218310.</p>
+<p class="muted">Strukturelle Inhaltsanalyse (Building-Text-Methodik: Wissensanker · Zeile/Thema/Aspekt). Keine Bestätigung technischer Machbarkeit, rechtlicher Gültigkeit oder der genannten Zahlen/Register-IDs. Code-Snippets sind Entwürfe/Muster, nicht auditierte Produktion.</p>
+<p><div class="paperlinks">
+<a href="index.html"><b>Übersicht / Index</b><span>Start</span></a>
+<a href="01_Architektur_Paper.html"><b>Architektur-Paper</b><span>8-Layer · PNIA-Triade · Token-Schichten</span></a>
+<a href="02_One_Paper.html"><b>One-Paper (Alles in einem)</b><span>Komplette Analyse, alle Files</span></a>
+<a href="03_Themen_Aspekte_Paper.html"><b>Themen & Aspekte ◀</b><span>Zeile/Thema/Aspekt · 8 Fäden</span></a>
+<a href="04_API_Connector_Paper.html"><b>API-Connector-Paper</b><span>Settlement-Bridges · ISO 20022</span></a>
+<a href="05_Install_Architektur_Paper.html"><b>Install-/Deployment-Paper</b><span>Foundry · Python · Stack-Setup</span></a>
+<a href="06_Technisches_Paper.html"><b>Technisches Paper</b><span>Solidity/Python-Contracts</span></a>
+<a href="07_Charts_Graphen_Paper.html"><b>Info-Charts & Graphen</b><span>Chart.js · Mermaid</span></a>
+<a href="08_Visions_Paper.html"><b>Visions-Paper</b><span>Doktrin · Pledge · 4 Säulen</span></a>
+<a href="09_Tools_URLs_Paper.html"><b>Tools & URLs (Technical)</b><span>33-Tools-Kataloge · Register-IDs</span></a>
+</div></p>
+</footer>
+</div></body></html>

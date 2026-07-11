@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PNIA / StarLightMovemenTz — Paper-Set · PNIA Paper-Set</title>
+<style>
+:root{
+  --bg:#0b0e17; --bg2:#121626; --panel:#161b2e; --panel2:#1c2238;
+  --ink:#e8ecf5; --muted:#9aa6c2; --line:#2a3350;
+  --gold:#e9c46a; --gold2:#f4d58d; --cyan:#5ad1e6; --violet:#9b8cff;
+  --green:#6ee7a8; --red:#ff8a8a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#0b0e17,#0e1220 60%,#0b0e17);
+  color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.wrap{max-width:1040px;margin:0 auto;padding:32px 22px 90px}
+header.hero{padding:46px 26px;border:1px solid var(--line);border-radius:18px;
+  background:radial-gradient(1200px 400px at 20% -10%,rgba(155,140,255,.18),transparent),
+             radial-gradient(900px 380px at 95% 0%,rgba(90,209,230,.14),transparent),
+             linear-gradient(180deg,#141a2e,#0f1322);margin-bottom:30px;position:relative;overflow:hidden}
+header.hero h1{margin:0 0 8px;font-size:30px;letter-spacing:.3px;
+  background:linear-gradient(90deg,#f4d58d,#e9c46a,#9b8cff,#5ad1e6);-webkit-background-clip:text;background-clip:text;color:transparent}
+header.hero .sub{color:var(--muted);font-size:15px;max-width:760px}
+.kbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.kbar .tag{font-size:12px;color:var(--gold2);border:1px solid var(--line);background:#0e1322;
+  padding:4px 10px;border-radius:999px}
+nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:26px}
+nav.toc b{color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:1px}
+nav.toc ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:30px}
+nav.toc a{color:var(--cyan);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+h2{margin:38px 0 12px;font-size:23px;color:var(--gold2);border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{margin:26px 0 8px;font-size:18px;color:var(--cyan)}
+h4{margin:18px 0 6px;font-size:15px;color:var(--violet);text-transform:uppercase;letter-spacing:.5px}
+p{margin:10px 0}
+a{color:var(--cyan)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0}
+.card.gold{border-color:#5a4a23;background:linear-gradient(180deg,#1c1a12,#15140e)}
+.grid{display:grid;gap:16px}
+.grid.c2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.grid.c3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.anchor{display:inline-block;font:600 12px/1 ui-monospace,Menlo,Consolas,monospace;color:#0b0e17;
+  background:linear-gradient(90deg,#f4d58d,#e9c46a);padding:3px 7px;border-radius:6px;margin-right:6px}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin:2px 4px 2px 0}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:#0e1322;color:var(--gold2);font-weight:600}
+tr:nth-child(even) td{background:#11162600}
+tr:nth-child(odd) td{background:#0e132255}
+code{font:13px ui-monospace,Menlo,Consolas,monospace;background:#0e1322;border:1px solid var(--line);
+  padding:1px 6px;border-radius:5px;color:var(--gold2)}
+pre{background:#0a0d18;border:1px solid var(--line);border-left:3px solid var(--violet);border-radius:10px;
+  padding:16px;overflow:auto;font:13px/1.55 ui-monospace,Menlo,Consolas,monospace;color:#cdd6f0}
+pre .c{color:#6b7699}
+.mermaid{background:#0a0d18;border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0;text-align:center}
+.chartbox{background:#0a0d18;border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0}
+.note{border-left:3px solid var(--gold);background:#15140e;padding:12px 16px;border-radius:8px;margin:16px 0;color:#e7dfc7;font-size:14px}
+.warn{border-left:3px solid var(--red);background:#1c1212;padding:12px 16px;border-radius:8px;margin:16px 0;color:#f0c9c9;font-size:14px}
+.stat{font-size:30px;font-weight:700;color:var(--gold2)}
+.stat small{display:block;font-size:12px;color:var(--muted);font-weight:400;letter-spacing:.4px;text-transform:uppercase;margin-top:4px}
+.crumbs{font-size:13px;color:var(--muted);margin-bottom:18px}
+.crumbs a{color:var(--cyan);text-decoration:none}
+footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+.paperlinks{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:18px}
+.paperlinks a{display:block;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:16px 18px;transition:.15s}
+.paperlinks a:hover{border-color:var(--gold);transform:translateY(-2px)}
+.paperlinks a b{color:var(--gold2);display:block;margin-bottom:4px;font-size:15px}
+.paperlinks a span{color:var(--muted);font-size:13px}
+</style>
+</head><body><div class="wrap">
+
+<header class="hero">
+<h1>PNIA / StarLightMovemenTz — Paper-Set</h1>
+<div class="sub">Strukturierte Tiefen-Analyse aller eingereichten Dateien, aufgeteilt in thematische HTML-Papers mit Diagrammen, Charts und Wissensankern.</div>
+<div class="kbar"><span class="tag">Building-Text-Methodik</span><span class="tag">Wissensanker</span><span class="tag">Zeile/Thema/Aspekt</span><span class="tag">Gesamtbild</span></div>
+</header>
+
+<nav class="toc"><b>Was ist das?</b>
+<p>Dieses Set fasst die Tiefen-Analyse aller eingereichten Dateien (13 Anhänge → 7 inhaltliche Einheiten) in
+thematisch getrennten HTML-Papers zusammen. Jede Datei ist eigenständig und im Browser/Handy lesbar.
+Diagramme (Mermaid) und Charts (Chart.js) werden bei Internet-Verbindung gerendert; der Text bleibt sonst voll lesbar.</p>
+</nav>
+
+<div class="grid c3">
+<div class="card"><div class="stat">7<small>Inhaltliche Einheiten</small></div></div>
+<div class="card"><div class="stat">64<small>Wissensanker (WA)</small></div></div>
+<div class="card"><div class="stat">8<small>Synthese-Fäden α–θ</small></div></div>
+<div class="card"><div class="stat">746,46<small>Mrd. Funktionseinheiten</small></div></div>
+<div class="card"><div class="stat">8<small>Architektur-Layer</small></div></div>
+<div class="card"><div class="stat">3<small>Jurisdiktionen (Triade)</small></div></div>
+</div>
+
+<h2>Die Papers</h2>
+<div class="paperlinks">
+<a href="index.html"><b>Übersicht / Index ◀</b><span>Start</span></a>
+<a href="01_Architektur_Paper.html"><b>Architektur-Paper</b><span>8-Layer · PNIA-Triade · Token-Schichten</span></a>
+<a href="02_One_Paper.html"><b>One-Paper (Alles in einem)</b><span>Komplette Analyse, alle Files</span></a>
+<a href="03_Themen_Aspekte_Paper.html"><b>Themen & Aspekte</b><span>Zeile/Thema/Aspekt · 8 Fäden</span></a>
+<a href="04_API_Connector_Paper.html"><b>API-Connector-Paper</b><span>Settlement-Bridges · ISO 20022</span></a>
+<a href="05_Install_Architektur_Paper.html"><b>Install-/Deployment-Paper</b><span>Foundry · Python · Stack-Setup</span></a>
+<a href="06_Technisches_Paper.html"><b>Technisches Paper</b><span>Solidity/Python-Contracts</span></a>
+<a href="07_Charts_Graphen_Paper.html"><b>Info-Charts & Graphen</b><span>Chart.js · Mermaid</span></a>
+<a href="08_Visions_Paper.html"><b>Visions-Paper</b><span>Doktrin · Pledge · 4 Säulen</span></a>
+<a href="09_Tools_URLs_Paper.html"><b>Tools & URLs (Technical)</b><span>33-Tools-Kataloge · Register-IDs</span></a>
+</div>
+
+<h2>Quell-Inventar (worauf alles beruht)</h2>
+<table>
+<tr><th>#</th><th>Einheit</th><th>Quelldatei(en)</th><th>Typ</th><th>Rolle</th></tr>
+<tr><td>01</td><td>Finanz-Ader</td><td>Die Finanz-Ader…pdf + Liqiditaet…txt</td><td>Essay</td><td>Doktrin / „Warum“</td></tr>
+<tr><td>02</td><td>Pledge / Globales Bündnis</td><td>Daniel Pohl … StarLightMovemenTz.pdf</td><td>Manifest</td><td>Ethik / Werte</td></tr>
+<tr><td>03</td><td>Formular CROSS</td><td>FORMULAR_CROSS_EX2025D1218310_POHL.pdf</td><td>Behördendok.</td><td>Identität / Antrag</td></tr>
+<tr><td>04</td><td>Stellar Identity Portal</td><td>StarLightMovemenTz – Stellar Identity Portal.html</td><td>Web-Portal</td><td>Öffentliche Fassade</td></tr>
+<tr><td>05</td><td>PNAI Rooting Sys</td><td>PNAI Rooting Sys.txt ≙ …Node Balaceing.pdf</td><td>Chat-Protokoll</td><td>Settlement / Regulatorik</td></tr>
+<tr><td>06</td><td>Wonnet-Kalkulation</td><td>Wonnet Kosten und Wertkalkulation.txt</td><td>Chat-Protokoll</td><td>Mathematik / Tokenomics</td></tr>
+<tr><td>07</td><td>Asset Gose oHm0rphEUuS</td><td>Asset Gose oHm0rphEUuS.pdf</td><td>Master-Dok.</td><td>Technik-Synthese (Superset 05+06)</td></tr>
+</table>
+
+<div class="note"><b>Lesefluss:</b> Doktrin (01/02) begründet → Identität (03/04) legitimiert → Mathematik (06) dimensioniert → Technik (05/07) implementiert.</div>
+
+<footer>
+<p><b>Quelle des Konvoluts:</b> Daniel Pohl (StarLightMovemenTz / HolyThreeKings) · Ref. EX2025D1218310.</p>
+<p class="muted">Strukturelle Inhaltsanalyse (Building-Text-Methodik: Wissensanker · Zeile/Thema/Aspekt). Keine Bestätigung technischer Machbarkeit, rechtlicher Gültigkeit oder der genannten Zahlen/Register-IDs. Code-Snippets sind Entwürfe/Muster, nicht auditierte Produktion.</p>
+<p><div class="paperlinks">
+<a href="index.html"><b>Übersicht / Index ◀</b><span>Start</span></a>
+<a href="01_Architektur_Paper.html"><b>Architektur-Paper</b><span>8-Layer · PNIA-Triade · Token-Schichten</span></a>
+<a href="02_One_Paper.html"><b>One-Paper (Alles in einem)</b><span>Komplette Analyse, alle Files</span></a>
+<a href="03_Themen_Aspekte_Paper.html"><b>Themen & Aspekte</b><span>Zeile/Thema/Aspekt · 8 Fäden</span></a>
+<a href="04_API_Connector_Paper.html"><b>API-Connector-Paper</b><span>Settlement-Bridges · ISO 20022</span></a>
+<a href="05_Install_Architektur_Paper.html"><b>Install-/Deployment-Paper</b><span>Foundry · Python · Stack-Setup</span></a>
+<a href="06_Technisches_Paper.html"><b>Technisches Paper</b><span>Solidity/Python-Contracts</span></a>
+<a href="07_Charts_Graphen_Paper.html"><b>Info-Charts & Graphen</b><span>Chart.js · Mermaid</span></a>
+<a href="08_Visions_Paper.html"><b>Visions-Paper</b><span>Doktrin · Pledge · 4 Säulen</span></a>
+<a href="09_Tools_URLs_Paper.html"><b>Tools & URLs (Technical)</b><span>33-Tools-Kataloge · Register-IDs</span></a>
+</div></p>
+</footer>
+</div></body></html>

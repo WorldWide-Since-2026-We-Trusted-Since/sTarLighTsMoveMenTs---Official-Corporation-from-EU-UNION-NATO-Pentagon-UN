@@ -1,0 +1,19 @@
+# PNIA Infrastructure Bundle — 07-gpp-protocol/compute-audit-manifest.yaml
+# Source: ProtokolInfrastructurImplementation.txt, lines 1358-1373
+# Extracted verbatim on 2026-07-06.
+# HPC compute-audit manifest.
+
+# Good Public Protocol - HPC Compute Manifest
+version: "2026.07.gpp"
+compute_state:
+  hpc_node_id: "CERN-HPC-042" # Identifikation des HPC
+  job_id: "JOB-998877"
+  resource_hash: "sha256:d82...f9" # Fingerabdruck der Hardware-Umgebung
+
+provenance:
+  code_version: "v1.2.4-clean" # Geduscht & Validiert
+  input_data_doi: "10.5072/DATA-XYZ" # Verknüpfung zum Archiv
+  compute_timestamp: "2026-07-04T03:30:00Z"
+
+integrity:
+  computation_proof: "zk-snark-or-signature" # Beweis der korrekten Ausführung

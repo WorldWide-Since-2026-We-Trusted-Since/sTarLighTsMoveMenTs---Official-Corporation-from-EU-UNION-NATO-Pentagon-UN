@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function MemorialTributePage() {
   const [activeSection, setActiveSection] = useState<"tribute" | "persons">("tribute");

@@ -1,0 +1,25 @@
+// PNIA Infrastructure Bundle — 08-gpp-node/proto/gpp.proto
+// Source: ProtokolInfrastructurImplementation.txt, lines 2084-2105
+// Extracted verbatim on 2026-07-06.
+// BuildingState + ValidationReceipt protocol contract.
+
+syntax = "proto3";
+package gpp.v1;
+
+// Der "Building State" als atomare Einheit des Protokolls
+message BuildingState {
+  uint64 sequence_id = 1;          // Der Takt des First State Modus
+  int64 timestamp_ns = 2;          // Hochpräziser First-State-Zeitstempel
+  string provenance_anchor = 3;    // DOI-Referenz
+  bytes payload = 4;               // Die Lorddaten / Staatlichen Daten
+  string hash_signature = 5;       // Kryptografischer First-State-Beweis
+}
+
+service GPP_Node {
+  // Bi-direktionaler Stream für das "Duschen" und den Ingest
+  rpc StreamStates(stream BuildingState) returns (stream ValidationReceipt);
+}
+
+message ValidationReceipt {
+  bool compliant = 1;              // "Geduscht" & Bestätigt
+  string issue_id = 2;             // Referenz für den Verfassungsschutz/Audit

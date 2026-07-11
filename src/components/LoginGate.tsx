@@ -20,7 +20,7 @@ export default function LoginGate({ children }: LoginGateProps) {
   useEffect(() => {
     const ip = (() => {
       try {
-        return (window as any).clientIP || 'localhost';
+        return (window as { clientIP?: string }).clientIP || 'localhost';
       } catch {
         return 'localhost';
       }
@@ -44,7 +44,7 @@ export default function LoginGate({ children }: LoginGateProps) {
       return;
     }
     setAuthenticated(true);
-    const ip = (window as any).clientIP || 'localhost';
+    const ip = (window as { clientIP?: string }).clientIP || 'localhost';
     logAccess({
       sessionId,
       ip,

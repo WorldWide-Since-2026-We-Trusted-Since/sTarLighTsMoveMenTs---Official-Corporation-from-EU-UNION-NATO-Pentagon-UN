@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FileText, Lightbulb, BookOpen, Cpu, Info, FileCheck, Scale, Zap } from "lucide-react";
 import DocumentOverlay, { type DocumentOverlayData } from "./DocumentOverlay";
 import { renderMarkdown } from "../utils/markdown";

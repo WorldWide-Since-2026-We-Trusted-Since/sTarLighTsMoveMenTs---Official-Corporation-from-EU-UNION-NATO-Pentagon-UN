@@ -1,0 +1,41 @@
+openapi: 3.1.0
+info:
+  title: PNIA Deploy-by-ID API
+  version: 2.0.0
+  description: |
+    Unified interface bridging frontend, orchestrator, GitHub/GitLab CI,
+    Cloudflare, DataCite and GPP. Every operation is keyed by PNIA ID.
+servers:
+  - url: https://api.pnia.example
+paths:
+  /registry:
+    get:
+      summary: List all registered IDs and their cross-links
+      responses: { "200": { description: OK } }
+  /deploy/{id}:
+    post:
+      summary: Deploy a single ID (respects DEPENDS_ON)
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses: { "202": { description: Accepted }, "404": { description: Unknown ID } }
+  /deploy:
+    post:
+      summary: Deploy all IDs in parallel waves
+      responses: { "202": { description: Accepted } }
+  /contract/{id}:
+    get:
+      summary: Fetch the deployment contract for an ID
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string } }
+      responses: { "200": { description: OK } }
+  /gpp/tick:
+    post:
+      summary: Emit a GPP live-tick event (see 07-gpp-protocol)
+      responses: { "202": { description: Accepted } }
+components:
+  securitySchemes:
+    LicenseKey:
+      type: apiKey
+      in: header
+      name: X-PNIA-License
+security: [{ LicenseKey: [] }]

@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tools & URLs (Technical) · PNIA Paper-Set</title>
+<style>
+:root{
+  --bg:#0b0e17; --bg2:#121626; --panel:#161b2e; --panel2:#1c2238;
+  --ink:#e8ecf5; --muted:#9aa6c2; --line:#2a3350;
+  --gold:#e9c46a; --gold2:#f4d58d; --cyan:#5ad1e6; --violet:#9b8cff;
+  --green:#6ee7a8; --red:#ff8a8a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#0b0e17,#0e1220 60%,#0b0e17);
+  color:var(--ink);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.wrap{max-width:1040px;margin:0 auto;padding:32px 22px 90px}
+header.hero{padding:46px 26px;border:1px solid var(--line);border-radius:18px;
+  background:radial-gradient(1200px 400px at 20% -10%,rgba(155,140,255,.18),transparent),
+             radial-gradient(900px 380px at 95% 0%,rgba(90,209,230,.14),transparent),
+             linear-gradient(180deg,#141a2e,#0f1322);margin-bottom:30px;position:relative;overflow:hidden}
+header.hero h1{margin:0 0 8px;font-size:30px;letter-spacing:.3px;
+  background:linear-gradient(90deg,#f4d58d,#e9c46a,#9b8cff,#5ad1e6);-webkit-background-clip:text;background-clip:text;color:transparent}
+header.hero .sub{color:var(--muted);font-size:15px;max-width:760px}
+.kbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.kbar .tag{font-size:12px;color:var(--gold2);border:1px solid var(--line);background:#0e1322;
+  padding:4px 10px;border-radius:999px}
+nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin-bottom:26px}
+nav.toc b{color:var(--gold);font-size:13px;text-transform:uppercase;letter-spacing:1px}
+nav.toc ul{margin:10px 0 0;padding-left:18px;columns:2;column-gap:30px}
+nav.toc a{color:var(--cyan);text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+h2{margin:38px 0 12px;font-size:23px;color:var(--gold2);border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{margin:26px 0 8px;font-size:18px;color:var(--cyan)}
+h4{margin:18px 0 6px;font-size:15px;color:var(--violet);text-transform:uppercase;letter-spacing:.5px}
+p{margin:10px 0}
+a{color:var(--cyan)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:16px 0}
+.card.gold{border-color:#5a4a23;background:linear-gradient(180deg,#1c1a12,#15140e)}
+.grid{display:grid;gap:16px}
+.grid.c2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.grid.c3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.anchor{display:inline-block;font:600 12px/1 ui-monospace,Menlo,Consolas,monospace;color:#0b0e17;
+  background:linear-gradient(90deg,#f4d58d,#e9c46a);padding:3px 7px;border-radius:6px;margin-right:6px}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);margin:2px 4px 2px 0}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14px}
+th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+th{background:#0e1322;color:var(--gold2);font-weight:600}
+tr:nth-child(even) td{background:#11162600}
+tr:nth-child(odd) td{background:#0e132255}
+code{font:13px ui-monospace,Menlo,Consolas,monospace;background:#0e1322;border:1px solid var(--line);
+  padding:1px 6px;border-radius:5px;color:var(--gold2)}
+pre{background:#0a0d18;border:1px solid var(--line);border-left:3px solid var(--violet);border-radius:10px;
+  padding:16px;overflow:auto;font:13px/1.55 ui-monospace,Menlo,Consolas,monospace;color:#cdd6f0}
+pre .c{color:#6b7699}
+.mermaid{background:#0a0d18;border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0;text-align:center}
+.chartbox{background:#0a0d18;border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0}
+.note{border-left:3px solid var(--gold);background:#15140e;padding:12px 16px;border-radius:8px;margin:16px 0;color:#e7dfc7;font-size:14px}
+.warn{border-left:3px solid var(--red);background:#1c1212;padding:12px 16px;border-radius:8px;margin:16px 0;color:#f0c9c9;font-size:14px}
+.stat{font-size:30px;font-weight:700;color:var(--gold2)}
+.stat small{display:block;font-size:12px;color:var(--muted);font-weight:400;letter-spacing:.4px;text-transform:uppercase;margin-top:4px}
+.crumbs{font-size:13px;color:var(--muted);margin-bottom:18px}
+.crumbs a{color:var(--cyan);text-decoration:none}
+footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+.paperlinks{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));margin-top:18px}
+.paperlinks a{display:block;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:16px 18px;transition:.15s}
+.paperlinks a:hover{border-color:var(--gold);transform:translateY(-2px)}
+.paperlinks a b{color:var(--gold2);display:block;margin-bottom:4px;font-size:15px}
+.paperlinks a span{color:var(--muted);font-size:13px}
+</style>
+</head><body><div class="wrap">
+<div class="crumbs"><a href="index.html">← Index</a> · PNIA / StarLightMovemenTz Paper-Set · Ref. EX2025D1218310</div>
+<header class="hero">
+<h1>Tools & URLs (Technical)</h1>
+<div class="sub">Vollständiger Katalog: On-/Off-Ramps, Custody/Treasury, das 33-Tools-Muster je Jurisdiktion, DeFi/Oracles, Regulatoren/Schienen und die Register-Kennungen.</div>
+<div class="kbar"><span class="tag">33-Tools</span><span class="tag">Ramps & Custody</span><span class="tag">Regulatoren</span><span class="tag">Register-IDs</span></div>
+</header>
+
+<nav class="toc"><b>Inhalt</b>
+<ul>
+<li><a href="#ramps">1 · On-/Off-Ramps & APIs</a></li>
+<li><a href="#custody">2 · Custody & Treasury</a></li>
+<li><a href="#regions">3 · 33-Tools je Jurisdiktion</a></li>
+<li><a href="#defi">4 · DeFi & Oracles</a></li>
+<li><a href="#reg">5 · Regulatoren & Schienen</a></li>
+<li><a href="#ids">6 · Register-IDs & Kontakt</a></li>
+</ul></nav>
+
+<p>Katalog aller in den Quellen genannten Werkzeuge, APIs, Schienen, Regulatoren und Register-Kennungen.</p>
+<div class="warn"><b>Hinweis:</b> Tool-/Provider-Namen sind den Quelltexten entnommen; Register-IDs sind im Material
+<i>behauptet</i> und hier ohne externe Verifikation wiedergegeben. URLs, wo nicht explizit genannt, sind als
+offizielle Anbieter-Domains zur Orientierung ergänzt.</p>
+
+<h2 id="ramps">1 · On-/Off-Ramps & Payment-APIs <span class="anchor">WA-05.1</span> <span class="anchor">WA-07.4</span></h2>
+<table>
+<tr><th>Tool</th><th>Funktion</th><th>Region</th><th>URL</th></tr>
+<tr><td>Circle (USDC)</td><td>Stablecoin / API</td><td>US/Global</td><td>circle.com</td></tr>
+<tr><td>Stripe Crypto</td><td>Fiat-Payout-API</td><td>US/Global</td><td>stripe.com</td></tr>
+<tr><td>Monerium</td><td>EURe / EU-Off-Ramp</td><td>EU</td><td>monerium.com</td></tr>
+<tr><td>Ramp Network</td><td>On/Off-Ramp</td><td>EU/Global</td><td>ramp.network</td></tr>
+<tr><td>Coinmotion</td><td>EUR-Liquidierung</td><td>Finnland</td><td>coinmotion.com</td></tr>
+<tr><td>Mt Pelerin / Fiat24</td><td>IBAN / On-Ramp</td><td>Schweiz</td><td>mtpelerin.com · fiat24.com</td></tr>
+<tr><td>Fiat Republic</td><td>Banking-as-a-Service</td><td>EU/UK</td><td>fiatrepublic.com</td></tr>
+<tr><td>Plaid</td><td>Bank-Connectivity</td><td>US</td><td>plaid.com</td></tr>
+<tr><td>Bitpanda</td><td>Exchange / Broker</td><td>EU</td><td>bitpanda.com</td></tr>
+<tr><td>Ripple</td><td>Cross-Border</td><td>Global</td><td>ripple.com</td></tr>
+</table>
+
+<h2 id="custody">2 · Custody, Neo-Banks & Treasury</h2>
+<table>
+<tr><th>Tool</th><th>Funktion</th><th>Region</th><th>URL</th></tr>
+<tr><td>Fireblocks</td><td>Bank-Grade Custody</td><td>Global</td><td>fireblocks.com</td></tr>
+<tr><td>Paxos</td><td>Regulated Custody/Stablecoin</td><td>US</td><td>paxos.com</td></tr>
+<tr><td>Sygnum</td><td>Crypto-Custody-Bank</td><td>Schweiz</td><td>sygnum.com</td></tr>
+<tr><td>Mercury</td><td>Neo-Bank (Startups)</td><td>US</td><td>mercury.com</td></tr>
+<tr><td>Cross River</td><td>Sponsor-Bank / API</td><td>US</td><td>crossriver.com</td></tr>
+<tr><td>Bison Bank</td><td>Digital-Asset-Bank</td><td>Portugal/EU</td><td>bisonbank.com</td></tr>
+<tr><td>Slash.xyz</td><td>Crypto-Business-Banking</td><td>US</td><td>slash.com</td></tr>
+<tr><td>Fipto</td><td>Blockchain-Payments</td><td>EU</td><td>fipto.com</td></tr>
+</table>
+
+<h2 id="regions">3 · Das 33-Tools-Muster je Jurisdiktion <span class="anchor">WA-07.3</span></h2>
+<p>Im Master-Dokument (Asset Gose) wird für jede Region ein Katalog von je ~33 Tools/APIs entfaltet, gruppiert in
+<b>Kern · Weitere · Globale-Hybride · Ergänzende</b>.</p>
+<table>
+<tr><th>Region</th><th>Zeile (BT07)</th><th>Aufsicht</th></tr>
+<tr><td>Generisch / US</td><td>935+</td><td>SEC / FinCEN</td></tr>
+<tr><td>Schweiz 🇨🇭</td><td>1338</td><td>FINMA</td></tr>
+<tr><td>Schweden 🇸🇪</td><td>1419</td><td>Finansinspektionen</td></tr>
+<tr><td>Irland 🇮🇪</td><td>1497</td><td>CBI</td></tr>
+<tr><td>Spanien 🇪🇸</td><td>1574</td><td>CNMV / Banco de España</td></tr>
+<tr><td>Italien 🇮🇹</td><td>1650</td><td>CONSOB / Banca d'Italia</td></tr>
+<tr><td>Israel 🇮🇱</td><td>1727</td><td>ISA</td></tr>
+<tr><td>Silicon Valley</td><td>1814</td><td>SEC (US)</td></tr>
+</table>
+
+<h2 id="defi">4 · DeFi & Oracles <span class="anchor">WA-07.7</span> <span class="anchor">WA-07.12</span></h2>
+<table>
+<tr><th>Tool</th><th>Funktion</th><th>URL</th></tr>
+<tr><td>Aave</td><td>Kredit-/Liquidity-Layer</td><td>aave.com</td></tr>
+<tr><td>Uniswap V3</td><td>Multi-Asset-Swap-Engine</td><td>uniswap.org</td></tr>
+<tr><td>Chainlink (DON + Automation)</td><td>Oracle-Consensus, Trigger</td><td>chain.link</td></tr>
+<tr><td>Foundry</td><td>Solidity-Toolchain</td><td>getfoundry.sh</td></tr>
+<tr><td>Ethereum · Base · Polygon</td><td>Chains für Spray</td><td>ethereum.org · base.org · polygon.technology</td></tr>
+</table>
+
+<h2 id="reg">5 · Regulatoren, Normen & Schienen <span class="anchor">WA-05.6</span> <span class="anchor">WA-05.9</span></h2>
+<table>
+<tr><th>Element</th><th>Rolle</th></tr>
+<tr><td>MiCA / MiCAR</td><td>EU-Krypto-Regulierung (Passporting)</td></tr>
+<tr><td>DORA</td><td>Digital Operational Resilience Act</td></tr>
+<tr><td>NIS-2</td><td>EU-Cybersicherheits-Richtlinie</td></tr>
+<tr><td>RAIF / CSSF</td><td>Luxemburg-Fondsstruktur / Aufsicht</td></tr>
+<tr><td>Euroclear</td><td>Brüssel — Settlement/Verwahrung</td></tr>
+<tr><td>ISO 20022 · UN/EDIFACT</td><td>Nachrichten-/Datenstandards (UNECE Genf)</td></tr>
+<tr><td>SEPA Instant · RT1 · TIPS · ACH · RTP</td><td>Echtzeit-Zahlungs-Schienen</td></tr>
+<tr><td>Project Nexus (BIS) · UPI · Wero</td><td>globale/regionale Instant-Netze</td></tr>
+</table>
+
+<h2 id="ids">6 · Register-Kennungen & Kontakt <span class="anchor">WA-03.3</span> <span class="anchor">WA-04.4</span></h2>
+<table>
+<tr><th>Kennung</th><th>Wert</th></tr>
+<tr><td>D-U-N-S</td><td>315676980 · 317066336</td></tr>
+<tr><td>VAT / EU-Ref</td><td>DE441892129 · EX2025D1218310</td></tr>
+<tr><td>Global LEI</td><td>894500GBJSIW8L6ET310</td></tr>
+<tr><td>Swiss ID</td><td>756.6199.0539.28</td></tr>
+<tr><td>UNGM / PIC</td><td>1172700 · 873042778</td></tr>
+<tr><td>Marke</td><td>Hnoss® · „sTarLighTsMoveMenTs“</td></tr>
+<tr><td>Kontakt</td><td>government-enterprise@ag-thrust.cloud · +49 1556 2233724</td></tr>
+<tr><td>Adresse</td><td>Daniel Pohl, Saganer Straße 31, 32756 Detmold</td></tr>
+</table>
+<div class="warn">Diese IDs sind im Quellmaterial <b>behauptet</b> und wurden <b>nicht extern verifiziert</b> — analytisch als Anspruch zu lesen.</div>
+
+<footer>
+<p><b>Quelle des Konvoluts:</b> Daniel Pohl (StarLightMovemenTz / HolyThreeKings) · Ref. EX2025D1218310.</p>
+<p class="muted">Strukturelle Inhaltsanalyse (Building-Text-Methodik: Wissensanker · Zeile/Thema/Aspekt). Keine Bestätigung technischer Machbarkeit, rechtlicher Gültigkeit oder der genannten Zahlen/Register-IDs. Code-Snippets sind Entwürfe/Muster, nicht auditierte Produktion.</p>
+<p><div class="paperlinks">
+<a href="index.html"><b>Übersicht / Index</b><span>Start</span></a>
+<a href="01_Architektur_Paper.html"><b>Architektur-Paper</b><span>8-Layer · PNIA-Triade · Token-Schichten</span></a>
+<a href="02_One_Paper.html"><b>One-Paper (Alles in einem)</b><span>Komplette Analyse, alle Files</span></a>
+<a href="03_Themen_Aspekte_Paper.html"><b>Themen & Aspekte</b><span>Zeile/Thema/Aspekt · 8 Fäden</span></a>
+<a href="04_API_Connector_Paper.html"><b>API-Connector-Paper</b><span>Settlement-Bridges · ISO 20022</span></a>
+<a href="05_Install_Architektur_Paper.html"><b>Install-/Deployment-Paper</b><span>Foundry · Python · Stack-Setup</span></a>
+<a href="06_Technisches_Paper.html"><b>Technisches Paper</b><span>Solidity/Python-Contracts</span></a>
+<a href="07_Charts_Graphen_Paper.html"><b>Info-Charts & Graphen</b><span>Chart.js · Mermaid</span></a>
+<a href="08_Visions_Paper.html"><b>Visions-Paper</b><span>Doktrin · Pledge · 4 Säulen</span></a>
+<a href="09_Tools_URLs_Paper.html"><b>Tools & URLs (Technical) ◀</b><span>33-Tools-Kataloge · Register-IDs</span></a>
+</div></p>
+</footer>
+</div></body></html>

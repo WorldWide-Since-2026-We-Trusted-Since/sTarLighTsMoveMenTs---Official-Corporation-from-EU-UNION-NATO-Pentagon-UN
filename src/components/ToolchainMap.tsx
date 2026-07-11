@@ -4,7 +4,7 @@
  * @copyright Copyright © 2024–2026 Daniel Pohl. All rights reserved worldwide.
  */
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Wrench, 

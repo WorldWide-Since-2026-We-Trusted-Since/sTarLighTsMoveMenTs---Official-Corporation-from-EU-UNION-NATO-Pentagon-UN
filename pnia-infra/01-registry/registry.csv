@@ -1,0 +1,9 @@
+# PNIA Infrastructure Bundle — 01-registry/registry.csv
+# Source: ProtokolInfrastructurImplementation.txt, lines 17-22
+# Extracted verbatim on 2026-07-06.
+# Registry mapping each PNIA ID to a database engine, port and DB name.
+
+ID,DB_TYPE,DB_PORT,DB_NAME
+PNIA-001,postgres,5432,alpha_db
+PNIA-002,clickhouse,8123,analytics_db
+PNIA-003,mysql,3306,content_db

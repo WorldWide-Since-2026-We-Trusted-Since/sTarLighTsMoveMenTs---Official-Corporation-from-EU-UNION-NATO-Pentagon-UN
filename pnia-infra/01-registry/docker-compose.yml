@@ -1,0 +1,14 @@
+# PNIA Infrastructure Bundle — 01-registry/docker-compose.yml
+# Source: ProtokolInfrastructurImplementation.txt, lines 75-85
+# Extracted verbatim on 2026-07-06.
+# docker-compose file that consumes the exported registry variables.
+
+services:
+  database_node:
+    image: ${DB_IMAGE_TYPE}:latest
+    container_name: ${DB_NAME}_container
+    ports:
+      - "${DB_INTERNAL_PORT}:${DB_INTERNAL_PORT}"
+    environment:
+      - DB_NAME=${DB_NAME}
+    restart: always

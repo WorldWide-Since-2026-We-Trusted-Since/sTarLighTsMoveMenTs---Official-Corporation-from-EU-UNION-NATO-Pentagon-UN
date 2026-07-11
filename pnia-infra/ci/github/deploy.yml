@@ -1,0 +1,47 @@
+name: PNIA Parallel Deploy
+on:
+  workflow_dispatch:
+    inputs:
+      wave:
+        description: "PNIA IDs (space-separated) or 'all'"
+        default: "all"
+  push:
+    branches: [main]
+    paths: ["infra/**"]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ludeeus/action-shellcheck@master
+        with: { scandir: "./infra" }
+
+  build-matrix:
+    needs: lint
+    runs-on: ubuntu-latest
+    outputs:
+      ids: ${{ steps.ids.outputs.ids }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: ids
+        run: |
+          ids=$(tail -n+2 infra/00-core/registry.csv | cut -d, -f1 | jq -R . | jq -sc .)
+          echo "ids=$ids" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: build-matrix
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        id: ${{ fromJson(needs.build-matrix.outputs.ids) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy ${{ matrix.id }}
+        env:
+          PNIA_LICENSE_KEY: ${{ secrets.PNIA_LICENSE_KEY }}
+          DATACITE_USER:    ${{ secrets.DATACITE_USER }}
+          DATACITE_PASS:    ${{ secrets.DATACITE_PASS }}
+        run: bash infra/01-registry/deploy_service.v2.sh "${{ matrix.id }}"
