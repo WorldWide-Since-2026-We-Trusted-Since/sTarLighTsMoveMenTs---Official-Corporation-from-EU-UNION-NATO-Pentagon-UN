@@ -75,9 +75,17 @@ export default function RainbowLightningFooter() {
   const handleMouseLeave = () => {
     const timer = setTimeout(() => {
       setIsExpanded(false);
-    }, 3000); // Auto-collapse after 3 seconds
+    }, 3000); // Auto-collapse after 3 seconds (wie gewünscht)
     setHoverTimer(timer);
   };
+
+  // Auto-expand when footer comes into view (3 seconds)
+  useEffect(() => {
+    const autoExpandTimer = setTimeout(() => {
+      setIsExpanded(true);
+    }, 3000);
+    return () => clearTimeout(autoExpandTimer);
+  }, []);
 
   const rainbowGradient = `linear-gradient(${rainbowOffset}deg, 
     #ff69b4, #da70d6, #9370db, #8a2be2, #9932cc, #ba55d3, #dda0dd, #ff69b4)`;
