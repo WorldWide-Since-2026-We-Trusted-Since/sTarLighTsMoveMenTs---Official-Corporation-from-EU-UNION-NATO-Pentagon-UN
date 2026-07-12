@@ -26,7 +26,7 @@ export const extractTextFromHTML = (html: string): string => {
 };
 
 // Verfügbare Sprachen für TTS
-export const TTS_LANGUAGES = {
+export const TTS_LANGUAGES: Record<string, string> = {
   de: "de-DE",
   en: "en-US",
   fr: "fr-FR",
@@ -47,18 +47,17 @@ export const speakText = (text: string, langCode: string = "de"): void => {
   window.speechSynthesis.cancel();
   
   const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = TTS_LANGUAGES[langCode as keyof typeof TTS_LANGUAGES] || "de-DE";
+  utterance.lang = TTS_LANGUAGES[langCode] || "de-DE";
   utterance.rate = 0.9;
   utterance.pitch = 1;
   
   window.speechSynthesis.speak(utterance);
 };
 
-// Übersetzungsfunktion (Browser-eigene, keine API nötig)
-export const translateHTML = (html: string, targetLang: string): Promise<string> => {
+// Übersetzungsfunktion (Placeholder für zukünftige Integration)
+// Funktioniert direkt im Browser ohne API
+export const translateHTML = (_html: string, _targetLang: string): Promise<string> => {
   // Hinweis: Für vollständige Übersetzung müsste eine Translation-API genutzt werden
-  // Dies ist eine Placeholder-Implementierung
-  return new Promise((resolve) => {
-    resolve(html);
-  });
+  // Aktuell wird HTML unverändert zurückgegeben
+  return Promise.resolve(_html);
 };
