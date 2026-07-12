@@ -79,13 +79,8 @@ export default function RainbowLightningFooter() {
     setHoverTimer(timer);
   };
 
-  // Auto-expand when footer comes into view (3 seconds)
-  useEffect(() => {
-    const autoExpandTimer = setTimeout(() => {
-      setIsExpanded(true);
-    }, 3000);
-    return () => clearTimeout(autoExpandTimer);
-  }, []);
+  // Note: Removed auto-expand - Footer opens only on mouse hover as originally intended
+  // The footer can be manually expanded by hovering over the bottom trigger line
 
   const rainbowGradient = `linear-gradient(${rainbowOffset}deg, 
     #ff69b4, #da70d6, #9370db, #8a2be2, #9932cc, #ba55d3, #dda0dd, #ff69b4)`;
