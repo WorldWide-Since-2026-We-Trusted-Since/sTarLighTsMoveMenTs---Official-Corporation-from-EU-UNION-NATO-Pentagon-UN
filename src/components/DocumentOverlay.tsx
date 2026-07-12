@@ -12,6 +12,7 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, Globe, Volume2, Pause } from "lucide-react";
+import { extractTextFromHTML, TTS_LANGUAGES } from "../utils/tts";
 
 export interface DocumentOverlayData {
   /** Document title shown in header + panel */
@@ -74,13 +75,7 @@ export default function DocumentOverlay({ doc, onClose }: DocumentOverlayProps) 
     };
   }, [doc, onClose]);
 
-  // Text-to-Speech functions
-  const extractText = (html: string): string => {
-    const temp = document.createElement("div");
-    temp.innerHTML = html;
-    return temp.textContent || temp.innerText || "";
-  };
-
+  // Text-to-Speech using proper TTS library
   const speakDocument = () => {
     if (!doc?.html) return;
     
@@ -90,9 +85,13 @@ export default function DocumentOverlay({ doc, onClose }: DocumentOverlayProps) 
       return;
     }
 
-    const text = extractText(doc.html);
+    // Extract clean text using the TTS utility
+    const text = extractTextFromHTML(doc.html);
+    if (!text || !text.trim()) return;
+    
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = selectedLang;
+    // Use proper language code from TTS_LANGUAGES mapping
+    utterance.lang = TTS_LANGUAGES[selectedLang as keyof typeof TTS_LANGUAGES] || "de-DE";
     utterance.rate = 0.9;
     utterance.pitch = 1;
     
