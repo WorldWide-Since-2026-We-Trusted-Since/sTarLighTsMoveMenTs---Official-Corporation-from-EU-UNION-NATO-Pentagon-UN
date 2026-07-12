@@ -105,9 +105,24 @@ export default function DocumentOverlay({ doc, onClose }: DocumentOverlayProps) 
               </button>
             </div>
 
-            {/* Body — inherits site typography via .paper-* tokens */}
+            {/* Body — inherits site typography via .paper-* tokens — A4 Format */}
             <div className="paper-body custom-scrollbar flex-1 overflow-y-auto px-6 py-6">
-              <div className="paper-content" dangerouslySetInnerHTML={{ __html: doc.html }} />
+              <div 
+                className="paper-content a4-format dejavu-sans" 
+                style={{
+                  width: '210mm',
+                  minHeight: '297mm',
+                  maxWidth: '100%',
+                  margin: '0 auto',
+                  padding: '20mm',
+                  fontSize: '12pt',
+                  lineHeight: '1.6',
+                  fontFamily: 'DejaVu Sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+                  backgroundColor: 'rgba(15, 20, 35, 0.95)',
+                  color: '#e8ecf5',
+                }}
+                dangerouslySetInnerHTML={{ __html: doc.html }} 
+              />
             </div>
           </motion.div>
         </motion.div>

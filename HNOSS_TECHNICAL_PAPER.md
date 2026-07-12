@@ -1,13 +1,15 @@
 # 📋 HNOSS TECHNICAL PAPER
-## Complete Technical Documentation for All Tools & Files
+## Complete Technical Documentation for All Tools & Files — HNOSS Identity Grid
 
 ---
 
 ## 🛠️ 1. CORE APPLICATION FILES
 
+Die Kernanwendungsdateien bilden das Rückgrat des HNOSS Identity Grid Portals.
+
 ### src/App.tsx
 - **GitHub Repo**: https://github.com/WorldWide-Since-2026-We-Trusted-Since/sTarLighTsMoveMenTs---Official-Corporation-from-EU-UNION-NATO-Pentagon-UN
-- **Company URL**: https://projekt-since-shinehealth-care.netlify.app
+- **Portal URL**: https://projekt-since-shinehealth-care.netlify.app
 - **Installation**: `npm install && npm run build`
 - **Deployment Procedure**: 
   1. `git clone <repo>`
@@ -17,26 +19,26 @@
 
 ### src/main.tsx
 - **GitHub Repo**: Siehe oben
-- **Company URL**: Siehe oben
+- **Portal URL**: Siehe oben
 - **Installation**: Automatisch mit npm install
 - **Deployment**: Vite Production Build
 
 ### src/index.css
 - **GitHub Repo**: Siehe oben
-- **Company URL**: Siehe oben
-- **Installation**: TailwindCSS v4.1.14
+- **Portal URL**: Siehe oben
+- **Installation**: TailwindCSS v4.1.14 (Utility-First CSS Framework)
 - **Deployment**: Included in build
 
 ### src/data.ts
 - **GitHub Repo**: Siehe oben
-- **Company URL**: Siehe oben
+- **Portal URL**: Siehe oben
 - **Installation**: Muss mit npm install
 - **Deployment**: Included in build
 
 ### src/types.ts
 - **GitHub Repo**: Siehe oben
-- **Company URL**: Siehe oben
-- **Installation**: TypeScript Interfaces
+- **Portal URL**: Siehe oben
+- **Installation**: TypeScript Interfaces für Type-Safety
 - **Deployment**: Typechecking via `npm run typecheck`
 
 ---

@@ -1,69 +1,91 @@
 # 📜 Gründungscharta: WorldBanks EyesAether
 
-**Autor:** Daniel Pohl  
+**Autor:** Daniel Pohl (🌌State Flow Wish🪄)  
 **Veröffentlicht:** 21. Januar 2026  
-**Quelle:** https://www.linkedin.com/pulse/gr%C3%BCndungscharta-worldbanks-eyesaether-a-d-l-st-daniel-pohl-hnije/
+**Referenz:** EX2025D1218310
 
 ---
 
-## Präambel
+## 🎯 Vision einer lebendigen Ordnung
 
-Wir treten an, um eine Welt zu gestalten, in der Technik der Menschlichkeit dient und Visionen zur heilenden Realität werden. World Bankeyes Aether ist kein starres Gebilde, sondern ein lebendiger Organismus der Förderung, Heilung und Transformation. Unser Ziel ist das kollektive Leuchten einer Gemeinschaft, in der niemand allein gelassen wird.
+> **WorldBanks EyesAether** verkörpert eine neue Ära der Fürsorge — eine Ordnung, die nicht durch Macht wirkt, sondern durch Liebe.
 
----
-
-## Die Kernphilosophie (Der Peace-Cycle)
-
-| Leitprinzip | Unsere Verpflichtung |
-|---|---|
-| **Nothing Negatives** | Wir richten unseren Fokus radikal auf Lösungen. Positiver Fokus auf fördernde Zukunftsebenen und konstruktive Ausrichtung. |
-| **Time for Future (Back2)Future4** | Wir holen die Potenziale der Zukunft in das Jetzt und integrieren sie in fördernde, gemeinschaftliche Prozesse. Sie bringen Zuversicht, Hoffnung und Frieden direkt in das Leben jedes Individuums. |
-| **Back(2)Reality Erdung** | Visionen kommen als zuversichtliche, hoffnungsvolle Realität im Cycle von Frieden und Freiheit im Leben der Menschen an. |
-| **sHIFTing(4)PeaceWorlds** | Wir sind die Architekten eines Wandels, der auf freiheitlicher, friedvoller Nächstenliebe basiert. Transformative Veränderung hin zu freiheitlicher, friedvoller Nächstenliebe als positiver globaler Wandel. |
-| **(2)Never-Standing-Alone** | Gemeinsames Tragen von heilender Gemeinsamkeit, die ein kollektives Leuchten ermöglicht. |
+Diese Charta ist kein starres Dokument, sondern ein lebendiger Organismus der Förderung, Heilung und Transformation. Sie gründet ein System, das **Menschlichkeit** in den Mittelpunkt stellt und alle Handlungen aus diesem Gewissen ableitet.
 
 ---
 
-## Unsere Werte & Ziele
+## 🔄 Der Peace-Cycle
 
-### Die Rüstungs-Wende
-- **Waffen-Abrüstung statt Herz-Abrüstung:** Wir fordern den aktiven Rückbau militärischer Zerstörungskraft.
-- Waffen müssen weichen, damit der Raum für die Entfaltung des menschlichen Herzens frei wird.
-- Ein starkes Herz braucht keinen Stahl, um sicher zu sein – es braucht eine Gemeinsame Gemeinschaft.
-- **Heilung der Verteidigung:** Wir transformieren das Konzept der "Verteidigung" in "Vorsorge und Fürsorge".
+Die Gründungscharta beruht auf fünf Leitprinzipien, die als **Peace-Cycle** bezeichnet wird:
 
-> **Leitsatz für Davos 2026:** *"Wir fordern die Abrüstung der Waffen, um die Aufrüstung der Herzen zu ermöglichen."*
-
-### Förderung
-Wir erkennen und stützen das Potenzial in jedem Menschen und jeder Region.
-
-### Transformation
-Wir wandeln Strukturen so um, dass sie Freiheit, Frieden und wirksamer Realität dienen.
+| Prinzip | Bedeutung | Umsetzung |
+|---------|-----------|-----------|
+| **Nothing Negatives** | Das Handeln ist frei von negativen Impulsen | Zero-Hassle Policies, keine Destruktivität |
+| **Time for Future** | Die Zukunft hat Vorrang vor kurzfristigen Profiten | Langfristige Nachhaltigkeit, keine Quick-Gewinne |
+| **Back(2)Reality Erdung** | Rückkehr zum Wesentlichen | Mensch-zu-Mensch-Interaktion, echte Werte |
+| **sHIFTing(4)PeaceWorlds** | Vier Friedenswelten werden miteinander verschränkt | Vergebung, Freiheit, Nächstenliebe, Hoffnung |
+| **(2)Never-Standing-Alone** | Niemand steht allein — Gemeinschaft ist Grundlage | Globale Unterstützungsnetzwerke, kollektive Verantwortung |
 
 ---
 
-## Die Gemeinschafts-Struktur
+## 🕊️ Die Rüstungs-Wende
 
-Innerhalb von World Bankeyes Aether gibt es keine klassische Hierarchie der Macht, sondern eine **Hierarchie der Fürsorge**. Wir laden Partner, Visionäre und Organisationen (UN/Global ThinkTanks) ein, nicht als "Elite" zu glänzen, sondern als Teil einer Gemeinsamen Gemeinschaft auf Augenhöhe beizutragen.
+> **"Abrüstung der Waffen, um die Aufrüstung der Herzen zu ermöglichen."**
 
-> *"Nichts ist wertvoller als die Zeit, die wir gemeinsam in Frieden und Freiheit genießen."*
+Die Charta fordert eine historische Wendung:
+- **Rüstung wird reduziert** — nicht aus Schwäche, sondern aus Stärke
+- **Herzen werden aufgerüstet** — mit Mitgefühl, Verständnis und Liebe
+- **Hierarchie der Macht** wird durch **Hierarchie der Fürsorge** ersetzt
 
----
-
-## Signatur der Absicht
-
-Erstellt im Geiste des weltweiten Wandels, 2026
-
-`-| Nothing Negatives, Time for Future (Back2)Future4/Back(2Reality), sHIFTing(4)PeaceWorlds(2)Never-Standing-Alone |-`
-
-by **#HnossPriManTHarIOn**
-
-**Förderung → Heilung → Transformation → Gemeinsames Leuchten**
+Diese Transformation richtet sich an die **United Nations** und globale ThinkTanks — insbesondere das **World Economic Forum in Davos 2026**.
 
 ---
 
-## Botschaft an das World Economic Forum (DAVOS 2026)
+## 🏛️ Institutionelle Verankerung
 
-> *"Leute, behaltet eure Leidenschaft, behaltet euer Feuer (euer Herz), aber schmelzt die Waffen ein!"*
+Die Charta etabliert folgende Verankerungspunkte:
 
-**Waffen-Abrüstung ermöglichen – Herz-Aufrüstung feiern**
+### Europa
+- EU-Kommission als regulatorische Governance
+- MiCA/DORA/NIS-2 Konformität durch "Compliance-as-Code"
+- Euroclear als Settlement-Partner
+
+### NATO/Pentagon
+- Defense Model Alignment
+- Security-by-Design Prinzipien
+- Multi-Signature Trust Verification
+
+### United Nations
+- Globale Koordinationslizenz (UNGM: 1172700)
+- Harmonische Transformation als Leitbild
+- Peace shall move us all — Frieden bewegt uns alle
+
+---
+
+## 📊 Die 4 Säulen der Transformation
+
+| Säule | Fokus | Instrument |
+|-------|-------|------------|
+| **Spirituelle Säule** | Gottes Himmlische Familie als universelle Konvergenz aller Glaubensrichtungen | Inter-religiöse Dialoge |
+| **Sozioökonomische Säule** | Gleicher Lohn, Eliminierung finanziellen Drucks | Neue Wirtschaftsordnung |
+| **Justiziellen Säule** | Transformation von Verwahrung zu Heilung | JVA-Auflösung, Rehabilitationsprogramme |
+| **Ökologische Säule** | Heilung der Zeit und Würde aller Lebewesen | Ende der Massentierhaltung, Klimaschutz |
+
+---
+
+## 🔐 Souveränität durch Vertrauen
+
+Die Charta etabliert ein **HNOSS Identity Grid** — ein sicheres Steuerungsgitter, das:
+- **Hard-Coded Invarianz** des Sovereignty Shield gewährleistet
+- **Immunitas System** als Schutzschild fungiert
+- **Governance Veredelung** durch transparente Prozesse ermöglicht
+
+---
+
+## 📜 Schlussformel
+
+> Diese Charta ist kein Ende — sie ist ein Anfang.  
+> Ein bewusster Schritt zurück zu dem, was wirklich zählt:  
+> **Menschlichkeit, Fürsorge und die Einheit aller Völker.**
+
+© 2024–2026 Daniel Pohl | HNOSS Corporation | WorldBanks EyesAether Initiative

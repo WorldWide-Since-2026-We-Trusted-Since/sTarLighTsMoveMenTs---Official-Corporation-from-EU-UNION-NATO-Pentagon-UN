@@ -5,8 +5,8 @@
 
 ## 🏢 KORPORATION PROFILE
 
-**sTarLighTsMoveMenTs** - Official Portal Corporation  
-Eine registrierte Marke der HNOSS Corporation
+**sTarLighTsMoveMenTs** — Official Portal Corporation  
+*Eine registrierte Marke der HNOSS Corporation*
 
 ### Grunddaten:
 | Feld | Wert |
