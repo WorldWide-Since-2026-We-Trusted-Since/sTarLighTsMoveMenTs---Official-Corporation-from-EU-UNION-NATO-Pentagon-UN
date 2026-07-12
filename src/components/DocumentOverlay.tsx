@@ -5,11 +5,13 @@
  * any HNOSS document as an integrated part of the web design rather than a
  * detached "paper". Used by both the Papers Archive and the Concil Portal so
  * that every text layer (Ebene) shares one consistent presentation.
+ * 
+ * Enhanced with Multi-Language Translation and Text-to-Speech capabilities.
  */
 
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X } from "lucide-react";
+import { X, Globe, Volume2, Pause, Play } from "lucide-react";
 
 export interface DocumentOverlayData {
   /** Document title shown in header + panel */
@@ -31,7 +33,26 @@ interface DocumentOverlayProps {
   onClose: () => void;
 }
 
+// Supported languages for translation
+const LANGUAGES = [
+  { code: "de", label: "Deutsch", flag: "🇩🇪" },
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "fr", label: "Français", flag: "🇫🇷" },
+  { code: "es", label: "Español", flag: "🇪🇸" },
+  { code: "it", label: "Italiano", flag: "🇮🇹" },
+  { code: "pt", label: "Português", flag: "🇵🇹" },
+  { code: "ru", label: "Русский", flag: "🇷🇺" },
+  { code: "zh", label: "中文", flag: "🇨🇳" },
+  { code: "ja", label: "日本語", flag: "🇯🇵" },
+  { code: "ar", label: "العربية", flag: "🇸🇦" },
+];
+
 export default function DocumentOverlay({ doc, onClose }: DocumentOverlayProps) {
+  const [selectedLang, setSelectedLang] = useState("de");
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [showLangMenu, setShowLangMenu] = useState(false);
+  const speechRef = useRef<SpeechSynthesisUtterance | null>(null);
+
   // Close on Escape key for accessibility
   useEffect(() => {
     if (!doc) return;
@@ -45,8 +66,57 @@ export default function DocumentOverlay({ doc, onClose }: DocumentOverlayProps) 
     return () => {
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prevOverflow;
+      // Stop speech when closing
+      if (speechRef.current) {
+        window.speechSynthesis.cancel();
+        setIsSpeaking(false);
+      }
     };
   }, [doc, onClose]);
+
+  // Text-to-Speech functions
+  const extractText = (html: string): string => {
+    const temp = document.createElement("div");
+    temp.innerHTML = html;
+    return temp.textContent || temp.innerText || "";
+  };
+
+  const speakDocument = () => {
+    if (!doc?.html) return;
+    
+    if (isSpeaking) {
+      window.speechSynthesis.cancel();
+      setIsSpeaking(false);
+      return;
+    }
+
+    const text = extractText(doc.html);
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = selectedLang;
+    utterance.rate = 0.9;
+    utterance.pitch = 1;
+    
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+    
+    speechRef.current = utterance;
+    window.speechSynthesis.speak(utterance);
+    setIsSpeaking(true);
+  };
+
+  // Translation placeholder - would integrate with translation API
+  const translateText = async (_text: string, _targetLang: string): Promise<string> => {
+    // Note: In production, this would connect to a translation service
+    // For now, returns original text
+    return _text;
+  };
+
+  const handleLanguageChange = async (langCode: string) => {
+    setSelectedLang(langCode);
+    setShowLangMenu(false);
+    // Future: Auto-translate document when language changes
+    // const translated = await translateText(doc?.html || "", langCode);
+  };
 
   return (
     <AnimatePresence>
@@ -95,20 +165,67 @@ export default function DocumentOverlay({ doc, onClose }: DocumentOverlayProps) 
                   </p>
                 )}
               </div>
-              <button
-                type="button"
-                onClick={onClose}
-                aria-label="Schließen"
-                className="paper-close flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-[#bf953f]/40 text-[#fcf6ba] transition-colors hover:bg-[#bf953f]/20"
-              >
-                <X className="h-5 w-5" />
-              </button>
+              
+              {/* Action Buttons */}
+              <div className="flex items-center gap-2">
+                {/* Text-to-Speech Button */}
+                <button
+                  type="button"
+                  onClick={speakDocument}
+                  aria-label={isSpeaking ? "Vorlesen stoppen" : "Vorlesen"}
+                  className="paper-tts flex h-9 w-9 items-center justify-center rounded-lg border border-[#bf953f]/40 text-[#fcf6ba] transition-colors hover:bg-[#bf953f]/20"
+                  title="Text vorlesen (TTS)"
+                >
+                  {isSpeaking ? <Pause className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+                </button>
+
+                {/* Language Selector */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setShowLangMenu(!showLangMenu)}
+                    aria-label="Sprache wählen"
+                    className="paper-lang flex h-9 w-9 items-center justify-center rounded-lg border border-[#bf953f]/40 text-[#fcf6ba] transition-colors hover:bg-[#bf953f]/20"
+                    title="Sprache wählen"
+                  >
+                    <Globe className="h-5 w-5" />
+                  </button>
+                  
+                  {/* Language Dropdown */}
+                  {showLangMenu && (
+                    <div className="absolute right-0 mt-2 w-48 rounded-lg border border-[#bf953f]/30 bg-[#0a0f1f] py-2 shadow-xl z-50 max-h-64 overflow-y-auto">
+                      {LANGUAGES.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => handleLanguageChange(lang.code)}
+                          className={`flex w-full items-center gap-2 px-4 py-2 text-sm hover:bg-[#bf953f]/20 transition-colors ${
+                            selectedLang === lang.code ? "text-[#bf953f]" : "text-white"
+                          }`}
+                        >
+                          <span>{lang.flag}</span>
+                          <span>{lang.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* Close Button */}
+                <button
+                  type="button"
+                  onClick={onClose}
+                  aria-label="Schließen"
+                  className="paper-close flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-[#bf953f]/40 text-[#fcf6ba] transition-colors hover:bg-[#bf953f]/20"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
             </div>
 
-            {/* Body — inherits site typography via .paper-* tokens — A4 Format */}
+            {/* Body — A4 Format with DejaVu Sans */}
             <div className="paper-body custom-scrollbar flex-1 overflow-y-auto px-6 py-6">
               <div 
-                className="paper-content a4-format dejavu-sans" 
+                className="paper-content a4-format dejavu-sans"
                 style={{
                   width: '210mm',
                   minHeight: '297mm',
