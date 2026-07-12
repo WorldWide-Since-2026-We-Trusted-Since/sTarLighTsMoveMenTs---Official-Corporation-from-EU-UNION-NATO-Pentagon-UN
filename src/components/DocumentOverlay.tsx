@@ -11,7 +11,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Globe, Volume2, Pause, Play } from "lucide-react";
+import { X, Globe, Volume2, Pause } from "lucide-react";
 
 export interface DocumentOverlayData {
   /** Document title shown in header + panel */
@@ -104,18 +104,9 @@ export default function DocumentOverlay({ doc, onClose }: DocumentOverlayProps) 
     setIsSpeaking(true);
   };
 
-  // Translation placeholder - would integrate with translation API
-  const translateText = async (_text: string, _targetLang: string): Promise<string> => {
-    // Note: In production, this would connect to a translation service
-    // For now, returns original text
-    return _text;
-  };
-
-  const handleLanguageChange = async (langCode: string) => {
+  const handleLanguageChange = (langCode: string) => {
     setSelectedLang(langCode);
     setShowLangMenu(false);
-    // Future: Auto-translate document when language changes
-    // const translated = await translateText(doc?.html || "", langCode);
   };
 
   return (
